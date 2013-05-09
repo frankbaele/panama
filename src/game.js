@@ -10,11 +10,17 @@ require([
   var x = 0;
   var y = 0;
   var speed = 2.5;
-
   //setup a GameCore instance
-  document.getElementById
+  var body = document.getElementById('bodyWrapper');
+  var gameArea = document.createElement('canvas');
+
+  gameArea.width = window.innerWidth - 40;
+  gameArea.height = window.innerHeight - 50;
+  gameArea.setAttribute('id', 'gameArea');
+
+  body.appendChild(gameArea);
   var game = new GameCore({
-    canvasId: 'canvas',
+    canvasId: 'gameArea',
     initInput: function(im){ // im = this.inputManager
 
       //tells the input manager to listen for key events
@@ -50,7 +56,6 @@ require([
     draw: function(context){
       context.clearRect(0, 0, this.width, this.height);
       context.fillRect(x, y, 50, 50);
-      context.fillRect(-x, -y, 20, 20);
     }
   });
 
