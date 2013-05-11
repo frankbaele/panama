@@ -1,7 +1,5 @@
 body {
-  background-color: #222;
   color: #fff;
-  margin: 20px;
 }
 
 a {
@@ -12,6 +10,10 @@ a {
   text-align: center;
 }
 
-#gameArea {
+#bodyWrapper {
+  height: 100%;
   margin: 0 auto;
+}
+canvas{
+  background: lightgray;
 }

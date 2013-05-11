@@ -2,6 +2,7 @@
 require([
   'frozen/GameCore',
   'dojo/keys',
+  'rot'
 ], function(GameCore, keys){
 
   'use strict';
@@ -11,16 +12,16 @@ require([
   var y = 0;
   var speed = 2.5;
   //setup a GameCore instance
-  var body = document.getElementById('bodyWrapper');
-  var gameArea = document.createElement('canvas');
-
-  gameArea.width = window.innerWidth - 40;
-  gameArea.height = window.innerHeight - 50;
-  gameArea.setAttribute('id', 'gameArea');
-
-  body.appendChild(gameArea);
+  var map = new ROT.Map.Digger(100, 100);
+  map.create();
+  console.log(map);
+  var rooms = map.getRooms();
+  var corridors = map.getCorridors();
   var game = new GameCore({
     canvasId: 'gameArea',
+    gameAreaId: 'bodyWrapper',
+    width: 500,
+    height: 500,
     initInput: function(im){ // im = this.inputManager
 
       //tells the input manager to listen for key events
@@ -28,6 +29,7 @@ require([
       im.addKeyAction(keys.RIGHT_ARROW);
       im.addKeyAction(keys.UP_ARROW);
       im.addKeyAction(keys.DOWN_ARROW);
+
     },
     handleInput: function(im){
 
@@ -49,16 +51,32 @@ require([
         y+= speed;
       }
     },
-
-    update: function(millis){
-
-    },
     draw: function(context){
-      context.clearRect(0, 0, this.width, this.height);
-      context.fillRect(x, y, 50, 50);
+      for (var i=0; i<rooms.length; i++){
+        var room = rooms[i];
+        var x = room._x1;
+        var y = room._y1;
+        // make the correction to avoid 0 height or width
+        var width = room._x2 - x + 1;
+        var height = room._y2 - y + 1 ;
+        context.fillRect(x*5, y*5, width*5, height*5);
+      }
+
+      for (var i=0; i<corridors.length; i++){
+        var corridor = corridors[i];
+        var x = corridor._startX;
+        var y = corridor._startY;
+        // make the correction to avoid 0 height or width
+        var width = corridor._endX - x + 1;
+        var height = corridor._endY - y + 1 ;
+        context.fillStyle="#FF0000";
+        context.fillRect(x*5, y*5, width*5, height*5);
+      }
+
     }
   });
 
   //launch the game!
   game.run();
 });
+

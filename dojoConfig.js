@@ -16,6 +16,11 @@ var dojoConfig = {
       main: 'GameCore'
     },
     {
+      name: 'rot',
+      location: 'deps/rot.js',
+      main: 'rot'
+    },
+    {
       name: 'game',
       location: 'src',
       main: 'game'
