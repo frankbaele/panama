@@ -1,0 +1,32 @@
+{
+  "name": "panama",
+  "version": "0.0.1",
+  "devDependencies": {
+    "volo": "~0.2.9",
+    "grunt": "~0.4.1",
+    "grunt-dojo": "~0.2.0",
+    "grunt-open": "~0.2.0",
+    "grunt-jsdoc": "~0.3.2",
+    "grunt-contrib-copy": "~0.4.1",
+    "grunt-contrib-watch": "~0.3.0",
+    "grunt-contrib-jshint": "~0.3.0",
+    "grunt-contrib-jasmine": "~0.4.1",
+    "grunt-contrib-connect": "~0.2.0"
+  },
+  "description": "roguelike city survivor",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/frankbaele/panama.git"
+  },
+  "keywords": [
+    "roguelike",
+    "nodejs"
+  ],
+  "author": "frank baele",
+  "license": "BSD",
+  "gitHead": "858448533afd957afbe8489810991220c2d92120"
+}
