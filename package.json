@@ -2,7 +2,6 @@
   "name": "panama",
   "version": "0.0.1",
   "devDependencies": {
-    "volo": "~0.2.9",
     "grunt": "~0.4.1",
     "grunt-dojo": "~0.2.0",
     "grunt-open": "~0.2.0",
@@ -10,14 +9,14 @@
     "grunt-contrib-copy": "~0.4.1",
     "grunt-contrib-watch": "~0.3.0",
     "grunt-contrib-jshint": "~0.3.0",
-    "grunt-contrib-jasmine": "~0.4.1",
-    "grunt-contrib-connect": "~0.2.0"
+    "grunt-contrib-connect": "~0.3.0",
+    "grunt-contrib-sass": "~0.3.0",
+    "grunt-jade": "~0.4.0",
+    "grunt-contrib-livereload": "~0.1.2",
+    "grunt-regarde": "~0.1.1"
   },
-  "description": "roguelike city survivor",
+  "description": "roguelike pirate game",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git://github.com/frankbaele/panama.git"
