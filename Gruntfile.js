@@ -5,6 +5,13 @@ module.exports = function(grunt) {
   // Config...
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+    nodemon: {
+      prod: {
+        options: {
+          file: './js/server.js'
+        }
+      }
+    },
     connect: {
       server: {
         options: {
@@ -26,9 +33,13 @@ module.exports = function(grunt) {
   // Load tasks...
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-open');
+  grunt.loadNpmTasks('grunt-nodemon');
 
   // Task aliases and tasks
   grunt.registerTask('server', [
+    'nodemon',
+  ]);
+  grunt.registerTask('client', [
     'open',
     'connect'
   ]);
