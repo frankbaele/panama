@@ -1,4 +1,5 @@
-var util = require("util"),
+var
+  util = require("util"),
   io = require("socket.io");
   Player = require("./server_player").Player;
 

@@ -12,7 +12,8 @@
     "grunt-contrib-sass": "~0.3.0",
     "grunt-contrib-livereload": "~0.1.2",
     "grunt-regarde": "~0.1.1",
-    "socket.io": "~0.9.16"
+    "socket.io": "~0.9.16",
+    "grunt-nodemon": "0.0.5"
   },
   "description": "roguelike pirate game",
   "main": "index.js",
