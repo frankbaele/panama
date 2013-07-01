@@ -1,11 +1,12 @@
 /**************************************************
  ** GAME KEYBOARD CLASS
  **************************************************/
-var Keys = function (up, left, right, down) {
+var Keys = function (up, left, right, down, space) {
   var up = up || false,
     left = left || false,
     right = right || false,
     down = down || false;
+    space = space || false;
 
   var onKeyDown = function (e) {
     var that = this,
@@ -59,6 +60,7 @@ var Keys = function (up, left, right, down) {
     left: left,
     right: right,
     down: down,
+    space: space,
     onKeyDown: onKeyDown,
     onKeyUp: onKeyUp
   };

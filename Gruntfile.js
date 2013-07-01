@@ -18,7 +18,8 @@ module.exports = function(grunt) {
           port: 9001,
           // Prevents Grunt to close just after the task (starting the server) completes
           // This will be removed later as `watch` will take care of that
-          keepalive: true
+          keepalive: true,
+          hostname:''
         }
       }
     },

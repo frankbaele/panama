@@ -32,9 +32,10 @@ function init() {
 
   // Initialise the local player
   localPlayer = new Player(startX, startY);
-  socket = io.connect("http://localhost", {port: 8000, transports: ["websocket"]});
+  socket = io.connect("http://172.16.1.136", {port: 8000, transports: ["websocket"]});
   // Start listening for events
   remotePlayers = [];
+  projectiles = [];
   setEventHandlers();
 };
 
@@ -55,6 +56,7 @@ var setEventHandlers = function () {
   socket.on("new player", onNewPlayer);
   socket.on("move player", onMovePlayer);
   socket.on("remove player", onRemovePlayer);
+  socket.on("new projectile", onNewProjectile);
 
   console.log(socket);
 };
@@ -63,17 +65,20 @@ var setEventHandlers = function () {
 function onKeydown(e) {
   if (localPlayer) {
     keys.onKeyDown(e);
+    if (keys.space) {
+      console.log(keys);
+      projectiles.push(new Projectile(localPlayer.getX(), localPlayer.getY(), keys));
+      socket.emit("new projectile", {x: localPlayer.getX(), y: localPlayer.getY(), saved_keys: keys});
+    }
   }
-  ;
-};
+}
 
 // Keyboard key up
 function onKeyup(e) {
   if (localPlayer) {
     keys.onKeyUp(e);
   }
-  ;
-};
+}
 
 // Browser window resize
 function onResize(e) {
@@ -92,7 +97,7 @@ function onSocketDisconnect() {
 };
 
 function onNewPlayer(data) {
-  console.log("New player connected: "+data.id);
+  console.log("New player connected: " + data.id);
   var newPlayer = new Player(data.x, data.y);
   newPlayer.id = data.id;
   remotePlayers.push(newPlayer);
@@ -102,9 +107,10 @@ function onMovePlayer(data) {
   var movePlayer = playerById(data.id);
 
   if (!movePlayer) {
-    console.log("Player not found: "+data.id);
+    console.log("Player not found: " + data.id);
     return;
-  };
+  }
+  ;
 
   movePlayer.setX(data.x);
   movePlayer.setY(data.y);
@@ -114,11 +120,17 @@ function onRemovePlayer(data) {
   var removePlayer = playerById(data.id);
 
   if (!removePlayer) {
-    console.log("Player not found: "+data.id);
+    console.log("Player not found: " + data.id);
     return;
-  };
+  }
+  ;
 
   remotePlayers.splice(remotePlayers.indexOf(removePlayer), 1);
+};
+
+function onNewProjectile(data) {
+  console.log(data);
+  projectiles.push(new Projectile(data.x, data.y, data.saved_keys));
 };
 
 /**************************************************
@@ -132,14 +144,19 @@ function animate() {
   window.requestAnimFrame(animate);
 };
 
-
 /**************************************************
  ** GAME UPDATE
  **************************************************/
 function update() {
   if (localPlayer.update(keys)) {
     socket.emit("move player", {x: localPlayer.getX(), y: localPlayer.getY()});
-  };
+  }
+  ;
+  for (i = 0; i < projectiles.length; i++) {
+    projectiles[i].update();
+  }
+  ;
+
 };
 
 
@@ -155,7 +172,12 @@ function draw() {
   var i;
   for (i = 0; i < remotePlayers.length; i++) {
     remotePlayers[i].draw(ctx);
-  };
+  }
+  ;
+  for (i = 0; i < projectiles.length; i++) {
+    projectiles[i].draw(ctx);
+  }
+  ;
 };
 
 function playerById(id) {
@@ -163,7 +185,9 @@ function playerById(id) {
   for (i = 0; i < remotePlayers.length; i++) {
     if (remotePlayers[i].id == id)
       return remotePlayers[i];
-  };
+  }
+  ;
 
   return false;
 };
+

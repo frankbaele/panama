@@ -2,6 +2,7 @@ var
   util = require("util"),
   io = require("socket.io");
   Player = require("./server_player").Player;
+  projectile = require("./server_player").Projectile;
 
 var socket,
   players;
@@ -24,6 +25,7 @@ function onSocketConnection(client) {
   client.on("disconnect", onClientDisconnect);
   client.on("new player", onNewPlayer);
   client.on("move player", onMovePlayer);
+  client.on("new projectile", onNewProjectile);
 };
 
 function onClientDisconnect() {
@@ -68,18 +70,6 @@ function onMovePlayer(data) {
   this.broadcast.emit("move player", {id: movePlayer.id, x: movePlayer.getX(), y: movePlayer.getY()});
 };
 
-function onRemovePlayer(data) {
-  var removePlayer = playerById(this.id);
-
-  if (!removePlayer) {
-    util.log("Player not found: "+this.id);
-    return;
-  };
-
-  players.splice(players.indexOf(removePlayer), 1);
-  this.broadcast.emit("remove player", {id: this.id});
-};
-
 function playerById(id) {
   var i;
   for (i = 0; i < players.length; i++) {
@@ -89,5 +79,9 @@ function playerById(id) {
 
   return false;
 };
+
+function onNewProjectile(data){
+  this.broadcast.emit("new projectile", data);
+}
 
 init();

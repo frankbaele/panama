@@ -31,7 +31,6 @@ var Player = function (startX, startY) {
     } else if (keys.down) {
       y += moveAmount;
     }
-    ;
 
     // Left key takes priority over right
     if (keys.left) {
@@ -40,11 +39,11 @@ var Player = function (startX, startY) {
       x += moveAmount;
     }
     return (prevX != x || prevY != y) ? true : false;
-  };
+  }
 
   var draw = function (ctx) {
     ctx.fillRect(x - 5, y - 5, 10, 10);
-  };
+  }
 
   return {
     getX: getX,
@@ -54,4 +53,4 @@ var Player = function (startX, startY) {
     update: update,
     draw: draw
   }
-};
+}
