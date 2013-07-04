@@ -38,6 +38,10 @@ Installation
 
     npm install
 
+3. Run the socket.io server
+
+    grunt server
+
 3. Run the game
 
     grunt client
