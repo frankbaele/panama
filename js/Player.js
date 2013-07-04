@@ -5,7 +5,9 @@ var Player = function (startX, startY) {
   var x = startX,
     y = startY,
     id,
-    moveAmount = 2;
+    diff = [],
+    move,
+    moveAmount = 3;
   var getX = function () {
     return x;
   };
@@ -22,23 +24,35 @@ var Player = function (startX, startY) {
     y = newY;
   };
 
-  var update = function (keys) {
+  var update = function (goal) {
     var prevX = x,
       prevY = y;
-    // Up key takes priority over down
-    if (keys.up) {
+      diff.x = 0;
+      diff.y = 0;
+
+    diff.x = prevX - goal.x
+    if(diff.x > 0){
+      x -= moveAmount;
+    }
+    else if(diff.x < 0){
+      x += moveAmount;
+    }
+
+    diff.y = prevY - goal.y
+    if(diff.y > 0){
       y -= moveAmount;
-    } else if (keys.down) {
+    }
+    else if(diff.y < 0){
       y += moveAmount;
     }
 
-    // Left key takes priority over right
-    if (keys.left) {
-      x -= moveAmount;
-    } else if (keys.right) {
-      x += moveAmount;
+    if (diff.y == 0 && diff.x == 0){
+      move = false;
     }
-    return (prevX != x || prevY != y) ? true : false;
+    else {
+      move = true;
+    }
+    return move;
   }
 
   var draw = function (ctx) {
