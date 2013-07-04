@@ -164,6 +164,7 @@ function update() {
 
   if (move){
     move = localPlayer.update(goal);
+    socket.emit("move player", {x: localPlayer.getX(), y: localPlayer.getY()});
   }
   for (i = 0; i < projectiles.length; i++) {
     projectiles[i].update();
