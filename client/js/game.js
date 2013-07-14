@@ -40,7 +40,7 @@ function init() {
   // Initialise the local player
   localPlayer = new Player(startX, startY);
   // Change this to the ip of the server
-  socket = io.connect("192.168.1.4", {port: 8000, transports: ["websocket"]});
+  socket = io.connect("localhost", {port: 8000, transports: ["websocket"]});
   // Start listening for events
   remotePlayers = [];
   setEventHandlers();

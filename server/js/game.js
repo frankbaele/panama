@@ -1,9 +1,7 @@
 var
   util = require("util"),
   io = require("socket.io");
-  Player = require("./server_player").Player;
-  projectile = require("./server_player").Projectile;
-
+  Player = require("./player").Player;
 var socket,
   players;
 
@@ -25,7 +23,6 @@ function onSocketConnection(client) {
   client.on("disconnect", onClientDisconnect);
   client.on("new player", onNewPlayer);
   client.on("move player", onMovePlayer);
-  client.on("new projectile", onNewProjectile);
 };
 
 function onClientDisconnect() {
@@ -79,9 +76,5 @@ function playerById(id) {
 
   return false;
 };
-
-function onNewProjectile(data){
-  this.broadcast.emit("new projectile", data);
-}
 
 init();

@@ -8,7 +8,7 @@ module.exports = function(grunt) {
     nodemon: {
       prod: {
         options: {
-          file: './js/server.js'
+          file: './server/js/game.js'
         }
       }
     },
