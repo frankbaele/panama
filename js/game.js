@@ -40,10 +40,9 @@ function init() {
   // Initialise the local player
   localPlayer = new Player(startX, startY);
   // Change this to the ip of the server
-  socket = io.connect("localhost", {port: 8000, transports: ["websocket"]});
+  socket = io.connect("192.168.1.4", {port: 8000, transports: ["websocket"]});
   // Start listening for events
   remotePlayers = [];
-  projectiles = [];
   setEventHandlers();
 };
 
@@ -63,7 +62,6 @@ var setEventHandlers = function () {
   socket.on("new player", onNewPlayer);
   socket.on("move player", onMovePlayer);
   socket.on("remove player", onRemovePlayer);
-  socket.on("new projectile", onNewProjectile);
 
 };
 
@@ -71,11 +69,6 @@ var setEventHandlers = function () {
 function onKeydown(e) {
   if (localPlayer) {
     keys.onKeyDown(e);
-    if (keys.space) {
-      console.log(keys);
-      projectiles.push(new Projectile(localPlayer.getX(), localPlayer.getY(), keys));
-      socket.emit("new projectile", {x: localPlayer.getX(), y: localPlayer.getY(), saved_keys: keys});
-    }
   }
 }
 
@@ -142,10 +135,6 @@ function onRemovePlayer(data) {
   remotePlayers.splice(remotePlayers.indexOf(removePlayer), 1);
 };
 
-function onNewProjectile(data) {
-  projectiles.push(new Projectile(data.x, data.y, data.saved_keys));
-};
-
 /**************************************************
  ** GAME ANIMATION LOOP
  **************************************************/
@@ -166,10 +155,6 @@ function update() {
     move = localPlayer.update(goal);
     socket.emit("move player", {x: localPlayer.getX(), y: localPlayer.getY()});
   }
-  for (i = 0; i < projectiles.length; i++) {
-    projectiles[i].update();
-  }
-
 };
 
 
@@ -185,9 +170,6 @@ function draw() {
   var i;
   for (i = 0; i < remotePlayers.length; i++) {
     remotePlayers[i].draw(ctx);
-  }
-  for (i = 0; i < projectiles.length; i++) {
-    projectiles[i].draw(ctx);
   }
 }
 
