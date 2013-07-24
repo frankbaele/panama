@@ -1,8 +1,9 @@
 var
   util = require("util"),
-  io = require("socket.io");
-  Player = require("./player").Player;
-var socket,
+  io = require("socket.io"),
+  Player = require("./player").Player,
+  World = require("./world").World,
+  socket,
   players;
 
 function init() {
