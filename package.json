@@ -9,11 +9,11 @@
     "grunt-contrib-watch": "~0.3.0",
     "grunt-contrib-jshint": "~0.3.0",
     "grunt-contrib-connect": "~0.3.0",
-    "grunt-contrib-livereload": "~0.1.2",
     "grunt-regarde": "~0.1.1",
     "socket.io": "~0.9.16",
     "grunt-nodemon": "0.0.5",
-    "underscore": "~1.4.4"
+    "underscore": "~1.4.4",
+    "readline-prompter": "~0.2.0"
   },
   "description": "roguelike pirate game",
   "main": "index.js",
