@@ -8,6 +8,7 @@ var canvas,			// Canvas DOM element
   socket,         // socket io
   keys,
   goal,
+  world,
   move;
 
 
@@ -62,6 +63,7 @@ var setEventHandlers = function () {
   socket.on("new player", onNewPlayer);
   socket.on("move player", onMovePlayer);
   socket.on("remove player", onRemovePlayer);
+  socket.on("world", onWorld);
 
 };
 
@@ -135,6 +137,9 @@ function onRemovePlayer(data) {
   remotePlayers.splice(remotePlayers.indexOf(removePlayer), 1);
 };
 
+function onWorld(data){
+  console.log(data);
+}
 /**************************************************
  ** GAME ANIMATION LOOP
  **************************************************/
