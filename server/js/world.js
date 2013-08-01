@@ -2,8 +2,11 @@ var World = function(height, width) {
   var matrix;
 
   function init() {
+    generateWorld();
+  }
+  function generateWorld(){
     // Create an empty world map with empty objects
-    var matrix = new Array(height);
+    matrix = new Array(height);
     for (var i = 0; i < height; i++){
       matrix[i]= new Array(width);
       for (var j = 0; j < width; j++){
@@ -14,7 +17,10 @@ var World = function(height, width) {
     }
   }
   init();
-  return matrix;
+
+  return {
+    matrix: matrix
+  }
 };
 
 exports.World = World;
