@@ -10,7 +10,6 @@ var
 function init() {
   var tokens = ['height', 'width', 'port'];
   rlp(tokens).end(function(results){
-    console.log(results);
     var world = new World(results.height, results.width);
     var connection = new SocketConnection(results.port);
   });
