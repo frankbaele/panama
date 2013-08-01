@@ -8,7 +8,8 @@ var SocketConnection = function(port) {
 
   function init() {
     players = [];
-    socket = io.listen(8000);
+    // Parse to integer, readline returns a string.
+    socket = io.listen(parseInt(port));
     socket.configure(function() {
       socket.set("transports", ["websocket"]);
       socket.set("log level", 2);
