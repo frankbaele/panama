@@ -1,5 +1,5 @@
 
-module.exports = function(grunt) {
+module.exports = function (grunt) {
   "use strict";
 
   // Config...
@@ -38,7 +38,7 @@ module.exports = function(grunt) {
 
   // Task aliases and tasks
   grunt.registerTask('server', [
-    'nodemon',
+    'nodemon'
   ]);
   grunt.registerTask('client', [
     'open',
