@@ -3,7 +3,7 @@
 <html lang="en">
 
 	<head>
-		<title>A multiplayer game built using HTML5 canvas and WebSockets</title>
+		<title>Panama a multiplayer game built using HTML5 canvas and WebSockets</title>
 		<meta charset="utf-8">
 		
 		<link rel="stylesheet" href="style/reset.css">
@@ -11,7 +11,14 @@
 	</head>
 	
 	<body>
-		<canvas id="gameCanvas"></canvas>
+        <div id="gamecontainer">
+          <canvas id="gameCanvas" class="gamelayer"></canvas>
+          <div id="gamestartscreen" class="gamelayer"></div>
+          <div id="loadingscreen" class="gamelayer">
+            <div id="loadingmessage"></div>
+          </div>
+        </div>
+
         <script src="http://cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.16/socket.io.min.js"></script>
 		<script src="client/js/requestAnimationFrame.js"></script>
 		<script src="client/js/Keys.js"></script>

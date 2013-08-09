@@ -1,10 +1,10 @@
 /**************************************************
  ** GAME VARIABLES
  **************************************************/
-var canvas,			// Canvas DOM element
-  ctx,			// Canvas rendering context
-  localPlayer,	// Local player
-  remotePlayers,  //remote players
+var canvas,       // Canvas DOM element
+  ctx,            // Canvas rendering context
+  localPlayer,    // Local player
+  remotePlayers,  // remote players
   socket,         // socket io
   keys,
   goal,
@@ -41,7 +41,7 @@ function init() {
   // Initialise the local player
   localPlayer = new Player(startX, startY);
   // Change this to the ip of the server
-  socket = io.connect("localhost", {port: 8000, transports: ["websocket"]});
+  socket = io.connect("172.16.1.136", {port: 8000, transports: ["websocket"]});
   // Start listening for events
   remotePlayers = [];
   setEventHandlers();
