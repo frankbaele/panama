@@ -19,16 +19,17 @@
           </div>
         </div>
 
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.16/socket.io.min.js"></script>
+        <script src="client/js/lib/socket.io.min.js"></script>
 		<script src="client/js/requestAnimationFrame.js"></script>
-		<script src="client/js/Keys.js"></script>
+		<script src="client/js/Keys.js"></script>s
 		<script src="client/js/Player.js"></script>
 		<script src="client/js/game_helpers.js"></script>
 		<script src="client/js/game.js"></script>
 		<script>
 			// Initialise the game
-			init();
-			animate();
+            game = new Game();
+			game.init();
+			game.animate();
 		</script>
 	</body>
 </html>
