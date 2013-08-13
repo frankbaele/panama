@@ -2,12 +2,16 @@
  ** GAME PLAYER CLASS
  **************************************************/
 var Player = function (startX, startY) {
+  "use strict";
   var x = startX,
     y = startY,
+    goalY = startY,
+    goalX = startX,
     id,
     diff = [],
-    move,
+    move = false,
     moveAmount = 3;
+
   var getX = function () {
     return x;
   };
@@ -24,13 +28,26 @@ var Player = function (startX, startY) {
     y = newY;
   };
 
-  var update = function (goal) {
+  var setGoal = function (goal) {
+    goalX = goal.x;
+    goalY = goal.y;
+    move = true;
+    console.log(move);
+  };
+
+  var getMove = function () {
+    return move;
+  };
+
+  var update = function () {
     var prevX = x,
       prevY = y;
       diff.x = 0;
       diff.y = 0;
 
-    diff.x = prevX - goal.x
+    console.log(goalX);
+
+    diff.x = prevX - goalX;
     if(diff.x > 0){
       x -= moveAmount;
     }
@@ -38,33 +55,31 @@ var Player = function (startX, startY) {
       x += moveAmount;
     }
 
-    diff.y = prevY - goal.y
-    if(diff.y > 0){
+    diff.y = prevY - goalY;
+    if(diff.y > 0) {
       y -= moveAmount;
     }
-    else if(diff.y < 0){
+    else if(diff.y < 0) {
       y += moveAmount;
     }
-
-    if (diff.y == 0 && diff.x == 0){
+    if (diff.y === 0 && diff.x === 0) {
       move = false;
     }
-    else {
-      move = true;
-    }
-    return move;
-  }
+  };
 
   var draw = function (ctx) {
     ctx.fillRect(x - 5, y - 5, 10, 10);
-  }
+  };
 
   return {
     getX: getX,
     getY: getY,
     setX: setX,
     setY: setY,
+    getMove: getMove,
     update: update,
-    draw: draw
-  }
-}
+    draw: draw,
+    setGoal: setGoal,
+    move: move
+  };
+};
