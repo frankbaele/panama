@@ -6,9 +6,8 @@ function Game() {
     remotePlayers,  // remote players
     socket,         // socket io
     keys,
-    goal,
-    world,
-    move;
+    mouse,
+    world;
 
   function init() {
     // Declare the canvas and rendering context
@@ -21,6 +20,7 @@ function Game() {
     canvas.height = window.innerHeight;
 
     // Initialise keyboard controls
+    mouse = new Mouse();
     keys = new Keys();
     // Calculate a random start position for the local player
     // The minus 5 (half a player size) stops the player being
@@ -29,9 +29,6 @@ function Game() {
       startY = Math.round(Math.random() * (canvas.height - 5));
     startX = startX.roundTo(3);
     startY = startY.roundTo(3);
-
-    goal = [];
-    move = false;
 
     // Initialise the local player
     localPlayer = new Player(startX, startY);
@@ -48,10 +45,10 @@ function Game() {
    **************************************************/
   function setEventHandlers () {
     // Keyboard
-    window.addEventListener("keydown", onKeydown, false);
-    window.addEventListener("keyup", onKeyup, false);
+    window.addEventListener("keydown", keys.onKeydown, false);
+    window.addEventListener("keyup", keys.onKeyup, false);
     window.addEventListener("resize", onResize, false);
-    canvas.addEventListener("click", onClick, false);
+    canvas.addEventListener("click", mouse.onClick, false);
 
     socket.on("connect", onSocketConnected);
     socket.on("disconnect", onSocketDisconnect);
@@ -61,33 +58,11 @@ function Game() {
     socket.on("world", onWorld);
   }
 
-// Keyboard key down
-  function onKeydown(e) {
-    if (localPlayer) {
-      keys.onKeyDown(e);
-    }
-  }
-
-// Keyboard key up
-  function onKeyup(e) {
-    if (localPlayer) {
-      keys.onKeyUp(e);
-    }
-  }
-
-// Browser window resize
+  // Browser window resize
   function onResize(e) {
     // Maximise the canvas
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-  }
-
-// Click event function
-  function onClick(e){
-    var coords = canvas.relMouseCoords(e);
-    goal.x = coords.x.roundTo(3);
-    goal.y = coords.y.roundTo(3);
-    move = true;
   }
 
   function onSocketConnected() {
@@ -124,7 +99,7 @@ function Game() {
     }
 
     remotePlayers.splice(remotePlayers.indexOf(removePlayer), 1);
-  };
+  }
 
   function onWorld(data){
     console.log(data);
@@ -145,13 +120,11 @@ function Game() {
    ** GAME UPDATE
    **************************************************/
   function update() {
-
-    if (move){
-      move = localPlayer.update(goal);
+    if (localPlayer.getMove()) {
+      localPlayer.update();
       socket.emit("move player", {x: localPlayer.getX(), y: localPlayer.getY()});
     }
-  };
-
+  }
 
   /**************************************************
    ** GAME DRAW
@@ -167,7 +140,6 @@ function Game() {
       remotePlayers[i].draw(ctx);
     }
   }
-
   function playerById(id) {
     var i;
     for (i = 0; i < remotePlayers.length; i++) {
@@ -176,10 +148,18 @@ function Game() {
     }
     return false;
   }
+  var  getLocalplayer = function () {
+    return localPlayer;
+  };
+  var getCanvas = function () {
+    return canvas;
+  };
   return {
     init: init,
     animate: animate,
+    canvas: getCanvas,
+    localPlayer: getLocalplayer
   };
   exports.Game = Game;
-};
+}
 
