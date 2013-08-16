@@ -19,7 +19,7 @@ var SocketConnection = function(port, worldMatrix) {
     socket.sockets.on("connection", onSocketConnection);
   }
   function onSocketConnection(client) {
-    util.log("New player has connected: "+client.id);
+    util.log("New player has connected: "  + client.id);
     client.on("disconnect", onClientDisconnect);
     client.on("new player", onNewPlayer);
     client.on("move player", onMovePlayer);
@@ -36,14 +36,14 @@ var SocketConnection = function(port, worldMatrix) {
     players.splice(players.indexOf(removePlayer), 1);
     this.broadcast.emit("remove player", {id: this.id});
 
-  };
+  }
 
   function onNewPlayer(data) {
-    var newPlayer = new Player(data.x, data.y);
+    var newPlayer = new Player(data.gridPosition);
     newPlayer.id = this.id;
 
     // inform the other players there is a new player.
-    this.broadcast.emit("new player", {id: newPlayer.id, x: newPlayer.getX(), y: newPlayer.getY()});
+    this.broadcast.emit("new player", {id: newPlayer.id, gridPosition: newPlayer.getGridPosition()});
 
     // Send the world data to the connecting player.
     this.emit('world', world);
@@ -52,35 +52,34 @@ var SocketConnection = function(port, worldMatrix) {
     var i, existingPlayer;
     for (i = 0; i < players.length; i++) {
       existingPlayer = players[i];
-      this.emit("new player", {id: existingPlayer.id, x: existingPlayer.getX(), y: existingPlayer.getY()});
+      this.emit("new player", {id: existingPlayer.id, gridPosition: existingPlayer.getGridPosition()});
     };
     // Add the new player tot the players array.
     players.push(newPlayer);
 
-  };
+  }
 
   function onMovePlayer(data) {
     var movePlayer = playerById(this.id);
 
     if (!movePlayer) {
-      util.log("Player not found: "+this.id);
+      util.log("Player not found: " + this.id);
       return;
-    };
+    }
 
-    movePlayer.setX(data.x);
-    movePlayer.setY(data.y);
+    movePlayer.setGridPostion(data);
 
-    this.broadcast.emit("move player", {id: movePlayer.id, x: movePlayer.getX(), y: movePlayer.getY()});
-  };
+    this.broadcast.emit("move player", {id: movePlayer.id, gridPosition: movePlayer.getGridPosition()});
+  }
 
   function playerById(id) {
     var i;
     for (i = 0; i < players.length; i++) {
       if (players[i].id == id)
         return players[i];
-    };
+    }
     return false;
-  };
+  }
 
   init();
 };

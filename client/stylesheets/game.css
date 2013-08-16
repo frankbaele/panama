@@ -64,7 +64,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 
 /* line 3, ../sass/game.scss */
-#gamecontainer {
+#gameCanvas {
   background-repeat: repeat;
   background-image: url("../art/looseSprites/water.png");
 }

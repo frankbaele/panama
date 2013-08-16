@@ -21,17 +21,15 @@ function Game() {
 
     // Initialise keyboard controls
     mouse = new Mouse();
-    keys = new Keys();
     // Calculate a random start position for the local player
-    // The minus 5 (half a player size) stops the player being
-    // placed right on the egde of the screen
-    var startX = Math.round(Math.random() * (canvas.width - 5)),
-      startY = Math.round(Math.random() * (canvas.height - 5));
-    startX = startX.roundTo(3);
-    startY = startY.roundTo(3);
+    var startGridPosition = ({
+      x : (Math.round(Math.random()) * 1),
+      y : (Math.round(Math.random()) * 1)
+    });
+
 
     // Initialise the local player
-    localPlayer = new Player(startX, startY);
+    localPlayer = new Player(startGridPosition);
     // Change this to the ip of the server
     socket = io.connect("localhost", {port: 8000, transports: ["websocket"]});
     // Start listening for events
@@ -44,9 +42,6 @@ function Game() {
    ** GAME EVENT HANDLERS
    **************************************************/
   function setEventHandlers () {
-    // Keyboard
-    window.addEventListener("keydown", keys.onKeydown, false);
-    window.addEventListener("keyup", keys.onKeyup, false);
     window.addEventListener("resize", onResize, false);
     canvas.addEventListener("click", mouse.onClick, false);
 
@@ -66,14 +61,15 @@ function Game() {
   }
 
   function onSocketConnected() {
-    socket.emit("new player", {x: localPlayer.getX(), y: localPlayer.getY()});
+    socket.emit("new player", localPlayer.getGridPosition());
   }
 
   function onSocketDisconnect() {
+
   }
 
   function onNewPlayer(data) {
-    var newPlayer = new Player(data.x, data.y);
+    var newPlayer = new Player(data);
     newPlayer.id = data.id;
     remotePlayers.push(newPlayer);
   }
@@ -86,8 +82,7 @@ function Game() {
       return;
     }
 
-    movePlayer.setX(data.x);
-    movePlayer.setY(data.y);
+    movePlayer.setGridPosition(data.gridPosition);
   }
 
   function onRemovePlayer(data) {
@@ -123,7 +118,7 @@ function Game() {
   function update() {
     if (localPlayer.getMove()) {
       localPlayer.update();
-      socket.emit("move player", {x: localPlayer.getX(), y: localPlayer.getY()});
+      socket.emit("move player", localPlayer.getGridPosition());
     }
   }
 
