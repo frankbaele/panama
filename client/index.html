@@ -10,7 +10,9 @@
 	
 	<body>
         <div id="gamecontainer">
-          <canvas id="gameCanvas" class="gamelayer"></canvas>
+          <canvas id="mapCanvas" class="gamelayer"></canvas>
+          <canvas id="playerCanvas" class="gamelayer"></canvas>
+          <canvas id="userCanvas" class="gamelayer"></canvas>
           <div id="gamestartscreen" class="gamelayer"></div>
           <div id="loadingscreen" class="gamelayer">
             <div id="loadingmessage"></div>
@@ -26,7 +28,6 @@
 			// Initialise the game
             game = new Game();
 			game.init();
-			game.animate();
 		</script>
 	</body>
 </html>

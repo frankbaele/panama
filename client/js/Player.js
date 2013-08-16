@@ -36,7 +36,7 @@ var Player = function (startGridPosition) {
 
   return {
     getGridPosition : getGridPosition,
-    setGridPostion : setGridPosition,
+    setGridPosition : setGridPosition,
     getMove : getMove,
     update : update,
     draw : draw,
