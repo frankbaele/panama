@@ -1,26 +1,22 @@
-var World = function(height, width) {
-  var matrix;
+var World = function () {
+  'use strict';
+  var
+  $ = require('jquery'),
+  matrix = require('../JSON/testmap.json');
 
   function init() {
     generateWorld();
   }
-  function generateWorld(){
-    // Create an empty world map with empty objects
-    matrix = new Array(height);
-    for (var i = 0; i < height; i++){
-      matrix[i]= new Array(width);
-      for (var j = 0; j < width; j++){
-        matrix[i][j] = {
-          open: true
-        }
-      }
-    }
+  function generateWorld() {
+    // For now we parse a preconstructed world map from tiled,
+    // server should be able to choose between custom map or random map.
+
   }
   init();
 
   return {
     matrix: matrix
-  }
+  };
 };
 
 exports.World = World;

@@ -4,13 +4,14 @@ var SocketConnection = function(port, worldMatrix) {
   util = require("util"),
   Player = require("./player").Player,
   players,
+  world = worldMatrix,
   socket;
 
   function init() {
     players = [];
     // Parse to integer, readline returns a string.
     socket = io.listen(8000);
-    socket.configure(function() {
+    socket.configure(function () {
       socket.set("transports", ["websocket"]);
       socket.set("log level", 2);
     });
@@ -28,9 +29,9 @@ var SocketConnection = function(port, worldMatrix) {
     var removePlayer = playerById(this.id);
 
     if (!removePlayer) {
-      util.log("Player not found: "+this.id);
+      util.log("Player not found: " + this.id);
       return;
-    };
+    }
 
     players.splice(players.indexOf(removePlayer), 1);
     this.broadcast.emit("remove player", {id: this.id});
@@ -45,7 +46,7 @@ var SocketConnection = function(port, worldMatrix) {
     this.broadcast.emit("new player", {id: newPlayer.id, x: newPlayer.getX(), y: newPlayer.getY()});
 
     // Send the world data to the connecting player.
-    this.emit('world', worldMatrix);
+    this.emit('world', world);
 
     // Emit the existing players to the connecting player.
     var i, existingPlayer;

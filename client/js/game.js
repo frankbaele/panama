@@ -103,6 +103,7 @@ function Game() {
 
   function onWorld(data){
     console.log(data);
+    world = data;
   }
 
   /**************************************************

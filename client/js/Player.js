@@ -32,7 +32,6 @@ var Player = function (startX, startY) {
     goalX = goal.x;
     goalY = goal.y;
     move = true;
-    console.log(move);
   };
 
   var getMove = function () {
@@ -44,9 +43,6 @@ var Player = function (startX, startY) {
       prevY = y;
       diff.x = 0;
       diff.y = 0;
-
-    console.log(goalX);
-
     diff.x = prevX - goalX;
     if(diff.x > 0){
       x -= moveAmount;

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="30" height="30" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="panama" tilewidth="32" tileheight="32">
+  <image source="../../client/art/panama.png" width="32" height="64"/>
+ </tileset>
+ <layer name="island" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjALqA0Y0PBB20svukWYvNrtJVT9cwweXnbS2eyDsxGc3Ncwj1V5KASMSPZBl1qi9tLd3sIKBcuNgiBN6+nmk2UsMAABV5gBq
+  </data>
+ </layer>
+</map>
