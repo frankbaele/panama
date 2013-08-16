@@ -1,29 +1,18 @@
-var Player = function(startX, startY) {
-  var x = startX,
-    y = startY,
+var Player = function(startGridPosition) {
+  var gridPosition = startGridPosition,
     id;
 
-  var getX = function() {
-    return x;
+  var getGridPosition = function () {
+    return gridPosition;
   };
 
-  var getY = function() {
-    return y;
-  };
-
-  var setX = function(newX) {
-    x = newX;
-  };
-
-  var setY = function(newY) {
-    y = newY;
+  var setGridPosition = function (newGridPosition) {
+    gridPosition = newGridPosition;
   };
 
   return {
-    getX: getX,
-    getY: getY,
-    setX: setX,
-    setY: setY,
+    getGridPosition : getGridPosition,
+    setGridPostion : setGridPosition,
     id: id
   };
 };
