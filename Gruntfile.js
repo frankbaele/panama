@@ -19,7 +19,8 @@ module.exports = function (grunt) {
           // Prevents Grunt to close just after the task (starting the server) completes
           // This will be removed later as `watch` will take care of that
           keepalive: true,
-          hostname:''
+          hostname: '',
+          base: './client'
         }
       }
     },
