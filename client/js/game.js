@@ -1,39 +1,38 @@
 function Game() {
   'use strict';
-  var mapCanvas,
-    gridSize,
+  var
+    // Canvases
+    mapCanvas,
     gameCanvas,
     userCanvas,
+    mapCtx,
+    playerCtx,
+    userCtx,
+    // General canvas specs.
     canvasHeight,
     canvasWidth,
     canvasGridWidth,
     canvasGridHeight,
-    mapCtx,
-    playerCtx,
-    userCtx,
+    // General global variables
+    tileWidth,  //default value for the tileWidth is 32
     localPlayer,    // Local player
     remotePlayers,  // remote players
     socket,         // socket io
-    keys,
     mouse,
+    redrawMap = true,
+    redrawPlayers = true,
     // the first grid on the canvas in the left upper corner.
-    unoGrid = ({
-      x : 1,
-      y : 1
-    }),
+    unoGridPosition = ({x : 1, y : 1}),
     world;
 
   function init() {
     // Declare the canvases and rendering contexts
-    gridSize = 32;
     mapCanvas = document.getElementById("mapCanvas");
     gameCanvas = document.getElementById("playerCanvas");
     userCanvas = document.getElementById("userCanvas");
     mapCtx = mapCanvas.getContext("2d");
     playerCtx = gameCanvas.getContext("2d");
     userCtx = gameCanvas.getContext("2d");
-
-
     // Initialise keyboard controls
     mouse = new Mouse();
     // Change this to the ip of the server
@@ -41,8 +40,6 @@ function Game() {
     // Start listening for events
     remotePlayers = [];
     setEventHandlers();
-    // Run the resize command once for init.
-    onResize();
   }
 
 
@@ -61,15 +58,15 @@ function Game() {
   // Browser window resize
   function onResize() {
     // Maximise the canvas
-    canvasWidth = window.innerWidth.roundTo(gridSize);
+    canvasWidth = window.innerWidth.roundTo(tileWidth);
     // If the canvas with is greater then the window we subtract a gridSize to make it fit in the window.
-    canvasWidth = canvasWidth > window.innerWidth ? canvasWidth - gridSize : canvasWidth;
+    canvasWidth = canvasWidth > window.innerWidth ? canvasWidth - tileWidth : canvasWidth;
 
-    canvasHeight = window.innerHeight.roundTo(gridSize);
+    canvasHeight = window.innerHeight.roundTo(tileWidth);
     // If the canvas height is greater then the window we subtract a gridSize to make it fit in the window.
-    canvasHeight = canvasHeight > window.innerWidth ? canvasHeight - gridSize : canvasHeight;
-    canvasGridWidth = canvasWidth / gridSize;
-    canvasGridHeight = canvasHeight / gridSize;
+    canvasHeight = canvasHeight > window.innerWidth ? canvasHeight - tileWidth : canvasHeight;
+    canvasGridWidth = canvasWidth / tileWidth;
+    canvasGridHeight = canvasHeight / tileWidth;
 
     mapCanvas.width = canvasWidth;
     mapCanvas.height = canvasHeight;
@@ -109,6 +106,8 @@ function Game() {
 
   function onWorld(data){
     world = data;
+    console.log(data.tilewidth);
+    tileWidth = data.tilewidth;
     generateNewLocalPlayer();
   }
 
@@ -118,9 +117,12 @@ function Game() {
       x : (Math.round(Math.random() * world.height)),
       y : (Math.round(Math.random() * world.width))
     });
+
     // Initialise the local player
     localPlayer = new Player(startGridPosition);
     socket.emit("new player", localPlayer.getGridPosition());
+    // Run the resize command once for init, now the world and player data is known.
+    onResize();
     // So when the new player object is created, start animating it.
     animate();
   }
@@ -150,7 +152,14 @@ function Game() {
    ** GAME DRAW
    **************************************************/
   function draw() {
-
+    // Only update the map canvas if a map update is requested by the game
+    if (redrawMap) {
+      drawMap();
+    }
+    // Only updtae the player canvas if a player moves in the canvas
+    if (redrawPlayers) {
+      drawPlayers();
+    }
   }
   function playerById(id) {
     var i;
@@ -160,12 +169,22 @@ function Game() {
     }
     return false;
   }
+
+  function drawMap() {
+    console.log(world);
+    redrawMap = false;
+  }
+  function drawPlayers() {
+    redrawPlayers = false;
+  }
+  // Variables that you want to be globaly available.
   var  getLocalplayer = function () {
     return localPlayer;
   };
   var getCanvas = function () {
     return userCanvas;
   };
+
   return {
     init: init,
     animate: animate,
