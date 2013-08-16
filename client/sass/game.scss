@@ -1,6 +1,12 @@
 @import "compass/reset";
 
-#gameCanvas{
+#mapCanvas{
   background-repeat: repeat;
   background-image:url('../art/looseSprites/water.png');
+}
+
+canvas {
+  position: absolute;
+  left: 0;
+  top: 0;
 }

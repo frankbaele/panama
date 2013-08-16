@@ -20,11 +20,12 @@ var SocketConnection = function(port, worldMatrix) {
   }
   function onSocketConnection(client) {
     util.log("New player has connected: "  + client.id);
+    client.emit('world', world.matrix);
+
     client.on("disconnect", onClientDisconnect);
     client.on("new player", onNewPlayer);
     client.on("move player", onMovePlayer);
-  };
-
+  }
   function onClientDisconnect() {
     var removePlayer = playerById(this.id);
 
@@ -39,14 +40,11 @@ var SocketConnection = function(port, worldMatrix) {
   }
 
   function onNewPlayer(data) {
-    var newPlayer = new Player(data.gridPosition);
+    var newPlayer = new Player(data);
     newPlayer.id = this.id;
 
     // inform the other players there is a new player.
     this.broadcast.emit("new player", {id: newPlayer.id, gridPosition: newPlayer.getGridPosition()});
-
-    // Send the world data to the connecting player.
-    this.emit('world', world);
 
     // Emit the existing players to the connecting player.
     var i, existingPlayer;
