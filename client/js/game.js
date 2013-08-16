@@ -14,6 +14,7 @@ function Game() {
     canvasGridWidth,
     canvasGridHeight,
     // General global variables
+    unoTile = ({x : 1, y : 1}),
     tileWidth,  //default value for the tileWidth is 32
     localPlayer,    // Local player
     remotePlayers,  // remote players
@@ -22,7 +23,6 @@ function Game() {
     redrawMap = true,
     redrawPlayers = true,
     // the first grid on the canvas in the left upper corner.
-    unoGridPosition = ({x : 1, y : 1}),
     world;
 
   function init() {
@@ -171,11 +171,25 @@ function Game() {
   }
 
   function drawMap() {
-    console.log(world);
+    mapCtx.clearRect(0, 0, canvasWidth, canvasHeight);
+    for (var i = 0; canvasGridWidth > i; i++) {
+      for (var j = 0; canvasGridHeight > j; j++){
+        var arrayPos = canvasGridToWorldArray({x : i, y : j});
+        if (world['layers'][0]['data'][arrayPos] === 1){
+          mapCtx.fillRect(i*32, j * 32, 32, 32);
+        }
+      }
+    }
     redrawMap = false;
   }
   function drawPlayers() {
     redrawPlayers = false;
+  }
+
+  function canvasGridToWorldArray(tile) {
+    var gridX = tile.x + unoTile.x;
+    var gridY = tile.y + unoTile.y;
+    return gridX * gridY + gridY;
   }
   // Variables that you want to be globaly available.
   var  getLocalplayer = function () {
