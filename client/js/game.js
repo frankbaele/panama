@@ -1,8 +1,13 @@
 function Game() {
   'use strict';
   var mapCanvas,
+    gridSize,
     gameCanvas,
     userCanvas,
+    canvasHeight,
+    canvasWidth,
+    canvasGridWidth,
+    canvasGridHeight,
     mapCtx,
     playerCtx,
     userCtx,
@@ -20,19 +25,14 @@ function Game() {
 
   function init() {
     // Declare the canvases and rendering contexts
+    gridSize = 32;
     mapCanvas = document.getElementById("mapCanvas");
     gameCanvas = document.getElementById("playerCanvas");
     userCanvas = document.getElementById("userCanvas");
     mapCtx = mapCanvas.getContext("2d");
     playerCtx = gameCanvas.getContext("2d");
     userCtx = gameCanvas.getContext("2d");
-    // Maximise the canvas
-    mapCanvas.width = window.innerWidth.roundTo(32);
-    mapCanvas.height = window.innerHeight.roundTo(32);
-    gameCanvas.width = window.innerWidth.roundTo(32);
-    gameCanvas.height = window.innerHeight.roundTo(32);
-    userCanvas.width = window.innerWidth.roundTo(32);
-    userCanvas.height = window.innerHeight.roundTo(32);
+
 
     // Initialise keyboard controls
     mouse = new Mouse();
@@ -41,6 +41,8 @@ function Game() {
     // Start listening for events
     remotePlayers = [];
     setEventHandlers();
+    // Run the resize command once for init.
+    onResize();
   }
 
 
@@ -57,14 +59,24 @@ function Game() {
   }
 
   // Browser window resize
-  function onResize(e) {
+  function onResize() {
     // Maximise the canvas
-    mapCanvas.width = window.innerWidth.roundTo(32);
-    mapCanvas.height = window.innerHeight.roundTo(32);
-    gameCanvas.width = window.innerWidth.roundTo(32);
-    gameCanvas.height = window.innerHeight.roundTo(32);
-    userCanvas.width = window.innerWidth.roundTo(32);
-    userCanvas.height = window.innerHeight.roundTo(32);
+    canvasWidth = window.innerWidth.roundTo(gridSize);
+    // If the canvas with is greater then the window we subtract a gridSize to make it fit in the window.
+    canvasWidth = canvasWidth > window.innerWidth ? canvasWidth - gridSize : canvasWidth;
+
+    canvasHeight = window.innerHeight.roundTo(gridSize);
+    // If the canvas height is greater then the window we subtract a gridSize to make it fit in the window.
+    canvasHeight = canvasHeight > window.innerWidth ? canvasHeight - gridSize : canvasHeight;
+    canvasGridWidth = canvasWidth / gridSize;
+    canvasGridHeight = canvasHeight / gridSize;
+
+    mapCanvas.width = canvasWidth;
+    mapCanvas.height = canvasHeight;
+    gameCanvas.width = canvasWidth;
+    gameCanvas.height = canvasHeight;
+    userCanvas.width = canvasWidth;
+    userCanvas.height = canvasHeight;
   }
 
   function onNewPlayer(data) {

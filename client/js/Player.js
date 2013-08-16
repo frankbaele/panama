@@ -19,6 +19,7 @@ var Player = function (startGridPosition) {
   };
 
   var setGoal = function (goal) {
+    console.log('click');
     move = true;
   };
 
