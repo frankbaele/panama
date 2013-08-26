@@ -198,6 +198,7 @@ function Game() {
   var getCanvas = function () {
     return userCanvas;
   };
+  exports.Game = Game;
 
   return {
     init: init,
@@ -205,6 +206,5 @@ function Game() {
     canvas: getCanvas,
     localPlayer: getLocalplayer
   };
-  exports.Game = Game;
 }
 
