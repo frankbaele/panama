@@ -230,6 +230,7 @@ function Game() {
   var getCanvas = function () {
     return userCanvas;
   };
+  exports.Game = Game;
 
   return {
     init: init,
