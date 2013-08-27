@@ -5,7 +5,7 @@
  </tileset>
  <layer name="island" width="30" height="30">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjALqA0Y0PBB20svukWYvNrtJVT9cwweXnbS2eyDsxGc3Ncwj1V5KASMSPZBl1qi9tLd3sIKBcuNgiBN6+nmk2UsMAABV5gBq
+   eJxjYBgFo2BwAkY0TG/7BoPd9ATUtnMg/DLS4m8g0w2pdo6U8MFXjtDS7sFWflHDPFLtpRQwItEDWWaN2kt7ewcrGOj6fySkBWx2D3d7iQEAI20AfQ==
   </data>
  </layer>
 </map>

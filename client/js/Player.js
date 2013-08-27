@@ -19,7 +19,6 @@ var Player = function (startGridPosition) {
   };
 
   var setGoal = function (goal) {
-    console.log('click');
     move = true;
   };
 
@@ -31,8 +30,9 @@ var Player = function (startGridPosition) {
 
   };
 
-  var draw = function (ctx) {
-
+  var draw = function (playerCtx, tileWidth) {
+    playerCtx.fillStyle = "yellow";
+    playerCtx.fillRect(gridPosition.x * tileWidth, gridPosition.y * tileWidth, tileWidth, tileWidth);
   };
 
   return {
