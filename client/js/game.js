@@ -14,7 +14,7 @@ function Game() {
     canvasGridWidth,
     canvasGridHeight,
     // General global variables
-    unoTile = ({x : 1, y : 1}),
+    unoTile = ({x : 0, y : 0}),
     tileWidth,  //default value for the tileWidth is 32
     localPlayer,    // Local player
     remotePlayers,  // remote players
@@ -42,7 +42,6 @@ function Game() {
     setEventHandlers();
   }
 
-
   /**************************************************
    ** GAME EVENT HANDLERS
    **************************************************/
@@ -61,10 +60,13 @@ function Game() {
     canvasWidth = window.innerWidth.roundTo(tileWidth);
     // If the canvas with is greater then the window we subtract a gridSize to make it fit in the window.
     canvasWidth = canvasWidth > window.innerWidth ? canvasWidth - tileWidth : canvasWidth;
+    canvasWidth = canvasWidth > tileWidth * world.width ? tileWidth * world.width : canvasWidth;
 
     canvasHeight = window.innerHeight.roundTo(tileWidth);
     // If the canvas height is greater then the window we subtract a gridSize to make it fit in the window.
     canvasHeight = canvasHeight > window.innerWidth ? canvasHeight - tileWidth : canvasHeight;
+    canvasHeight = canvasHeight > tileWidth * world.height ? tileWidth * world.height : canvasHeight;
+
     canvasGridWidth = canvasWidth / tileWidth;
     canvasGridHeight = canvasHeight / tileWidth;
 
@@ -74,12 +76,14 @@ function Game() {
     gameCanvas.height = canvasHeight;
     userCanvas.width = canvasWidth;
     userCanvas.height = canvasHeight;
+    redrawMap = true;
   }
 
   function onNewPlayer(data) {
     var newPlayer = new Player(data.gridPosition);
     newPlayer.id = data.id;
     remotePlayers.push(newPlayer);
+    redrawPlayers = true;
   }
 
   function onMovePlayer(data) {
@@ -91,10 +95,13 @@ function Game() {
     }
 
     movePlayer.setGridPosition(data.gridPosition);
+    redrawPlayers = true;
   }
 
   function onRemovePlayer(data) {
+    console.log(data);
     var removePlayer = playerById(data.id);
+    console.log(remotePlayers);
 
     if (!removePlayer) {
       console.log("Player not found: " + data.id);
@@ -102,29 +109,25 @@ function Game() {
     }
 
     remotePlayers.splice(remotePlayers.indexOf(removePlayer), 1);
+    redrawPlayers = true;
   }
 
   function onWorld(data){
     world = data;
-    console.log(data.tilewidth);
     tileWidth = data.tilewidth;
     generateNewLocalPlayer();
   }
 
   function generateNewLocalPlayer() {
-
-    var startGridPosition = ({
-      x : (Math.round(Math.random() * world.height)),
-      y : (Math.round(Math.random() * world.width))
+    generateStartPosition(function (startGridPosition) {
+      // Initialise the local player
+      localPlayer = new Player(startGridPosition);
+      socket.emit("new player", localPlayer.getGridPosition());
+      // Run the resize command once for init, now the world and player data is known.
+      onResize();
+      // So when the new player object is created, start animating it.
+      animate();
     });
-
-    // Initialise the local player
-    localPlayer = new Player(startGridPosition);
-    socket.emit("new player", localPlayer.getGridPosition());
-    // Run the resize command once for init, now the world and player data is known.
-    onResize();
-    // So when the new player object is created, start animating it.
-    animate();
   }
 
   /**************************************************
@@ -183,13 +186,42 @@ function Game() {
     redrawMap = false;
   }
   function drawPlayers() {
+    localPlayer.draw(playerCtx, tileWidth);
+    for (var i = 0; i < remotePlayers.length; i++) {
+      remotePlayers[i].draw(playerCtx, tileWidth);
+    }
     redrawPlayers = false;
   }
 
-  function canvasGridToWorldArray(tile) {
-    var gridX = tile.x + unoTile.x;
-    var gridY = tile.y + unoTile.y;
-    return gridX * gridY + gridY;
+  function canvasGridToWorldArray(tileIndex) {
+    tileIndex.x = tileIndex.x + unoTile.x;
+    tileIndex.y = tileIndex.y + unoTile.y;
+
+    var arrayIndex = tileIndex.y * world.width;
+    arrayIndex = arrayIndex + tileIndex.x;
+    return arrayIndex;
+  }
+
+  function tileIsOpen(tileIndex) {
+    if(world['layers'][0]['data'][canvasGridToWorldArray(tileIndex)] === 0){
+      return true;
+    } else {
+      return false;
+    }
+  }
+  function generateStartPosition(callback) {
+    var startGridPosition = ({
+      x : (Math.round(Math.random() * world.width)),
+      y : (Math.round(Math.random() * world.height))
+    });
+
+    while(!tileIsOpen(startGridPosition)){
+      startGridPosition = ({
+        x : (Math.round(Math.random() * world.width)),
+        y : (Math.round(Math.random() * world.height))
+      });
+    }
+    callback(startGridPosition);
   }
   // Variables that you want to be globaly available.
   var  getLocalplayer = function () {
@@ -205,6 +237,5 @@ function Game() {
     canvas: getCanvas,
     localPlayer: getLocalplayer
   };
-  exports.Game = Game;
 }
 
