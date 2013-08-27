@@ -18,7 +18,7 @@ About
 
 ### What is Panama?
 
-A pirate like space invader game.
+A pirate rogue like coop game.
 
 Installation
 ------------
