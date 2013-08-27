@@ -4,11 +4,10 @@
 
 var Mouse = function () {
   'use strict';
-  var coords
+  var coords;
   function onClick(e) {
 
-
-    function getGameData (callback){
+    function getGameData(callback) {
       var canvas =  game.canvas();
       var localPlayer = game.localPlayer();
       var goal = [];

@@ -11,8 +11,6 @@ function Game() {
     // General canvas specs.
     canvasHeight,
     canvasWidth,
-    canvasGridWidth,
-    canvasGridHeight,
     // General global variables
     unoTile = ({x : 0, y : 0}),
     tileWidth,  //default value for the tileWidth is 32
@@ -67,9 +65,6 @@ function Game() {
     canvasHeight = canvasHeight > window.innerWidth ? canvasHeight - tileWidth : canvasHeight;
     canvasHeight = canvasHeight > tileWidth * world.height ? tileWidth * world.height : canvasHeight;
 
-    canvasGridWidth = canvasWidth / tileWidth;
-    canvasGridHeight = canvasHeight / tileWidth;
-
     mapCanvas.width = canvasWidth;
     mapCanvas.height = canvasHeight;
     gameCanvas.width = canvasWidth;
@@ -99,7 +94,6 @@ function Game() {
   }
 
   function onRemovePlayer(data) {
-    console.log(data);
     var removePlayer = playerById(data.id);
     console.log(remotePlayers);
 
@@ -175,35 +169,27 @@ function Game() {
 
   function drawMap() {
     mapCtx.clearRect(0, 0, canvasWidth, canvasHeight);
-    for (var i = 0; canvasGridWidth > i; i++) {
-      for (var j = 0; canvasGridHeight > j; j++){
-        var arrayPos = canvasGridToWorldArray({x : i, y : j});
-        if (world['layers'][0]['data'][arrayPos] === 1){
-          mapCtx.fillRect(i*32, j * 32, 32, 32);
+    console.log(world.data);
+    for (var i = 0; world.height > i+1; i++) {
+      for (var j = 0; world.width > j+1; j++){
+        console.log(i, j);
+        if (world.data[i][j] === 1){
+          mapCtx.fillRect(i*world.tileheight, j * world.tilewidth, world.tileheight, world.tilewidth);
         }
       }
     }
     redrawMap = false;
   }
   function drawPlayers() {
-    localPlayer.draw(playerCtx, tileWidth);
+    localPlayer.draw(playerCtx, world.tilewidth);
     for (var i = 0; i < remotePlayers.length; i++) {
-      remotePlayers[i].draw(playerCtx, tileWidth);
+      remotePlayers[i].draw(playerCtx, world.tilewidth);
     }
     redrawPlayers = false;
   }
 
-  function canvasGridToWorldArray(tileIndex) {
-    tileIndex.x = tileIndex.x + unoTile.x;
-    tileIndex.y = tileIndex.y + unoTile.y;
-
-    var arrayIndex = tileIndex.y * world.width;
-    arrayIndex = arrayIndex + tileIndex.x;
-    return arrayIndex;
-  }
-
   function tileIsOpen(tileIndex) {
-    if(world['layers'][0]['data'][canvasGridToWorldArray(tileIndex)] === 0){
+    if(world.data[tileIndex.x][tileIndex.y] === 0){
       return true;
     } else {
       return false;
@@ -211,14 +197,13 @@ function Game() {
   }
   function generateStartPosition(callback) {
     var startGridPosition = ({
-      x : (Math.round(Math.random() * world.width)),
-      y : (Math.round(Math.random() * world.height))
+      x : (Math.round(Math.random() * (world.width -1))),
+      y : (Math.round(Math.random() * (world.height-1)))
     });
-
     while(!tileIsOpen(startGridPosition)){
       startGridPosition = ({
-        x : (Math.round(Math.random() * world.width)),
-        y : (Math.round(Math.random() * world.height))
+        x : (Math.round(Math.random() * (world.width -1))),
+        y : (Math.round(Math.random() * (world.height-1)))
       });
     }
     callback(startGridPosition);
