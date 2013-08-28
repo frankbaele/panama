@@ -1,21 +1,21 @@
 #################
-            ## npm
-            #################
+## npm
+#################
 
-            lib-cov
-            *.seed
-            *.log
-            *.csv
-            *.dat
-            *.out
-            *.pid
-            *.gz
+lib-cov
+*.seed
+*.log
+*.csv
+*.dat
+*.out
+*.pid
+*.gz
 
-            .grunt
+.grunt
 
-            pids
-            logs
-            results
+pids
+logs
+results
 
-            npm-debug.log
-            node_modules
+npm-debug.log
+node_modules
