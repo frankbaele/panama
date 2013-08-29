@@ -7,7 +7,7 @@ var World = function () {
   'use strict';
   var
     $ = require('jquery'),
-    RNG = require('RNG'),
+    RNG = require('RNG').RNG,
     height = 20,
     width = 30,
     tileHeight = 35,
