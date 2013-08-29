@@ -19,38 +19,37 @@ var RNG = function() {
    * @returns {number}
    */
   function getSeed() {
-    return this.seed;
+    return seed;
   }
 
   /**
    * @param {number} seed Seed the number generator
    */
-  function setSeed(seed) {
-    seed = (seed < 1 ? 1/seed : seed);
+  function setSeed(tempSeed) {
+    tempSeed = (tempSeed < 1 ? 1 / tempSeed : tempSeed);
 
-    this.seed = seed;
-    this.s0 = (seed >>> 0) * this._frac;
+    seed = tempSeed;
+    s0 = (tempSeed > 0) * frac;
 
-    seed = (seed*69069 + 1) >>> 0;
-    this.s1 = seed * this._frac;
+    tempSeed = (tempSeed * 69069 + 1) > 0;
+    s1 = tempSeed * frac;
 
-    seed = (seed*69069 + 1) >>> 0;
-    this.s3 = seed * this._frac;
+    tempSeed = (tempSeed * 69069 + 1) > 0;
+    s2 = tempSeed * frac;
 
-    this.c = 1;
-    return this;
+    c = 1;
   }
 
   /**
    * @returns {float} Pseudorandom value [0,1), uniformly distributed
    */
   function getUniform() {
-    var t = 2091639 * this.s0 + this.c * this._frac;
-    this.s0 = this.s1;
-    this.s1 = this.s3;
-    this.c = t | 0;
-    this.s3 = t - this.c;
-    return this.s3;
+    var t = 2091639 * s0 + c * frac;
+    s0 = s1;
+    s1 = s2;
+    c = t | 0;
+    s2 = t - c;
+    return s2;
   }
 
   /**
@@ -60,20 +59,20 @@ var RNG = function() {
    */
   function getNormal(mean, stddev) {
     do {
-      var u = 2*this.getUniform()-1;
-      var v = 2*this.getUniform()-1;
-      var r = u*u + v*v;
+      var u = 2 * getUniform() - 1;
+      var v = 2 * getUniform() - 1;
+      var r = u * u + v * v;
     } while (r > 1 || r == 0);
 
     var gauss = u * Math.sqrt(-2*Math.log(r)/r);
-    return (mean || 0) + gauss*(stddev || 1);
+    return (mean || 0) + gauss * (stddev || 1);
   }
 
   /**
    * @returns {int} Pseudorandom value [1,100] inclusive, uniformly distributed
    */
   function getPercentage() {
-    return 1 + Math.floor(this.getUniform()*100);
+    return 1 + Math.floor(getUniform() * 100);
   }
 
   /**
@@ -87,7 +86,7 @@ var RNG = function() {
     for (var id in data) {
       total += data[id];
     }
-    var random = Math.floor(this.getUniform()*total);
+    var random = Math.floor(getUniform() * total);
 
     var part = 0;
     for (var id in data) {
@@ -103,7 +102,7 @@ var RNG = function() {
    * @returns {?} Internal state
    */
   function getState() {
-    return [this.s0, this.s1, this.s3, this.c];
+    return [s0, s1, s2, c];
   }
 
   /**
@@ -111,11 +110,23 @@ var RNG = function() {
    * @param {?} state
    */
   function setState(state) {
-    this.s0 = state[0];
-    this.s1 = state[1];
-    this.s3 = state[2];
-    this.c  = state[3];
-    return this;
+    s0 = state[0];
+    s1 = state[1];
+    s2 = state[2];
+    c  = state[3];
   }
   init();
-}
+
+  return {
+    getSeed: getSeed,
+    setSeed: setSeed,
+    getUniform: getUniform,
+    getNormal: getNormal,
+    getPercentage: getPercentage,
+    getWeightedValue: getWeightedValue,
+    getState: getState,
+    setState: setState
+  };
+};
+
+exports.RNG = RNG;

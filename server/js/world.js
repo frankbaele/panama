@@ -1,7 +1,13 @@
+/**
+ * @namespace
+ * This code is an implementation of the ROT.js cellular map generation by Ondřej Žára, https://github.com/ondras/rot.js
+ * Alea is licensed according to the http://en.wikipedia.org/wiki/MIT_License.
+ */
 var World = function () {
   'use strict';
   var
     $ = require('jquery'),
+    RNG = require('RNG'),
     height = 20,
     width = 30,
     tileHeight = 35,
@@ -33,7 +39,7 @@ var World = function () {
     for (var p in options) { this._options[p] = options[p]; }
 
     this._dirs = ROT.DIRS[this._options.topology];
-    this._map = this._fillMap(0);
+    mapData = this._fillMap(0);
   }
 
   /**
@@ -43,14 +49,14 @@ var World = function () {
   function randomize(probability) {
     for (var i=0;i<this.width;i++) {
       for (var j=0;j<this.height;j++) {
-        this._map[i][j] = (getUniform() < probability ? 1 : 0);
+        mapData[i][j] = (getUniform() < probability ? 1 : 0);
       }
     }
     return this;
   }
 
   function set(x, y, value) {
-    this._map[x][y] = value;
+    mapData[x][y] = value;
   }
 
   function create(callback) {
@@ -69,7 +75,7 @@ var World = function () {
 
       for (var i=widthStart; i<this._width; i+=widthStep) {
 
-        var cur = this._map[i][j];
+        var cur = mapData[i][j];
         var ncount = this._getNeighbors(i, j);
 
         if (cur && survive.indexOf(ncount) != -1) { /* survive */
@@ -82,11 +88,11 @@ var World = function () {
       }
     }
 
-    this._map = newMap;
-  };
+    mapData = newMap;
+  }
 
   /**
-   * Get neighbor count at [i,j] in this._map
+   * Get neighbor count at [i,j] in mapData
    */
   function _getNeighbors(cx, cy) {
     var result = 0;
@@ -96,7 +102,7 @@ var World = function () {
       var y = cy + dir[1];
 
       if (x < 0 || x >= this._width || x < 0 || y >= this._width) { continue; }
-      result += (this._map[x][y] == 1 ? 1 : 0);
+      result += (mapData[x][y] == 1 ? 1 : 0);
     }
 
     return result;
