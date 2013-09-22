@@ -170,9 +170,8 @@ function Game() {
     mapCtx.clearRect(0, 0, canvasWidth, canvasHeight);
     for (var i = 0; world.height > i; i++) {
       for (var j = 0; world.width > j; j++){
-        console.log(i, j)
         if (world.mapData[i][j] === 1){
-          mapCtx.fillRect(i*world.tileHeight, j * world.tileWidth, world.tileHeight, world.tileWidth);
+          mapCtx.fillRect(j * world.tileWidth, i*world.tileHeight, world.tileHeight, world.tileWidth);
         }
       }
     }

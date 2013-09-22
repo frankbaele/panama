@@ -14,24 +14,98 @@ var World = function () {
     tileWidth = 35,
     tileHeight = 35,
     mapData = [],
-    genRNG = new RNG();
+    born =  [5, 6, 7, 8],
+    survive = [4, 5, 6, 7, 8],
+    topology = 8,
+    genRNG = new RNG(),
+    dirs = [
+      [ 0, -1],
+      [ 1, -1],
+      [ 1,  0],
+      [ 1,  1],
+      [ 0,  1],
+      [-1,  1],
+      [-1,  0],
+      [-1, -1]
+    ];
 
 
   function init() {
-    randomize(0.6);
+    mapData = fillMap();
+    mapData = randomize(0.45, mapData);
+    createMap();
+    createMap();
   }
   /**
    * Fill the map with random values
    * @param {float} probability Probability for a cell to become alive; 0 = all empty, 1 = all full
    */
-  function randomize(probability) {
-    for (var i=0;i<height;i++) {
-      mapData[i] = [];
-      for (var j=0;j<width;j++) {
-        mapData[i][j] = (genRNG.getUniform() < probability ? 1 : 0);
+  function randomize(probability, data) {
+    var
+      y,
+      x;
+    for (y = 0; y < height; y++) {
+      for (x = 0; x < width; x++) {
+        data[y][x] = (genRNG.getUniform() < probability ? 1 : 0);
       }
     }
+    return data;
   }
+  function fillMap(){
+    var
+      data = [],
+      y,
+      x;
+
+    for (y = 0; y < height; y++) {
+      data[y] = [];
+      for (x = 0; x < width; x++) {
+        data[y][x] = 0;
+      }
+    }
+    return data;
+  }
+  function getNeighbors(cx, cy) {
+    var result = 0;
+    for (var i = 0; i < dirs.length; i++) {
+      var dir = dirs[i];
+      var x = cx + dir[0];
+      var y = cy + dir[1];
+
+      if (x < 0 || x >= width || x < 0 || y >= width) { continue; }
+      result += (mapData[x][y] === 1 ? 1 : 0);
+    }
+
+    return result;
+  }
+  function createMap(callback) {
+      var newMap = fillMap();
+      for (var j=0;j<height;j++) {
+        var widthStep = 1;
+        var widthStart = 0;
+        if (topology === 6) {
+          widthStep = 2;
+          widthStart = j%2;
+        }
+
+        for (var i=widthStart; i<width; i+=widthStep) {
+
+          var cur = mapData[i][j];
+          var ncount = getNeighbors(i, j);
+
+          if (cur && survive.indexOf(ncount) !== -1) { /* survive */
+            newMap[i][j] = 1;
+          } else if (!cur && born.indexOf(ncount) !== -1) { /* born */
+            newMap[i][j] = 1;
+          }
+
+          if (callback) { callback(i, j, newMap[i][j]); }
+        }
+      }
+
+      mapData = newMap;
+      console.log(mapData);
+    }
 
   function set(x, y, value) {
     mapData[x][y] = value;
