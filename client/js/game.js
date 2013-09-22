@@ -95,7 +95,6 @@ function Game() {
 
   function onRemovePlayer(data) {
     var removePlayer = playerById(data.id);
-    console.log(remotePlayers);
 
     if (!removePlayer) {
       console.log("Player not found: " + data.id);
@@ -108,7 +107,7 @@ function Game() {
 
   function onWorld(data){
     world = data;
-    tileWidth = data.tilewidth;
+    tileWidth = data.tileWidth;
     generateNewLocalPlayer();
   }
 
@@ -169,27 +168,28 @@ function Game() {
 
   function drawMap() {
     mapCtx.clearRect(0, 0, canvasWidth, canvasHeight);
-    console.log(world.data);
-    for (var i = 0; world.height > i+1; i++) {
-      for (var j = 0; world.width > j+1; j++){
-        console.log(i, j);
-        if (world.data[i][j] === 1){
-          mapCtx.fillRect(i*world.tileheight, j * world.tilewidth, world.tileheight, world.tilewidth);
+    for (var i = 0; world.height > i; i++) {
+      for (var j = 0; world.width > j; j++){
+        console.log(i, j)
+        if (world.mapData[i][j] === 1){
+          mapCtx.fillRect(i*world.tileHeight, j * world.tileWidth, world.tileHeight, world.tileWidth);
         }
       }
     }
     redrawMap = false;
   }
   function drawPlayers() {
-    localPlayer.draw(playerCtx, world.tilewidth);
+    localPlayer.draw(playerCtx, world.tileWidth);
     for (var i = 0; i < remotePlayers.length; i++) {
-      remotePlayers[i].draw(playerCtx, world.tilewidth);
+      remotePlayers[i].draw(playerCtx, world.tileWidth);
     }
     redrawPlayers = false;
   }
 
   function tileIsOpen(tileIndex) {
-    if(world.data[tileIndex.x][tileIndex.y] === 0){
+    console.log(tileIndex);
+    console.log(world.mapData);
+    if(world.mapData[tileIndex.y][tileIndex.x] === 0){
       return true;
     } else {
       return false;
@@ -198,7 +198,7 @@ function Game() {
   function generateStartPosition(callback) {
     var startGridPosition = ({
       x : (Math.round(Math.random() * (world.width -1))),
-      y : (Math.round(Math.random() * (world.height-1)))
+      y : (Math.round(Math.random() * (world.height -1)))
     });
     while(!tileIsOpen(startGridPosition)){
       startGridPosition = ({

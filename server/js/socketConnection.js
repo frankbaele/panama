@@ -1,10 +1,9 @@
-var SocketConnection = function(port, worldMatrix) {
+var SocketConnection = function(port, generatedWorld) {
   var
   io = require("socket.io"),
   util = require("util"),
   Player = require("./player").Player,
   players,
-  world = worldMatrix,
   socket;
 
   function init() {
@@ -20,8 +19,7 @@ var SocketConnection = function(port, worldMatrix) {
   }
   function onSocketConnection(client) {
     util.log("New player has connected: "  + client.id);
-    client.emit('world', world.matrix);
-
+    client.emit('world', generatedWorld);
     client.on("disconnect", onClientDisconnect);
     client.on("new player", onNewPlayer);
     client.on("move player", onMovePlayer);

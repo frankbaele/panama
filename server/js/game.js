@@ -15,5 +15,4 @@ function init() {
   generatedWorld = new World();
   connection = new SocketConnection(8000, generatedWorld);
 }
-
 init();
