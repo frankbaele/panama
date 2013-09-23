@@ -12,8 +12,8 @@ var Mouse = function () {
       var localPlayer = game.localPlayer();
       var goal = [];
       coords  = canvas.relMouseCoords(e);
-      goal.x = coords.x.roundTo(3);
-      goal.y = coords.y.roundTo(3);
+      goal.x = coords.x;
+      goal.y = coords.y;
 
       callback(
         goal,

@@ -186,8 +186,6 @@ function Game() {
   }
 
   function tileIsOpen(tileIndex) {
-    console.log(tileIndex);
-    console.log(world.mapData);
     if(world.mapData[tileIndex.y][tileIndex.x] === 0){
       return true;
     } else {

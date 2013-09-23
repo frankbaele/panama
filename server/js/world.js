@@ -8,14 +8,14 @@ var World = function () {
   var
     $ = require('jquery'),
     RNG = require('./RNG').RNG,
-    height = 30,
-    width = 30,
+    height = 100,
+    width = 100,
     options,
-    tileWidth = 35,
-    tileHeight = 35,
+    tileWidth = 15,
+    tileHeight = 15,
     mapData = [],
-    born =  [5, 6, 7, 8],
-    survive = [4, 5, 6, 7, 8],
+    born =  [6, 7, 8],
+    survive = [3, 4, 5, 6, 7, 8],
     topology = 8,
     genRNG = new RNG(),
     dirs = [
@@ -32,8 +32,7 @@ var World = function () {
 
   function init() {
     mapData = fillMap();
-    mapData = randomize(0.45, mapData);
-    createMap();
+    mapData = randomize(0.5, mapData);
     createMap();
   }
   /**
@@ -79,6 +78,8 @@ var World = function () {
     return result;
   }
   function createMap(callback) {
+    var count = 0;
+    for(var r = 0; r < 3; r++){
       var newMap = fillMap();
       for (var j=0;j<height;j++) {
         var widthStep = 1;
@@ -89,7 +90,7 @@ var World = function () {
         }
 
         for (var i=widthStart; i<width; i+=widthStep) {
-
+          count++;
           var cur = mapData[i][j];
           var ncount = getNeighbors(i, j);
 
@@ -104,7 +105,8 @@ var World = function () {
       }
 
       mapData = newMap;
-      console.log(mapData);
+    }
+
     }
 
   function set(x, y, value) {
