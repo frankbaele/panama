@@ -8,33 +8,35 @@ var World = function () {
   var
     $ = require('jquery'),
     RNG = require('./RNG').RNG,
-    height = 100,
-    width = 100,
+    height = 25,
+    width = 25,
     options,
-    tileWidth = 15,
-    tileHeight = 15,
+    tileWidth = 10,
+    tileHeight = 10,
     mapData = [],
-    born =  [6, 7, 8],
-    survive = [3, 4, 5, 6, 7, 8],
+    born = [ 5, 6, 7, 8],
+    survive = [ 4, 5, 6, 7, 8],
     topology = 8,
     genRNG = new RNG(),
     dirs = [
       [ 0, -1],
       [ 1, -1],
-      [ 1,  0],
-      [ 1,  1],
-      [ 0,  1],
-      [-1,  1],
-      [-1,  0],
+      [ 1, 0],
+      [ 1, 1],
+      [ 0, 1],
+      [-1, 1],
+      [-1, 0],
       [-1, -1]
     ];
 
 
   function init() {
     mapData = fillMap();
-    mapData = randomize(0.5, mapData);
+    mapData = randomize(0.47, mapData);
     createMap();
+    mapData = superSizeMap(mapData, 4);
   }
+
   /**
    * Fill the map with random values
    * @param {float} probability Probability for a cell to become alive; 0 = all empty, 1 = all full
@@ -50,7 +52,8 @@ var World = function () {
     }
     return data;
   }
-  function fillMap(){
+
+  function fillMap() {
     var
       data = [],
       y,
@@ -64,6 +67,7 @@ var World = function () {
     }
     return data;
   }
+
   function getNeighbors(cx, cy) {
     var result = 0;
     for (var i = 0; i < dirs.length; i++) {
@@ -71,25 +75,28 @@ var World = function () {
       var x = cx + dir[0];
       var y = cy + dir[1];
 
-      if (x < 0 || x >= width || x < 0 || y >= width) { continue; }
+      if (x < 0 || x >= width || x < 0 || y >= width) {
+        continue;
+      }
       result += (mapData[x][y] === 1 ? 1 : 0);
     }
 
     return result;
   }
+
   function createMap(callback) {
     var count = 0;
-    for(var r = 0; r < 3; r++){
+    for (var r = 0; r < 3; r++) {
       var newMap = fillMap();
-      for (var j=0;j<height;j++) {
+      for (var j = 0; j < height; j++) {
         var widthStep = 1;
         var widthStart = 0;
         if (topology === 6) {
           widthStep = 2;
-          widthStart = j%2;
+          widthStart = j % 2;
         }
 
-        for (var i=widthStart; i<width; i+=widthStep) {
+        for (var i = widthStart; i < width; i += widthStep) {
           count++;
           var cur = mapData[i][j];
           var ncount = getNeighbors(i, j);
@@ -100,23 +107,46 @@ var World = function () {
             newMap[i][j] = 1;
           }
 
-          if (callback) { callback(i, j, newMap[i][j]); }
+          if (callback) {
+            callback(i, j, newMap[i][j]);
+          }
         }
       }
 
       mapData = newMap;
     }
 
-    }
+  }
 
   function set(x, y, value) {
     mapData[x][y] = value;
   }
+
+  function superSizeMap(map, amount) {
+    var newMap = [];
+    for (var y = 0; y < height; y++) {
+      for (var yAmount = 0; yAmount < amount; yAmount++) {
+        var newY = (y * amount) + yAmount;
+        newMap[newY] = [];
+        for (var x = 0; x < width; x++) {
+          for (var xAmount = 0; xAmount < amount; xAmount++) {
+            var newX = (x * amount) + xAmount;
+            newMap[newY][newX] = map[y][x];
+          }
+        }
+      }
+    }
+
+   width = width * amount;
+   height = height * amount;
+    return newMap;
+  }
+
   init();
 
   return {
-    tileWidth : tileWidth,
-    tileHeight : tileHeight,
+    tileWidth: tileWidth,
+    tileHeight: tileHeight,
     height: height,
     width: width,
     mapData: mapData

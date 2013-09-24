@@ -29,12 +29,12 @@ var RNG = function () {
     tempSeed = (tempSeed < 1 ? 1 / tempSeed : tempSeed);
 
     seed = tempSeed;
-    s0 = (tempSeed > 0) * frac;
+    s0 = (tempSeed >>> 0) * frac;
 
-    tempSeed = (tempSeed * 69069 + 1) > 0;
+    tempSeed = (tempSeed * 69069 + 1) >>> 0;
     s1 = tempSeed * frac;
 
-    tempSeed = (tempSeed * 69069 + 1) > 0;
+    tempSeed = (tempSeed * 69069 + 1) >>> 0;
     s2 = tempSeed * frac;
 
     c = 1;
