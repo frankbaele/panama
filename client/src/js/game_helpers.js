@@ -2,6 +2,8 @@
 /**************************************************
  ** HELPER FUNCTIONS
  **************************************************/
+var helper = {};
+
 HTMLCanvasElement.prototype.relMouseCoords = function (event){
   var totalOffsetX = 0;
   var totalOffsetY = 0;
@@ -21,10 +23,29 @@ HTMLCanvasElement.prototype.relMouseCoords = function (event){
 };
 
 Number.prototype.roundTo = function(num) {
-  var resto = this%num;
-  if (resto <= (num/2)) {
-    return this-resto;
+  var resto = this % num;
+  if (resto <= (num / 2)) {
+    return this - resto;
   } else {
-    return this+num-resto;
+    return this + num - resto;
   }
-}
+};
+
+helper.prototype.isoToTwoD = function (coords) {
+  var newCoords = {};
+  newCoords.x = (2 * coords.y + coords.x) / 2;
+  newCoords.y = (2 * coords.y - coords.x) / 2;
+  return newCoords;
+};
+
+helper.prototype.twoDToIso = function (coords) {
+  var newCoords = {};
+  newCoords.x = coords.x - coords.y;
+  newCoords.y = (coords.x + coords.y) / 2;
+  return newCoords;
+};
+
+helperObject.prototyp.getTileCoordinates = function () {
+  "use strict";
+
+};

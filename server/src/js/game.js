@@ -1,7 +1,6 @@
 var
 // Node js requierements
   _ = require('underscore'),
-  $ = require('jquery'),
   // File variable includes
   World = require("./world").World,
   SocketConnection = require("./socketConnection").Connection,

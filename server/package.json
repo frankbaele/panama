@@ -3,22 +3,15 @@
   "version": "0.0.1",
   "devDependencies": {
     "grunt": "~0.4.1",
-    "grunt-open": "~0.2.0",
     "grunt-jsdoc": "~0.3.2",
-    "grunt-contrib-copy": "~0.4.1",
-    "grunt-contrib-watch": "~0.3.0",
-    "grunt-contrib-jshint": "~0.3.0",
-    "grunt-contrib-connect": "~0.3.0",
-    "grunt-regarde": "~0.1.1",
     "socket.io": "~0.9.16",
     "grunt-nodemon": "0.0.5",
     "underscore": "~1.4.4",
-    "readline-prompter": "~0.2.0",
-    "jquery": "~1.8.3",
-    "path": "~0.4.9"
+    "path": "~0.4.9",
+    "grunt-node-webkit-builder": "~0.1.6"
   },
   "description": "roguelike pirate game",
-  "main": "index.js",
+  "main": "./src/js/game.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/frankbaele/panama.git"
@@ -26,7 +19,8 @@
   "keywords": [
     "roguelike",
     "pirates",
-    "nodejs"
+    "nodejs",
+    "server"
   ],
   "author": "frank baele",
   "license": "BSD",

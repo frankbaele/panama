@@ -6,7 +6,6 @@
 var World = function () {
   'use strict';
   var
-    $ = require('jquery'),
     _ = require('underscore'),
     RNG = require('./RNG').RNG,
     height = 50,

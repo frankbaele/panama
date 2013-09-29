@@ -5,13 +5,6 @@ module.exports = function (grunt) {
   // Config...
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    nodemon: {
-      prod: {
-        options: {
-          file: './server/js/game.js'
-        }
-      }
-    },
     connect: {
       server: {
         options: {
@@ -20,7 +13,7 @@ module.exports = function (grunt) {
           // This will be removed later as `watch` will take care of that
           keepalive: true,
           hostname: '',
-          base: './client'
+          base: './src'
         }
       }
     },
@@ -35,15 +28,15 @@ module.exports = function (grunt) {
   // Load tasks...
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-open');
-  grunt.loadNpmTasks('grunt-nodemon');
+  grunt.loadNpmTasks('grunt-node-webkit-builder');
 
   // Task aliases and tasks
-  grunt.registerTask('server', [
-    'nodemon'
-  ]);
-  grunt.registerTask('client', [
+  grunt.registerTask('serv', [
     'open',
     'connect'
+  ]);
+  grunt.registerTask('build', [
+    'nodewebkit'
   ]);
 
 };

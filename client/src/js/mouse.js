@@ -14,6 +14,7 @@ var Mouse = function () {
       coords  = canvas.relMouseCoords(e);
       goal.x = coords.x;
       goal.y = coords.y;
+      alert(goal.x);
 
       callback(
         goal,
