@@ -38,6 +38,7 @@ function Game() {
     // Start listening for events
     remotePlayers = [];
     setEventHandlers();
+
   }
 
   /**************************************************

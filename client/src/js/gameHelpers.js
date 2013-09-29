@@ -2,7 +2,39 @@
 /**************************************************
  ** HELPER FUNCTIONS
  **************************************************/
-var helper = {};
+var HelperConstructor = function () {
+  "use strict";
+
+};
+
+HelperConstructor.prototype.isoToTwoD = function (coords) {
+  var newCoords = {};
+  newCoords.x = (2 * coords.y + coords.x) / 2;
+  newCoords.y = (2 * coords.y - coords.x) / 2;
+  return newCoords;
+};
+
+HelperConstructor.prototype.twoDToIso = function (coords) {
+  var newCoords = {};
+  newCoords.x = coords.x - coords.y;
+  newCoords.y = (coords.x + coords.y) / 2;
+  return newCoords;
+};
+
+HelperConstructor.prototype.getTileCoordinates = function () {
+
+};
+
+HelperConstructor.prototype.checkWait = function (conditionFunction, resultFunction) {
+  var tev = setInterval(function () {
+    if (conditionFunction()) {
+      resultFunction();
+      clearInterval(tev);
+    }
+  }, 1000);
+};
+
+var helper = new HelperConstructor();
 
 HTMLCanvasElement.prototype.relMouseCoords = function (event){
   var totalOffsetX = 0;
@@ -29,23 +61,4 @@ Number.prototype.roundTo = function(num) {
   } else {
     return this + num - resto;
   }
-};
-
-helper.prototype.isoToTwoD = function (coords) {
-  var newCoords = {};
-  newCoords.x = (2 * coords.y + coords.x) / 2;
-  newCoords.y = (2 * coords.y - coords.x) / 2;
-  return newCoords;
-};
-
-helper.prototype.twoDToIso = function (coords) {
-  var newCoords = {};
-  newCoords.x = coords.x - coords.y;
-  newCoords.y = (coords.x + coords.y) / 2;
-  return newCoords;
-};
-
-helperObject.prototyp.getTileCoordinates = function () {
-  "use strict";
-
 };
