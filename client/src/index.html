@@ -25,9 +25,11 @@
             var inputScripts = [
               // scripts
               "./js/gameHelpers.js",
+              "./js/spriteSheet.js",
               "./js/assetLoader.js",
               "./js/lib/socket.io.min.js",
               "./js/lib/underscore.min.js",
+              "./js/lib/jquery.min.js",
               "./js/requestAnimationFrame.js",
               "./js/mouse.js",
               "./js/Player.js",
@@ -40,14 +42,12 @@
               complete:	function()
               {
 
-                assetLoader.preloadAssets;
+                assetLoader.preloadAssets();
                 helper.checkWait(
-                  function()
-                  {
-                    return assetLoader.preloadComplete;
+                  function () {
+                    return assetLoader.preloadComplete();
                   },
-                  function ()
-                  {
+                  function () {
                     // Initialise the game
                     game = new Game();
                     game.init();
