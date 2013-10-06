@@ -19,7 +19,7 @@
   "window": {
     "show": true,
     "toolbar": false,
-    "frame": true,
+    "frame": false,
     "position": "center",
     "width": 800,
     "height": 600,
