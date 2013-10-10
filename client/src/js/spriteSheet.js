@@ -6,7 +6,7 @@ var SpriteSheet = function (confConstructor, fileConstructor){
     configuration = confConstructor,
     file = fileConstructor;
   var init = function (){
-    console.log(configuration);
+
   };
 
   var defSprite = function (name, x, y, w, h, cx, cy) {

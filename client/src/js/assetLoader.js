@@ -24,7 +24,8 @@ AssetLoaderConstructor.prototype.preloadAssets = function () {
     switch (asset.type) {
       case 'atlas':
         that.loadAtlas(asset, function (loadedAsset) {
-          assets.loaded.atlas.push(loadedAsset);
+          // now put all the loaded data in a spritesheet object and inject it into the loaded atlas array.
+          assets.loaded.atlas.push(new SpriteSheet(loadedAsset.configuration, loadedAsset.file));
           that.queue--;
         });
         break;
@@ -39,7 +40,6 @@ AssetLoaderConstructor.prototype.preloadComplete = function () {
   return this.queue > 0 ? false : true;
 };
 AssetLoaderConstructor.prototype.loadAtlas = function (asset, callback) {
-
   jQuery.getJSON(asset.configuration,function (data) {
     asset.configuration = data;
   }).then(function () {
