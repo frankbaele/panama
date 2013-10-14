@@ -31,7 +31,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-node-webkit-builder');
 
   // Task aliases and tasks
-  grunt.registerTask('serv', [
+  grunt.registerTask('serve', [
     'nodemon'
   ]);
   grunt.registerTask('build', [

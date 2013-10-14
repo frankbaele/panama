@@ -12,7 +12,7 @@ Panama
 About
 -----
 
-### Author
+## Author
 
 [Frank Baele](http://github.com/frankbaele)
 
@@ -23,28 +23,44 @@ A pirate rogue like coop game.
 Installation
 ------------
 
-### Dependencies
+## Dependencies
 
 * [Node.js](http://node.js)
 * [Grunt.js](http://grunt.js)
 
-### Installation
+## Installation
 
 1. Clone the repository
 
     git clone <url>
 
+### Client
+
+1. navigate to the client subfolder
+
+    cd client
+
 2. Get all the dependencies via npm
 
     npm install
 
-3. Run the socket.io server
+3. Serve the client page
 
-    grunt server
+    grunt serve
 
-3. Run the game
+### Server
 
-    grunt client
+1. navigate to the io server subfolder
+
+    cd server
+
+2. Get all the dependencies via npm
+
+    npm install
+
+3. Serve the client page
+
+    grunt serve
 
 That's it. Your browser should automagically open and point to [http://localhost:9001](http://localhost:9001).
 
