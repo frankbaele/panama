@@ -1,6 +1,7 @@
 var assets = {
   config: {
-    mapTiles: {
+    0 : {
+      name: "mapTiles",
       type: "atlas",
       configuration: "./art/panama.json",
       file: "./art/panama.png"
@@ -25,7 +26,10 @@ AssetLoaderConstructor.prototype.preloadAssets = function () {
       case 'atlas':
         that.loadAtlas(asset, function (loadedAsset) {
           // now put all the loaded data in a spritesheet object and inject it into the loaded atlas array.
-          assets.loaded.atlas.push(new SpriteSheet(loadedAsset.configuration, loadedAsset.file));
+          assets.loaded.atlas.push({
+            name: asset.name,
+            sprite: new SpriteSheet(loadedAsset.configuration, loadedAsset.file)
+          });
           that.queue--;
         });
         break;
@@ -40,6 +44,7 @@ AssetLoaderConstructor.prototype.preloadComplete = function () {
   return this.queue > 0 ? false : true;
 };
 AssetLoaderConstructor.prototype.loadAtlas = function (asset, callback) {
+  // first get the configuration over json en then load the image object.
   jQuery.getJSON(asset.configuration,function (data) {
     asset.configuration = data;
   }).then(function () {

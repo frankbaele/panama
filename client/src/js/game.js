@@ -168,6 +168,7 @@ function Game() {
   }
 
   function drawMap() {
+    /*
     mapCtx.clearRect(0, 0, canvasWidth, canvasHeight);
     for (var i = 0; world.height > i; i++) {
       for (var j = 0; world.width > j; j++){
@@ -175,7 +176,7 @@ function Game() {
           mapCtx.fillRect(j * world.tileWidth, i*world.tileHeight, world.tileHeight, world.tileWidth);
         }
       }
-    }
+    }*/
     redrawMap = false;
   }
   function drawPlayers() {
@@ -213,12 +214,16 @@ function Game() {
   var getCanvas = function () {
     return userCanvas;
   };
+  var getMapContext = function () {
+    return mapCtx;
+  };
 
   return {
     init: init,
     animate: animate,
     canvas: getCanvas,
-    localPlayer: getLocalplayer
+    localPlayer: getLocalplayer,
+    getMapContext: getMapContext
   };
 }
 
