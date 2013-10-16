@@ -38,7 +38,7 @@ var SpriteSheet = function (confConstructor, fileConstructor){
   function drawSprite(spriteName, posX, posY, context) {
     var spt,
       mapTrans = {};
-    spt = _.where(sprites, {id : spriteName});
+    spt = _.findWhere(sprites, {id : spriteName});
 
     if (_.isEmpty(spt))
       return;
