@@ -14,6 +14,7 @@ function Game() {
     // General global variables
     unoTile = ({x : 0, y : 0}),
     tileWidth,  //default value for the tileWidth is 32
+    tileHeight,
     localPlayer,    // Local player
     remotePlayers,  // remote players
     socket,         // socket io
@@ -109,6 +110,7 @@ function Game() {
   function onWorld(data){
     world = data;
     tileWidth = data.tileWidth;
+    tileHeight = data.tileHeight;
     generateNewLocalPlayer();
   }
 
@@ -166,7 +168,6 @@ function Game() {
     }
     return false;
   }
-
   function drawMap() {
     /*
     mapCtx.clearRect(0, 0, canvasWidth, canvasHeight);
@@ -186,7 +187,6 @@ function Game() {
     }
     redrawPlayers = false;
   }
-
   function tileIsOpen(tileIndex) {
     if(world.mapData[tileIndex.y][tileIndex.x] === 0){
       return true;
@@ -208,7 +208,7 @@ function Game() {
     callback(startGridPosition);
   }
   // Variables that you want to be globaly available.
-  var  getLocalplayer = function () {
+  var getLocalplayer = function () {
     return localPlayer;
   };
   var getCanvas = function () {
@@ -217,10 +217,17 @@ function Game() {
   var getMapContext = function () {
     return mapCtx;
   };
-
+  var getTileWidth = function () {
+    return tileWidth;
+  };
+  var getTileHeight = function () {
+    return tileHeight;
+  };
   return {
     init: init,
     animate: animate,
+    getTileWidth: getTileWidth,
+    getTileHeight: getTileHeight,
     canvas: getCanvas,
     localPlayer: getLocalplayer,
     getMapContext: getMapContext

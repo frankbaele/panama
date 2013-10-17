@@ -34,58 +34,9 @@ var SpriteSheet = function (confConstructor, fileConstructor){
     sprites.push(spt);
   };
 
-
-  function drawSprite(spriteName, posX, posY, context) {
-    var spt,
-      mapTrans = {};
-    spt = _.findWhere(sprites, {id : spriteName});
-
-    if (_.isEmpty(spt))
-      return;
-
-    var hlf = {x: spt.cx, y: spt.cy};
-    mapTrans.x = 0;
-    mapTrans.y = 0;
-
-    /*
-    if (settings && settings.rotRadians != null) {
-      context.save();
-      var rotRadians = Math.PI + settings.rotRadians;
-
-      context.translate(posX - mapTrans.x, posY - mapTrans.y);
-      context.rotate(rotRadians); //rotate in origin
-
-
-      context.drawImage(sheet.img,
-        spt.x, spt.y,
-        spt.w, spt.h,
-        +hlf.x,
-        +hlf.y,
-        spt.w,
-        spt.h);
-      context.restore();
-
-
-    }
-
-    else {
-    */
-    context.drawImage(img,
-      spt.x, spt.y,
-      spt.w, spt.h,
-      (posX + hlf.x),
-      (posY + hlf.y),
-      spt.w,
-      spt.h);
-    /*
-    }
-    */
-
-  }
-
   init();
   return {
-    sprites : sprites,
-    drawSprite : drawSprite
+    img: img,
+    sprites : sprites
   };
 };

@@ -33,6 +33,47 @@ HelperConstructor.prototype.checkWait = function (conditionFunction, resultFunct
     }
   }, 1000);
 };
+HelperConstructor.prototype.drawSprite = function (spriteName, posX, posY, layer) {
+  var spt,
+    mapTrans = {},
+    context,
+    img;
+  // For lop trough all the atlasses with find, because we want to exit this loop when the atlas is found.
+  _.find(assets.loaded.atlas, function(sheet){
+    // Search for a sprite with the same sprite name
+    spt = _.findWhere(sheet.sprite.sprites, {id : spriteName});
+    img = sheet.sprite.img;
+    // exit find loop when sprite is found.
+    if (!_.isEmpty(spt)){
+      return;
+    }
+  });
+
+  if (_.isEmpty(spt)){
+    return;
+  }
+  console.log(layer);
+  //lookup the context
+  switch (layer){
+    case 'map' :
+      context = game.getMapContext();
+      break;
+    default:
+      return;
+  }
+
+  var hlf = {x: spt.cx, y: spt.cy};
+  //var spriteHeight = spt.x / game.tileWidth
+  mapTrans.x = 0;
+  mapTrans.y = 0;
+  context.drawImage(img,
+    spt.x, spt.y,
+    spt.w, spt.h,
+    (posX + hlf.x),
+    (posY + hlf.y),
+    game.getTileWidth(),
+    game.getTileHeight());
+};
 
 var helper = new HelperConstructor();
 
@@ -51,7 +92,7 @@ HTMLCanvasElement.prototype.relMouseCoords = function (event){
 
   canvasX = event.pageX - totalOffsetX;
   canvasY = event.pageY - totalOffsetY;
-  return {x:canvasX, y:canvasY}
+  return {x:canvasX, y:canvasY};
 };
 
 Number.prototype.roundTo = function(num) {

@@ -11,8 +11,8 @@ var World = function () {
     height = 50,
     width = 50,
     options,
-    tileWidth = 5,
-    tileHeight = 5,
+    tileWidth = 64,
+    tileHeight = 32,
     mapData = [],
     born = [ 5, 6, 7, 8],
     survive = [ 4, 5, 6, 7, 8],
@@ -33,7 +33,7 @@ var World = function () {
 
   function init() {
 
-    mapData = (_.compose(superSizeMap, superSizeMap, runAutomatonCycle,  runAutomatonCycle, runAutomatonCycle, randomize, fillMap))();
+    mapData = (_.compose(superSizeMap, runAutomatonCycle,  runAutomatonCycle, runAutomatonCycle, randomize, fillMap))();
   }
 
   /**
