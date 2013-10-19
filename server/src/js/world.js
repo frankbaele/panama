@@ -8,8 +8,8 @@ var World = function () {
   var
     _ = require('underscore'),
     RNG = require('./RNG').RNG,
-    height = 50,
-    width = 50,
+    height = 10,
+    width = 10,
     options,
     tileWidth = 64,
     tileHeight = 32,

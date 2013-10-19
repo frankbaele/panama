@@ -60,12 +60,12 @@ function Game() {
     canvasWidth = window.innerWidth.roundTo(tileWidth);
     // If the canvas with is greater then the window we subtract a gridSize to make it fit in the window.
     canvasWidth = canvasWidth > window.innerWidth ? canvasWidth - tileWidth : canvasWidth;
-    canvasWidth = canvasWidth > tileWidth * world.width ? tileWidth * world.width : canvasWidth;
+    canvasWidth = canvasWidth > tileWidth * world.width * 2 ? tileWidth * world.width * 2 : canvasWidth;
 
     canvasHeight = window.innerHeight.roundTo(tileWidth);
     // If the canvas height is greater then the window we subtract a gridSize to make it fit in the window.
     canvasHeight = canvasHeight > window.innerWidth ? canvasHeight - tileWidth : canvasHeight;
-    canvasHeight = canvasHeight > tileWidth * world.height ? tileWidth * world.height : canvasHeight;
+    canvasHeight = canvasHeight > tileWidth * world.height * 2 ? tileWidth * world.height * 2  : canvasHeight;
 
     mapCanvas.width = canvasWidth;
     mapCanvas.height = canvasHeight;
@@ -169,19 +169,23 @@ function Game() {
     return false;
   }
   function drawMap() {
-    /*
     mapCtx.clearRect(0, 0, canvasWidth, canvasHeight);
     for (var i = 0; world.height > i; i++) {
       for (var j = 0; world.width > j; j++){
         if (world.mapData[i][j] === 1){
-          mapCtx.fillRect(j * world.tileWidth, i*world.tileHeight, world.tileHeight, world.tileWidth);
+          var coords = helper.twoDToIso({x:j,y: i});
+          helper.drawSprite("ts_beach0/straight/225/0.png", coords.x*tileWidth + ((world.width*tileWidth)/2), coords.y*tileHeight, "map");
+        } else {
+          var coords = helper.twoDToIso({x:j,y: i});
+          helper.drawSprite("ts_shallow-deep0/curve_out/45/0.png", coords.x*tileWidth + ((world.width*tileWidth)/2), coords.y*tileHeight, "map");
         }
       }
-    }*/
+    }
+
     redrawMap = false;
   }
   function drawPlayers() {
-    localPlayer.draw(playerCtx, world.tileWidth);
+    //glocalPlayer.draw(playerCtx, world.tileWidth);
     for (var i = 0; i < remotePlayers.length; i++) {
       remotePlayers[i].draw(playerCtx, world.tileWidth);
     }

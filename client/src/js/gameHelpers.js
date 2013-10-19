@@ -16,7 +16,7 @@ HelperConstructor.prototype.isoToTwoD = function (coords) {
 
 HelperConstructor.prototype.twoDToIso = function (coords) {
   var newCoords = {};
-  newCoords.x = coords.x - coords.y;
+  newCoords.x = (coords.x - coords.y) / 2;
   newCoords.y = (coords.x + coords.y) / 2;
   return newCoords;
 };
@@ -52,7 +52,7 @@ HelperConstructor.prototype.drawSprite = function (spriteName, posX, posY, layer
   if (_.isEmpty(spt)){
     return;
   }
-  console.log(layer);
+
   //lookup the context
   switch (layer){
     case 'map' :
