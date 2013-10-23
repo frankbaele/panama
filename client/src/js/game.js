@@ -20,9 +20,8 @@ function Game() {
     socket,         // socket io
     mouse,
     redrawMap = true,
-    redrawPlayers = true,
+    redrawPlayers = true;
     // the first grid on the canvas in the left upper corner.
-    world;
 
   function init() {
     // Declare the canvases and rendering contexts
@@ -170,14 +169,15 @@ function Game() {
   }
   function drawMap() {
     mapCtx.clearRect(0, 0, canvasWidth, canvasHeight);
+    console.log(world);
     for (var i = 0; world.height > i; i++) {
       for (var j = 0; world.width > j; j++){
         if (world.mapData[i][j] === 1){
           var coords = helper.twoDToIso({x:j,y: i});
-          helper.drawSprite("ts_beach0/straight/225/0.png", coords.x*tileWidth + ((world.width*tileWidth)/2), coords.y*tileHeight, "map");
+          helper.drawSprite("ts_beach0/straight/135/0.png", coords.x*tileWidth + (world.tileWidth * world.width)/2, coords.y*tileHeight, "map");
         } else {
           var coords = helper.twoDToIso({x:j,y: i});
-          helper.drawSprite("ts_shallow-deep0/curve_out/45/0.png", coords.x*tileWidth + ((world.width*tileWidth)/2), coords.y*tileHeight, "map");
+          helper.drawSprite("ts_shallow-deep0/curve_out/45/0.png", coords.x*tileWidth + (world.tileWidth * world.width)/2, coords.y*tileHeight, "map");
         }
       }
     }

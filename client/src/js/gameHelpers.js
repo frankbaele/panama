@@ -16,8 +16,8 @@ HelperConstructor.prototype.isoToTwoD = function (coords) {
 
 HelperConstructor.prototype.twoDToIso = function (coords) {
   var newCoords = {};
-  newCoords.x = (coords.x - coords.y) / 2;
-  newCoords.y = (coords.x + coords.y) / 2;
+  newCoords.x = ((coords.x - coords.y) / 2);
+  newCoords.y = ((coords.x + coords.y) / 2);
   return newCoords;
 };
 
@@ -63,9 +63,10 @@ HelperConstructor.prototype.drawSprite = function (spriteName, posX, posY, layer
   }
 
   var hlf = {x: spt.cx, y: spt.cy};
-  //var spriteHeight = spt.x / game.tileWidth
+
   mapTrans.x = 0;
   mapTrans.y = 0;
+
   context.drawImage(img,
     spt.x, spt.y,
     spt.w, spt.h,
