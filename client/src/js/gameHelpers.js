@@ -1,4 +1,3 @@
-
 /**************************************************
  ** HELPER FUNCTIONS
  **************************************************/
@@ -34,33 +33,54 @@ HelperConstructor.prototype.checkWait = function (conditionFunction, resultFunct
   }, 1000);
 };
 HelperConstructor.prototype.drawSprite = function (spriteName, posX, posY, layer) {
+  var unoTile = game.getUnoTile();
+  var visible = game.getVisible();
+  posX = posX - unoTile.x;
+  posY = posY - unoTile.y;
+  // transform the grid tile to iso coordinates
+  var coords = helper.twoDToIso({x: posX, y: posY});
+  // transform the coordinates to the actual size of the map
+  coords.x = coords.x * world.tileWidth + (world.tileWidth * visible.x) / 2;
+  coords.y = coords.y * world.tileHeight;
+
+  if (coords.x > ((visible.x - 1) * game.getTileWidth()) || (coords.x + game.getTileWidth()) <= 0){
+    return;
+  }
+  if (coords.y > ((visible.y + 1) * game.getTileHeight()) ||(coords.y + game.getTileHeight()) <= 0){
+    return;
+  }
+
   var spt,
     mapTrans = {},
     context,
     img;
   // For lop trough all the atlasses with find, because we want to exit this loop when the atlas is found.
-  _.find(assets.loaded.atlas, function(sheet){
+  _.find(assets.loaded.atlas, function (sheet) {
     // Search for a sprite with the same sprite name
-    spt = _.findWhere(sheet.sprite.sprites, {id : spriteName});
+    spt = _.findWhere(sheet.sprite.sprites, {id: spriteName});
     img = sheet.sprite.img;
     // exit find loop when sprite is found.
-    if (!_.isEmpty(spt)){
+    if (!_.isEmpty(spt)) {
       return;
     }
   });
 
-  if (_.isEmpty(spt)){
+  if (_.isEmpty(spt)) {
     return;
   }
 
   //lookup the context
-  switch (layer){
+  switch (layer) {
     case 'map' :
       context = game.getMapContext();
+      break;
+    case 'player' :
+      context = game.getPlayerContext();
       break;
     default:
       return;
   }
+
 
   var hlf = {x: spt.cx, y: spt.cy};
 
@@ -70,33 +90,78 @@ HelperConstructor.prototype.drawSprite = function (spriteName, posX, posY, layer
   context.drawImage(img,
     spt.x, spt.y,
     spt.w, spt.h,
-    (posX + hlf.x),
-    (posY + hlf.y),
+    (coords.x + hlf.x),
+    (coords.y + hlf.y),
     game.getTileWidth(),
     game.getTileHeight());
 };
+HelperConstructor.prototype.OutOfBound = function (posX, posY) {
+  if (posX >= 0 && posY >= 0) {
+    if (posX < world.width) {
+      if (posY < world.height) {
+        return false;
+      } else {
+        return true;
+      }
+    } else {
+      return true;
+    }
+  } else {
+    return true;
+  }
+};
+HelperConstructor.prototype.inBoundUnoTile = function (posX, posY, visible) {
+  // check if the unoTile is inbound and correct if not
+  if (this.OutOfBound(posX, posY)) {
+    if (posX <= 0) {
+      posX = 0;
+    } else if (posX >= world.width) {
+      posX = world.width - 1;
+    }
 
+    if (posY <= 0) {
+      posY = 0;
+    } else if (posY >= world.height) {
+      posY = world.height - 1;
+    }
+  }
+  // correct the X unotile to show the max visible field
+
+  if (posX + visible.x > world.width) {
+    var correctionX = world.width - (posX + visible.x);
+    posX = posX + correctionX;
+  }
+
+  // correct the Y unotile to show the max visible field
+
+  if (posY + visible.y > world.height) {
+    var correctionY = world.height - (posY + visible.y);
+    posY = posY + correctionY;
+  }
+
+  return {x: posX, y: posY};
+};
 var helper = new HelperConstructor();
 
-HTMLCanvasElement.prototype.relMouseCoords = function (event){
+HTMLCanvasElement.prototype.relMouseCoords = function (event) {
   var totalOffsetX = 0;
   var totalOffsetY = 0;
   var canvasX = 0;
   var canvasY = 0;
   var currentElement = this;
 
-  do{
+  do {
     totalOffsetX += currentElement.offsetLeft - currentElement.scrollLeft;
     totalOffsetY += currentElement.offsetTop - currentElement.scrollTop;
   }
-  while(currentElement = currentElement.offsetParent)
+  while (currentElement = currentElement.offsetParent)
 
   canvasX = event.pageX - totalOffsetX;
   canvasY = event.pageY - totalOffsetY;
-  return {x:canvasX, y:canvasY};
+  return {x: canvasX, y: canvasY};
 };
 
-Number.prototype.roundTo = function(num) {
+Number.prototype.roundTo = function (num) {
   var resto = this % num;
   if (resto <= (num / 2)) {
     return this - resto;

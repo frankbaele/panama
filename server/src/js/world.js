@@ -8,8 +8,8 @@ var World = function () {
   var
     _ = require('underscore'),
     RNG = require('./RNG').RNG,
-    height = 10,
-    width = 10,
+    height = 100,
+    width = 100,
     options,
     tileWidth = 64,
     tileHeight = 32,
@@ -32,7 +32,6 @@ var World = function () {
 
 
   function init() {
-
     mapData = (_.compose(superSizeMap, runAutomatonCycle,  runAutomatonCycle, runAutomatonCycle, randomize, fillMap))();
   }
 

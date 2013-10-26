@@ -1,556 +1,60 @@
 {"frames": [
 
 {
-	"filename": "ts_beach-shallow0/curve_in/135/0.png",
-	"frame": {"x":2,"y":392,"w":64,"h":34},
+	"filename": "ally.png",
+	"frame": {"x":2,"y":2,"w":64,"h":35},
 	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":30,"w":64,"h":34},
-	"sourceSize": {"w":64,"h":64}
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":35},
+	"sourceSize": {"w":64,"h":35}
 },
 {
-	"filename": "ts_beach-shallow0/curve_in/225/0.png",
-	"frame": {"x":2,"y":428,"w":64,"h":34},
+	"filename": "enemy.png",
+	"frame": {"x":68,"y":2,"w":64,"h":35},
 	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":29,"w":64,"h":34},
-	"sourceSize": {"w":64,"h":64}
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":35},
+	"sourceSize": {"w":64,"h":35}
 },
 {
-	"filename": "ts_beach-shallow0/curve_in/315/0.png",
-	"frame": {"x":68,"y":68,"w":64,"h":32},
+	"filename": "grass.png",
+	"frame": {"x":134,"y":2,"w":64,"h":35},
 	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":31,"w":64,"h":32},
-	"sourceSize": {"w":64,"h":64}
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":35},
+	"sourceSize": {"w":64,"h":35}
 },
 {
-	"filename": "ts_beach-shallow0/curve_in/45/0.png",
-	"frame": {"x":68,"y":428,"w":64,"h":34},
+	"filename": "player.png",
+	"frame": {"x":200,"y":2,"w":64,"h":35},
 	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":29,"w":64,"h":34},
-	"sourceSize": {"w":64,"h":64}
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":35},
+	"sourceSize": {"w":64,"h":35}
 },
 {
-	"filename": "ts_beach-shallow0/curve_out/135/0.png",
-	"frame": {"x":134,"y":392,"w":64,"h":34},
+	"filename": "sand.png",
+	"frame": {"x":266,"y":2,"w":64,"h":35},
 	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":30,"w":64,"h":34},
-	"sourceSize": {"w":64,"h":64}
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":35},
+	"sourceSize": {"w":64,"h":35}
 },
 {
-	"filename": "ts_beach-shallow0/curve_out/225/0.png",
-	"frame": {"x":134,"y":356,"w":64,"h":34},
+	"filename": "water.png",
+	"frame": {"x":332,"y":2,"w":64,"h":35},
 	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":30,"w":64,"h":34},
-	"sourceSize": {"w":64,"h":64}
-},
-{
-	"filename": "ts_beach-shallow0/curve_out/315/0.png",
-	"frame": {"x":2,"y":68,"w":64,"h":32},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":31,"w":64,"h":32},
-	"sourceSize": {"w":64,"h":64}
-},
-{
-	"filename": "ts_beach-shallow0/curve_out/45/0.png",
-	"frame": {"x":68,"y":284,"w":64,"h":34},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":30,"w":64,"h":34},
-	"sourceSize": {"w":64,"h":64}
-},
-{
-	"filename": "ts_beach-shallow0/straight/135/0.png",
-	"frame": {"x":2,"y":356,"w":64,"h":34},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":30,"w":64,"h":34},
-	"sourceSize": {"w":64,"h":64}
-},
-{
-	"filename": "ts_beach-shallow0/straight/225/0.png",
-	"frame": {"x":68,"y":34,"w":64,"h":32},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":31,"w":64,"h":32},
-	"sourceSize": {"w":64,"h":64}
-},
-{
-	"filename": "ts_beach-shallow0/straight/315/0.png",
-	"frame": {"x":134,"y":34,"w":64,"h":32},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":31,"w":64,"h":32},
-	"sourceSize": {"w":64,"h":64}
-},
-{
-	"filename": "ts_beach-shallow0/straight/45/0.png",
-	"frame": {"x":2,"y":284,"w":64,"h":34},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":30,"w":64,"h":34},
-	"sourceSize": {"w":64,"h":64}
-},
-{
-	"filename": "ts_beach0/straight/135/0.png",
-	"frame": {"x":134,"y":284,"w":64,"h":34},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":29,"w":64,"h":34},
-	"sourceSize": {"w":64,"h":64}
-},
-{
-	"filename": "ts_beach0/straight/225/0.png",
-	"frame": {"x":134,"y":320,"w":64,"h":34},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":29,"w":64,"h":34},
-	"sourceSize": {"w":64,"h":64}
-},
-{
-	"filename": "ts_beach0/straight/315/0.png",
-	"frame": {"x":2,"y":320,"w":64,"h":34},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":29,"w":64,"h":34},
-	"sourceSize": {"w":64,"h":64}
-},
-{
-	"filename": "ts_beach0/straight/45/0.png",
-	"frame": {"x":68,"y":320,"w":64,"h":34},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":29,"w":64,"h":34},
-	"sourceSize": {"w":64,"h":64}
-},
-{
-	"filename": "ts_grass-beach0/curve_in/135/0.png",
-	"frame": {"x":68,"y":842,"w":64,"h":46},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":17,"w":64,"h":46},
-	"sourceSize": {"w":64,"h":64}
-},
-{
-	"filename": "ts_grass-beach0/curve_in/225/0.png",
-	"frame": {"x":134,"y":798,"w":64,"h":42},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":17,"w":64,"h":42},
-	"sourceSize": {"w":64,"h":64}
-},
-{
-	"filename": "ts_grass-beach0/curve_in/315/0.png",
-	"frame": {"x":2,"y":2,"w":64,"h":30},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":29,"w":64,"h":30},
-	"sourceSize": {"w":64,"h":64}
-},
-{
-	"filename": "ts_grass-beach0/curve_in/45/0.png",
-	"frame": {"x":68,"y":754,"w":64,"h":40},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":19,"w":64,"h":40},
-	"sourceSize": {"w":64,"h":64}
-},
-{
-	"filename": "ts_grass-beach0/curve_out/135/0.png",
-	"frame": {"x":2,"y":798,"w":64,"h":42},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":21,"w":64,"h":42},
-	"sourceSize": {"w":64,"h":64}
-},
-{
-	"filename": "ts_grass-beach0/curve_out/225/0.png",
-	"frame": {"x":68,"y":392,"w":64,"h":34},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":29,"w":64,"h":34},
-	"sourceSize": {"w":64,"h":64}
-},
-{
-	"filename": "ts_grass-beach0/curve_out/315/0.png",
-	"frame": {"x":2,"y":34,"w":64,"h":30},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":29,"w":64,"h":30},
-	"sourceSize": {"w":64,"h":64}
-},
-{
-	"filename": "ts_grass-beach0/curve_out/45/0.png",
-	"frame": {"x":68,"y":356,"w":64,"h":34},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":29,"w":64,"h":34},
-	"sourceSize": {"w":64,"h":64}
-},
-{
-	"filename": "ts_grass-beach0/straight/135/0.png",
-	"frame": {"x":68,"y":798,"w":64,"h":42},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":21,"w":64,"h":42},
-	"sourceSize": {"w":64,"h":64}
-},
-{
-	"filename": "ts_grass-beach0/straight/225/0.png",
-	"frame": {"x":134,"y":2,"w":64,"h":30},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":29,"w":64,"h":30},
-	"sourceSize": {"w":64,"h":64}
-},
-{
-	"filename": "ts_grass-beach0/straight/315/0.png",
-	"frame": {"x":68,"y":2,"w":64,"h":30},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":29,"w":64,"h":30},
-	"sourceSize": {"w":64,"h":64}
-},
-{
-	"filename": "ts_grass-beach0/straight/45/0.png",
-	"frame": {"x":2,"y":842,"w":64,"h":44},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":19,"w":64,"h":44},
-	"sourceSize": {"w":64,"h":64}
-},
-{
-	"filename": "ts_grass0/straight/135/0.png",
-	"frame": {"x":2,"y":628,"w":64,"h":40},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":19,"w":64,"h":40},
-	"sourceSize": {"w":64,"h":64}
-},
-{
-	"filename": "ts_grass0/straight/225/0.png",
-	"frame": {"x":68,"y":628,"w":64,"h":40},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":19,"w":64,"h":40},
-	"sourceSize": {"w":64,"h":64}
-},
-{
-	"filename": "ts_grass0/straight/315/0.png",
-	"frame": {"x":134,"y":588,"w":64,"h":38},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":21,"w":64,"h":38},
-	"sourceSize": {"w":64,"h":64}
-},
-{
-	"filename": "ts_grass0/straight/45/0.png",
-	"frame": {"x":68,"y":508,"w":64,"h":38},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":21,"w":64,"h":38},
-	"sourceSize": {"w":64,"h":64}
-},
-{
-	"filename": "ts_grass1/straight/135/0.png",
-	"frame": {"x":134,"y":548,"w":64,"h":38},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":21,"w":64,"h":38},
-	"sourceSize": {"w":64,"h":64}
-},
-{
-	"filename": "ts_grass1/straight/225/0.png",
-	"frame": {"x":2,"y":508,"w":64,"h":38},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":21,"w":64,"h":38},
-	"sourceSize": {"w":64,"h":64}
-},
-{
-	"filename": "ts_grass1/straight/315/0.png",
-	"frame": {"x":134,"y":628,"w":64,"h":40},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":19,"w":64,"h":40},
-	"sourceSize": {"w":64,"h":64}
-},
-{
-	"filename": "ts_grass1/straight/45/0.png",
-	"frame": {"x":68,"y":548,"w":64,"h":38},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":21,"w":64,"h":38},
-	"sourceSize": {"w":64,"h":64}
-},
-{
-	"filename": "ts_grass2/straight/135/0.png",
-	"frame": {"x":2,"y":548,"w":64,"h":38},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":21,"w":64,"h":38},
-	"sourceSize": {"w":64,"h":64}
-},
-{
-	"filename": "ts_grass2/straight/225/0.png",
-	"frame": {"x":68,"y":588,"w":64,"h":38},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":21,"w":64,"h":38},
-	"sourceSize": {"w":64,"h":64}
-},
-{
-	"filename": "ts_grass2/straight/315/0.png",
-	"frame": {"x":134,"y":508,"w":64,"h":38},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":21,"w":64,"h":38},
-	"sourceSize": {"w":64,"h":64}
-},
-{
-	"filename": "ts_grass2/straight/45/0.png",
-	"frame": {"x":2,"y":712,"w":64,"h":40},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":19,"w":64,"h":40},
-	"sourceSize": {"w":64,"h":64}
-},
-{
-	"filename": "ts_grass3/straight/135/0.png",
-	"frame": {"x":2,"y":588,"w":64,"h":38},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":21,"w":64,"h":38},
-	"sourceSize": {"w":64,"h":64}
-},
-{
-	"filename": "ts_grass3/straight/225/0.png",
-	"frame": {"x":2,"y":670,"w":64,"h":40},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":19,"w":64,"h":40},
-	"sourceSize": {"w":64,"h":64}
-},
-{
-	"filename": "ts_grass3/straight/315/0.png",
-	"frame": {"x":68,"y":670,"w":64,"h":40},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":19,"w":64,"h":40},
-	"sourceSize": {"w":64,"h":64}
-},
-{
-	"filename": "ts_grass3/straight/45/0.png",
-	"frame": {"x":134,"y":754,"w":64,"h":42},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":17,"w":64,"h":42},
-	"sourceSize": {"w":64,"h":64}
-},
-{
-	"filename": "ts_grass4/straight/135/0.png",
-	"frame": {"x":2,"y":754,"w":64,"h":40},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":19,"w":64,"h":40},
-	"sourceSize": {"w":64,"h":64}
-},
-{
-	"filename": "ts_grass4/straight/225/0.png",
-	"frame": {"x":134,"y":428,"w":64,"h":38},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":21,"w":64,"h":38},
-	"sourceSize": {"w":64,"h":64}
-},
-{
-	"filename": "ts_grass4/straight/315/0.png",
-	"frame": {"x":134,"y":468,"w":64,"h":38},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":21,"w":64,"h":38},
-	"sourceSize": {"w":64,"h":64}
-},
-{
-	"filename": "ts_grass4/straight/45/0.png",
-	"frame": {"x":134,"y":670,"w":64,"h":40},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":19,"w":64,"h":40},
-	"sourceSize": {"w":64,"h":64}
-},
-{
-	"filename": "ts_grass5/straight/135/0.png",
-	"frame": {"x":68,"y":712,"w":64,"h":40},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":19,"w":64,"h":40},
-	"sourceSize": {"w":64,"h":64}
-},
-{
-	"filename": "ts_grass5/straight/225/0.png",
-	"frame": {"x":2,"y":468,"w":64,"h":38},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":21,"w":64,"h":38},
-	"sourceSize": {"w":64,"h":64}
-},
-{
-	"filename": "ts_grass5/straight/315/0.png",
-	"frame": {"x":134,"y":712,"w":64,"h":40},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":19,"w":64,"h":40},
-	"sourceSize": {"w":64,"h":64}
-},
-{
-	"filename": "ts_grass5/straight/45/0.png",
-	"frame": {"x":68,"y":468,"w":64,"h":38},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":21,"w":64,"h":38},
-	"sourceSize": {"w":64,"h":64}
-},
-{
-	"filename": "ts_shallow-deep0/curve_in/135/0.png",
-	"frame": {"x":2,"y":140,"w":64,"h":34},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":30,"w":64,"h":34},
-	"sourceSize": {"w":64,"h":64}
-},
-{
-	"filename": "ts_shallow-deep0/curve_in/225/0.png",
-	"frame": {"x":68,"y":104,"w":64,"h":34},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":30,"w":64,"h":34},
-	"sourceSize": {"w":64,"h":64}
-},
-{
-	"filename": "ts_shallow-deep0/curve_in/315/0.png",
-	"frame": {"x":134,"y":104,"w":64,"h":34},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":30,"w":64,"h":34},
-	"sourceSize": {"w":64,"h":64}
-},
-{
-	"filename": "ts_shallow-deep0/curve_in/45/0.png",
-	"frame": {"x":134,"y":68,"w":64,"h":34},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":30,"w":64,"h":34},
-	"sourceSize": {"w":64,"h":64}
-},
-{
-	"filename": "ts_shallow-deep0/curve_out/135/0.png",
-	"frame": {"x":2,"y":104,"w":64,"h":34},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":30,"w":64,"h":34},
-	"sourceSize": {"w":64,"h":64}
-},
-{
-	"filename": "ts_shallow-deep0/curve_out/225/0.png",
-	"frame": {"x":134,"y":140,"w":64,"h":34},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":30,"w":64,"h":34},
-	"sourceSize": {"w":64,"h":64}
-},
-{
-	"filename": "ts_shallow-deep0/curve_out/315/0.png",
-	"frame": {"x":134,"y":212,"w":64,"h":34},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":30,"w":64,"h":34},
-	"sourceSize": {"w":64,"h":64}
-},
-{
-	"filename": "ts_shallow-deep0/curve_out/45/0.png",
-	"frame": {"x":68,"y":140,"w":64,"h":34},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":30,"w":64,"h":34},
-	"sourceSize": {"w":64,"h":64}
-},
-{
-	"filename": "ts_shallow-deep0/straight/135/0.png",
-	"frame": {"x":2,"y":248,"w":64,"h":34},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":30,"w":64,"h":34},
-	"sourceSize": {"w":64,"h":64}
-},
-{
-	"filename": "ts_shallow-deep0/straight/225/0.png",
-	"frame": {"x":68,"y":212,"w":64,"h":34},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":30,"w":64,"h":34},
-	"sourceSize": {"w":64,"h":64}
-},
-{
-	"filename": "ts_shallow-deep0/straight/315/0.png",
-	"frame": {"x":2,"y":212,"w":64,"h":34},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":30,"w":64,"h":34},
-	"sourceSize": {"w":64,"h":64}
-},
-{
-	"filename": "ts_shallow-deep0/straight/45/0.png",
-	"frame": {"x":2,"y":176,"w":64,"h":34},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":30,"w":64,"h":34},
-	"sourceSize": {"w":64,"h":64}
-},
-{
-	"filename": "ts_shallow0/straight/135/0.png",
-	"frame": {"x":134,"y":176,"w":64,"h":34},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":30,"w":64,"h":34},
-	"sourceSize": {"w":64,"h":64}
-},
-{
-	"filename": "ts_shallow0/straight/225/0.png",
-	"frame": {"x":68,"y":176,"w":64,"h":34},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":30,"w":64,"h":34},
-	"sourceSize": {"w":64,"h":64}
-},
-{
-	"filename": "ts_shallow0/straight/315/0.png",
-	"frame": {"x":68,"y":248,"w":64,"h":34},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":30,"w":64,"h":34},
-	"sourceSize": {"w":64,"h":64}
-},
-{
-	"filename": "ts_shallow0/straight/45/0.png",
-	"frame": {"x":134,"y":248,"w":64,"h":34},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":30,"w":64,"h":34},
-	"sourceSize": {"w":64,"h":64}
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":35},
+	"sourceSize": {"w":64,"h":35}
 }],
 "meta": {
 	"app": "http://www.codeandweb.com/texturepacker ",
 	"version": "1.0",
 	"image": "panama.png",
 	"format": "RGBA8888",
-	"size": {"w":200,"h":890},
+	"size": {"w":398,"h":39},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:b18c0a3e62ab553c0eede12490eb6d0c:1/1$"
+	"smartupdate": "$TexturePacker:SmartUpdate:18d7e4be9cc35fc6810f22bfc772a3c2:1/1$"
 }
 }

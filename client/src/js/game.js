@@ -12,6 +12,7 @@ function Game() {
     canvasHeight,
     canvasWidth,
     // General global variables
+    visible = ({x : 20, y : 20}),
     unoTile = ({x : 0, y : 0}),
     tileWidth,  //default value for the tileWidth is 32
     tileHeight,
@@ -169,15 +170,15 @@ function Game() {
   }
   function drawMap() {
     mapCtx.clearRect(0, 0, canvasWidth, canvasHeight);
-    console.log(world);
+    var coords = {x:0, y:0};
     for (var i = 0; world.height > i; i++) {
-      for (var j = 0; world.width > j; j++){
-        if (world.mapData[i][j] === 1){
-          var coords = helper.twoDToIso({x:j,y: i});
-          helper.drawSprite("ts_beach0/straight/135/0.png", coords.x*tileWidth + (world.tileWidth * world.width)/2, coords.y*tileHeight, "map");
-        } else {
-          var coords = helper.twoDToIso({x:j,y: i});
-          helper.drawSprite("ts_shallow-deep0/curve_out/45/0.png", coords.x*tileWidth + (world.tileWidth * world.width)/2, coords.y*tileHeight, "map");
+      for (var j = 0; world.width> j; j++){
+        if(!helper.OutOfBound(coords.y + i,coords.x + j)){
+          if (world.mapData[coords.y + i][coords.x + j] === 1){
+            helper.drawSprite("sand.png", coords.x + j, coords.y + i, "map");
+          } else {
+            helper.drawSprite("water.png", coords.x + j, coords.y + i, "map");
+          }
         }
       }
     }
@@ -185,10 +186,14 @@ function Game() {
     redrawMap = false;
   }
   function drawPlayers() {
-    //glocalPlayer.draw(playerCtx, world.tileWidth);
-    for (var i = 0; i < remotePlayers.length; i++) {
-      remotePlayers[i].draw(playerCtx, world.tileWidth);
-    }
+    playerCtx.clearRect(0, 0, canvasWidth, canvasHeight);
+    var coords = localPlayer.getGridPosition();
+    helper.drawSprite("player.png", coords.x, coords.y, "player");
+    _.each(remotePlayers, function(remotePlayer) {
+      coords = remotePlayer.getGridPosition();
+      helper.drawSprite("ally.png", coords.x, coords.y, "player");
+    });
+
     redrawPlayers = false;
   }
   function tileIsOpen(tileIndex) {
@@ -209,17 +214,24 @@ function Game() {
         y : (Math.round(Math.random() * (world.height-1)))
       });
     }
+
+    // Calculate the uno position based on the starting position and corrected with visible range of the map.
+    // Check if the visible map correction is not crossing the map borders in either way, otherwise make correction and show more from the other side.
+    unoTile = helper.inBoundUnoTile(startGridPosition.x - visible.x/2, startGridPosition.y - visible.y/2, visible);
     callback(startGridPosition);
   }
   // Variables that you want to be globaly available.
   var getLocalplayer = function () {
     return localPlayer;
   };
-  var getCanvas = function () {
+  var getUserCanvas = function () {
     return userCanvas;
   };
   var getMapContext = function () {
     return mapCtx;
+  };
+  var getPlayerContext = function () {
+    return playerCtx;
   };
   var getTileWidth = function () {
     return tileWidth;
@@ -227,14 +239,30 @@ function Game() {
   var getTileHeight = function () {
     return tileHeight;
   };
+  var getUnoTile = function () {
+    return unoTile;
+  };
+  var setUnoTile = function (x, y) {
+    unoTile = helper.inBoundUnoTile(x,y,visible);
+    redrawMap = true;
+    redrawPlayers = true;
+  };
+  var getVisible = function () {
+    return visible;
+  };
   return {
     init: init,
     animate: animate,
+    getVisible: getVisible,
+    getLocalPlayer: getLocalplayer,
     getTileWidth: getTileWidth,
     getTileHeight: getTileHeight,
-    canvas: getCanvas,
+    getUnoTile: getUnoTile,
+    setUnoTile: setUnoTile,
+    getUserCanvas: getUserCanvas,
     localPlayer: getLocalplayer,
-    getMapContext: getMapContext
+    getMapContext: getMapContext,
+    getPlayerContext: getPlayerContext
   };
 }
 
