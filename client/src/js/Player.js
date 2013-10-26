@@ -31,8 +31,8 @@ var Player = function (startGridPosition) {
   };
 
   var draw = function (playerCtx, tileWidth) {
-    playerCtx.fillStyle = "yellow";
-    playerCtx.fillRect(gridPosition.x * tileWidth, gridPosition.y * tileWidth, tileWidth, tileWidth);
+    //playerCtx.fillStyle = "yellow";
+    //playerCtx.fillRect(gridPosition.x * tileWidth, gridPosition.y * tileWidth, tileWidth, tileWidth);
   };
 
   return {

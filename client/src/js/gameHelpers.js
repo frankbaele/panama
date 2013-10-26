@@ -35,6 +35,7 @@ HelperConstructor.prototype.checkWait = function (conditionFunction, resultFunct
 HelperConstructor.prototype.drawSprite = function (spriteName, posX, posY, layer) {
   var unoTile = game.getUnoTile();
   var visible = game.getVisible();
+  var canvas = game.getCanvasStats();
   posX = posX - unoTile.x;
   posY = posY - unoTile.y;
   // transform the grid tile to iso coordinates
@@ -43,10 +44,10 @@ HelperConstructor.prototype.drawSprite = function (spriteName, posX, posY, layer
   coords.x = coords.x * world.tileWidth + (world.tileWidth * visible.x) / 2;
   coords.y = coords.y * world.tileHeight;
 
-  if (coords.x > ((visible.x - 1) * game.getTileWidth()) || (coords.x + game.getTileWidth()) <= 0){
+  if (coords.x > canvas.x || (coords.x + game.getTileWidth()) <= 0){
     return;
   }
-  if (coords.y > ((visible.y + 1) * game.getTileHeight()) ||(coords.y + game.getTileHeight()) <= 0){
+  if (coords.y > canvas.y ||(coords.y + game.getTileHeight()) <= 0){
     return;
   }
 

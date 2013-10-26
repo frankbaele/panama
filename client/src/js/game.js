@@ -242,6 +242,9 @@ function Game() {
   var getUnoTile = function () {
     return unoTile;
   };
+  var getCanvasStats = function () {
+    return {x: canvasWidth, y:canvasHeight};
+  };
   var setUnoTile = function (x, y) {
     unoTile = helper.inBoundUnoTile(x,y,visible);
     redrawMap = true;
@@ -253,6 +256,7 @@ function Game() {
   return {
     init: init,
     animate: animate,
+    getCanvasStats: getCanvasStats,
     getVisible: getVisible,
     getLocalPlayer: getLocalplayer,
     getTileWidth: getTileWidth,
