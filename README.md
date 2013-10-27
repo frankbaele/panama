@@ -20,6 +20,10 @@ About
 
 A pirate rogue like coop game.
 
+### Current test build
+
+http://frankbaele.github.io/panama/
+
 Installation
 ------------
 
