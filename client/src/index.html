@@ -3,7 +3,7 @@
 <html lang="en">
 
 	<head>
-		<title>Panama a multiplayer game built using HTML5 canvas and WebSockets</title>
+		<title>Panama a multiplayer game built using HTML5 canvas</title>
 		<meta charset="utf-8">
 		<link rel="stylesheet" href="stylesheets/game.css">
 	</head>
@@ -26,14 +26,15 @@
           (function(){
             var inputScripts = [
               // scripts
+              "./js/lib/require.js",
+              "./js/RNG.js",
+              "./js/world.js",
               "./js/gameHelpers.js",
               "./js/spriteSheet.js",
               "./js/assetLoader.js",
-              "./js/lib/socket.io.min.js",
               "./js/lib/underscore.min.js",
               "./js/lib/jquery.min.js",
               "./js/requestAnimationFrame.js",
-              "./js/mouse.js",
               "./js/Player.js",
               "./js/game.js"
             ];

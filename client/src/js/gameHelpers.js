@@ -87,7 +87,7 @@ HelperConstructor.prototype.drawSprite = function (spriteName, posX, posY, layer
 
   mapTrans.x = 0;
   mapTrans.y = 0;
-
+  console.log('test');
   context.drawImage(img,
     spt.x, spt.y,
     spt.w, spt.h,

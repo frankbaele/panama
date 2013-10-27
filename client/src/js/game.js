@@ -17,8 +17,6 @@ function Game() {
     tileWidth,  //default value for the tileWidth is 32
     tileHeight,
     localPlayer,    // Local player
-    remotePlayers,  // remote players
-    socket,         // socket io
     mouse,
     redrawMap = true,
     redrawPlayers = true;
@@ -33,13 +31,11 @@ function Game() {
     playerCtx = gameCanvas.getContext("2d");
     userCtx = gameCanvas.getContext("2d");
     // Initialise keyboard controls
-    mouse = new Mouse();
-    // Change this to the ip of the server
-    socket = io.connect("localhost", {port: 8000, transports: ["websocket"]});
-    // Start listening for events
-    remotePlayers = [];
     setEventHandlers();
-
+    world = new World();
+    tileWidth = world.tileWidth;
+    tileHeight = world.tileHeight;
+    generateNewLocalPlayer();
   }
 
   /**************************************************
@@ -47,11 +43,6 @@ function Game() {
    **************************************************/
   function setEventHandlers () {
     window.addEventListener("resize", onResize, false);
-    userCanvas.addEventListener("click", mouse.onClick, false);
-    socket.on("new player", onNewPlayer);
-    socket.on("move player", onMovePlayer);
-    socket.on("remove player", onRemovePlayer);
-    socket.on("world", onWorld);
   }
 
   // Browser window resize
@@ -75,50 +66,10 @@ function Game() {
     userCanvas.height = canvasHeight;
     redrawMap = true;
   }
-
-  function onNewPlayer(data) {
-    var newPlayer = new Player(data.gridPosition);
-    newPlayer.id = data.id;
-    remotePlayers.push(newPlayer);
-    redrawPlayers = true;
-  }
-
-  function onMovePlayer(data) {
-    var movePlayer = playerById(data.id);
-
-    if (!movePlayer) {
-      console.log("Player not found: " + data.id);
-      return;
-    }
-
-    movePlayer.setGridPosition(data.gridPosition);
-    redrawPlayers = true;
-  }
-
-  function onRemovePlayer(data) {
-    var removePlayer = playerById(data.id);
-
-    if (!removePlayer) {
-      console.log("Player not found: " + data.id);
-      return;
-    }
-
-    remotePlayers.splice(remotePlayers.indexOf(removePlayer), 1);
-    redrawPlayers = true;
-  }
-
-  function onWorld(data){
-    world = data;
-    tileWidth = data.tileWidth;
-    tileHeight = data.tileHeight;
-    generateNewLocalPlayer();
-  }
-
   function generateNewLocalPlayer() {
     generateStartPosition(function (startGridPosition) {
       // Initialise the local player
       localPlayer = new Player(startGridPosition);
-      socket.emit("new player", localPlayer.getGridPosition());
       // Run the resize command once for init, now the world and player data is known.
       onResize();
       // So when the new player object is created, start animating it.
@@ -143,7 +94,6 @@ function Game() {
   function update() {
     if (localPlayer.getMove()) {
       localPlayer.update();
-      socket.emit("move player", localPlayer.getGridPosition());
     }
   }
 
@@ -189,11 +139,6 @@ function Game() {
     playerCtx.clearRect(0, 0, canvasWidth, canvasHeight);
     var coords = localPlayer.getGridPosition();
     helper.drawSprite("player.png", coords.x, coords.y, "player");
-    _.each(remotePlayers, function(remotePlayer) {
-      coords = remotePlayer.getGridPosition();
-      helper.drawSprite("ally.png", coords.x, coords.y, "player");
-    });
-
     redrawPlayers = false;
   }
   function tileIsOpen(tileIndex) {

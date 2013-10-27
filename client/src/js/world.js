@@ -6,8 +6,6 @@
 var World = function () {
   'use strict';
   var
-    _ = require('underscore'),
-    RNG = require('./RNG').RNG,
     height = 50,
     width = 50,
     options,
@@ -144,8 +142,5 @@ var World = function () {
     mapData: mapData
   };
 };
-
-exports.World = World;
-
 
 

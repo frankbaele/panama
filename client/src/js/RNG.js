@@ -128,5 +128,3 @@ var RNG = function () {
     setState: setState
   };
 };
-
-exports.RNG = RNG;
