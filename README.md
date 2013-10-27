@@ -48,20 +48,6 @@ Installation
 
     grunt serve
 
-### Server
-
-1. navigate to the io server subfolder
-
-    cd server
-
-2. Get all the dependencies via npm
-
-    npm install
-
-3. Serve the client page
-
-    grunt serve
-
 That's it. Your browser should automagically open and point to [http://localhost:9001](http://localhost:9001).
 
 How to play
