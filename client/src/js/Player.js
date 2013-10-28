@@ -30,9 +30,8 @@ var Player = function (startGridPosition) {
 
   };
 
-  var draw = function (playerCtx, tileWidth) {
-    //playerCtx.fillStyle = "yellow";
-    //playerCtx.fillRect(gridPosition.x * tileWidth, gridPosition.y * tileWidth, tileWidth, tileWidth);
+  var draw = function () {
+    helper.drawSprite("player.png", gridPosition.x, gridPosition.y, "player");
   };
 
   return {

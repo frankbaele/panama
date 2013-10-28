@@ -12,18 +12,15 @@ HelperConstructor.prototype.isoToTwoD = function (coords) {
   newCoords.y = (2 * coords.y - coords.x) / 2;
   return newCoords;
 };
-
 HelperConstructor.prototype.twoDToIso = function (coords) {
   var newCoords = {};
   newCoords.x = ((coords.x - coords.y) / 2);
   newCoords.y = ((coords.x + coords.y) / 2);
   return newCoords;
 };
-
 HelperConstructor.prototype.getTileCoordinates = function () {
 
 };
-
 HelperConstructor.prototype.checkWait = function (conditionFunction, resultFunction) {
   var tev = setInterval(function () {
     if (conditionFunction()) {
@@ -87,7 +84,6 @@ HelperConstructor.prototype.drawSprite = function (spriteName, posX, posY, layer
 
   mapTrans.x = 0;
   mapTrans.y = 0;
-  console.log('test');
   context.drawImage(img,
     spt.x, spt.y,
     spt.w, spt.h,
@@ -142,6 +138,32 @@ HelperConstructor.prototype.inBoundUnoTile = function (posX, posY, visible) {
 
   return {x: posX, y: posY};
 };
+HelperConstructor.prototype.tileIsOpen = function(tileIndex) {
+  if(world.mapData[tileIndex.y][tileIndex.x] === 0){
+    return true;
+  } else {
+    return false;
+  }
+};
+HelperConstructor.prototype.generateStartPosition =  function (callback) {
+  var visible = game.getVisible();
+  var startGridPosition = ({
+    x : (Math.round(Math.random() * (world.width -1))),
+    y : (Math.round(Math.random() * (world.height -1)))
+  });
+  while(!this.tileIsOpen(startGridPosition)){
+    startGridPosition = ({
+      x : (Math.round(Math.random() * (world.width -1))),
+      y : (Math.round(Math.random() * (world.height-1)))
+    });
+  }
+
+  // Calculate the uno position based on the starting position and corrected with visible range of the map.
+  // Check if the visible map correction is not crossing the map borders in either way, otherwise make correction and show more from the other side.
+  var unoTile = helper.inBoundUnoTile(startGridPosition.x - visible.x/2, startGridPosition.y - visible.y/2, visible);
+  game.setUnoTile(unoTile);
+  callback(startGridPosition);
+}
 var helper = new HelperConstructor();
 
 HTMLCanvasElement.prototype.relMouseCoords = function (event) {
