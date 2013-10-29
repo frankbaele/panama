@@ -12,13 +12,13 @@
         <div id="gamecontainer">
           <canvas id="mapCanvas" class="gamelayer"></canvas>
           <canvas id="playerCanvas" class="gamelayer"></canvas>
-          <canvas id="userCanvas" class="gamelayer"></canvas>
+          <div class="ui"></div>
           <div id="gamestartscreen" class="gamelayer"></div>
           <div id="loadingscreen" class="gamelayer">
             <div id="loadingmessage"></div>
           </div>
         </div>
-        <script type="text/javascript" src="js/lib/yepnope.1.5.4-min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/yepnope/1.5.4/yepnope.min.js"></script>
 
 		<script>
           var world,
@@ -26,18 +26,19 @@
           (function(){
             var inputScripts = [
               // scripts
-              "./js/lib/require.js",
-              "./js/RNG.js",
-              "./js/world.js",
-              "./js/gameHelpers.js",
-              "./js/spriteSheet.js",
-              "./js/assetLoader.js",
-              "./js/mouse.js",
-              "./js/lib/underscore.min.js",
-              "./js/lib/jquery.min.js",
-              "./js/requestAnimationFrame.js",
-              "./js/Player.js",
-              "./js/game.js"
+              "//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js",
+              "//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js",
+              "//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.9/require.min.js",
+              "//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js",
+              "./js/canvas/RNG.js",
+              "./js/canvas/world.js",
+              "./js/canvas/gameHelpers.js",
+              "./js/canvas/spriteSheet.js",
+              "./js/canvas/assetLoader.js",
+              "./js/canvas/mouse.js",
+              "./js/canvas/requestAnimationFrame.js",
+              "./js/canvas/Player.js",
+              "./js/canvas/game.js"
             ];
 
 

@@ -3,11 +3,9 @@ function Game() {
   var
     // Canvases
     mapCanvas,
-    gameCanvas,
-    userCanvas,
+    playerCanvas,
     mapCtx,
     playerCtx,
-    userCtx,
     // General canvas specs.
     canvasHeight,
     canvasWidth,
@@ -25,11 +23,9 @@ function Game() {
   function init() {
     // Declare the canvases and rendering contexts
     mapCanvas = document.getElementById("mapCanvas");
-    gameCanvas = document.getElementById("playerCanvas");
-    userCanvas = document.getElementById("userCanvas");
+    playerCanvas = document.getElementById("playerCanvas");
     mapCtx = mapCanvas.getContext("2d");
-    playerCtx = gameCanvas.getContext("2d");
-    userCtx = gameCanvas.getContext("2d");
+    playerCtx = playerCanvas.getContext("2d");
     // Initialise keyboard controls
     mouse = new Mouse();
     setEventHandlers();
@@ -44,7 +40,7 @@ function Game() {
    **************************************************/
   function setEventHandlers () {
     window.addEventListener("resize", onResize, false);
-    userCanvas.addEventListener("click", mouse.onClick, false);
+    playerCanvas.addEventListener("click", mouse.onClick, false);
   }
 
   // Browser window resize
@@ -62,10 +58,8 @@ function Game() {
 
     mapCanvas.width = canvasWidth;
     mapCanvas.height = canvasHeight;
-    gameCanvas.width = canvasWidth;
-    gameCanvas.height = canvasHeight;
-    userCanvas.width = canvasWidth;
-    userCanvas.height = canvasHeight;
+    playerCanvas.width = canvasWidth;
+    playerCanvas.height = canvasHeight;
     redrawMap = true;
   }
   function generateNewLocalPlayer() {
@@ -146,9 +140,6 @@ function Game() {
   var getLocalplayer = function () {
     return localPlayer;
   };
-  var getUserCanvas = function () {
-    return userCanvas;
-  };
   var getMapContext = function () {
     return mapCtx;
   };
@@ -173,6 +164,9 @@ function Game() {
   var getVisible = function () {
     return visible;
   };
+  var getPlayerCanvas = function() {
+    return playerCanvas;
+  };
   return {
     init: init,
     animate: animate,
@@ -183,10 +177,10 @@ function Game() {
     getTileHeight: getTileHeight,
     getUnoTile: getUnoTile,
     setUnoTile: setUnoTile,
-    getUserCanvas: getUserCanvas,
     localPlayer: getLocalplayer,
     getMapContext: getMapContext,
-    getPlayerContext: getPlayerContext
+    getPlayerContext: getPlayerContext,
+    getPlayerCanvas: getPlayerCanvas,
   };
 }
 

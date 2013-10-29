@@ -8,7 +8,7 @@ var Mouse = function () {
   function onClick(e) {
 
     function getGameData(callback) {
-      var canvas =  game.canvas();
+      var canvas =  game.getPlayerCanvas;
       var localPlayer = game.localPlayer();
       var goal = [];
       coords  = canvas.relMouseCoords(e);

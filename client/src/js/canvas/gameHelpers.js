@@ -38,9 +38,9 @@ HelperConstructor.prototype.drawSprite = function (spriteName, posX, posY, layer
   // transform the grid tile to iso coordinates
   var coords = helper.twoDToIso({x: posX, y: posY});
   // transform the coordinates to the actual size of the map
+
   coords.x = coords.x * world.tileWidth + (world.tileWidth * visible.x) / 2;
   coords.y = coords.y * world.tileHeight;
-
   if (coords.x > canvas.x || (coords.x + game.getTileWidth()) <= 0){
     return;
   }
@@ -78,10 +78,7 @@ HelperConstructor.prototype.drawSprite = function (spriteName, posX, posY, layer
     default:
       return;
   }
-
-
   var hlf = {x: spt.cx, y: spt.cy};
-
   mapTrans.x = 0;
   mapTrans.y = 0;
   context.drawImage(img,
@@ -161,7 +158,7 @@ HelperConstructor.prototype.generateStartPosition =  function (callback) {
   // Calculate the uno position based on the starting position and corrected with visible range of the map.
   // Check if the visible map correction is not crossing the map borders in either way, otherwise make correction and show more from the other side.
   var unoTile = helper.inBoundUnoTile(startGridPosition.x - visible.x/2, startGridPosition.y - visible.y/2, visible);
-  game.setUnoTile(unoTile);
+  game.setUnoTile(unoTile.x, unoTile.y);
   callback(startGridPosition);
 }
 var helper = new HelperConstructor();
@@ -177,7 +174,7 @@ HTMLCanvasElement.prototype.relMouseCoords = function (event) {
     totalOffsetX += currentElement.offsetLeft - currentElement.scrollLeft;
     totalOffsetY += currentElement.offsetTop - currentElement.scrollTop;
   }
-  while (currentElement = currentElement.offsetParent)
+  while (currentElement === currentElement.offsetParent);
 
   canvasX = event.pageX - totalOffsetX;
   canvasY = event.pageY - totalOffsetY;
