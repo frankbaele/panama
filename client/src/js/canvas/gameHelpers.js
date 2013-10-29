@@ -8,8 +8,8 @@ var HelperConstructor = function () {
 
 HelperConstructor.prototype.isoToTwoD = function (coords) {
   var newCoords = {};
-  newCoords.x = (2 * coords.y + coords.x) / 2;
-  newCoords.y = (2 * coords.y - coords.x) / 2;
+  newCoords.x = (coords.y + coords.x);
+  newCoords.y = (coords.y - coords.x);
   return newCoords;
 };
 HelperConstructor.prototype.twoDToIso = function (coords) {
