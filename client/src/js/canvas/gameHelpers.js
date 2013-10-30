@@ -161,6 +161,10 @@ HelperConstructor.prototype.generateStartPosition =  function (callback) {
   game.setUnoTile(unoTile.x, unoTile.y);
   callback(startGridPosition);
 }
+HelperConstructor.prototype.roundHalf = function(num) {
+  num = Math.round(num*2)/2;
+  return num;
+}
 var helper = new HelperConstructor();
 
 HTMLCanvasElement.prototype.relMouseCoords = function (event) {
