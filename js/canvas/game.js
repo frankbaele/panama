@@ -3,11 +3,9 @@ function Game() {
   var
     // Canvases
     mapCanvas,
-    gameCanvas,
-    userCanvas,
+    playerCanvas,
     mapCtx,
     playerCtx,
-    userCtx,
     // General canvas specs.
     canvasHeight,
     canvasWidth,
@@ -25,12 +23,11 @@ function Game() {
   function init() {
     // Declare the canvases and rendering contexts
     mapCanvas = document.getElementById("mapCanvas");
-    gameCanvas = document.getElementById("playerCanvas");
-    userCanvas = document.getElementById("userCanvas");
+    playerCanvas = document.getElementById("playerCanvas");
     mapCtx = mapCanvas.getContext("2d");
-    playerCtx = gameCanvas.getContext("2d");
-    userCtx = gameCanvas.getContext("2d");
+    playerCtx = playerCanvas.getContext("2d");
     // Initialise keyboard controls
+    mouse = new Mouse();
     setEventHandlers();
     world = new World();
     tileWidth = world.tileWidth;
@@ -43,6 +40,7 @@ function Game() {
    **************************************************/
   function setEventHandlers () {
     window.addEventListener("resize", onResize, false);
+    playerCanvas.addEventListener("click", mouse.onClick, false);
   }
 
   // Browser window resize
@@ -60,14 +58,12 @@ function Game() {
 
     mapCanvas.width = canvasWidth;
     mapCanvas.height = canvasHeight;
-    gameCanvas.width = canvasWidth;
-    gameCanvas.height = canvasHeight;
-    userCanvas.width = canvasWidth;
-    userCanvas.height = canvasHeight;
+    playerCanvas.width = canvasWidth;
+    playerCanvas.height = canvasHeight;
     redrawMap = true;
   }
   function generateNewLocalPlayer() {
-    generateStartPosition(function (startGridPosition) {
+    helper.generateStartPosition(function (startGridPosition) {
       // Initialise the local player
       localPlayer = new Player(startGridPosition);
       // Run the resize command once for init, now the world and player data is known.
@@ -137,40 +133,12 @@ function Game() {
   }
   function drawPlayers() {
     playerCtx.clearRect(0, 0, canvasWidth, canvasHeight);
-    var coords = localPlayer.getGridPosition();
-    helper.drawSprite("player.png", coords.x, coords.y, "player");
+    localPlayer.draw();
     redrawPlayers = false;
-  }
-  function tileIsOpen(tileIndex) {
-    if(world.mapData[tileIndex.y][tileIndex.x] === 0){
-      return true;
-    } else {
-      return false;
-    }
-  }
-  function generateStartPosition(callback) {
-    var startGridPosition = ({
-      x : (Math.round(Math.random() * (world.width -1))),
-      y : (Math.round(Math.random() * (world.height -1)))
-    });
-    while(!tileIsOpen(startGridPosition)){
-      startGridPosition = ({
-        x : (Math.round(Math.random() * (world.width -1))),
-        y : (Math.round(Math.random() * (world.height-1)))
-      });
-    }
-
-    // Calculate the uno position based on the starting position and corrected with visible range of the map.
-    // Check if the visible map correction is not crossing the map borders in either way, otherwise make correction and show more from the other side.
-    unoTile = helper.inBoundUnoTile(startGridPosition.x - visible.x/2, startGridPosition.y - visible.y/2, visible);
-    callback(startGridPosition);
   }
   // Variables that you want to be globaly available.
   var getLocalplayer = function () {
     return localPlayer;
-  };
-  var getUserCanvas = function () {
-    return userCanvas;
   };
   var getMapContext = function () {
     return mapCtx;
@@ -192,11 +160,12 @@ function Game() {
   };
   var setUnoTile = function (x, y) {
     unoTile = helper.inBoundUnoTile(x,y,visible);
-    redrawMap = true;
-    redrawPlayers = true;
   };
   var getVisible = function () {
     return visible;
+  };
+  var getPlayerCanvas = function() {
+    return playerCanvas;
   };
   return {
     init: init,
@@ -208,10 +177,10 @@ function Game() {
     getTileHeight: getTileHeight,
     getUnoTile: getUnoTile,
     setUnoTile: setUnoTile,
-    getUserCanvas: getUserCanvas,
     localPlayer: getLocalplayer,
     getMapContext: getMapContext,
-    getPlayerContext: getPlayerContext
+    getPlayerContext: getPlayerContext,
+    getPlayerCanvas: getPlayerCanvas,
   };
 }
 

@@ -8,22 +8,19 @@ var HelperConstructor = function () {
 
 HelperConstructor.prototype.isoToTwoD = function (coords) {
   var newCoords = {};
-  newCoords.x = (2 * coords.y + coords.x) / 2;
-  newCoords.y = (2 * coords.y - coords.x) / 2;
+  newCoords.x = (coords.y + coords.x);
+  newCoords.y = (coords.y - coords.x);
   return newCoords;
 };
-
 HelperConstructor.prototype.twoDToIso = function (coords) {
   var newCoords = {};
   newCoords.x = ((coords.x - coords.y) / 2);
   newCoords.y = ((coords.x + coords.y) / 2);
   return newCoords;
 };
-
 HelperConstructor.prototype.getTileCoordinates = function () {
 
 };
-
 HelperConstructor.prototype.checkWait = function (conditionFunction, resultFunction) {
   var tev = setInterval(function () {
     if (conditionFunction()) {
@@ -41,9 +38,9 @@ HelperConstructor.prototype.drawSprite = function (spriteName, posX, posY, layer
   // transform the grid tile to iso coordinates
   var coords = helper.twoDToIso({x: posX, y: posY});
   // transform the coordinates to the actual size of the map
+
   coords.x = coords.x * world.tileWidth + (world.tileWidth * visible.x) / 2;
   coords.y = coords.y * world.tileHeight;
-
   if (coords.x > canvas.x || (coords.x + game.getTileWidth()) <= 0){
     return;
   }
@@ -81,13 +78,9 @@ HelperConstructor.prototype.drawSprite = function (spriteName, posX, posY, layer
     default:
       return;
   }
-
-
   var hlf = {x: spt.cx, y: spt.cy};
-
   mapTrans.x = 0;
   mapTrans.y = 0;
-  console.log('test');
   context.drawImage(img,
     spt.x, spt.y,
     spt.w, spt.h,
@@ -142,6 +135,36 @@ HelperConstructor.prototype.inBoundUnoTile = function (posX, posY, visible) {
 
   return {x: posX, y: posY};
 };
+HelperConstructor.prototype.tileIsOpen = function(tileIndex) {
+  if(world.mapData[tileIndex.y][tileIndex.x] === 0){
+    return true;
+  } else {
+    return false;
+  }
+};
+HelperConstructor.prototype.generateStartPosition =  function (callback) {
+  var visible = game.getVisible();
+  var startGridPosition = ({
+    x : (Math.round(Math.random() * (world.width -1))),
+    y : (Math.round(Math.random() * (world.height -1)))
+  });
+  while(!this.tileIsOpen(startGridPosition)){
+    startGridPosition = ({
+      x : (Math.round(Math.random() * (world.width -1))),
+      y : (Math.round(Math.random() * (world.height-1)))
+    });
+  }
+
+  // Calculate the uno position based on the starting position and corrected with visible range of the map.
+  // Check if the visible map correction is not crossing the map borders in either way, otherwise make correction and show more from the other side.
+  var unoTile = helper.inBoundUnoTile(startGridPosition.x - visible.x/2, startGridPosition.y - visible.y/2, visible);
+  game.setUnoTile(unoTile.x, unoTile.y);
+  callback(startGridPosition);
+}
+HelperConstructor.prototype.roundHalf = function(num) {
+  num = Math.round(num*2)/2;
+  return num;
+}
 var helper = new HelperConstructor();
 
 HTMLCanvasElement.prototype.relMouseCoords = function (event) {
@@ -155,7 +178,7 @@ HTMLCanvasElement.prototype.relMouseCoords = function (event) {
     totalOffsetX += currentElement.offsetLeft - currentElement.scrollLeft;
     totalOffsetY += currentElement.offsetTop - currentElement.scrollTop;
   }
-  while (currentElement = currentElement.offsetParent)
+  while (currentElement === currentElement.offsetParent);
 
   canvasX = event.pageX - totalOffsetX;
   canvasY = event.pageY - totalOffsetY;
