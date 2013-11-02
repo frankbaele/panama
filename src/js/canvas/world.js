@@ -6,8 +6,8 @@
 var World = function () {
   'use strict';
   var
-    height = 50,
-    width = 50,
+    height = 2,
+    width = 2,
     options,
     tileWidth = 64,
     tileHeight = 32,
@@ -30,7 +30,7 @@ var World = function () {
 
 
   function init() {
-    mapData = (_.compose(runAutomatonCycle, runAutomatonCycle,superSizeMap, superSizeMap, runAutomatonCycle,  runAutomatonCycle, runAutomatonCycle, randomize, fillMap))();
+    mapData = (_.compose(runAutomatonCycle, runAutomatonCycle,  runAutomatonCycle, runAutomatonCycle, randomize, fillMap))();
   }
 
   /**

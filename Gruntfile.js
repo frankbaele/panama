@@ -11,15 +11,24 @@ module.exports = function (grunt) {
           port: 9001,
           // Prevents Grunt to close just after the task (starting the server) completes
           // This will be removed later as `watch` will take care of that
-          keepalive: true,
+          keepalive: false,
           hostname: '',
           base: './src'
         }
       }
     },
-    open: {
-      all: {
-        path: 'http://localhost:9001'
+    watch: {
+      scripts: {
+        files: ['./src/js/**/*.js'],
+        options: {
+          livereload: true
+        }
+      },
+      html:{
+        files: ['./src/**/*.html'],
+        options: {
+          livereload: true
+        }
       }
     },
     nodewebkit: {
@@ -39,11 +48,13 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-open');
   grunt.loadNpmTasks('grunt-node-webkit-builder');
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
 
   // Task aliases and tasks
   grunt.registerTask('serve', [
-    'open',
-    'connect'
+    'connect',
+    'watch'
   ]);
   grunt.registerTask('build', [
     'nodewebkit'

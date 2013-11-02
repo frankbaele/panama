@@ -7,10 +7,8 @@ function Game() {
     mapCtx,
     playerCtx,
     // General canvas specs.
-    canvasHeight,
-    canvasWidth,
     // General global variables
-    visible = ({x : 20, y : 20}),
+    visible = ({x : 10, y : 10}),
     unoTile = ({x : 0, y : 0}),
     tileWidth,  //default value for the tileWidth is 32
     tileHeight,
@@ -45,6 +43,7 @@ function Game() {
 
   // Browser window resize
   function onResize() {
+    /*
     // Maximise the canvas
     canvasWidth = window.innerWidth.roundTo(tileWidth);
     // If the canvas with is greater then the window we subtract a gridSize to make it fit in the window.
@@ -56,18 +55,20 @@ function Game() {
     canvasHeight = canvasHeight > window.innerWidth ? canvasHeight - tileWidth : canvasHeight;
     canvasHeight = canvasHeight > tileWidth * world.height * 2 ? tileWidth * world.height * 2  : canvasHeight;
 
-    mapCanvas.width = canvasWidth;
-    mapCanvas.height = canvasHeight;
     playerCanvas.width = canvasWidth;
     playerCanvas.height = canvasHeight;
-    redrawMap = true;
+    */
   }
   function generateNewLocalPlayer() {
     helper.generateStartPosition(function (startGridPosition) {
       // Initialise the local player
       localPlayer = new Player(startGridPosition);
-      // Run the resize command once for init, now the world and player data is known.
-      onResize();
+
+      mapCanvas.width = world.width * world.tileWidth;
+      mapCanvas.height = world.height * world.tileHeight;
+
+      playerCanvas.width = world.width * world.tileWidth;
+      playerCanvas.height = world.height * world.tileHeight;
       // So when the new player object is created, start animating it.
       animate();
     });
@@ -115,7 +116,7 @@ function Game() {
     return false;
   }
   function drawMap() {
-    mapCtx.clearRect(0, 0, canvasWidth, canvasHeight);
+    mapCtx.clearRect(0, 0, mapCanvas.width, mapCanvas.height);
     var coords = {x:0, y:0};
     for (var i = 0; world.height > i; i++) {
       for (var j = 0; world.width> j; j++){
@@ -132,7 +133,7 @@ function Game() {
     redrawMap = false;
   }
   function drawPlayers() {
-    playerCtx.clearRect(0, 0, canvasWidth, canvasHeight);
+    playerCtx.clearRect(0, 0, playerCanvas.width, playerCanvas.height);
     localPlayer.draw();
     redrawPlayers = false;
   }
@@ -142,6 +143,10 @@ function Game() {
   };
   var getMapContext = function () {
     return mapCtx;
+  };
+
+  var getMapCanvas = function () {
+    return mapCanvas;
   };
   var getPlayerContext = function () {
     return playerCtx;
@@ -155,9 +160,6 @@ function Game() {
   var getUnoTile = function () {
     return unoTile;
   };
-  var getCanvasStats = function () {
-    return {x: canvasWidth, y:canvasHeight};
-  };
   var setUnoTile = function (x, y) {
     unoTile = helper.inBoundUnoTile(x,y,visible);
   };
@@ -170,7 +172,6 @@ function Game() {
   return {
     init: init,
     animate: animate,
-    getCanvasStats: getCanvasStats,
     getVisible: getVisible,
     getLocalPlayer: getLocalplayer,
     getTileWidth: getTileWidth,
@@ -179,8 +180,9 @@ function Game() {
     setUnoTile: setUnoTile,
     localPlayer: getLocalplayer,
     getMapContext: getMapContext,
+    getMapCanvas: getMapCanvas,
     getPlayerContext: getPlayerContext,
-    getPlayerCanvas: getPlayerCanvas,
+    getPlayerCanvas: getPlayerCanvas
   };
 }
 
