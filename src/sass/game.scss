@@ -1,12 +1,17 @@
 @import "compass/reset";
 
-#mapCanvas{
-  background-repeat: repeat;
-  background-image:url('../art/looseSprites/water.png');
-}
-
 canvas {
   position: absolute;
   left: 0;
   top: 0;
 }
+
+body{
+  background: black;
+  overflow: hidden;
+}
+
+#mapCanvas{
+  margin-left: -1200px;
+}
+

@@ -10,7 +10,7 @@ lib-cov
 *.out
 *.pid
 *.gz
-
+.sass-cache
 .grunt
 
 pids

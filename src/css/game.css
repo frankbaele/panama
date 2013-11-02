@@ -64,13 +64,19 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 
 /* line 3, ../sass/game.scss */
-#mapCanvas {
-  background-repeat: repeat;
-}
-
-/* line 8, ../sass/game.scss */
 canvas {
   position: absolute;
   left: 0;
   top: 0;
+}
+
+/* line 9, ../sass/game.scss */
+body {
+  background: black;
+  overflow: hidden;
+}
+
+/* line 14, ../sass/game.scss */
+#mapCanvas {
+  margin-left: -1200px;
 }

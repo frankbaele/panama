@@ -18,16 +18,25 @@ module.exports = function (grunt) {
       }
     },
     watch: {
+      options: {
+        livereload: true,
+      },
       scripts: {
-        files: ['./src/js/**/*.js'],
-        options: {
-          livereload: true
-        }
+        files: ['./src/js/**/*.js']
       },
       html:{
-        files: ['./src/**/*.html'],
+        files: ['./src/**/*.html']
+      },
+      css:{
+        files: ['./src/sass/**/*.scss'],
+        tasks: ['compass:dev']
+      }
+    },
+    compass: {
+      dev: {
         options: {
-          livereload: true
+          sassDir: './src/sass',
+          cssDir: './src/css'
         }
       }
     },
@@ -35,7 +44,7 @@ module.exports = function (grunt) {
       options: {
         build_dir: './dist', // Where the build version of my node-webkit app is saved
         mac: true, // We want to build it for mac
-        win: true, // We want to build it for win
+        win: false, // We want to build it for win
         linux32: false, // We don't need linux32
         linux64: false // We don't need linux64
       },
@@ -49,6 +58,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-open');
   grunt.loadNpmTasks('grunt-node-webkit-builder');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-compass');
   grunt.loadNpmTasks('grunt-contrib-jshint');
 
   // Task aliases and tasks
@@ -59,5 +69,4 @@ module.exports = function (grunt) {
   grunt.registerTask('build', [
     'nodewebkit'
   ]);
-
 };

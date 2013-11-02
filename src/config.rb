@@ -8,8 +8,7 @@ sass_options = (environment == :development) ? { :debug_info => true } : {}
 # Don't default to DEV settings. Instead, use "compass compile -e development" (defaults to production output)
 
 # Set this to the root of your project when deployed:
-http_path = "/sites/all/themes/wundertheme/"
-css_dir = "stylesheets"
+css_dir = "css"
 sass_dir = "sass"
 images_dir = "images"
 javascripts_dir = "js"
