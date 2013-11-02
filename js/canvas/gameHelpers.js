@@ -30,28 +30,35 @@ HelperConstructor.prototype.checkWait = function (conditionFunction, resultFunct
   }, 1000);
 };
 HelperConstructor.prototype.drawSprite = function (spriteName, posX, posY, layer) {
-  var unoTile = game.getUnoTile();
-  var visible = game.getVisible();
-  var canvas = game.getCanvasStats();
-  posX = posX - unoTile.x;
-  posY = posY - unoTile.y;
-  // transform the grid tile to iso coordinates
-  var coords = helper.twoDToIso({x: posX, y: posY});
-  // transform the coordinates to the actual size of the map
-
-  coords.x = coords.x * world.tileWidth + (world.tileWidth * visible.x) / 2;
-  coords.y = coords.y * world.tileHeight;
-  if (coords.x > canvas.x || (coords.x + game.getTileWidth()) <= 0){
-    return;
-  }
-  if (coords.y > canvas.y ||(coords.y + game.getTileHeight()) <= 0){
-    return;
-  }
-
   var spt,
     mapTrans = {},
     context,
+    canvas,
+    coords,
+    hlf,
     img;
+
+  //lookup the context
+  switch (layer) {
+    case 'map' :
+      context = game.getMapContext();
+      canvas = game.getMapCanvas();
+      break;
+    case 'player' :
+      context = game.getPlayerContext();
+      canvas = game.getPlayerCanvas();
+      break;
+    default:
+      return;
+  }
+
+
+  // transform the grid tile to iso coordinates
+  coords = helper.twoDToIso({x: posX, y: posY});
+  // transform the coordinates to the actual size of the map
+  coords.x = coords.x * world.tileWidth + (canvas.width) / 2;
+  coords.y = coords.y * world.tileHeight;
+
   // For lop trough all the atlasses with find, because we want to exit this loop when the atlas is found.
   _.find(assets.loaded.atlas, function (sheet) {
     // Search for a sprite with the same sprite name
@@ -62,23 +69,11 @@ HelperConstructor.prototype.drawSprite = function (spriteName, posX, posY, layer
       return;
     }
   });
-
   if (_.isEmpty(spt)) {
     return;
   }
 
-  //lookup the context
-  switch (layer) {
-    case 'map' :
-      context = game.getMapContext();
-      break;
-    case 'player' :
-      context = game.getPlayerContext();
-      break;
-    default:
-      return;
-  }
-  var hlf = {x: spt.cx, y: spt.cy};
+  hlf = {x: spt.cx, y: spt.cy};
   mapTrans.x = 0;
   mapTrans.y = 0;
   context.drawImage(img,
@@ -160,11 +155,24 @@ HelperConstructor.prototype.generateStartPosition =  function (callback) {
   var unoTile = helper.inBoundUnoTile(startGridPosition.x - visible.x/2, startGridPosition.y - visible.y/2, visible);
   game.setUnoTile(unoTile.x, unoTile.y);
   callback(startGridPosition);
-}
-HelperConstructor.prototype.roundHalf = function(num) {
-  num = Math.round(num*2)/2;
-  return num;
-}
+};
+HelperConstructor.prototype.worldPosToGridPos = function(iPosX, iPosY){
+  /*
+  var d = (this.mcBoundaryVectors.upper.x * this.mcBoundaryVectors.lower.y) - (this.mcBoundaryVectors.upper.y * this.mcBoundaryVectors.lower.x);
+
+  var a = ((iPosX * this.mcBoundaryVectors.lower.y) - (this.mcBoundaryVectors.lower.x * iPosY)) / d;
+  var b = ((this.mcBoundaryVectors.upper.x * iPosY) - (iPosX * this.mcBoundaryVectors.upper.y)) / d;
+
+  var cParaUpperVec = new Vector2(a * this.mcBoundaryVectors.upper.x, a * this.mcBoundaryVectors.upper.y);
+  var cParaLowerVec = new Vector2(b * this.mcBoundaryVectors.lower.x, b * this.mcBoundaryVectors.lower.y);
+
+  var iGridX = Math.floor((cParaLowerVec.length() / this.mcBoundaryVectors.lower.length()) * world.width);
+  var iGridY = Math.floor((cParaUpperVec.length() / this.mcBoundaryVectors.upper.length()) * world.height);
+
+  return {gridX: iGridX, gridY: iGridY};
+  */
+};
+
 var helper = new HelperConstructor();
 
 HTMLCanvasElement.prototype.relMouseCoords = function (event) {

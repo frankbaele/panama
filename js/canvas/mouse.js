@@ -11,15 +11,11 @@ var Mouse = function () {
       var canvas =  game.getPlayerCanvas();
       var localPlayer = game.localPlayer();
       var unoTile = game.getUnoTile();
-      var temp = {};
       var goal = {};
       var visible = game.getVisible();
       coords  = canvas.relMouseCoords(e);
-      temp.x = helper.roundHalf((coords.x / world.tileWidth) - visible.x / 2);
-      temp.y = helper.roundHalf(coords.y / world.tileHeight);
-
+      coords = helper.worldPosToGridPos(coords.x, coords.y);
       goal = helper.isoToTwoD(temp);
-      console.log(temp.x + ' ' + temp.y);
       helper.drawSprite("sand.png", goal.x + unoTile.x, goal.y + unoTile.y, "map");
       callback(
         goal,
