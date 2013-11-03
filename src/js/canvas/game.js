@@ -6,12 +6,8 @@ function Game() {
     playerCanvas,
     mapCtx,
     playerCtx,
-    // General canvas specs.
     // General global variables
     visible = ({x : 10, y : 10}),
-    unoTile = ({x : 0, y : 0}),
-    tileWidth,  //default value for the tileWidth is 32
-    tileHeight,
     localPlayer,    // Local player
     mouse,
     redrawMap = true,
@@ -28,8 +24,11 @@ function Game() {
     mouse = new Mouse();
     setEventHandlers();
     world = new World();
-    tileWidth = world.tileWidth;
-    tileHeight = world.tileHeight;
+    mapCanvas.width = world.width * world.tileWidth;
+    mapCanvas.height = world.height * world.tileHeight;
+
+    playerCanvas.width = world.width * world.tileWidth;
+    playerCanvas.height = world.height * world.tileHeight;
     generateNewLocalPlayer();
   }
 
@@ -61,16 +60,12 @@ function Game() {
   }
   function generateNewLocalPlayer() {
     helper.generateStartPosition(function (startGridPosition) {
+
       // Initialise the local player
       localPlayer = new Player(startGridPosition);
-
-      mapCanvas.width = world.width * world.tileWidth;
-      mapCanvas.height = world.height * world.tileHeight;
-
-      playerCanvas.width = world.width * world.tileWidth;
-      playerCanvas.height = world.height * world.tileHeight;
       // So when the new player object is created, start animating it.
       animate();
+      helper.centerMap(startGridPosition.x, startGridPosition.y, visible);
     });
   }
 
@@ -151,33 +146,18 @@ function Game() {
   var getPlayerContext = function () {
     return playerCtx;
   };
-  var getTileWidth = function () {
-    return tileWidth;
-  };
-  var getTileHeight = function () {
-    return tileHeight;
-  };
-  var getUnoTile = function () {
-    return unoTile;
-  };
-  var setUnoTile = function (x, y) {
-    unoTile = helper.inBoundUnoTile(x,y,visible);
-  };
   var getVisible = function () {
     return visible;
   };
   var getPlayerCanvas = function() {
     return playerCanvas;
   };
+
   return {
     init: init,
     animate: animate,
     getVisible: getVisible,
     getLocalPlayer: getLocalplayer,
-    getTileWidth: getTileWidth,
-    getTileHeight: getTileHeight,
-    getUnoTile: getUnoTile,
-    setUnoTile: setUnoTile,
     localPlayer: getLocalplayer,
     getMapContext: getMapContext,
     getMapCanvas: getMapCanvas,

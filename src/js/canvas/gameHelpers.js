@@ -6,16 +6,16 @@ var HelperConstructor = function () {
 
 };
 
-HelperConstructor.prototype.isoToTwoD = function (coords) {
+HelperConstructor.prototype.isoToTwoD = function (posX, posY) {
   var newCoords = {};
-  newCoords.x = (coords.y + coords.x);
-  newCoords.y = (coords.y - coords.x);
+  newCoords.x = (posY + posX);
+  newCoords.y = (posY - posX);
   return newCoords;
 };
-HelperConstructor.prototype.twoDToIso = function (coords) {
+HelperConstructor.prototype.twoDToIso = function (posX, posY) {
   var newCoords = {};
-  newCoords.x = ((coords.x - coords.y) / 2);
-  newCoords.y = ((coords.x + coords.y) / 2);
+  newCoords.x = ((posX - posY) / 2);
+  newCoords.y = ((posX + posY) / 2);
   return newCoords;
 };
 HelperConstructor.prototype.getTileCoordinates = function () {
@@ -54,10 +54,10 @@ HelperConstructor.prototype.drawSprite = function (spriteName, posX, posY, layer
 
 
   // transform the grid tile to iso coordinates
-  coords = helper.twoDToIso({x: posX, y: posY});
+  coords = helper.twoDToIso(posX, posY);
   // transform the coordinates to the actual size of the map
-  coords.x = coords.x * world.tileWidth + (canvas.width) / 2;
-  coords.y = coords.y * world.tileHeight;
+  coords.x = coords.x * world.tileWidth + ((canvas.width) / 2);
+  coords.y = coords.y * world.tileHeight + world.tileHeight/2;
 
   // For lop trough all the atlasses with find, because we want to exit this loop when the atlas is found.
   _.find(assets.loaded.atlas, function (sheet) {
@@ -81,8 +81,8 @@ HelperConstructor.prototype.drawSprite = function (spriteName, posX, posY, layer
     spt.w, spt.h,
     (coords.x + hlf.x),
     (coords.y + hlf.y),
-    game.getTileWidth(),
-    game.getTileHeight());
+    world.tileWidth,
+    world.tileHeight);
 };
 HelperConstructor.prototype.OutOfBound = function (posX, posY) {
   if (posX >= 0 && posY >= 0) {
@@ -99,7 +99,7 @@ HelperConstructor.prototype.OutOfBound = function (posX, posY) {
     return true;
   }
 };
-HelperConstructor.prototype.inBoundUnoTile = function (posX, posY, visible) {
+HelperConstructor.prototype.inBoundUnoTile = function (posX, posY) {
   // check if the unoTile is inbound and correct if not
   if (this.OutOfBound(posX, posY)) {
     if (posX <= 0) {
@@ -114,20 +114,6 @@ HelperConstructor.prototype.inBoundUnoTile = function (posX, posY, visible) {
       posY = world.height - 1;
     }
   }
-  // correct the X unotile to show the max visible field
-
-  if (posX + visible.x > world.width) {
-    var correctionX = world.width - (posX + visible.x);
-    posX = posX + correctionX;
-  }
-
-  // correct the Y unotile to show the max visible field
-
-  if (posY + visible.y > world.height) {
-    var correctionY = world.height - (posY + visible.y);
-    posY = posY + correctionY;
-  }
-
   return {x: posX, y: posY};
 };
 HelperConstructor.prototype.tileIsOpen = function(tileIndex) {
@@ -149,14 +135,9 @@ HelperConstructor.prototype.generateStartPosition =  function (callback) {
       y : (Math.round(Math.random() * (world.height-1)))
     });
   }
-
-  // Calculate the uno position based on the starting position and corrected with visible range of the map.
-  // Check if the visible map correction is not crossing the map borders in either way, otherwise make correction and show more from the other side.
-  var unoTile = helper.inBoundUnoTile(startGridPosition.x - visible.x/2, startGridPosition.y - visible.y/2, visible);
-  game.setUnoTile(unoTile.x, unoTile.y);
   callback(startGridPosition);
 };
-HelperConstructor.prototype.worldPosToGridPos = function(iPosX, iPosY){
+HelperConstructor.prototype.worldPosToGridPos = function(PosX, PosY){
   /*
   var d = (this.mcBoundaryVectors.upper.x * this.mcBoundaryVectors.lower.y) - (this.mcBoundaryVectors.upper.y * this.mcBoundaryVectors.lower.x);
 
@@ -171,6 +152,18 @@ HelperConstructor.prototype.worldPosToGridPos = function(iPosX, iPosY){
 
   return {gridX: iGridX, gridY: iGridY};
   */
+};
+HelperConstructor.prototype.centerMap = function (posX, posY, visible){
+  var mapCanvas = game.getMapCanvas();
+  var PlayerCanvas = game.getPlayerCanvas();
+  // transform the grid tile to iso coordinates
+  var coords = helper.twoDToIso(posX, posY);
+
+  // transform the coordinates to the actual size of the map
+  coords.x = -((coords.x-visible.x) * world.tileWidth + ((mapCanvas.width) / 2));
+  coords.y = -((coords.y-visible.y) * world.tileHeight + world.tileHeight/2);
+  $(mapCanvas).css('margin-left', coords.x).css('marginTop', coords.y);
+  $(PlayerCanvas).css('margin-left', coords.x).css('marginTop', coords.y);
 };
 
 var helper = new HelperConstructor();
