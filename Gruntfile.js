@@ -40,15 +40,15 @@ module.exports = function (grunt) {
         }
       }
     },
-    nodewebkit: {
-      options: {
-        build_dir: './dist', // Where the build version of my node-webkit app is saved
-        mac: true, // We want to build it for mac
-        win: false, // We want to build it for win
-        linux32: false, // We don't need linux32
-        linux64: false // We don't need linux64
-      },
-      src: ['src/**/*'] // Your node-wekit app
+    copy: {
+      main: {
+        expand: true,
+        cwd: 'src/',
+        src: '**',
+        dest: 'dist/',
+        flatten: false,
+        filter: 'isFile',
+      }
     }
   });
 
@@ -56,10 +56,10 @@ module.exports = function (grunt) {
   // Load tasks...
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-open');
-  grunt.loadNpmTasks('grunt-node-webkit-builder');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-compass');
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-copy');
 
   // Task aliases and tasks
   grunt.registerTask('serve', [
@@ -67,6 +67,6 @@ module.exports = function (grunt) {
     'watch'
   ]);
   grunt.registerTask('build', [
-    'nodewebkit'
+    'copy'
   ]);
 };

@@ -6,8 +6,8 @@
 var World = function () {
   'use strict';
   var
-    height = 10,
-    width = 10,
+    height = 100,
+    width = 100,
     options,
     tileWidth = 64,
     tileHeight = 32,
