@@ -73,9 +73,5 @@ canvas {
 /* line 9, ../sass/game.scss */
 body {
   background: black;
-}
-
-/* line 14, ../sass/game.scss */
-#mapCanvas {
-  margin-left: -1200px;
+  position: fixed;
 }

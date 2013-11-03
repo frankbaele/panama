@@ -9,6 +9,7 @@ var Player = function (startGridPosition) {
     move = false,
     id,
     moveAmount = 3;
+  
 
   var getGridPosition = function () {
     return gridPosition;
@@ -18,7 +19,12 @@ var Player = function (startGridPosition) {
     gridPosition = newGridPosition;
   };
 
-  var setGoal = function (goal) {
+  var setGoal = function (x, y) {
+    var graph = new Graph(world.mapData);
+    var start = graph.nodes[gridPosition.x][gridPosition.y];
+    var end = graph.nodes[x][y];
+    var result = astar.search(graph, start, end);
+    console.log(result);
     move = true;
   };
 
