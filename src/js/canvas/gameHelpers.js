@@ -138,20 +138,14 @@ HelperConstructor.prototype.generateStartPosition =  function (callback) {
   callback(startGridPosition);
 };
 HelperConstructor.prototype.worldPosToGridPos = function(PosX, PosY){
-  /*
-  var d = (this.mcBoundaryVectors.upper.x * this.mcBoundaryVectors.lower.y) - (this.mcBoundaryVectors.upper.y * this.mcBoundaryVectors.lower.x);
 
-  var a = ((iPosX * this.mcBoundaryVectors.lower.y) - (this.mcBoundaryVectors.lower.x * iPosY)) / d;
-  var b = ((this.mcBoundaryVectors.upper.x * iPosY) - (iPosX * this.mcBoundaryVectors.upper.y)) / d;
+  var gridPosX = (PosX / (world.tileWidth/2) + PosY / (world.tileHeight/2))/2 - world.width/2;
+  var gridPosY = (PosY / (world.tileHeight/2) - (PosX / (world.tileWidth/2)))/2 + world.height/2;
 
-  var cParaUpperVec = new Vector2(a * this.mcBoundaryVectors.upper.x, a * this.mcBoundaryVectors.upper.y);
-  var cParaLowerVec = new Vector2(b * this.mcBoundaryVectors.lower.x, b * this.mcBoundaryVectors.lower.y);
+  gridPosX = Math.floor(gridPosX);
+  gridPosY = Math.floor(gridPosY);
 
-  var iGridX = Math.floor((cParaLowerVec.length() / this.mcBoundaryVectors.lower.length()) * world.width);
-  var iGridY = Math.floor((cParaUpperVec.length() / this.mcBoundaryVectors.upper.length()) * world.height);
-
-  return {gridX: iGridX, gridY: iGridY};
-  */
+  return {x: gridPosX, y: gridPosY};
 };
 HelperConstructor.prototype.centerMap = function (posX, posY, visible){
   var mapCanvas = game.getMapCanvas();

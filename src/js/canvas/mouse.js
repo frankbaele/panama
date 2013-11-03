@@ -14,8 +14,9 @@ var Mouse = function () {
       var visible = game.getVisible();
       coords  = canvas.relMouseCoords(e);
       coords = helper.worldPosToGridPos(coords.x, coords.y);
-      callback(
-        goal,
+      helper.drawSprite("sand.png", coords.x, coords.y, "map");
+       callback(
+        coords,
         localPlayer
       );
     }
