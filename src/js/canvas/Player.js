@@ -18,7 +18,8 @@ var Player = function (startGridPosition) {
     gridPosition = newGridPosition;
   };
 
-  var setGoal = function (goal) {
+  var setGoal = function (x, y) {
+
     move = true;
   };
 
