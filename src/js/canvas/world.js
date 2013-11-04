@@ -9,6 +9,7 @@ var World = function () {
     height = 100,
     width = 100,
     options,
+    graph,
     tileWidth = 64,
     tileHeight = 32,
     mapData = [],
@@ -31,6 +32,7 @@ var World = function () {
 
   function init() {
     mapData = (_.compose(runAutomatonCycle, runAutomatonCycle,  runAutomatonCycle, runAutomatonCycle, randomize, fillMap))();
+    graph = new Graph(mapData);
   }
 
   /**
@@ -139,7 +141,8 @@ var World = function () {
     tileHeight: tileHeight,
     height: height,
     width: width,
-    mapData: mapData
+    mapData: mapData,
+    graph: graph
   };
 };
 
