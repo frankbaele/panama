@@ -78,7 +78,8 @@ function Game() {
     helper.generateStartPosition(function (startGridPosition) {
 
       // Initialise the local player
-      mapCenter = startGridPosition;
+      mapCenter = helper.clone(startGridPosition);
+      console.log('new');
       localPlayer = new Player(startGridPosition);
       // So when the new player object is created, start animating it.
       animate();
@@ -105,15 +106,19 @@ function Game() {
     }
     if (keys.up) {
       mapCenter.y--;
+      mapCenter.x--;
     }
     if (keys.down) {
       mapCenter.y++;
+      mapCenter.x++;
     }
     if (keys.left) {
       mapCenter.x--;
+      mapCenter.y++;
     }
     if (keys.right) {
       mapCenter.x++;
+      mapCenter.y--;
     }
     var inbound = helper.inBoundTile(mapCenter.x, mapCenter.y);
     helper.centerMap(inbound.x, inbound.y, visible);

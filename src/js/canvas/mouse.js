@@ -12,7 +12,7 @@ var Mouse = function () {
     var visible = game.getVisible();
     coords  = canvas.relMouseCoords(e);
     coords = helper.worldPosToGridPos(coords.x, coords.y);
-    helper.drawSprite("sand.png", coords.x, coords.y, "map");
+    console.log(coords);
     localPlayer.setGoal(coords.x, coords.y);
   }
   return {
