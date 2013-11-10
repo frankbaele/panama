@@ -99,7 +99,7 @@ HelperConstructor.prototype.OutOfBound = function (posX, posY) {
     return true;
   }
 };
-HelperConstructor.prototype.inBoundUnoTile = function (posX, posY) {
+HelperConstructor.prototype.inBoundTile = function (posX, posY) {
   // check if the unoTile is inbound and correct if not
   if (this.OutOfBound(posX, posY)) {
     if (posX <= 0) {
