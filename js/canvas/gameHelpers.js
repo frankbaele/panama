@@ -99,7 +99,7 @@ HelperConstructor.prototype.OutOfBound = function (posX, posY) {
     return true;
   }
 };
-HelperConstructor.prototype.inBoundUnoTile = function (posX, posY) {
+HelperConstructor.prototype.inBoundTile = function (posX, posY) {
   // check if the unoTile is inbound and correct if not
   if (this.OutOfBound(posX, posY)) {
     if (posX <= 0) {
@@ -159,6 +159,16 @@ HelperConstructor.prototype.centerMap = function (posX, posY, visible){
   $(mapCanvas).css('margin-left', coords.x).css('marginTop', coords.y);
   $(PlayerCanvas).css('margin-left', coords.x).css('marginTop', coords.y);
 };
+HelperConstructor.prototype.clone = function(obj){
+  if(obj == null || typeof(obj) != 'object')
+    return obj;
+
+  var temp = new obj.constructor();
+  for(var key in obj)
+    temp[key] = this.clone(obj[key]);
+
+  return temp;
+}
 
 var helper = new HelperConstructor();
 

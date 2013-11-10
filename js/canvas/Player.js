@@ -23,8 +23,8 @@ var Player = function (startGridPosition) {
     var start = world.graph.nodes[gridPosition.y][gridPosition.x];
     var end = world.graph.nodes[y][x];
     var results = astar.search(world.graph.nodes, start, end, true);
+
     _.forEach(results, function(result){
-      console.log(result.x, result.y);
       helper.drawSprite("ally.png", result.y, result.x,"player");
     });
     move = true;

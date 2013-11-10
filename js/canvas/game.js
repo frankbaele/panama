@@ -11,6 +11,7 @@ function Game() {
     localPlayer,    // Local player
     mapCenter = {x: 0, y:0},
     mouse,
+    keys,
     redrawMap = true,
     redrawPlayers = true;
     // the first grid on the canvas in the left upper corner.
@@ -23,6 +24,7 @@ function Game() {
     playerCtx = playerCanvas.getContext("2d");
     // Initialise keyboard controls
     mouse = new Mouse();
+    keys = new Keys();
     setEventHandlers();
     world = new World();
 
@@ -42,6 +44,8 @@ function Game() {
    **************************************************/
   function setEventHandlers () {
     window.addEventListener("resize", onResize, false);
+    window.addEventListener("keydown", onKeydown, false);
+    window.addEventListener("keyup", onKeyup, false);
     playerCanvas.addEventListener("click", mouse.onClick, false);
   }
 
@@ -51,11 +55,31 @@ function Game() {
     visible.y = window.outerHeight.roundTo(world.tileHeight)/world.tileHeight/2;
     helper.centerMap(mapCenter.x, mapCenter.y, visible);
   }
+  // Keyboard key down
+  function onKeydown(e) {
+    if (localPlayer) {
+      keys.onKeyDown(e);
+      if (keys.space) {
+        console.log(keys);
+        projectiles.push(new Projectile(localPlayer.getX(), localPlayer.getY(), keys));
+        socket.emit("new projectile", {x: localPlayer.getX(), y: localPlayer.getY(), saved_keys: keys});
+      }
+    }
+  }
+
+  // Keyboard key up
+  function onKeyup(e) {
+    if (localPlayer) {
+      keys.onKeyUp(e);
+    }
+  }
+
   function generateNewLocalPlayer() {
     helper.generateStartPosition(function (startGridPosition) {
 
       // Initialise the local player
-      mapCenter = startGridPosition;
+      mapCenter = helper.clone(startGridPosition);
+      console.log('new');
       localPlayer = new Player(startGridPosition);
       // So when the new player object is created, start animating it.
       animate();
@@ -80,6 +104,26 @@ function Game() {
     if (localPlayer.getMove()) {
       localPlayer.update();
     }
+    if (keys.up) {
+      mapCenter.y--;
+      mapCenter.x--;
+    }
+    if (keys.down) {
+      mapCenter.y++;
+      mapCenter.x++;
+    }
+    if (keys.left) {
+      mapCenter.x--;
+      mapCenter.y++;
+    }
+    if (keys.right) {
+      mapCenter.x++;
+      mapCenter.y--;
+    }
+    var inbound = helper.inBoundTile(mapCenter.x, mapCenter.y);
+    helper.centerMap(inbound.x, inbound.y, visible);
+    mapCenter.x = inbound.x;
+    mapCenter.y = inbound.y;
   }
 
   /**************************************************
