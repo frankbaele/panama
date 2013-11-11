@@ -6,8 +6,8 @@
 var World = function () {
   'use strict';
   var
-    height = 100,
-    width = 100,
+    height = 50,
+    width = 50,
     options,
     graph,
     tileWidth = 64,
@@ -31,7 +31,7 @@ var World = function () {
 
 
   function init() {
-    mapData = (_.compose(runAutomatonCycle, runAutomatonCycle,  runAutomatonCycle, runAutomatonCycle, randomize, fillMap))();
+    mapData = (_.compose(runAutomatonCycle, runAutomatonCycle, superSizeMap, superSizeMap,  runAutomatonCycle, runAutomatonCycle, randomize, fillMap))();
     graph = new Graph(mapData);
   }
 
