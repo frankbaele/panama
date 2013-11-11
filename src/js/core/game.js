@@ -8,13 +8,12 @@ function Game() {
     playerCtx,
     // General global variables
     visible = ({x : 20, y : 20}),
-    localPlayer,    // Local player
     mapCenter = {x: 0, y:0},
     mouse,
     keys,
+    commandQueue,
     cycle = 0,
-    redrawMap = true,
-    redrawPlayers = true;
+    redrawMap = true;
     // the first grid on the canvas in the left upper corner.
 
   function init() {
@@ -36,8 +35,10 @@ function Game() {
 
     playerCanvas.width = world.width * world.tileWidth;
     playerCanvas.height = world.height * world.tileHeight;
-    generateNewLocalPlayer();
     helper.centerMap(mapCenter.x, mapCenter.y, visible);
+
+    animate();
+    gameCycle();
   }
 
   /**************************************************
@@ -58,34 +59,12 @@ function Game() {
   }
   // Keyboard key down
   function onKeydown(e) {
-    if (localPlayer) {
-      keys.onKeyDown(e);
-      if (keys.space) {
-        console.log(keys);
-        projectiles.push(new Projectile(localPlayer.getX(), localPlayer.getY(), keys));
-        socket.emit("new projectile", {x: localPlayer.getX(), y: localPlayer.getY(), saved_keys: keys});
-      }
-    }
+    keys.onKeyDown(e);
   }
 
   // Keyboard key up
   function onKeyup(e) {
-    if (localPlayer) {
-      keys.onKeyUp(e);
-    }
-  }
-
-  function generateNewLocalPlayer() {
-    helper.generateStartPosition(function (startGridPosition) {
-
-      // Initialise the local player
-      mapCenter = helper.clone(startGridPosition);
-      console.log('new');
-      localPlayer = new Player(startGridPosition);
-      // So when the new player object is created, start animating it.
-      animate();
-      gameCycle();
-    });
+    keys.onKeyUp(e);
   }
 
   /**************************************************
@@ -101,35 +80,44 @@ function Game() {
    ** GAME CYCLE LOOP
    **************************************************/
   function gameCycle() {
-    // First set the next cycle, the next execution shouldn't be influenced by the current exe load.
+    // Call next cycle.
     setTimeout(gameCycle, 200);
+    // Execute the previous cycle Commands.
+    excuteCycle(commandQueue);
+    // Generate commands to executed next cycle.
     cycle++;
   }
+  function excuteCycle(commandQueue){
 
+  }
   /**************************************************
    ** Map panning code
    **************************************************/
   function moveMap() {
+    var inbound = {x:0, y:0};
     if (keys.up) {
-      mapCenter.y--;
-      mapCenter.x--;
+      inbound.y--;
+      inbound.x--;
     }
     if (keys.down) {
-      mapCenter.y++;
-      mapCenter.x++;
+      inbound.y++;
+      inbound.x++;
     }
     if (keys.left) {
-      mapCenter.x--;
-      mapCenter.y++;
+      inbound.x--;
+      inbound.y++;
     }
     if (keys.right) {
-      mapCenter.x++;
-      mapCenter.y--;
+      inbound.x++;
+      inbound.y--;
     }
-    var inbound = helper.inBoundTile(mapCenter.x, mapCenter.y);
-    helper.centerMap(inbound.x, inbound.y, visible);
-    mapCenter.x = inbound.x;
-    mapCenter.y = inbound.y;
+    // Only update the map position if there is a change.
+    if(inbound.x !== 0 || inbound.y !== 0){
+      inbound = helper.inBoundTile(mapCenter.x + inbound.x, mapCenter.y + inbound.y);
+      helper.centerMap(inbound.x, inbound.y, visible);
+      mapCenter.x = inbound.x;
+      mapCenter.y = inbound.y;
+    }
   }
 
   /**************************************************
@@ -140,18 +128,6 @@ function Game() {
     if (redrawMap) {
       drawMap();
     }
-    // Only updtae the player canvas if a player moves in the canvas
-    if (redrawPlayers) {
-      drawPlayers();
-    }
-  }
-  function playerById(id) {
-    var i;
-    for (i = 0; i < remotePlayers.length; i++) {
-      if (remotePlayers[i].id == id)
-        return remotePlayers[i];
-    }
-    return false;
   }
   function drawMap() {
     mapCtx.clearRect(0, 0, mapCanvas.width, mapCanvas.height);
@@ -170,15 +146,6 @@ function Game() {
 
     redrawMap = false;
   }
-  function drawPlayers() {
-    playerCtx.clearRect(0, 0, playerCanvas.width, playerCanvas.height);
-    localPlayer.draw();
-    redrawPlayers = false;
-  }
-  // Variables that you want to be globaly available.
-  var getLocalplayer = function () {
-    return localPlayer;
-  };
   var getMapContext = function () {
     return mapCtx;
   };
@@ -198,10 +165,7 @@ function Game() {
 
   return {
     init: init,
-    animate: animate,
     getVisible: getVisible,
-    getLocalPlayer: getLocalplayer,
-    localPlayer: getLocalplayer,
     getMapContext: getMapContext,
     getMapCanvas: getMapCanvas,
     getPlayerContext: getPlayerContext,
