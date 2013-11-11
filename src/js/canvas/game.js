@@ -12,6 +12,7 @@ function Game() {
     mapCenter = {x: 0, y:0},
     mouse,
     keys,
+    cycle = 0,
     redrawMap = true,
     redrawPlayers = true;
     // the first grid on the canvas in the left upper corner.
@@ -83,6 +84,7 @@ function Game() {
       localPlayer = new Player(startGridPosition);
       // So when the new player object is created, start animating it.
       animate();
+      gameCycle();
     });
   }
 
@@ -90,20 +92,24 @@ function Game() {
    ** GAME ANIMATION LOOP
    **************************************************/
   function animate() {
-    update();
+    moveMap();
     draw();
-
     // Request a new animation frame using Paul Irish's shim
     window.requestAnimFrame(animate);
   }
+  /**************************************************
+   ** GAME CYCLE LOOP
+   **************************************************/
+  function gameCycle() {
+    // First set the next cycle, the next execution shouldn't be influenced by the current exe load.
+    setTimeout(gameCycle, 200);
+    cycle++;
+  }
 
   /**************************************************
-   ** GAME UPDATE
+   ** Map panning code
    **************************************************/
-  function update() {
-    if (localPlayer.getMove()) {
-      localPlayer.update();
-    }
+  function moveMap() {
     if (keys.up) {
       mapCenter.y--;
       mapCenter.x--;
