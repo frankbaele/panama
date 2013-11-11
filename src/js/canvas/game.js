@@ -7,7 +7,7 @@ function Game() {
     mapCtx,
     playerCtx,
     // General global variables
-    visible = ({x : 5, y : 10}),
+    visible = ({x : 20, y : 20}),
     localPlayer,    // Local player
     mapCenter = {x: 0, y:0},
     mouse,

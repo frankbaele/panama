@@ -9,7 +9,7 @@
 	"sourceSize": {"w":64,"h":35}
 },
 {
-	"filename": "enemy.png",
+	"filename": "grass.png",
 	"frame": {"x":68,"y":2,"w":64,"h":35},
 	"rotated": false,
 	"trimmed": false,
@@ -17,7 +17,7 @@
 	"sourceSize": {"w":64,"h":35}
 },
 {
-	"filename": "grass.png",
+	"filename": "player.png",
 	"frame": {"x":134,"y":2,"w":64,"h":35},
 	"rotated": false,
 	"trimmed": false,
@@ -25,7 +25,7 @@
 	"sourceSize": {"w":64,"h":35}
 },
 {
-	"filename": "player.png",
+	"filename": "sand.png",
 	"frame": {"x":200,"y":2,"w":64,"h":35},
 	"rotated": false,
 	"trimmed": false,
@@ -33,16 +33,8 @@
 	"sourceSize": {"w":64,"h":35}
 },
 {
-	"filename": "sand.png",
-	"frame": {"x":266,"y":2,"w":64,"h":35},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":35},
-	"sourceSize": {"w":64,"h":35}
-},
-{
 	"filename": "water.png",
-	"frame": {"x":332,"y":2,"w":64,"h":35},
+	"frame": {"x":266,"y":2,"w":64,"h":35},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":35},
@@ -53,8 +45,8 @@
 	"version": "1.0",
 	"image": "panama.png",
 	"format": "RGBA8888",
-	"size": {"w":398,"h":39},
+	"size": {"w":332,"h":39},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:c531ab02b317b8d0371587b88a2d92e4:b1e2cc6a13ab1c8b2a7dafd6ba09bee3:16acbfc3e7af3822b64fc3d89d57c998$"
+	"smartupdate": "$TexturePacker:SmartUpdate:fda722ec3f86e792f68bf98ffc65b98b:a2b560ebfc0b786b52ce06cb5af09432:16acbfc3e7af3822b64fc3d89d57c998$"
 }
 }
