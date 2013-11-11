@@ -8,26 +8,20 @@
         <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
         <link rel="stylesheet" href="css/game.css">
 	</head>
-	
-	<body>
-        <div id="gamecontainer">
-          <canvas id="mapCanvas" class="gamelayer"></canvas>
-          <canvas id="playerCanvas" class="gamelayer"></canvas>
-          <div class="ui"></div>
-          <div id="gamestartscreen" class="gamelayer"></div>
-          <div id="loadingscreen" class="gamelayer">
-            <div id="loadingmessage"></div>
-          </div>
-        </div>
+
+    <body ng-app="panama">
+      <div ng-view=""></div>
         <script src="//localhost:35729/livereload.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/yepnope/1.5.4/yepnope.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+        <script src="./js/app/app.js"></script>
+        <script src="./js/app/controllers/main.js"></script>
 		<script>
           var world,
            game;
           (function(){
             var inputScripts = [
               // scripts
-              "//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js",
               "//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js",
               "//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.9/require.min.js",
               "//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js",
@@ -61,7 +55,6 @@
                   function () {
                     // Initialise the game
                     game = new Game();
-                    game.init();
                   }
                 );
               }
