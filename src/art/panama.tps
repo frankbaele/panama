@@ -56,7 +56,7 @@
             <key>width</key>
             <int>512</int>
             <key>height</key>
-            <int>8192</int>
+            <int>64</int>
         </QSize>
         <key>fixedTextureSize</key>
         <QSize>
@@ -142,7 +142,7 @@
             <key>trimThreshold</key>
             <uint>1</uint>
             <key>trimMode</key>
-            <enum type="SpriteSettings::TrimMode">Trim</enum>
+            <enum type="SpriteSettings::TrimMode">Crop</enum>
             <key>heuristicMask</key>
             <false/>
         </struct>
