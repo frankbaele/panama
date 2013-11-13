@@ -12,55 +12,12 @@
     <body ng-app="panama">
       <div ng-view=""></div>
         <script src="//localhost:35729/livereload.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/yepnope/1.5.4/yepnope.min.js"></script>
         <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
         <script src="./js/app/app.js"></script>
         <script src="./js/app/controllers/main.js"></script>
-		<script>
-          var world,
-           game;
-          (function(){
-            var inputScripts = [
-              // scripts
-              "//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js",
-              "//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.9/require.min.js",
-              "//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js",
-              "./js/lib/astar.js",
-              "./js/lib/graph.js",
-              "./js/util/keys.js",
-              "./js/util/mouse.js",
-              "./js/util/gameHelpers.js",
-              "./js/util/spriteSheet.js",
-              "./js/util/assetLoader.js",
-              "./js/util/requestAnimationFrame.js",
-              "./js/map/RNG.js",
-              "./js/map/world.js",
-              "./js/entities/entity.js",
-              "./js/core/command.js",
-              "./js/core/commandQueue.js",
-              "./js/core/game.js"
-            ];
-
-
-            yepnope({
-              load: inputScripts,
-              complete:	function()
-              {
-
-                assetLoader.preloadAssets();
-                helper.checkWait(
-                  function () {
-                    return assetLoader.preloadComplete();
-                  },
-                  function () {
-                    // Initialise the game
-                    game = new Game();
-                  }
-                );
-              }
-
-            });
-          })();
-		</script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.9/require.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
+        <script src="./js/core/game.js"></script>
 	</body>
 </html>
