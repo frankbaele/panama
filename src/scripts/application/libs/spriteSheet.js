@@ -1,5 +1,4 @@
 var SpriteSheet = function (confConstructor, fileConstructor){
-  "use strict";
   var
     sprites = [],
     configuration = confConstructor,

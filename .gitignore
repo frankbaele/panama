@@ -1,21 +1,17 @@
-#################
-## npm
-#################
+# Ignore system files
+.DS_Store
+Thumbs.db
 
-lib-cov
-*.seed
-*.log
-*.csv
-*.dat
-*.out
-*.pid
-*.gz
-.sass-cache
+# Ignore NetBeans, Eclipse && phpstorm
+nbproject
+.project
+.settings
+.idea
+
+# Ignore sass-cache files.
+*.sass-cache*
+
+# Node stuff
 .grunt
-
-pids
-logs
-results
-dist
 npm-debug.log
 node_modules
