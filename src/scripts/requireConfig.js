@@ -1,5 +1,5 @@
 require.config({
-  baseUrl: 'scripts/vendor',
+  baseUrl: 'scripts',
   paths: {
     // the left side is the module ID,
     // the right side is the path to
@@ -9,7 +9,30 @@ require.config({
     // is using jQuery 1.9.0 located at
     // js/lib/jquery-1.9.0.js, relative to
     // the HTML page.
-    jquery: 'jquery-2.0.3.min',
-    lodash: 'lodash.min'
+    /* VENDORS */
+    jQuery: 'vendor/jquery-2.0.3.min',
+    underscore: 'vendor/lodash.min',
+    text: 'vendor/require.text',
+    /* libs */
+    RNG: 'application/libs/RNG',
+    World: 'application/libs/World',
+    Graph: 'application/libs/Graph',
+    GraphNode: 'application/libs/GraphNode',
+    BinaryHeap: 'application/libs/BinaryHeap',
+    SpriteSheet: 'application/libs/SpriteSheet',
+    STL: 'application/libs/StandardLibrary',
+    RequestAnimationFrame: 'application/libs/RequestAnimationFrame',
+    /* application */
+    AssetLoader: 'application/AssetLoader',
+    Assets : 'application/Assets',
+    Canvas : 'application/Canvas',
+    /* Config */
+    config : '../config',
+    /* logic */
+    map : 'logic/map',
+    /* view */
+    Animate: 'view/Animate',
+    Map: 'view/Map',
+    Sprite: 'view/Sprite'
   }
 });

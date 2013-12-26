@@ -22,7 +22,7 @@ module.exports = function (grunt) {
         livereload: true,
       },
       scripts: {
-        files: ['./src/js/**/*.js']
+        files: ['./src/scripts/**/*.js']
       },
       html:{
         files: ['./src/**/*.html']
@@ -50,7 +50,7 @@ module.exports = function (grunt) {
         src: '**',
         dest: 'dist/',
         flatten: false,
-        filter: 'isFile',
+        filter: 'isFile'
       }
     }
   });
@@ -65,7 +65,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
 
   // Task aliases and tasks
-  grunt.registerTask('serve', [
+  grunt.registerTask('server', [
     'connect',
     'watch'
   ]);

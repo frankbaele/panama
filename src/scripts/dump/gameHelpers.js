@@ -18,9 +18,6 @@ HelperConstructor.prototype.twoDToIso = function (posX, posY) {
   newCoords.y = ((posX + posY) / 2);
   return newCoords;
 };
-HelperConstructor.prototype.getTileCoordinates = function () {
-
-};
 HelperConstructor.prototype.checkWait = function (conditionFunction, resultFunction) {
   var tev = setInterval(function () {
     if (conditionFunction()) {
