@@ -26,6 +26,7 @@ require.config({
     AssetLoader: 'application/AssetLoader',
     Assets : 'application/Assets',
     Canvas : 'application/Canvas',
+    Keys : 'application/Keys',
     /* Config */
     config : '../config',
     /* logic */

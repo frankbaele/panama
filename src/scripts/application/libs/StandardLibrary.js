@@ -1,17 +1,17 @@
 define(['World'], function (world) {
-    var isoToTwoD = function (posX, posY) {
+  function isoToTwoD(posX, posY) {
     var newCoords = {};
     newCoords.x = (posY + posX);
     newCoords.y = (posY - posX);
     return newCoords;
   };
-  var twoDToIso = function (posX, posY) {
+  function twoDToIso(posX, posY) {
     var newCoords = {};
     newCoords.x = ((posX - posY) / 2);
     newCoords.y = ((posX + posY) / 2);
     return newCoords;
   };
-  var checkWait = function (conditionFunction, resultFunction) {
+  function checkWait(conditionFunction, resultFunction) {
     var tev = setInterval(function () {
       if (conditionFunction()) {
         resultFunction();
@@ -21,7 +21,7 @@ define(['World'], function (world) {
   };
   return {
     isoToTwoD: isoToTwoD,
-    twoDToIso : twoDToIso,
-    checkWait : checkWait
+    twoDToIso: twoDToIso,
+    checkWait: checkWait
   };
 });

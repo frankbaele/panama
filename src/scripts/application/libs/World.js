@@ -130,6 +130,8 @@ define(['RNG', 'underscore', 'Graph'], function (RNG, _ ,Graph) {
     height = height * amount;
     return newMap;
   }
+
+
   function outOfBound(posX, posY) {
     if (posX >= 0 && posY >= 0) {
       if (posX < width) {
@@ -145,12 +147,41 @@ define(['RNG', 'underscore', 'Graph'], function (RNG, _ ,Graph) {
       return true;
     }
   };
+
+  function inBoundTile(posX, posY) {
+    // check if the unoTile is inbound and correct if not
+    if (outOfBound(posX, posY)) {
+      if (posX <= 0) {
+        posX = 0;
+      } else if (posX >= width) {
+        posX = width - 1;
+      }
+
+      if (posY <= 0) {
+        posY = 0;
+      } else if (posY >= height) {
+        posY = height - 1;
+      }
+    }
+    return {x: posX, y: posY};
+  };
+
+  function tileIsOpen(tileIndex) {
+    if(mapData[tileIndex.y][tileIndex.x] === 0){
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   init();
 
   return {
     tileWidth: tileWidth,
     tileHeight: tileHeight,
+    inBoundTile: inBoundTile,
     outOfBound: outOfBound,
+    tileIsOpen: tileIsOpen,
     height: height,
     width: width,
     mapData: mapData,

@@ -1,4 +1,4 @@
-define(['Animate', 'STL', 'Assets', 'AssetLoader'], function (animate, stl, assets, assetLoader) {
+define(['Animate', 'STL', 'Assets', 'AssetLoader', 'Keys'], function (animate, stl, assets, assetLoader, keys) {
   function init() {
     animate.init();
     gameCycle();
@@ -15,7 +15,6 @@ define(['Animate', 'STL', 'Assets', 'AssetLoader'], function (animate, stl, asse
   function excuteCycle(){
 
   }
-  console.log(assetLoader.preloadComplete());
   stl.checkWait(
     assetLoader.preloadComplete,
     init
