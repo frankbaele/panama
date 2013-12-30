@@ -13,6 +13,7 @@ require.config({
     jQuery: 'vendor/jquery-2.0.3.min',
     underscore: 'vendor/lodash.min',
     text: 'vendor/require.text',
+    keypress: 'vendor/keypress',
     /* libs */
     RNG: 'application/libs/RNG',
     World: 'application/libs/World',
@@ -30,9 +31,10 @@ require.config({
     /* Config */
     config : '../config',
     /* logic */
-    map : 'logic/map',
+    EventManager: 'view/Mediator',
     /* view */
     Animate: 'view/Animate',
+    Input: 'view/Input',
     Map: 'view/Map',
     Sprite: 'view/Sprite'
   }

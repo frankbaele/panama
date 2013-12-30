@@ -1,8 +1,20 @@
-define(['jQuery','Canvas', 'World', 'STL', 'Sprite', 'Keys'], function (jQuery, canvas, world, stl, sprite, keys) {
+define(['EventManager', 'Canvas', 'World', 'STL', 'Sprite', 'jQuery'], function (eventManager, canvas, world, stl, sprite) {
   var visible = {x:10, y:10};
-  var mapCenter = {x: 10, y:10};
+  var centerCoords = {x: 10, y:10};
+  var pressedKeys = {
+    up: 0,
+    down: 0,
+    left: 0,
+    right: 0
+  };
+
   function init(){
-    center(mapCenter.x, mapCenter.y, visible);
+    draw();
+    center(centerCoords.x, centerCoords.y);
+    eventManager.subscribe( 'map up', function(e){pressedKeys.up = e;});
+    eventManager.subscribe( 'map down', function(e){pressedKeys.down = e});
+    eventManager.subscribe( 'map left', function(e){pressedKeys.left = e});
+    eventManager.subscribe( 'map right', function(e){pressedKeys.right = e});
   }
 
   function draw() {
@@ -24,32 +36,6 @@ define(['jQuery','Canvas', 'World', 'STL', 'Sprite', 'Keys'], function (jQuery, 
   /**************************************************
    ** Map panning code
    **************************************************/
-  function move() {
-    var inbound = {x:0, y:0};
-    if (keys.up) {
-      inbound.y--;
-      inbound.x--;
-    }
-    if (keys.down) {
-      inbound.y++;
-      inbound.x++;
-    }
-    if (keys.left) {
-      inbound.x--;
-      inbound.y++;
-    }
-    if (keys.right) {
-      inbound.x++;
-      inbound.y--;
-    }
-    // Only update the map position if there is a change.
-    if(inbound.x !== 0 || inbound.y !== 0){
-      inbound = world.inBoundTile(mapCenter.x + inbound.x, mapCenter.y + inbound.y);
-      center(inbound.x, inbound.y);
-      mapCenter.x = inbound.x;
-      mapCenter.y = inbound.y;
-    }
-  }
   function center(posX,posY){
     // transform the grid tile to iso coordinates
     var coords = stl.twoDToIso(posX, posY);
@@ -60,10 +46,38 @@ define(['jQuery','Canvas', 'World', 'STL', 'Sprite', 'Keys'], function (jQuery, 
     $(canvas.terrain.canvas).css('margin-left', coords.x).css('marginTop', coords.y);
   }
 
-  init();
+  function update() {
+    var inbound = {x:0, y:0};
+    if (pressedKeys.up == 1) {
+      inbound.y--;
+      inbound.x--;
+    }
+    if (pressedKeys.down == 1) {
+      inbound.y++;
+      inbound.x++;
+    }
+    if (pressedKeys.left == 1) {
+      inbound.x--;
+      inbound.y++;
+    }
+    if (pressedKeys.right == 1) {
+      inbound.x++;
+      inbound.y--;
+    }
+    // Only update the map position if there is a change.
+    if(inbound.x !== 0 || inbound.y !== 0){
+      inbound = world.inBoundTile(centerCoords.x + inbound.x, centerCoords.y + inbound.y);
+      center(inbound.x, inbound.y);
+      centerCoords.x = inbound.x;
+      centerCoords.y = inbound.y;
+    }
+  }
+
   return {
+    init: init,
     draw: draw,
-    move: move,
-    center: center
+    update: update,
+    center: center,
+    centerCoords: centerCoords
   };
 });

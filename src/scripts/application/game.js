@@ -1,4 +1,4 @@
-define(['Animate', 'STL', 'Assets', 'AssetLoader', 'Keys'], function (animate, stl, assets, assetLoader, keys) {
+define(['Animate', 'STL', 'Assets', 'AssetLoader'], function (animate, stl, assets, assetLoader, keys) {
   function init() {
     animate.init();
     gameCycle();
