@@ -47,7 +47,30 @@ HelperConstructor.prototype.drawSprite = function (spriteName, posX, posY, layer
       break;
     default:
       return;
+  }HelperConstructor.prototype.inBoundTile = function (posX, posY) {
+  // check if the unoTile is inbound and correct if not
+  if (this.OutOfBound(posX, posY)) {
+    if (posX <= 0) {
+      posX = 0;
+    } else if (posX >= world.width) {
+      posX = world.width - 1;
+    }
+
+    if (posY <= 0) {
+      posY = 0;
+    } else if (posY >= world.height) {
+      posY = world.height - 1;
+    }
   }
+  return {x: posX, y: posY};
+};
+HelperConstructor.prototype.tileIsOpen = function(tileIndex) {
+  if(world.mapData[tileIndex.y][tileIndex.x] === 0){
+    return true;
+  } else {
+    return false;
+  }
+};
 
 
   // transform the grid tile to iso coordinates

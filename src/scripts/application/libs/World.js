@@ -5,8 +5,8 @@ define(['RNG', 'underscore', 'Graph'], function (RNG, _ ,Graph) {
    * Alea is licensed according to the http://en.wikipedia.org/wiki/MIT_License.
    */
     var
-    height = 10,
-    width = 10,
+    height = 50,
+    width = 50,
     graph,
     tileWidth = 64,
     tileHeight = 32,

@@ -28,6 +28,7 @@ require.config({
     Assets : 'application/Assets',
     Canvas : 'application/Canvas',
     Keys : 'application/Keys',
+    Mouse : 'application/Mouse',
     /* Config */
     config : '../config',
     /* logic */
