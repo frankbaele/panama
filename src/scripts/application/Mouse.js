@@ -1,9 +1,13 @@
 define(['Canvas'], function (canvas) {
-  var mouseCallback = function (e){
-    console.log('The mouse is not assigned, define mouseCallback');
+  var leftMouseCallback = function (e){
+    console.log('The right mouse click is not assigned, define leftMouseCallback');
   };
+  var rightMouseCallback = function (e){
+    console.log('The left mouse click is not assigned, define rightMouseCallback');
+  };
+
   // This snippet gives back some nice canvas relative coordinates
-  HTMLCanvasElement.prototype.relMouseCoords = function (event) {
+  HTMLCanvasElement.prototype.relMouseCoordinates = function (event) {
     var totalOffsetX = 0;
     var totalOffsetY = 0;
     var canvasX = 0;
@@ -20,20 +24,38 @@ define(['Canvas'], function (canvas) {
     canvasY = event.pageY - totalOffsetY;
     return {x: canvasX, y: canvasY};
   };
-
+/*
+  window.oncontextmenu = function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    return false;
+  };
+*/
   canvas.player.canvas.addEventListener("click", function(e){
-    mouseCallback(
-      canvas.player.canvas.relMouseCoords(e));
+      leftMouseCallback(
+      canvas.player.canvas.relMouseCoordinates(e));
+    },
+    false
+  );
+
+  canvas.player.canvas.addEventListener("contextmenu", function(e){
+      rightMouseCallback(
+        canvas.player.canvas.relMouseCoordinates(e));
     },
     false
   );
 
 
-  function setMouseCallback(newCallback) {
-    mouseCallback = newCallback;
+  function setLeftMouseCallback(newCallback) {
+    leftMouseCallback = newCallback;
+  }
+
+  function setRightMouseCallback(newCallback) {
+    rightMouseCallback = newCallback;
   }
 
   return {
-    setMouseCallback: setMouseCallback
+    setLeftMouseCallback: setLeftMouseCallback,
+    setRightMouseCallback: setRightMouseCallback
   };
 });

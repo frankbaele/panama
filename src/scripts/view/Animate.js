@@ -1,15 +1,10 @@
-define(['Map', 'RequestAnimationFrame', 'Input'], function (map) {
-  function init(){
-    map.init();
-    animate();
-  }
+define(['EventManager', 'RequestAnimationFrame', 'Map', 'Actors'], function (eventManager) {
   function animate() {
-    map.update();
+    eventManager.publish('updateMap');
+    eventManager.publish('updateActors');
     // Request a new animation frame using Paul Irish's shim
     window.requestAnimFrame(animate);
   }
-
-  return {
-    init: init
-  };
+  eventManager.subscribe('assetsLoaded', function(){animate();});
+  return {};
 });

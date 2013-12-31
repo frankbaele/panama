@@ -1,7 +1,8 @@
-define(['Animate', 'STL', 'Assets', 'AssetLoader'], function (animate, stl, assets, assetLoader, keys) {
+define(['Assets', 'EventManager', 'Actor', 'Animate', 'Input'], function (assets, eventManager, actor) {
   function init() {
-    animate.init();
     gameCycle();
+    player = actor;
+    player.create('player.png', {x:0,y:0})
   }
 
   function gameCycle() {
@@ -15,8 +16,5 @@ define(['Animate', 'STL', 'Assets', 'AssetLoader'], function (animate, stl, asse
   function excuteCycle(){
 
   }
-  stl.checkWait(
-    assetLoader.preloadComplete,
-    init
-  );
+  eventManager.subscribe('assetsLoaded', function(){init();});
 });

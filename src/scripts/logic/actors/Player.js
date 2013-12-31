@@ -1,0 +1,6 @@
+define(['Actor'], function () {
+
+  return {
+
+  };
+});

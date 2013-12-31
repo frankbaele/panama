@@ -33,10 +33,13 @@ require.config({
     config : '../config',
     /* logic */
     EventManager: 'logic/Mediator',
+    Actor: 'logic/actors/Actor',
+    Player: 'logic/Player',
     /* view */
     Animate: 'view/Animate',
     Input: 'view/Input',
     Map: 'view/Map',
-    Sprite: 'view/Sprite'
+    Sprite: 'view/Sprite',
+    Actors: 'view/Actors'
   }
 });

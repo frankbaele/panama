@@ -1,6 +1,6 @@
 define(['EventManager', 'Canvas', 'World', 'STL', 'Sprite', 'jQuery'], function (eventManager, canvas, world, stl, sprite) {
   var visible = {x:10, y:10};
-  var centerCoords = {x: 10, y:10};
+  var centerCoordinates = {x: 10, y:10};
   var pressedKeys = {
     up: 0,
     down: 0,
@@ -10,40 +10,33 @@ define(['EventManager', 'Canvas', 'World', 'STL', 'Sprite', 'jQuery'], function 
 
   function init(){
     draw();
-    center(centerCoords.x, centerCoords.y);
-    eventManager.subscribe( 'map up', function(e){pressedKeys.up = e;});
-    eventManager.subscribe( 'map down', function(e){pressedKeys.down = e});
-    eventManager.subscribe( 'map left', function(e){pressedKeys.left = e});
-    eventManager.subscribe( 'map right', function(e){pressedKeys.right = e});
+    center(centerCoordinates.x, centerCoordinates.y);
   }
 
   function draw() {
     canvas.terrain.context.clearRect(0, 0, canvas.terrain.canvas.width, canvas.terrain.canvas.height);
-    var coords = {x:0, y:0};
+    var coordinates = {x:0, y:0};
     for (var i = 0; world.height > i; i++) {
       for (var j = 0; world.width> j; j++){
-        if(!world.outOfBound(coords.y + i,coords.x + j)){
-          if (world.mapData[coords.y + i][coords.x + j] === 1){
-            sprite.draw("sand.png", coords.x + j, coords.y + i, "terrain");
+        if(!world.outOfBound(coordinates.y + i,coordinates.x + j)){
+          if (world.mapData[coordinates.y + i][coordinates.x + j] === 1){
+            sprite.draw("sand.png", coordinates.x + j, coordinates.y + i, "terrain");
           } else {
-            sprite.draw("water.png", coords.x + j, coords.y + i, "terrain");
+            sprite.draw("water.png", coordinates.x + j, coordinates.y + i, "terrain");
           }
         }
       }
     }
   }
 
-  /**************************************************
-   ** Map panning code
-   **************************************************/
   function center(posX,posY){
     // transform the grid tile to iso coordinates
-    var coords = stl.twoDToIso(posX, posY);
+    var coordinates = stl.twoDToIso(posX, posY);
     // transform the coordinates to the actual size of the map
-    coords.x = -((coords.x - visible.x) * world.tileWidth + ((canvas.terrain.canvas.width) / 2));
-    coords.y = -((coords.y - visible.y) * world.tileHeight + world.tileHeight/2);
-    $(canvas.terrain.canvas).css('margin-left', coords.x).css('marginTop', coords.y);
-    $(canvas.terrain.canvas).css('margin-left', coords.x).css('marginTop', coords.y);
+    coordinates.x = -((coordinates.x - visible.x) * world.tileWidth + ((canvas.terrain.canvas.width) / 2));
+    coordinates.y = -((coordinates.y - visible.y) * world.tileHeight + world.tileHeight/2);
+    $(canvas.terrain.canvas).css('margin-left', coordinates.x).css('marginTop', coordinates.y);
+    $(canvas.terrain.canvas).css('margin-left', coordinates.x).css('marginTop', coordinates.y);
   }
 
   function update() {
@@ -66,18 +59,17 @@ define(['EventManager', 'Canvas', 'World', 'STL', 'Sprite', 'jQuery'], function 
     }
     // Only update the map position if there is a change.
     if(inbound.x !== 0 || inbound.y !== 0){
-      inbound = world.inBoundTile(centerCoords.x + inbound.x, centerCoords.y + inbound.y);
+      inbound = world.inBoundTile(centerCoordinates.x + inbound.x, centerCoordinates.y + inbound.y);
       center(inbound.x, inbound.y);
-      centerCoords.x = inbound.x;
-      centerCoords.y = inbound.y;
+      centerCoordinates.x = inbound.x;
+      centerCoordinates.y = inbound.y;
     }
   }
-
-  return {
-    init: init,
-    draw: draw,
-    update: update,
-    center: center,
-    centerCoords: centerCoords
-  };
+  eventManager.subscribe('assetsLoaded', function(){init();});
+  eventManager.subscribe('redrawMap', function(){draw();});
+  eventManager.subscribe('updateMap', function(){update();});
+  eventManager.subscribe('panUp', function(e){pressedKeys.up = e;});
+  eventManager.subscribe('panDown', function(e){pressedKeys.down = e;});
+  eventManager.subscribe('panLeft', function(e){pressedKeys.left = e;});
+  eventManager.subscribe('panRight', function(e){pressedKeys.right = e;});
 });

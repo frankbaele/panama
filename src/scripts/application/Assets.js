@@ -1,4 +1,4 @@
-define(['text!config/AssetsList.json', 'AssetLoader'], function (AssetList, AssetLoader) {
+define(['text!config/AssetsList.json', 'AssetLoader', 'EventManager'], function (AssetList, AssetLoader, eventManager) {
   var assets = {
     config: {},
     loaded : {
@@ -9,5 +9,16 @@ define(['text!config/AssetsList.json', 'AssetLoader'], function (AssetList, Asse
   // Load the Asset list;
   assets.config = JSON.parse(AssetList);
   assets = AssetLoader.preloadAssets(assets);
+
+  function checkAssetLoader() {
+    var tev = setInterval(function () {
+      if (AssetLoader.preloadComplete()) {
+        eventManager.publish('assetsLoaded');
+        clearInterval(tev);
+      }
+    }, 1000);
+  };
+
+  checkAssetLoader();
   return assets;
 });

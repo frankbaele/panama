@@ -3,7 +3,7 @@ define(['underscore', 'Canvas', 'STL', 'World', 'Assets'], function (_,canvases,
     var spt,
       mapTrans = {},
       context,
-      coords,
+      coordinates,
       canvas,
       hlf,
       img;
@@ -23,10 +23,10 @@ define(['underscore', 'Canvas', 'STL', 'World', 'Assets'], function (_,canvases,
     }
 
     // transform the grid tile to iso coordinates
-    coords = stl.twoDToIso(posX, posY);
+    coordinates = stl.twoDToIso(posX, posY);
     // transform the coordinates to the actual size of the map
-    coords.x = coords.x * world.tileWidth + ((canvas.width) / 2);
-    coords.y = coords.y * world.tileHeight + world.tileHeight/2;
+    coordinates.x = coordinates.x * world.tileWidth + ((canvas.width) / 2);
+    coordinates.y = coordinates.y * world.tileHeight + world.tileHeight/2;
     // For lop trough all the atlasses with find, because we want to exit this loop when the atlas is found.
 
     _.findIndex(assets.loaded.atlas, function (sheet) {
@@ -48,8 +48,8 @@ define(['underscore', 'Canvas', 'STL', 'World', 'Assets'], function (_,canvases,
     context.drawImage(img,
       spt.x, spt.y,
       spt.w, spt.h,
-      (coords.x + hlf.x),
-      (coords.y + hlf.y),
+      (coordinates.x + hlf.x),
+      (coordinates.y + hlf.y),
       world.tileWidth,
       world.tileHeight);
   };

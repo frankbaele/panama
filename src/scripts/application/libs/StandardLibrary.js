@@ -1,20 +1,20 @@
-define(['World'], function (world) {
+define(['World', 'EventManager'], function (world, eventManager) {
   function isoToTwoD(posX, posY) {
-    var newCoords = {};
-    newCoords.x = (posY + posX);
-    newCoords.y = (posY - posX);
-    return newCoords;
+    var newCoordinates = {};
+    newCoordinates.x = (posY + posX);
+    newCoordinates.y = (posY - posX);
+    return newCoordinates;
   };
   function twoDToIso(posX, posY) {
-    var newCoords = {};
-    newCoords.x = ((posX - posY) / 2);
-    newCoords.y = ((posX + posY) / 2);
-    return newCoords;
+    var newCoordinates = {};
+    newCoordinates.x = ((posX - posY) / 2);
+    newCoordinates.y = ((posX + posY) / 2);
+    return newCoordinates;
   };
   function checkWait(conditionFunction, resultFunction) {
     var tev = setInterval(function () {
       if (conditionFunction()) {
-        resultFunction();
+        resultFunction
         clearInterval(tev);
       }
     }, 1000);
