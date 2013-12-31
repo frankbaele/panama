@@ -32,7 +32,7 @@ require.config({
     /* Config */
     config : '../config',
     /* logic */
-    EventManager: 'view/Mediator',
+    EventManager: 'logic/Mediator',
     /* view */
     Animate: 'view/Animate',
     Input: 'view/Input',
