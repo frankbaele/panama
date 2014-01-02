@@ -16,6 +16,7 @@ require.config({
     keypress: 'vendor/keypress',
     /* libs */
     RNG: 'application/libs/RNG',
+    Astar: 'application/libs/Astar',
     World: 'application/libs/World',
     Graph: 'application/libs/Graph',
     GraphNode: 'application/libs/GraphNode',
@@ -34,7 +35,7 @@ require.config({
     /* logic */
     EventManager: 'logic/Mediator',
     Actor: 'logic/actors/Actor',
-    Player: 'logic/Player',
+    Player: 'logic/actors/Player',
     /* view */
     Animate: 'view/Animate',
     Input: 'view/Input',

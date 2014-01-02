@@ -1,4 +1,15 @@
 define(['World', 'EventManager'], function (world, eventManager) {
+  function s4() {
+    return Math.floor((1 + Math.random()) * 0x10000)
+      .toString(16)
+      .substring(1);
+  };
+
+  function guid() {
+    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+      s4() + '-' + s4() + s4() + s4();
+  }
+
   function isoToTwoD(posX, posY) {
     var newCoordinates = {};
     newCoordinates.x = (posY + posX);
@@ -11,6 +22,18 @@ define(['World', 'EventManager'], function (world, eventManager) {
     newCoordinates.y = ((posX + posY) / 2);
     return newCoordinates;
   };
+
+  function worldPosToGridPos(PosX, PosY){
+
+    var gridPosX = (PosX / (world.tileWidth/2) + PosY / (world.tileHeight/2))/2 - world.width/2;
+    var gridPosY = (PosY / (world.tileHeight/2) - (PosX / (world.tileWidth/2)))/2 + world.height/2;
+
+    gridPosX = Math.floor(gridPosX);
+    gridPosY = Math.floor(gridPosY);
+
+    return {x: gridPosX, y: gridPosY};
+  };
+
   function checkWait(conditionFunction, resultFunction) {
     var tev = setInterval(function () {
       if (conditionFunction()) {
@@ -20,8 +43,10 @@ define(['World', 'EventManager'], function (world, eventManager) {
     }, 1000);
   };
   return {
+    guid: guid,
     isoToTwoD: isoToTwoD,
     twoDToIso: twoDToIso,
+    worldPosToGridPos: worldPosToGridPos,
     checkWait: checkWait
   };
 });

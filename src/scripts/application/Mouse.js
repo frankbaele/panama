@@ -1,4 +1,4 @@
-define(['Canvas'], function (canvas) {
+define(['Canvas', 'STL'], function (canvas, stl) {
   var leftMouseCallback = function (e){
     console.log('The right mouse click is not assigned, define leftMouseCallback');
   };
@@ -24,23 +24,25 @@ define(['Canvas'], function (canvas) {
     canvasY = event.pageY - totalOffsetY;
     return {x: canvasX, y: canvasY};
   };
-/*
+
   window.oncontextmenu = function(event) {
     event.preventDefault();
     event.stopPropagation();
     return false;
   };
-*/
+
   canvas.player.canvas.addEventListener("click", function(e){
-      leftMouseCallback(
-      canvas.player.canvas.relMouseCoordinates(e));
+      var coordinates = canvas.player.canvas.relMouseCoordinates(e);
+      coordinates = stl.worldPosToGridPos(coordinates.x, coordinates.y);
+      leftMouseCallback(coordinates);
     },
     false
   );
 
   canvas.player.canvas.addEventListener("contextmenu", function(e){
-      rightMouseCallback(
-        canvas.player.canvas.relMouseCoordinates(e));
+    var coordinates = canvas.player.canvas.relMouseCoordinates(e);
+    coordinates = stl.worldPosToGridPos(coordinates.x, coordinates.y);
+    rightMouseCallback(coordinates);
     },
     false
   );

@@ -1,20 +1,17 @@
-define(['Assets', 'EventManager', 'Actor', 'Animate', 'Input'], function (assets, eventManager, actor) {
+define(['Assets', 'EventManager', 'Player', 'Animate', 'Input'], function (assets, eventManager, player) {
+
   function init() {
     gameCycle();
-    player = actor;
-    player.create('player.png', {x:0,y:0})
+    var frank = new player().create('player.png', {x:0,y:0});
   }
 
   function gameCycle() {
     // Call next cycle.
     setTimeout(gameCycle, 200);
     // Execute the previous cycle Commands.
-    excuteCycle();
+    eventManager.publish('newGameCycle');
     // Generate commands to executed next cycle.
     //cycle++;
-  }
-  function excuteCycle(){
-
   }
   eventManager.subscribe('assetsLoaded', function(){init();});
 });
