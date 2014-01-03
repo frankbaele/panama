@@ -1,0 +1,8 @@
+{
+  "0" : {
+    "name": "mapTiles",
+    "type": "atlas",
+    "configuration": "./art/panama.json",
+    "file": "./art/panama.png"
+  }
+}

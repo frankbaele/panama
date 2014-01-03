@@ -3,18 +3,19 @@
  * This code is an implementation of Alea algorithm; (C) 2010 Johannes Baagøe.
  * Alea is licensed according to the http://en.wikipedia.org/wiki/MIT_License.
  */
-var RNG = function () {
-  'use strict';
+define([], function () {
   var seed,
     s0 = 0,
     s1 = 0,
     s2 = 0,
     c = 0,
-    frac = 2.3283064365386963e-10; /* 2^-32 */
+    frac = 2.3283064365386963e-10;
+  /* 2^-32 */
 
   function init() {
     setSeed(Date.now());
   }
+
   /**
    * @returns {number}
    */
@@ -64,7 +65,7 @@ var RNG = function () {
       var r = u * u + v * v;
     } while (r > 1 || r == 0);
 
-    var gauss = u * Math.sqrt(-2*Math.log(r)/r);
+    var gauss = u * Math.sqrt(-2 * Math.log(r) / r);
     return (mean || 0) + gauss * (stddev || 1);
   }
 
@@ -91,7 +92,9 @@ var RNG = function () {
     var part = 0;
     for (var id in data) {
       part += data[id];
-      if (random < part) { return id; }
+      if (random < part) {
+        return id;
+      }
     }
 
     return null;
@@ -113,8 +116,9 @@ var RNG = function () {
     s0 = state[0];
     s1 = state[1];
     s2 = state[2];
-    c  = state[3];
+    c = state[3];
   }
+
   init();
 
   return {
@@ -127,4 +131,4 @@ var RNG = function () {
     getState: getState,
     setState: setState
   };
-};
+});

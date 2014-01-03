@@ -1,14 +1,12 @@
-/**
- * @namespace
- * This code is an implementation of the ROT.js cellular map generation by Ondřej Žára, https://github.com/ondras/rot.js
- * Alea is licensed according to the http://en.wikipedia.org/wiki/MIT_License.
- */
-var World = function () {
-  'use strict';
-  var
-    height = 50,
-    width = 50,
-    options,
+define(['RNG', 'underscore', 'Graph'], function (RNG, _ ,Graph) {
+  /**
+   * @namespace
+   * This code is an implementation of the ROT.js cellular map generation by Ondřej Žára, https://github.com/ondras/rot.js
+   * Alea is licensed according to the http://en.wikipedia.org/wiki/MIT_License.
+   */
+    var
+    height = 75,
+    width = 75,
     graph,
     tileWidth = 64,
     tileHeight = 32,
@@ -17,7 +15,6 @@ var World = function () {
     survive = [ 4, 5, 6, 7, 8],
     topology = 8,
     probability = 0.47,
-    genRNG = new RNG(),
     dirs = [
       [ 0, -1],
       [ 1, -1],
@@ -31,7 +28,7 @@ var World = function () {
 
 
   function init() {
-    mapData = (_.compose(runAutomatonCycle, runAutomatonCycle, superSizeMap, superSizeMap,  runAutomatonCycle, runAutomatonCycle, randomize, fillMap))();
+    mapData = (_.compose(runAutomatonCycle, runAutomatonCycle, superSizeMap, superSizeMap, runAutomatonCycle, runAutomatonCycle, randomize, fillMap))();
     graph = new Graph(mapData);
   }
 
@@ -45,7 +42,7 @@ var World = function () {
       x;
     for (y = 0; y < height; y++) {
       for (x = 0; x < width; x++) {
-        data[y][x] = (genRNG.getUniform() < probability ? 1 : 0);
+        data[y][x] = (RNG.getUniform() < probability ? 1 : 0);
       }
     }
     return data;
@@ -105,7 +102,7 @@ var World = function () {
         }
       }
     }
-     return newMap;
+    return newMap;
 
   }
 
@@ -134,16 +131,62 @@ var World = function () {
     return newMap;
   }
 
+
+  function outOfBound(posX, posY) {
+    if (posX >= 0 && posY >= 0) {
+      if (posX < width) {
+        if (posY < height) {
+          return false;
+        } else {
+          return true;
+        }
+      } else {
+        return true;
+      }
+    } else {
+      return true;
+    }
+  };
+
+  function inBoundTile(posX, posY) {
+    // check if the unoTile is inbound and correct if not
+    if (outOfBound(posX, posY)) {
+      if (posX <= 0) {
+        posX = 0;
+      } else if (posX >= width) {
+        posX = width - 1;
+      }
+
+      if (posY <= 0) {
+        posY = 0;
+      } else if (posY >= height) {
+        posY = height - 1;
+      }
+    }
+    return {x: posX, y: posY};
+  };
+
+  function tileIsOpen(tileIndex) {
+    if(mapData[tileIndex.y][tileIndex.x] === 0){
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   init();
 
   return {
     tileWidth: tileWidth,
     tileHeight: tileHeight,
+    inBoundTile: inBoundTile,
+    outOfBound: outOfBound,
+    tileIsOpen: tileIsOpen,
     height: height,
     width: width,
     mapData: mapData,
     graph: graph
   };
-};
+});
 
 
