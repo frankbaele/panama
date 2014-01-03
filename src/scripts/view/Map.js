@@ -66,8 +66,7 @@ define(['EventManager', 'Canvas', 'World', 'STL', 'Sprite', 'jQuery'], function 
     }
   }
   eventManager.subscribe('assetsLoaded', function(){init();});
-  eventManager.subscribe('redrawMap', function(){draw();});
-  eventManager.subscribe('updateMap', function(){update();});
+  eventManager.subscribe('newFrame', function(){update();});
   eventManager.subscribe('panUp', function(e){pressedKeys.up = e;});
   eventManager.subscribe('panDown', function(e){pressedKeys.down = e;});
   eventManager.subscribe('panLeft', function(e){pressedKeys.left = e;});

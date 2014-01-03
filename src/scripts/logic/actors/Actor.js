@@ -27,7 +27,11 @@ define(['EventManager', 'STL'], function (eventManager, stl) {
     this.sprite = sprite;
     this.coordinates = coordinates;
     this.selected = false;
-    eventManager.publish('ActorCreated', this);
+    eventManager.publish('ActorCreate', this);
+  }
+
+  Actor.prototype.delete = function() {
+    eventManager.publish('ActorDelete', this);
   }
 
   return Actor;

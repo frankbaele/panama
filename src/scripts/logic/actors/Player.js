@@ -1,13 +1,8 @@
-define(['Actor', 'EventManager', 'Astar', 'World'], function (actor, eventManager, astar, world) {
+define(['Actor', 'EventManager', 'Astar', 'World', 'underscore'], function (actor, eventManager, astar, world) {
 
   function Player() {
-    var sprite,
-      guid,
-      coordinates,
-      selected,
-      guid,
-      path = [],
-      that = this;
+    var that = this;
+    that.path = [];
     eventManager.subscribe('leftMouse click', function(e){
       that.checkLeftClick(e);
     });
@@ -18,14 +13,33 @@ define(['Actor', 'EventManager', 'Astar', 'World'], function (actor, eventManage
       that.move();
     });
   }
-  Player.prototype = new actor;
+
+  Player.prototype = actor.prototype;
+
   Player.prototype.checkRightClick = function(e) {
+    this.goal = e;
+    this.generatePath();
+  }
+
+  Player.prototype.generatePath = function() {
     var start = world.graph.nodes[this.coordinates.y][this.coordinates.x];
-    var end = world.graph.nodes[e.y][e.x];
+    var end = world.graph.nodes[this.goal.y][this.goal.x];
     this.path = astar.search(world.graph.nodes, start, end, true);
   }
+
   Player.prototype.move = function(){
-    console.log('test');
+    // If the path is empty do not send move commands
+    if (this.path.length !== 0){
+      // get the first part of the path
+      var first = _.first(this.path);
+      this.path = _.rest(this.path);
+      this.coordinates = {
+        x: first.y,
+        y: first.x
+      }
+      eventManager.publish('ActorUpdate', this)
+    }
   }
+
   return Player;
 });

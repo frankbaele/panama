@@ -2,7 +2,8 @@ define(['Assets', 'EventManager', 'Player', 'Animate', 'Input'], function (asset
 
   function init() {
     gameCycle();
-    var frank = new player().create('player.png', {x:0,y:0});
+    var frank = new player();
+    frank.create('player.png', {x:0,y:0});
   }
 
   function gameCycle() {
