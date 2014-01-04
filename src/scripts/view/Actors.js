@@ -15,7 +15,7 @@ define(['EventManager', 'Sprite', 'STL', 'World', 'Canvas', 'underscore'], funct
   function update() {
     var inbound = {x:0, y:0};
     if (pressedKeys.up == 1) {
-      inbound.y--;
+      inbound.y--;0
       inbound.x--;
     }
     if (pressedKeys.down == 1) {

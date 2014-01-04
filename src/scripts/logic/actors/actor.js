@@ -6,10 +6,6 @@ define(['EventManager', 'STL'], function (eventManager, stl) {
       selected,
       guid,
       that = this;
-
-    eventManager.subscribe('leftMouse click', function(e){
-      that.checkLeftClick(e);
-    });
   }
 
   Actor.prototype.checkLeftClick = function(e) {

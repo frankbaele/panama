@@ -13,7 +13,7 @@ define(['actor.unit.human', 'EventManager'], function (human, eventManager) {
     });
   }
 
-  local.prototype = human.prototype;
+  local.prototype = Object.create(human.prototype);
 
   local.prototype.checkRightClick = function(e) {
     this.goal = e;

@@ -11,7 +11,7 @@ define(['actor', 'EventManager', 'Astar', 'World', 'underscore'], function (acto
     });
   }
 
-  unit.prototype = actor.prototype;
+  unit.prototype = Object.create(actor.prototype);
 
   unit.prototype.generatePath = function() {
     var start = world.graph.nodes[this.coordinates.y][this.coordinates.x];

@@ -39,6 +39,8 @@ require.config({
     /* Actors */
     actor: 'logic/actors/actor',
     'actor.unit': 'logic/actors/actor.unit',
+    'actor.unit.ai': 'logic/actors/actor.unit.ai',
+    'actor.unit.ai.enemy': 'logic/actors/actor.unit.ai.enemy',
     'actor.unit.human': 'logic/actors/actor.unit.human',
     'actor.unit.human.local': 'logic/actors/actor.unit.human.local',
     'actor.unit.human.remote': 'logic/actors/actor.unit.human.remote',
