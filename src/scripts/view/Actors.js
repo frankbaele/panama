@@ -12,10 +12,6 @@ define(['EventManager', 'Sprite', 'STL', 'World', 'Canvas', 'underscore'], funct
     center(centerCoordinates.x, centerCoordinates.y);
   }
 
-  function drawActor(actor){
-    sprite.draw(actor.sprite, actor.coordinates.x, actor.coordinates.y, 'player');
-  }
-
   function update() {
     var inbound = {x:0, y:0};
     if (pressedKeys.up == 1) {
@@ -62,8 +58,8 @@ define(['EventManager', 'Sprite', 'STL', 'World', 'Canvas', 'underscore'], funct
       coordinates: actor.coordinates,
       sprite: actor.sprite
     });
-    console.log(ActorList);
   });
+
   eventManager.subscribe('ActorUpdate', function(actor){
     var oldActor = _.findWhere(ActorList, {guid: actor.guid});
     sprite.draw('water.png', oldActor.coordinates.x, oldActor.coordinates.y, 'player');
@@ -74,10 +70,12 @@ define(['EventManager', 'Sprite', 'STL', 'World', 'Canvas', 'underscore'], funct
       sprite: actor.sprite
     });
   });
+
   eventManager.subscribe('ActorDelete', function(actor){
     // delete the give Actor from the list
     ActorList = _.without(ActorList, _.findWhere(ActorList, {guid: actor.guid}));
   });
+
   eventManager.subscribe('newFrame', function(){update();});
   eventManager.subscribe('panUp', function(e){pressedKeys.up = e;});
   eventManager.subscribe('panDown', function(e){pressedKeys.down = e;});

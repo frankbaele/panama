@@ -34,8 +34,14 @@ require.config({
     config : '../config',
     /* logic */
     EventManager: 'logic/Mediator',
-    Actor: 'logic/actors/Actor',
-    Player: 'logic/actors/Player',
+    Command: 'logic/command',
+    CommandQueue: 'logic/commandQueue',
+    /* Actors */
+    actor: 'logic/actors/actor',
+    'actor.unit': 'logic/actors/actor.unit',
+    'actor.unit.human': 'logic/actors/actor.unit.human',
+    'actor.unit.human.local': 'logic/actors/actor.unit.human.local',
+    'actor.unit.human.remote': 'logic/actors/actor.unit.human.remote',
     /* view */
     Animate: 'view/Animate',
     Input: 'view/Input',
