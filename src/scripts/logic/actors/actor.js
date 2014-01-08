@@ -16,7 +16,7 @@ define(['EventManager', 'STL'], function (eventManager, stl) {
       this.selected = false;
       eventManager.publish('ActorUnSelected', this);
     }
-  }
+  };
 
   Actor.prototype.create = function(sprite, coordinates) {
     this.guid = stl.guid();
@@ -24,11 +24,11 @@ define(['EventManager', 'STL'], function (eventManager, stl) {
     this.coordinates = coordinates;
     this.selected = false;
     eventManager.publish('ActorCreate', this);
-  }
+  };
 
   Actor.prototype.delete = function() {
     eventManager.publish('ActorDelete', this);
-  }
+  };
 
   return Actor;
 });

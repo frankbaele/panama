@@ -18,7 +18,7 @@ define(['actor.unit.human', 'EventManager'], function (human, eventManager) {
   local.prototype.checkRightClick = function(e) {
     this.goal = e;
     this.generatePath();
-  }
+  };
 
   return local;
 });

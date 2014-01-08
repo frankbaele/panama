@@ -1,11 +1,11 @@
 define(['actor.unit.human.local', 'actor.unit.ai.enemy','Assets', 'EventManager','Command', 'Animate', 'Input'], function (local, enemy, massets, eventManager) {
 
   function init() {
-    frank = new local;
-    frank.create('player.png', {x:0, y:0});
-    ruben = new enemy;
-    ruben.create('ally.png', {x:0, y:5});
     gameCycle();
+    var frank = new local;
+    frank.create('player.png', {x:0, y:0});
+    var test = new enemy;
+    test.create('ally.png', {x:5, y:5});
   }
 
   function gameCycle() {
