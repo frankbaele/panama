@@ -4,8 +4,6 @@ define(['actor.unit.human.local', 'actor.unit.ai.enemy','Assets', 'EventManager'
     gameCycle();
     var frank = new local;
     frank.create('player.png', {x:0, y:0});
-    var test = new enemy;
-    test.create('ally.png', {x:5, y:5});
   }
 
   function gameCycle() {
