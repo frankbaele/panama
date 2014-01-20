@@ -1,5 +1,4 @@
 require.config({
-  baseUrl: 'scripts',
   paths: {
     // the left side is the module ID,
     // the right side is the path to
@@ -10,45 +9,47 @@ require.config({
     // js/lib/jquery-1.9.0.js, relative to
     // the HTML page.
     /* VENDORS */
-    jQuery: 'vendor/jquery-2.0.3.min',
-    underscore: 'vendor/lodash.min',
-    text: 'vendor/require.text',
-    keypress: 'vendor/keypress',
+    jQuery: 'scripts/vendor/jquery-2.0.3.min',
+    underscore: 'scripts/vendor/lodash.min',
+    text: 'scripts/vendor/require.text',
+    keypress: 'scripts/vendor/keypress',
+    /* config */
+    AssetsList: 'config/AssetsList.json',
     /* libs */
-    RNG: 'application/libs/RNG',
-    Astar: 'application/libs/Astar',
-    World: 'application/libs/World',
-    Graph: 'application/libs/Graph',
-    GraphNode: 'application/libs/GraphNode',
-    BinaryHeap: 'application/libs/BinaryHeap',
-    SpriteSheet: 'application/libs/SpriteSheet',
-    STL: 'application/libs/StandardLibrary',
-    RequestAnimationFrame: 'application/libs/RequestAnimationFrame',
+    RNG: 'scripts/application/libs/RNG',
+    Astar: 'scripts/application/libs/Astar',
+    World: 'scripts/application/libs/World',
+    Graph: 'scripts/application/libs/Graph',
+    GraphNode: 'scripts/application/libs/GraphNode',
+    BinaryHeap: 'scripts/application/libs/BinaryHeap',
+    SpriteSheet: 'scripts/application/libs/SpriteSheet',
+    STL: 'scripts/application/libs/StandardLibrary',
+    RequestAnimationFrame: 'scripts/application/libs/RequestAnimationFrame',
     /* application */
-    AssetLoader: 'application/AssetLoader',
-    Assets : 'application/Assets',
-    Canvas : 'application/Canvas',
-    Keys : 'application/Keys',
-    Mouse : 'application/Mouse',
+    AssetLoader: 'scripts/application/AssetLoader',
+    Assets : 'scripts/application/Assets',
+    Canvas : 'scripts/application/Canvas',
+    Keys : 'scripts/application/Keys',
+    Mouse : 'scripts/application/Mouse',
     /* Config */
     config : '../config',
     /* logic */
-    EventManager: 'logic/Mediator',
-    Command: 'logic/command',
-    CommandQueue: 'logic/commandQueue',
+    EventManager: 'scripts/logic/Mediator',
+    Command: 'scripts/logic/command',
+    CommandQueue: 'scripts/logic/commandQueue',
     /* Actors */
-    actor: 'logic/actors/actor',
-    'actor.unit': 'logic/actors/actor.unit',
-    'actor.unit.ai': 'logic/actors/actor.unit.ai',
-    'actor.unit.ai.enemy': 'logic/actors/actor.unit.ai.enemy',
-    'actor.unit.human': 'logic/actors/actor.unit.human',
-    'actor.unit.human.local': 'logic/actors/actor.unit.human.local',
-    'actor.unit.human.remote': 'logic/actors/actor.unit.human.remote',
+    actor: 'scripts/logic/actors/actor',
+    'actor.unit': 'scripts/logic/actors/actor.unit',
+    'actor.unit.ai': 'scripts/logic/actors/actor.unit.ai',
+    'actor.unit.ai.enemy': 'scripts/logic/actors/actor.unit.ai.enemy',
+    'actor.unit.human': 'scripts/logic/actors/actor.unit.human',
+    'actor.unit.human.local': 'scripts/logic/actors/actor.unit.human.local',
+    'actor.unit.human.remote': 'scripts/logic/actors/actor.unit.human.remote',
     /* view */
-    Animate: 'view/Animate',
-    Input: 'view/Input',
-    Map: 'view/Map',
-    Sprite: 'view/Sprite',
-    Actors: 'view/Actors'
+    Animate: 'scripts/view/Animate',
+    Input: 'scripts/view/Input',
+    Map: 'scripts/view/Map',
+    Sprite: 'scripts/view/Sprite',
+    Actors: 'scripts/view/Actors'
   }
 });

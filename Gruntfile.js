@@ -1,7 +1,7 @@
 
 module.exports = function (grunt) {
   "use strict";
-
+  var neat = require('node-neat').includePaths;
   // Config...
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
@@ -35,22 +35,43 @@ module.exports = function (grunt) {
         tasks: ['compass:dev']
       }
     },
-    compass: {
-      dev: {
-        options: {
-          sassDir: './src/sass',
-          cssDir: './src/css'
+    sass: {
+      options: {
+        includePaths: neat,
+        outputStyle: 'compressed'
+      },
+      dist: {
+        files: {
+          './dist/css/style.css': './src/sass/style.scss'
         }
       }
     },
     copy: {
-      main: {
+      art: {
         expand: true,
-        cwd: 'src/',
+        cwd: 'src/art',
         src: '**',
-        dest: 'dist/',
+        dest: 'dist/art',
         flatten: false,
         filter: 'isFile'
+      },
+      html:{
+        expand: true,
+        cwd: 'src',
+        src: 'index.html',
+        dest: 'dist',
+        flatten: false,
+        filter: 'isFile'
+      }
+    },
+    requirejs: {
+      compile: {
+        options: {
+          name: 'scripts/application/game',
+          baseUrl: "src/",
+          mainConfigFile: "src/config/requireConfig.js",
+          out: "dist/scripts/game.js"
+        }
       }
     }
   });
@@ -60,16 +81,18 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-open');
   grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-compass');
+  grunt.loadNpmTasks('grunt-sass');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-copy');
-
+  grunt.loadNpmTasks('grunt-requirejs');
   // Task aliases and tasks
   grunt.registerTask('server', [
     'connect',
     'watch'
   ]);
   grunt.registerTask('build', [
-    'copy'
+    'copy',
+    'sass',
+    'requirejs'
   ]);
 };

@@ -1,4 +1,4 @@
-define(['text!config/AssetsList.json', 'AssetLoader', 'EventManager'], function (AssetList, AssetLoader, eventManager) {
+define(['text!AssetsList', 'AssetLoader', 'EventManager'], function (AssetList, AssetLoader, eventManager) {
   var assets = {
     config: {},
     loaded : {
