@@ -55,11 +55,19 @@ module.exports = function (grunt) {
         flatten: false,
         filter: 'isFile'
       },
-      html:{
+      vendor: {
         expand: true,
-        cwd: 'src',
-        src: 'index.html',
-        dest: 'dist',
+        cwd: 'src/scripts/vendor',
+        src: '**',
+        dest: 'dist/scripts/vendor',
+        flatten: false,
+        filter: 'isFile'
+      },
+      requireConfig: {
+        expand: true,
+        cwd: 'src/config',
+        src: 'requireLiveConfig.js',
+        dest: 'dist/config',
         flatten: false,
         filter: 'isFile'
       }
@@ -70,7 +78,8 @@ module.exports = function (grunt) {
           name: 'scripts/application/game',
           baseUrl: "src/",
           mainConfigFile: "src/config/requireConfig.js",
-          out: "dist/scripts/game.js"
+          out: "dist/scripts/game.js",
+          exclude: ['jQuery', 'underscore', 'text', 'keypress']
         }
       }
     }
@@ -86,9 +95,9 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-requirejs');
   // Task aliases and tasks
-  grunt.registerTask('server', [
-    'connect',
-    'watch'
+  grunt.registerTask('server_dev', [
+    'connect:dev',
+    'watch:dev'
   ]);
   grunt.registerTask('build', [
     'copy',
