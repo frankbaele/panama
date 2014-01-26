@@ -1,6 +1,5 @@
-define(['EventManager', 'Sprite', 'STL', 'World', 'Canvas', 'underscore'], function (eventManager, sprite, stl, world, canvas) {
+define(['EventManager', 'Sprite', 'STL', 'World', 'Canvas', 'ActorList', 'underscore'], function (eventManager, sprite, stl, world, canvas, ActorList) {
   var visible = {x:10, y:10};
-  var ActorList = [];
   var centerCoordinates = {x: 10, y:10};
   var pressedKeys = {
     up: 0,
@@ -37,7 +36,11 @@ define(['EventManager', 'Sprite', 'STL', 'World', 'Canvas', 'underscore'], funct
       centerCoordinates.x = inbound.x;
       centerCoordinates.y = inbound.y;
     }
-    _.each(ActorList,function(actor){
+    _.each(ActorList.getCleanUpList(),function(actor){
+      sprite.draw('water.png', actor.coordinates.x, actor.coordinates.y, 'player');
+    });
+    ActorList.clearCleanUpList()
+    _.each(ActorList.getActorList(),function(actor){
       sprite.draw(actor.sprite, actor.coordinates.x, actor.coordinates.y, 'player');
     });
   }
@@ -49,32 +52,8 @@ define(['EventManager', 'Sprite', 'STL', 'World', 'Canvas', 'underscore'], funct
     coordinates.x = -((coordinates.x - visible.x) * world.tileWidth + ((canvas.player.canvas.width) / 2));
     coordinates.y = -((coordinates.y - visible.y) * world.tileHeight + world.tileHeight/2);
     $(canvas.player.canvas).css('margin-left', coordinates.x).css('marginTop', coordinates.y);
-    $(canvas.player.canvas).css('margin-left', coordinates.x).css('marginTop', coordinates.y);
+    $(canvas.terrain.canvas).css('margin-left', coordinates.x).css('marginTop', coordinates.y);
   }
-
-  eventManager.subscribe('ActorCreate', function(actor){
-    ActorList.push({
-      guid: actor.guid,
-      coordinates: actor.coordinates,
-      sprite: actor.sprite
-    });
-  });
-
-  eventManager.subscribe('ActorUpdate', function(actor){
-    var oldActor = _.findWhere(ActorList, {guid: actor.guid});
-    sprite.draw('water.png', oldActor.coordinates.x, oldActor.coordinates.y, 'player');
-    ActorList = _.without(ActorList, oldActor);
-    ActorList.push({
-      guid: actor.guid,
-      coordinates: actor.coordinates,
-      sprite: actor.sprite
-    });
-  });
-
-  eventManager.subscribe('ActorDelete', function(actor){
-    // delete the give Actor from the list
-    ActorList = _.without(ActorList, _.findWhere(ActorList, {guid: actor.guid}));
-  });
 
   eventManager.subscribe('newFrame', function(){update();});
   eventManager.subscribe('panUp', function(e){pressedKeys.up = e;});

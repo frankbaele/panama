@@ -11,6 +11,7 @@ define(['World', 'EventManager'], function (world, eventManager) {
   }
 
   function isoToTwoD(posX, posY) {
+    console.log(posX, posY);
     var newCoordinates = {};
     newCoordinates.x = (posY + posX);
     newCoordinates.y = (posY - posX);
@@ -42,6 +43,10 @@ define(['World', 'EventManager'], function (world, eventManager) {
       }
     }, 1000);
   };
+  function roundHalf(num) {
+    num = Math.round(num*2)/2;
+    return num;
+  }
   return {
     guid: guid,
     isoToTwoD: isoToTwoD,

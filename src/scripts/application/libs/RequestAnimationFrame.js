@@ -7,7 +7,7 @@ define([''], function () {
       window.oRequestAnimationFrame      ||
       window.msRequestAnimationFrame     ||
       function(/* function */ callback, /* DOMElement */ element){
-        window.setTimeout(callback, 1000 / 20);
+        window.setTimeout(callback, 1000 / 16.5);
       };
   })();
 });

@@ -33,7 +33,7 @@ define(['Canvas', 'STL'], function (canvas, stl) {
 
   canvas.player.canvas.addEventListener("click", function(e){
       var coordinates = canvas.player.canvas.relMouseCoordinates(e);
-      coordinates = stl.worldPosToGridPos(coordinates.x, coordinates.y);
+      coordinates = stl.worldPosToGridPos(coordinates.x, coordinates.y, canvas.player.canvas.width);
       leftMouseCallback(coordinates);
     },
     false
@@ -41,7 +41,7 @@ define(['Canvas', 'STL'], function (canvas, stl) {
 
   canvas.player.canvas.addEventListener("contextmenu", function(e){
     var coordinates = canvas.player.canvas.relMouseCoordinates(e);
-    coordinates = stl.worldPosToGridPos(coordinates.x, coordinates.y);
+    coordinates = stl.worldPosToGridPos(coordinates.x, coordinates.y, canvas.player.canvas.width);
     rightMouseCallback(coordinates);
     },
     false

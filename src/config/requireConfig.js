@@ -38,6 +38,7 @@ require.config({
     Command: 'scripts/logic/command',
     CommandQueue: 'scripts/logic/commandQueue',
     /* Actors */
+    ActorList: 'scripts/logic/ActorList',
     actor: 'scripts/logic/actors/actor',
     'actor.unit': 'scripts/logic/actors/actor.unit',
     'actor.unit.ai': 'scripts/logic/actors/actor.unit.ai',

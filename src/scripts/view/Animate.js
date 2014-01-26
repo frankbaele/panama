@@ -1,8 +1,7 @@
-define(['EventManager', 'RequestAnimationFrame', 'Map', 'Actors'], function (eventManager) {
+define(['EventManager', 'RequestAnimationFrame', 'Map', 'Actors'], function (eventManager, RequestAnimationFrame) {
   function animate() {
     eventManager.publish('newFrame');
-    // Request a new animation frame using Paul Irish's shim
-    window.requestAnimFrame(animate);
+    window.setTimeout(animate, 1000/20);
   }
   eventManager.subscribe('assetsLoaded', function(){animate();});
   return {};

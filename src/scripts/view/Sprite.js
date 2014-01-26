@@ -25,7 +25,7 @@ define(['underscore', 'Canvas', 'STL', 'World', 'Assets'], function (_,canvases,
     // transform the grid tile to iso coordinates
     coordinates = stl.twoDToIso(posX, posY);
     // transform the coordinates to the actual size of the map
-    coordinates.x = coordinates.x * world.tileWidth + ((canvas.width) / 2);
+    coordinates.x = (coordinates.x * world.tileWidth + ((canvas.width) / 2));
     coordinates.y = coordinates.y * world.tileHeight + world.tileHeight/2;
     // For lop trough all the atlasses with find, because we want to exit this loop when the atlas is found.
 
@@ -41,15 +41,13 @@ define(['underscore', 'Canvas', 'STL', 'World', 'Assets'], function (_,canvases,
     if (_.isEmpty(spt)) {
       return;
     }
-
-    hlf = {x: spt.cx, y: spt.cy};
     mapTrans.x = 0;
     mapTrans.y = 0;
     context.drawImage(img,
       spt.x, spt.y,
       spt.w, spt.h,
-      (coordinates.x + hlf.x),
-      (coordinates.y + hlf.y),
+      (coordinates.x - world.tileWidth/2),
+      (coordinates.y - world.tileHeight/2),
       world.tileWidth,
       world.tileHeight);
   };

@@ -5,11 +5,11 @@ define(['RNG', 'underscore', 'Graph'], function (RNG, _ ,Graph) {
    * Alea is licensed according to the http://en.wikipedia.org/wiki/MIT_License.
    */
     var
-    height = 50,
-    width = 50,
+    height = 25,
+    width = 25,
     graph,
-    tileWidth = 64,
-    tileHeight = 32,
+    tileWidth = 128,
+    tileHeight = 64,
     mapData = [],
     born = [ 5, 6, 7, 8],
     survive = [ 4, 5, 6, 7, 8],
