@@ -32,13 +32,18 @@ module.exports = function (grunt) {
       },
       css:{
         files: ['./src/sass/**/*.scss'],
-        tasks: ['compass:dev']
+        tasks: ['sass:dev']
       }
     },
     sass: {
       options: {
         includePaths: neat,
         outputStyle: 'compressed'
+      },
+      dev: {
+        files: {
+          './src/css/style.css': './src/sass/style.scss'
+        }
       },
       dist: {
         files: {
@@ -95,9 +100,9 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-requirejs');
   // Task aliases and tasks
-  grunt.registerTask('server_dev', [
-    'connect:dev',
-    'watch:dev'
+  grunt.registerTask('server', [
+    'connect',
+    'watch'
   ]);
   grunt.registerTask('build', [
     'copy',

@@ -3,7 +3,9 @@ define(['actor.unit.human.local', 'actor.unit.ai.enemy','Assets', 'EventManager'
   function init() {
     gameCycle();
     var frank = new local;
-    frank.create('player.png', {x:0, y:0});
+    frank.create('player.png', {x:5, y:5});
+    var ruben = new enemy;
+    ruben.create('ally.png', {x:3, y:3});
   }
 
   function gameCycle() {
@@ -14,5 +16,6 @@ define(['actor.unit.human.local', 'actor.unit.ai.enemy','Assets', 'EventManager'
     // Generate commands to executed next cycle.
     //cycle++;
   }
+
   eventManager.subscribe('assetsLoaded', function(){init();});
 });

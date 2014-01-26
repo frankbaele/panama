@@ -16,7 +16,7 @@ define(['actor.unit.ai', 'EventManager'], function (ai, eventManager) {
 
   enemy.prototype = Object.create(ai.prototype);
 
-  enemy.prototype.checkRightClick = function(e) {
+  enemy.prototype.checkLeftClick = function(e) {
     if(e.x == this.coordinates.x && e.y == this.coordinates.y){
       this.aimed = true;
       eventManager.publish('ActorAimed', this);

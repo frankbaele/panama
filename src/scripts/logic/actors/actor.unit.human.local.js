@@ -15,7 +15,7 @@ define(['actor.unit.human', 'EventManager'], function (human, eventManager) {
 
   local.prototype = Object.create(human.prototype);
 
-  local.prototype.checkRightClick = function(e) {
+  local.prototype.checkLeftClick = function(e) {
     this.goal = e;
     this.generatePath();
   };
