@@ -26,7 +26,7 @@ define(['EventManager', 'Sprite', 'underscore'], function (eventManager, sprite)
     CleanupList.push({coordinates: Actor.coordinates});
     ActorList = _.without(ActorList, Actor);
   });
-  
+
   var getActorList = function (){
     return ActorList;
   }
