@@ -1,10 +1,7 @@
 define(['actor.unit', 'EventManager'], function (unit, eventManager) {
   function human(sprite, coordinates) {
-    this.coordinates = coordinates;
-    this.sprite = sprite;
+    _.extend(this, new unit(sprite, coordinates));
     var that = this;
-    eventManager.publish('ActorCreate', this);
-
     eventManager.subscribe('leftMouse click', function(e){
       that.checkLeftClick(e);
     });

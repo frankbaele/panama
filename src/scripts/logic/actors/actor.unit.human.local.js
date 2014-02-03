@@ -1,7 +1,6 @@
 define(['actor.unit.human', 'EventManager'], function (human, eventManager) {
   function local(sprite, coordinates) {
-    this.coordinates = coordinates;
-    this.sprite = sprite;
+    _.extend(this, new human(sprite, coordinates));
 
     var that = this;
     eventManager.subscribe('leftMouse click', function(e){
@@ -19,7 +18,6 @@ define(['actor.unit.human', 'EventManager'], function (human, eventManager) {
     eventManager.subscribe('ActorUnSelected', function(e){
 
     });
-    eventManager.publish('ActorCreate', this);
   }
 
   local.prototype = Object.create(human.prototype);

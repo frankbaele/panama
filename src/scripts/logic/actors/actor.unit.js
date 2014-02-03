@@ -1,11 +1,8 @@
 define(['actor', 'EventManager', 'Astar', 'World', 'underscore'], function (actor, eventManager, astar, world) {
 
   function unit(sprite, coordinates) {
-    this.coordinates = coordinates;
-    this.sprite = sprite;
+    _.extend(this, new actor(sprite, coordinates));
     var that = this;
-    eventManager.publish('ActorCreate', this);
-
     eventManager.subscribe('leftMouse click', function(e){
       that.checkLeftClick(e);
     });

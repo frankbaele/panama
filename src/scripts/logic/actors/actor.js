@@ -2,8 +2,10 @@ define(['EventManager', 'STL'], function (eventManager, stl) {
   function Actor(sprite, coordinates){
     this.coordinates = coordinates;
     this.sprite = sprite;
+    this.uuid = stl.guid();
     eventManager.publish('ActorCreate', this);
   }
+
   Actor.prototype.uuid = '';
   Actor.prototype.sprite = '';
   Actor.prototype.coordinates = '';
