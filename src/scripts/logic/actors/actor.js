@@ -1,11 +1,14 @@
 define(['EventManager', 'STL'], function (eventManager, stl) {
-  function Actor(){
-    var sprite,
-      uuid,
-      coordinates,
-      selected,
-      that = this;
+  function Actor(sprite, coordinates){
+    this.coordinates = coordinates;
+    this.sprite = sprite;
+    eventManager.publish('ActorCreate', this);
   }
+  Actor.prototype.uuid = '';
+  Actor.prototype.sprite = '';
+  Actor.prototype.coordinates = '';
+  Actor.prototype.selected = '';
+  Actor.prototype.level = 0;
 
   Actor.prototype.checkLeftClick = function(e) {
     if(e.x == this.coordinates.x && e.y == this.coordinates.y){
@@ -15,14 +18,6 @@ define(['EventManager', 'STL'], function (eventManager, stl) {
       this.selected = false;
       eventManager.publish('ActorUnSelected', this.uuid);
     }
-  };
-
-  Actor.prototype.create = function(sprite, coordinates) {
-    this.uuid = stl.guid();
-    this.sprite = sprite;
-    this.coordinates = coordinates;
-    this.selected = false;
-    eventManager.publish('ActorCreate', this);
   };
 
   Actor.prototype.delete = function() {

@@ -1,8 +1,8 @@
 define(['actor.unit.ai', 'EventManager'], function (ai, eventManager) {
-  function enemy() {
+  function enemy(sprite, coordinates) {
+    this.coordinates = coordinates;
+    this.sprite = sprite;
     var that = this;
-    that.path = [];
-    that.aimed = false;
     eventManager.subscribe('leftMouse click', function(e){
       that.checkLeftClick(e);
     });

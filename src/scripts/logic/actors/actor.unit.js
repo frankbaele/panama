@@ -1,8 +1,11 @@
 define(['actor', 'EventManager', 'Astar', 'World', 'underscore'], function (actor, eventManager, astar, world) {
 
-  function unit() {
+  function unit(sprite, coordinates) {
+    this.coordinates = coordinates;
+    this.sprite = sprite;
     var that = this;
-    that.path = [];
+    eventManager.publish('ActorCreate', this);
+
     eventManager.subscribe('leftMouse click', function(e){
       that.checkLeftClick(e);
     });
@@ -12,7 +15,7 @@ define(['actor', 'EventManager', 'Astar', 'World', 'underscore'], function (acto
   }
 
   unit.prototype = Object.create(actor.prototype);
-
+  unit.prototype.path = [];
   unit.prototype.generatePath = function() {
     var start = world.graph.nodes[this.coordinates.y][this.coordinates.x];
     var end = world.graph.nodes[this.goal.y][this.goal.x];
@@ -29,7 +32,7 @@ define(['actor', 'EventManager', 'Astar', 'World', 'underscore'], function (acto
         x: first.y,
         y: first.x
       }
-      eventManager.publish('command', {event: 'ActorUpdate', parameters:this})
+      eventManager.publish('command', {event: 'ActorUpdate', parameters:this});
     }
   }
 
