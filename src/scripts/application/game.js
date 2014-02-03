@@ -3,9 +3,8 @@ define(['actor.unit.human.local', 'actor.unit.ai.enemy','Assets', 'EventManager'
   function init() {
     gameCycle();
     var frank = new local('player.png', {x: 5, y:5});
-    console.log(frank);
-    var frank = new enemy('player.png', {x: 5, y:5});
-    console.log(frank);
+    console.log(frank.strength);
+    console.log(frank.health);
   }
 
   function gameCycle() {
