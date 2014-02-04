@@ -1,7 +1,7 @@
 define(['EventManager', 'Sprite', 'underscore'], function (eventManager, sprite) {
   var ActorList = [];
   var CleanupList = [];
-  eventManager.subscribe('ActorCreate', function(actor){
+  eventManager.subscribe('actor.create', function(actor){
     ActorList.push({
       uuid: actor.uuid,
       coordinates: actor.coordinates,
@@ -9,7 +9,7 @@ define(['EventManager', 'Sprite', 'underscore'], function (eventManager, sprite)
     });
   });
 
-  eventManager.subscribe('ActorUpdate', function(actor){
+  eventManager.subscribe('actor.update', function(actor){
     var oldActor = _.findWhere(ActorList, {uuid: actor.uuid});
     CleanupList.push({coordinates: oldActor.coordinates});
     ActorList = _.without(ActorList, oldActor);
@@ -20,7 +20,7 @@ define(['EventManager', 'Sprite', 'underscore'], function (eventManager, sprite)
     });
   });
 
-  eventManager.subscribe('ActorDelete', function(uuid){
+  eventManager.subscribe('actor.delete', function(uuid){
     // delete the give Actor from the list
     var Actor = _.findWhere(ActorList, {uuid: uuid});
     CleanupList.push({coordinates: Actor.coordinates});

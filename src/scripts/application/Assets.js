@@ -13,7 +13,7 @@ define(['text!AssetsList', 'AssetLoader', 'EventManager'], function (AssetList, 
   function checkAssetLoader() {
     var tev = setInterval(function () {
       if (AssetLoader.preloadComplete()) {
-        eventManager.publish('assetsLoaded');
+        eventManager.publish('assets.loaded');
         clearInterval(tev);
       }
     }, 1000);

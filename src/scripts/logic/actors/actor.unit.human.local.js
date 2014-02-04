@@ -2,20 +2,23 @@ define(['actor.unit.human', 'EventManager'], function (human, eventManager) {
   function local(sprite, coordinates) {
     _.extend(this, new human(sprite, coordinates));
     var that = this;
-    eventManager.subscribe('rightMouse click', function(e){
+    eventManager.subscribe('mouse.click.right', function(e){
       that.checkRightClick(e);
     });
-    eventManager.subscribe('newGameCycle', function(){
+    eventManager.subscribe('mouse.click.left', function(e){
+      that.checkLeftClick(e);
+    });
+    eventManager.subscribe('new.gamecycle', function(){
       that.move();
-    });
-    eventManager.subscribe('ActorSelected', function(e){
 
     });
-    eventManager.subscribe('ActorUnSelected', function(e){
+    eventManager.subscribe('actor.selected', function(e){
 
     });
+    eventManager.subscribe('actor.unselected', function(e){
 
-    eventManager.publish('ActorCreate', this);
+    });
+    eventManager.publish('actor.create', this);
   }
 
   local.prototype = Object.create(human.prototype);

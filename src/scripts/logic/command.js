@@ -2,7 +2,7 @@ define(['CommandQueue', 'EventManager'], function (commandQueue, eventManager) {
   eventManager.subscribe('command', function(e){
     newCommand(e);
   });
-  eventManager.subscribe('newGameCycle', function(){executeQueue();});
+  eventManager.subscribe('new.gamecycle', function(){executeQueue();});
   function newCommand(command){
     commandQueue.add(command);
   }

@@ -3,11 +3,16 @@ define(['actor', 'EventManager', 'Astar', 'World', 'underscore'], function (acto
   function unit(sprite, coordinates) {
     _.extend(this, new actor(sprite, coordinates));
     this.path = [];
+    this.focus = '';
+    this.strenght = 0;
+    this.dexterity = 0;
+    this.intelligence = 0;
+    this.health = 0;
+    // temp vars
+    this.attack = 10;
   }
-  unit.prototype.path = [];
-  unit.prototype.strength = 1;
-  unit.prototype.health = 0;
   unit.prototype = Object.create(actor.prototype);
+
   unit.prototype.generatePath = function() {
     var start = world.graph.nodes[this.coordinates.y][this.coordinates.x];
     var end = world.graph.nodes[this.goal.y][this.goal.x];
@@ -24,9 +29,13 @@ define(['actor', 'EventManager', 'Astar', 'World', 'underscore'], function (acto
         x: first.y,
         y: first.x
       };
-      eventManager.publish('command', {event: 'ActorUpdate', parameters:this});
+      eventManager.publish('command', {event: 'actor.update', parameters:this});
     }
   };
-
+  unit.prototype.attack = function(){
+    if(this.focus !== ''){
+      eventManager.publish('actor.attack', this);
+    }
+  };
   return unit;
 });

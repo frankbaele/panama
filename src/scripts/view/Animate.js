@@ -1,8 +1,8 @@
 define(['EventManager', 'RequestAnimationFrame', 'Map', 'Actors'], function (eventManager, RequestAnimationFrame) {
   function animate() {
-    eventManager.publish('newFrame');
+    eventManager.publish('new.frame');
     window.setTimeout(animate, 1000/20);
   }
-  eventManager.subscribe('assetsLoaded', function(){animate();});
+  eventManager.subscribe('assets.loaded', function(){animate();});
   return {};
 });

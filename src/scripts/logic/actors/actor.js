@@ -3,20 +3,21 @@ define(['EventManager', 'STL'], function (eventManager, stl) {
     this.coordinates = coordinates;
     this.sprite = sprite;
     this.uuid = stl.guid();
+    this.hp = 0;
   }
 
   Actor.prototype.checkLeftClick = function(e) {
     if(e.x == this.coordinates.x && e.y == this.coordinates.y){
       this.selected = true;
-      eventManager.publish('ActorSelected', this.uuid);
+      eventManager.publish('actor.selected', this.uuid);
     } else if (this.selected){
       this.selected = false;
-      eventManager.publish('ActorUnSelected', this.uuid);
+      eventManager.publish('actor.unselected', this.uuid);
     }
   };
 
   Actor.prototype.delete = function() {
-    eventManager.publish('ActorDelete', this);
+    eventManager.publish('actor.delete', this);
   };
 
   return Actor;

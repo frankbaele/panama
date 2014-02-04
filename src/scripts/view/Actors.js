@@ -39,7 +39,7 @@ define(['EventManager', 'Sprite', 'STL', 'World', 'Canvas', 'ActorList', 'unders
     _.each(ActorList.getCleanUpList(),function(actor){
       sprite.draw('water.png', actor.coordinates.x, actor.coordinates.y, 'player');
     });
-    ActorList.clearCleanUpList()
+    ActorList.clearCleanUpList();
     _.each(ActorList.getActorList(),function(actor){
       sprite.draw(actor.sprite, actor.coordinates.x, actor.coordinates.y, 'player');
     });
@@ -55,11 +55,11 @@ define(['EventManager', 'Sprite', 'STL', 'World', 'Canvas', 'ActorList', 'unders
     $(canvas.terrain.canvas).css('margin-left', coordinates.x).css('marginTop', coordinates.y);
   }
 
-  eventManager.subscribe('newFrame', function(){update();});
-  eventManager.subscribe('panUp', function(e){pressedKeys.up = e;});
-  eventManager.subscribe('panDown', function(e){pressedKeys.down = e;});
-  eventManager.subscribe('panLeft', function(e){pressedKeys.left = e;});
-  eventManager.subscribe('panRight', function(e){pressedKeys.right = e;});
+  eventManager.subscribe('new.frame', function(){update();});
+  eventManager.subscribe('pan.up', function(e){pressedKeys.up = e;});
+  eventManager.subscribe('pan.down', function(e){pressedKeys.down = e;});
+  eventManager.subscribe('pan.left', function(e){pressedKeys.left = e;});
+  eventManager.subscribe('pan.right', function(e){pressedKeys.right = e;});
 
   init();
 });
