@@ -17,8 +17,11 @@ define(['EventManager', 'STL'], function (eventManager, stl) {
   };
 
   Actor.prototype.delete = function() {
-    eventManager.publish('actor.delete', this);
+    eventManager.publish('actor.delete', this.uuid);
+    delete(this);
+    _.each(this, function(val, key){
+      delete(this.key);
+    })
   };
-
   return Actor;
 });

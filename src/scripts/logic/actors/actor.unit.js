@@ -8,7 +8,9 @@ define(['actor', 'EventManager', 'Astar', 'World', 'underscore'], function (acto
     this.dexterity = 0;
     this.intelligence = 0;
     this.health = 0;
+    this.death = false;
     // temp vars
+    this.hp = 50;
     this.attack = 10;
   }
   unit.prototype = Object.create(actor.prototype);
@@ -32,9 +34,18 @@ define(['actor', 'EventManager', 'Astar', 'World', 'underscore'], function (acto
       eventManager.publish('command', {event: 'actor.update', parameters:this});
     }
   };
-  unit.prototype.attack = function(){
+
+  unit.prototype.checkDeath = function(){
+    if (this.hp <= 0 && !this.death){
+      this.death = true;
+      this.delete();
+    }
+  };
+
+  unit.prototype.attackActor = function(){
     if(this.focus !== ''){
-      eventManager.publish('actor.attack', this);
+      console.log('pew');
+      eventManager.publish('command', {event: 'actor.attack.' + this.focus, parameters:this.attack});
     }
   };
   return unit;
