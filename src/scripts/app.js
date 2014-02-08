@@ -1,18 +1,33 @@
-define(['EventManager','angular'], function (eventManager, angular) {
+define(['EventManager','angular', 'angular-ui-router'], function (eventManager, angular) {
 
-  var app = angular.module('panama', []);
+  var app = angular.module('panama', ['ui.router']);
 
-  app.controller('test', function($scope){
-    $scope.test = 'nanana';
+  app.config(function($stateProvider, $urlRouterProvider) {
+    //
+    // For any unmatched url, redirect to /state1
+    $urlRouterProvider.otherwise("/menu");
+    //
+    // Now set up the states
+    $stateProvider
+      .state('menu', {
+        url: "/menu",
+        templateUrl: "scripts/view/templates/menu.html"
+      })
+      .state('canvas', {
+        url: "/game",
+        templateUrl: "scripts/view/templates/canvas.html",
+        controller: function($scope) {
+          eventManager.publish('game.init');
+        }
+      });
+
   });
 
   angular.element(document).ready(function () {
     angular.bootstrap(document, ['panama']);
   });
   /*
-  eventManager.subscribe('assets.loaded', function() {
-    eventManager.publish('game.init');
-  }
+
   );
   */
   return app;
