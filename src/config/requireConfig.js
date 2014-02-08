@@ -13,8 +13,12 @@ require.config({
     underscore: 'scripts/vendor/lodash.min',
     text: 'scripts/vendor/require.text',
     keypress: 'scripts/vendor/keypress',
+    angular: 'scripts/vendor/angular.min',
+    'angular-ui-router': 'scripts/vendor/angular-ui-router.min',
     /* config */
     AssetsList: 'config/AssetsList.json',
+    /* app */
+    app : 'scripts/app',
     /* libs */
     RNG: 'scripts/application/libs/RNG',
     Astar: 'scripts/application/libs/Astar',
@@ -31,6 +35,7 @@ require.config({
     Canvas : 'scripts/application/Canvas',
     Keys : 'scripts/application/Keys',
     Mouse : 'scripts/application/Mouse',
+    gamecycle : 'scripts/application/gamecycle',
     /* Config */
     config : '../config',
     /* logic */
@@ -52,5 +57,20 @@ require.config({
     Map: 'scripts/view/Map',
     Sprite: 'scripts/view/Sprite',
     Actors: 'scripts/view/Actors'
-  }
+  },
+  shim: {
+    'angular' : {
+      'exports' : 'angular'
+    },
+    'angular-ui-router': {
+      deps:['angular']
+    },
+    'jQuery': {
+      'exports' : 'jQuery'
+    },
+    'underscore': {
+      exports: '_'
+    }
+  },
+  deps:['app', 'gamecycle', 'Assets', 'Animate', 'Input']
 });

@@ -60,6 +60,5 @@ define(['EventManager', 'Sprite', 'STL', 'World', 'Canvas', 'ActorList', 'unders
   eventManager.subscribe('pan.down', function(e){pressedKeys.down = e;});
   eventManager.subscribe('pan.left', function(e){pressedKeys.left = e;});
   eventManager.subscribe('pan.right', function(e){pressedKeys.right = e;});
-
-  init();
+  eventManager.subscribe('game.init', function(){init();});
 });

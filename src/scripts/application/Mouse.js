@@ -1,4 +1,4 @@
-define(['Canvas', 'STL'], function (canvas, stl) {
+define(['Canvas', 'STL', 'EventManager'], function (canvas, stl, eventManager) {
   var leftMouseCallback = function (e){
     console.log('The right mouse click is not assigned, define leftMouseCallback');
   };
@@ -30,23 +30,23 @@ define(['Canvas', 'STL'], function (canvas, stl) {
     event.stopPropagation();
     return false;
   };
+  var init = function() {
+    canvas.player.canvas.addEventListener("click", function(e){
+        var coordinates = canvas.player.canvas.relMouseCoordinates(e);
+        coordinates = stl.worldPosToGridPos(coordinates.x, coordinates.y, canvas.player.canvas.width);
+        leftMouseCallback(coordinates);
+      },
+      false
+    );
 
-  canvas.player.canvas.addEventListener("click", function(e){
-      var coordinates = canvas.player.canvas.relMouseCoordinates(e);
-      coordinates = stl.worldPosToGridPos(coordinates.x, coordinates.y, canvas.player.canvas.width);
-      leftMouseCallback(coordinates);
-    },
-    false
-  );
-
-  canvas.player.canvas.addEventListener("contextmenu", function(e){
-    var coordinates = canvas.player.canvas.relMouseCoordinates(e);
-    coordinates = stl.worldPosToGridPos(coordinates.x, coordinates.y, canvas.player.canvas.width);
-    rightMouseCallback(coordinates);
-    },
-    false
-  );
-
+    canvas.player.canvas.addEventListener("contextmenu", function(e){
+        var coordinates = canvas.player.canvas.relMouseCoordinates(e);
+        coordinates = stl.worldPosToGridPos(coordinates.x, coordinates.y, canvas.player.canvas.width);
+        rightMouseCallback(coordinates);
+      },
+      false
+    );
+  };
 
   function setLeftMouseCallback(newCallback) {
     leftMouseCallback = newCallback;
@@ -56,6 +56,7 @@ define(['Canvas', 'STL'], function (canvas, stl) {
     rightMouseCallback = newCallback;
   }
 
+  eventManager.subscribe('game.init', function(){init();});
   return {
     setLeftMouseCallback: setLeftMouseCallback,
     setRightMouseCallback: setRightMouseCallback

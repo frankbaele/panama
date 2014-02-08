@@ -8,20 +8,13 @@
   <link rel="stylesheet" href="css/style.css">
   <script src="scripts/vendor/require.js"></script>
   <script src="config/requireConfig.js"></script>
-  <script>
-    require(['scripts/application/game.js']);
-    var game = {};
-  </script>
 </head>
 <body>
-<div id="gamecontainer">
-  <canvas id="mapCanvas" class="gamelayer"></canvas>
-  <canvas id="playerCanvas" class="gamelayer"></canvas>
-  <div class="ui"></div>
-  <div id="gamestartscreen" class="gamelayer"></div>
-  <div id="loadingscreen" class="gamelayer">
-    <div id="loadingmessage"></div>
+<div ng-view>
+  <div ng-controller="test">
+    {{test}}
   </div>
+
 </div>
 </body>
 </html>

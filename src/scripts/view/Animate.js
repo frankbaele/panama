@@ -3,6 +3,6 @@ define(['EventManager', 'RequestAnimationFrame', 'Map', 'Actors'], function (eve
     eventManager.publish('new.frame');
     window.setTimeout(animate, 1000/20);
   }
-  eventManager.subscribe('assets.loaded', function(){animate();});
+  eventManager.subscribe('game.init', function(){animate();});
   return {};
 });

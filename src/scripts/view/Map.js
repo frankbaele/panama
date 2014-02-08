@@ -65,7 +65,7 @@ define(['EventManager', 'Canvas', 'World', 'STL', 'Sprite', 'jQuery'], function 
       centerCoordinates.y = inbound.y;
     }
   }
-  eventManager.subscribe('assets.loaded', function(){init();});
+  eventManager.subscribe('game.init', function(){init();});
   eventManager.subscribe('new.frame', function(){update();});
   eventManager.subscribe('pan.up', function(e){pressedKeys.up = e;});
   eventManager.subscribe('pan.down', function(e){pressedKeys.down = e;});
