@@ -1,16 +1,21 @@
-canvas {
-  position: absolute;
-  left: 0;
-  top: 0;
-}
+@charset "UTF-8";
 
-body{
-  background: black;
-  color: white;
-  position: fixed;
-}
+/**
+ * Style file
+ *
+ * This file is compiled into style.css
+ */
 
-
-#mapCanvas{
-}
-
+@import "bourbon";
+@import "neat";
+@import 'base/variables';
+/* ---------- Import base ---------- */
+@import 'base/normalize';
+@import 'base/functions';
+@import 'base/mixins';
+@import 'base/extendables';
+@import 'base/typography';
+/* ---------- Import design ---------- */
+@import 'design/design';
+/* ---------- Import styles ---------- */
+@import 'styles/styles';

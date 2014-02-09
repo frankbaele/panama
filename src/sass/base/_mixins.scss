@@ -1,0 +1,215 @@
+/**
+ * Mixins
+ *
+ * Snippets of reusable CSS to develop faster and keep code readable
+ */
+
+// UTILITY MIXINS
+// --------------------------------------------------
+
+// Sizing shortcuts
+// -------------------------
+@mixin size($height, $width) {
+  width: $width;
+  height: $height;
+}
+@mixin square($size) {
+  @include size($size, $size);
+}
+
+// Reset filters for IE
+@mixin gradient-reset-filter() {
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+}
+
+// IE rgba
+@mixin rgba-ie($color) {
+  background-color: $color;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{ie-hex-str($color)}', endColorstr='#{ie-hex-str($color)}', GradientType=0); // IE9 and down, gets no color-stop at all for proper fallback
+}
+
+
+// COMPONENT MIXINS
+// --------------------------------------------------
+
+// Horizontal dividers
+// -------------------------
+// Dividers (basically an hr) within dropdowns and nav lists
+@mixin nav-divider($top: #e5e5e5, $bottom: $white) {
+// IE7 needs a set width since we gave a height. Restricting just
+// to IE7 to keep the 1px left/right space in other browsers.
+// It is unclear where IE is getting the extra space that we need
+// to negative-margin away, but so it goes.
+  *width: 100%;
+  height: 1px;
+  margin: (($baseLineHeight / 2) - 1) 1px; // 8px 1px
+  *margin: -5px 0 5px;
+  overflow: hidden;
+  background-color: $top;
+  border-bottom: 1px solid $bottom;
+}
+
+// Button backgrounds
+// ------------------
+@mixin buttonBackground($startColor, $endColor) {
+// gradientBar will set the background to a pleasing blend of these, to support IE<=9
+  @include gradientBar($startColor, $endColor);
+  *background-color: $endColor; /* Darken IE7 buttons by default so they stand out more given they won't have borders */
+  @include gradient-reset-filter();
+
+// in these cases the gradient won't cover the background, so we override
+  &:hover, &:active, &.active, &.disabled, &[disabled] {
+    background-color: $endColor;
+    *background-color: darken($endColor, 5%);
+  }
+
+// IE 7 + 8 can't handle box-shadow to show active, so we darken a bit ourselves
+  &:active,
+  &.active {
+    background-color: darken($endColor, 10%) \9;
+  }
+}
+
+// Navbar vertical align
+// -------------------------
+// Vertically center elements in the navbar.
+// Example: an element has a height of 30px, so write out `.navbarVerticalAlign(30px);` to calculate the appropriate top margin.
+@mixin navbarVerticalAlign($elementHeight) {
+  margin-top: ($navbarHeight - $elementHeight) / 2;
+}
+
+// https://gist.github.com/3166895
+// http://compass-style.org/reference/compass/helpers/sprites/
+@mixin get-sprite($map, $sprite, $bg-color: transparent, $repeat: no-repeat, $height: true, $width: true) {
+
+//http://compass-style.org/reference/compass/helpers/sprites/#sprite-file
+  $sprite-image: sprite-file($map, $sprite);
+
+// http://compass-style.org/reference/compass/helpers/sprites/#sprite-url
+  $sprite-map: sprite-url($map);
+
+// http://compass-style.org/reference/compass/helpers/sprites/#sprite-position
+  $sprite-position: sprite-position($map, $sprite);
+
+// Returns background
+  background: $bg-color $sprite-map $sprite-position $repeat;
+
+// http://compass-style.org/reference/compass/helpers/image-dimensions/
+// Checks to see if the user wants height returned
+  @if $height == true {
+  // Gets the height of the sprite-image
+    $sprite-height: image-height($sprite-image);
+  // Returns the height
+    height: $sprite-height; }
+
+// http://compass-style.org/reference/compass/helpers/image-dimensions/
+// Checks to see if the user wants height returned
+  @if $width == true {
+  // Gets the width of the sprite-image
+    $sprite-width: image-width($sprite-image);
+  // Returns the width
+    width: $sprite-width; }
+}
+
+@mixin neg-left-margin($map, $sprite) {
+  $sprite-image: sprite-file($map, $sprite);
+  margin-left: -#{image-width($sprite-image) / 2};
+}
+
+@mixin neg-top-margin($map, $sprite) {
+  $sprite-image: sprite-file($map, $sprite);
+  margin-top: -#{image-height($sprite-image) / 2};
+}
+
+// A11Y-wise hiding
+// ------------------------
+@mixin element-invisible {
+  position: absolute !important;
+  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+}
+@mixin element-focusable {
+  &:active,
+  &:focus {
+    position: static !important;
+    clip: auto;
+  }
+}
+
+@mixin cf {
+  zoom: 1;
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin outer-container{
+  @include clearfix;
+  max-width: $max-width;
+  padding: 0 $gutter/2;
+  margin: {
+    left: auto;
+    right: auto;
+  }
+}
+/* Overwrite the default media mixin for ie9 fallback */
+@mixin media($query:$feature $value $columns, $ie: false, $total-columns: $grid-columns) {
+  @if $ie{
+    .lt-ie9 &{
+      $default-grid-columns: $grid-columns;
+      $grid-columns: $total-columns;
+      @content;
+      $grid-columns: $default-grid-columns;
+    }
+  }
+  @if length($query) == 1 {
+    @media screen and ($default-feature: nth($query, 1)) {
+      $default-grid-columns: $grid-columns;
+      $grid-columns: $total-columns;
+      @content;
+      $grid-columns: $default-grid-columns;
+    }
+  }
+
+  @else if length($query) == 2 {
+    @media screen and (nth($query, 1): nth($query, 2)) {
+      $default-grid-columns: $grid-columns;
+      $grid-columns: $total-columns;
+      @content;
+      $grid-columns: $default-grid-columns;
+    }
+  }
+
+  @else if length($query) == 3 {
+    @media screen and (nth($query, 1): nth($query, 2)) {
+      $default-grid-columns: $grid-columns;
+      $grid-columns: nth($query, 3);
+      @content;
+      $grid-columns: $default-grid-columns;
+    }
+  }
+
+  @else if length($query) == 4 {
+    @media screen and (nth($query, 1): nth($query, 2)) and (nth($query, 3): nth($query, 4)) {
+      $default-grid-columns: $grid-columns;
+      $grid-columns: $total-columns;
+      @content;
+      $grid-columns: $default-grid-columns;
+    }
+  }
+
+  @else if length($query) == 5 {
+    @media screen and (nth($query, 1): nth($query, 2)) and (nth($query, 3): nth($query, 4)) {
+      $default-grid-columns: $grid-columns;
+      $grid-columns: nth($query, 5);
+      @content;
+      $grid-columns: $default-grid-columns;
+    }
+  }
+
+  @else {
+    @warn "Wrong number of arguments for breakpoint(). Read the documentation for more details.";
+  }
+}

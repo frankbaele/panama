@@ -1,0 +1,68 @@
+/**
+ * Typography
+ */
+
+
+// 1. Corrects text resizing oddly in IE6/7 when body font-size is set using em units
+//    http://clagnut.com/blog/348/#c790
+// 2. Prevents iOS text size adjust after orientation change, without disabling user zoom
+//    www.456bereastreet.com/archive/201012/controlling_text_size_in_safari_for_ios_without_disabling_user_zoom/
+html {
+  font-size: 100% * ($base-font-size / 16px); /* 1 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+  -ms-text-size-adjust: 100%; /* 2 */
+}
+
+// Addresses font-family inconsistency between 'textarea' and other form elements.
+html,
+button,
+input,
+select,
+textarea {
+  font-family: $base-font-family;
+}
+
+
+/* Line-heights */
+body{
+  font-size: $base-font-size;
+  line-height: $base-line-height;
+}
+
+h1 {
+  margin: $h1_margin;
+  padding: $h1_padding;
+  font-size: $h1_font_size;
+}
+
+h2 {
+  margin: $h2_margin;
+  padding: $h2_padding;
+  font-size: $h2_font_size;
+}
+
+h3 {
+  margin: $h3_margin;
+  padding: $h3_padding;
+  font-size: $h3_font_size;
+}
+
+h4 {
+  margin: $h4_margin;
+  padding: $h4_padding;
+  font-size: $h4_font_size;
+}
+
+h5 {
+  margin: $h5_margin;
+  padding: $h5_padding;
+  font-size: $h5_font_size;
+}
+
+h6 {
+  margin: $h6_margin;
+  padding: $h6_padding;
+  font-size: $h6_font_size;
+}
+
+

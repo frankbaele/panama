@@ -1,0 +1,14 @@
+/**
+ * Functions
+ *
+ */
+
+// Working in ems is annoying. Think in pixels by using this handy function, emCalc(#px)
+@function emCalc($pxWidth) {
+  @return $pxWidth / $base-font-size * 1em;
+}
+
+// Creating rems and pixels
+@function remCalc($pxWidth) {
+  @return $pxWidth / $base-font-size * 1rem;
+}

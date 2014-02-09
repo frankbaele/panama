@@ -1,0 +1,22 @@
+/* Base link settings */
+
+a {
+  color: $base-link-color;
+  &:hover,
+  &:focus {
+    color: $base-link-hover-color;
+  }
+}
+
+html {
+  color: $base-text-color;
+  ::selection,
+  ::-moz-selection {
+    color: $base-selected-text-color;
+    background: $base-selected-text-background-color;
+  }
+}
+
+button{
+  @include button();
+}

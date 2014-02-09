@@ -1,0 +1,16 @@
+/**
+ * Layout
+ *
+ * All layout theming should go in this file
+ */
+
+
+/* Layout */
+
+.container {
+  @include outer-container;
+}
+
+header, footer, .homeScreen {
+  @include cf;
+}
