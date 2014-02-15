@@ -1,11 +1,11 @@
 define([''], function () {
 
-  function BinaryHeap(scoreFunction){
+  function binaryHeap(scoreFunction){
     this.content = [];
     this.scoreFunction = scoreFunction;
   }
 
-  BinaryHeap.prototype = {
+  binaryHeap.prototype = {
     push: function(element) {
       // Add the new element to the end of the array.
       this.content.push(element);
@@ -121,5 +121,5 @@ define([''], function () {
     }
   };
 
-  return BinaryHeap;
+  return binaryHeap;
 });

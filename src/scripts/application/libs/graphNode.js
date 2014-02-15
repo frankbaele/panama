@@ -1,11 +1,11 @@
 define([], function () {
 
-  var GraphNodeType = {
+  var graphNodeType = {
     OPEN: 0,
     WALL: 1
   };
 
-  function GraphNode(x,y,type) {
+  function graphNode(x,y,type) {
     this.data = { };
     this.x = x;
     this.y = y;
@@ -16,13 +16,13 @@ define([], function () {
     this.type = type;
   }
 
-  GraphNode.prototype.toString = function() {
+  graphNode.prototype.toString = function() {
     return "[" + this.x + " " + this.y + "]";
   };
 
-  GraphNode.prototype.isWall = function() {
-    return this.type == GraphNodeType.WALL;
+  graphNode.prototype.isWall = function() {
+    return this.type == graphNodeType.WALL;
   };
 
-  return GraphNode
+  return graphNode
 });

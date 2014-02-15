@@ -1,4 +1,4 @@
-define(['EventManager','Command'], function (eventManager) {
+define(['eventmanager','command'], function (eventmanager) {
 
   function init() {
     gameCycle();
@@ -7,11 +7,11 @@ define(['EventManager','Command'], function (eventManager) {
   function gameCycle() {
     // Call next cycle.
     setTimeout(gameCycle, 200);
-    // Execute the previous cycle Commands.
-    eventManager.publish('new.gamecycle');
+    // Execute the previous cycle commands.
+    eventmanager.publish('new.gamecycle');
     // Generate commands to executed next cycle.
     //cycle++;
   }
 
-  eventManager.subscribe('game.init', function(){init();});
+  eventmanager.subscribe('game.init', function(){init();});
 });

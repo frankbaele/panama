@@ -6,7 +6,9 @@
 
 
 /* Layout */
-
+html{
+  overflow: hidden;
+}
 .container {
   @include outer-container;
 }

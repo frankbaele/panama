@@ -1,5 +1,5 @@
 define([''], function () {
-  var SpriteSheet = function (confConstructor, fileConstructor){
+  var spriteSheet = function (confConstructor, fileConstructor){
     var
       sprites = [],
       configuration = confConstructor,
@@ -17,11 +17,11 @@ define([''], function () {
           cy = val.spriteSourceSize.y - (val.sourceSize.h * 0.5);
 
         }
-        defSprite(val.filename, val.frame.x, val.frame.y, val.frame.w, val.frame.h, cx, cy);
+        defsprite(val.filename, val.frame.x, val.frame.y, val.frame.w, val.frame.h, cx, cy);
       });
     };
 
-    var defSprite = function (name, x, y, w, h, cx, cy) {
+    var defsprite = function (name, x, y, w, h, cx, cy) {
       var spt = {
         "id": name,
         "x": x,
@@ -41,5 +41,5 @@ define([''], function () {
     };
   };
 
-  return SpriteSheet;
+  return spriteSheet;
 });

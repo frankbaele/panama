@@ -1,4 +1,4 @@
-define(['GraphNode'], function (GraphNode) {
+define(['graphNode'], function (graphNode) {
   // javascript-astar
   // http://github.com/bgrins/javascript-astar
   // Freely distributable under the MIT License.
@@ -6,15 +6,15 @@ define(['GraphNode'], function (GraphNode) {
   // http://eloquentjavascript.net/appendix2.html
 
 
-  // Creates a Graph class used in the astar search algorithm.
-  function Graph(grid) {
+  // Creates a graph class used in the astar search algorithm.
+  function graph(grid) {
     var nodes = [];
 
     for (var x = 0; x < grid.length; x++) {
       nodes[x] = [];
 
       for (var y = 0, row = grid[x]; y < row.length; y++) {
-        nodes[x][y] = new GraphNode(x, y, row[y]);
+        nodes[x][y] = new graphNode(x, y, row[y]);
       }
     }
 
@@ -22,7 +22,7 @@ define(['GraphNode'], function (GraphNode) {
     this.nodes = nodes;
   }
 
-  Graph.prototype.toString = function() {
+  graph.prototype.toString = function() {
     var graphString = "\n";
     var nodes = this.nodes;
     var rowDebug, row, y, l;
@@ -36,5 +36,5 @@ define(['GraphNode'], function (GraphNode) {
     }
     return graphString;
   };
-  return Graph;
+  return graph;
 });

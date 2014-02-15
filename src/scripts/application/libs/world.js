@@ -1,4 +1,4 @@
-define(['RNG', 'underscore', 'Graph'], function (RNG, _ ,Graph) {
+define(['RNG', 'underscore', 'graph'], function (RNG, _ ,graph) {
   /**
    * @namespace
    * This code is an implementation of the ROT.js cellular map generation by Ondřej Žára, https://github.com/ondras/rot.js
@@ -28,8 +28,8 @@ define(['RNG', 'underscore', 'Graph'], function (RNG, _ ,Graph) {
 
 
   function init() {
-    mapData = (_.compose(runAutomatonCycle, runAutomatonCycle, superSizeMap, superSizeMap, runAutomatonCycle, runAutomatonCycle, randomize, fillMap))();
-    graph = new Graph(mapData);
+    mapData = (_.compose(runAutomatonCycle, runAutomatonCycle, superSizemap, superSizemap, runAutomatonCycle, runAutomatonCycle, randomize, fillmap))();
+    graph = new graph(mapData);
   }
 
   /**
@@ -48,7 +48,7 @@ define(['RNG', 'underscore', 'Graph'], function (RNG, _ ,Graph) {
     return data;
   }
 
-  function fillMap() {
+  function fillmap() {
     var
       data = [],
       y,
@@ -81,7 +81,7 @@ define(['RNG', 'underscore', 'Graph'], function (RNG, _ ,Graph) {
 
   function runAutomatonCycle(data) {
     var count = 0;
-    var newMap = fillMap();
+    var newmap = fillmap();
     for (var j = 0; j < height; j++) {
       var widthStep = 1;
       var widthStart = 0;
@@ -96,13 +96,13 @@ define(['RNG', 'underscore', 'Graph'], function (RNG, _ ,Graph) {
         var ncount = getNeighbors(data, i, j);
 
         if (cur && survive.indexOf(ncount) !== -1) { /* survive */
-          newMap[i][j] = 1;
+          newmap[i][j] = 1;
         } else if (!cur && born.indexOf(ncount) !== -1) { /* born */
-          newMap[i][j] = 1;
+          newmap[i][j] = 1;
         }
       }
     }
-    return newMap;
+    return newmap;
 
   }
 
@@ -110,17 +110,17 @@ define(['RNG', 'underscore', 'Graph'], function (RNG, _ ,Graph) {
     mapData[x][y] = value;
   }
 
-  function superSizeMap(map) {
-    var newMap = [];
+  function superSizemap(map) {
+    var newmap = [];
     var amount = 2;
     for (var y = 0; y < height; y++) {
       for (var yAmount = 0; yAmount < amount; yAmount++) {
         var newY = (y * amount) + yAmount;
-        newMap[newY] = [];
+        newmap[newY] = [];
         for (var x = 0; x < width; x++) {
           for (var xAmount = 0; xAmount < amount; xAmount++) {
             var newX = (x * amount) + xAmount;
-            newMap[newY][newX] = map[y][x];
+            newmap[newY][newX] = map[y][x];
           }
         }
       }
@@ -128,7 +128,7 @@ define(['RNG', 'underscore', 'Graph'], function (RNG, _ ,Graph) {
 
     width = width * amount;
     height = height * amount;
-    return newMap;
+    return newmap;
   }
 
 

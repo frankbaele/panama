@@ -1,4 +1,4 @@
-define(['underscore', 'Canvas', 'STL', 'World', 'Assets'], function (_,canvases, stl, world, assets) {
+define(['underscore', 'canvas', 'standardlib', 'world', 'assets'], function (_,canvases, standardlib, world, assets) {
   function draw (spriteName, posX, posY, layer) {
     var spt,
       mapTrans = {},
@@ -17,13 +17,13 @@ define(['underscore', 'Canvas', 'STL', 'World', 'Assets'], function (_,canvases,
       case 'player' :
         context = canvases.player.context;
         canvas = canvases.player.canvas;
-        break;
+         break;
       default:
         return;
     }
 
     // transform the grid tile to iso coordinates
-    coordinates = stl.twoDToIso(posX, posY);
+    coordinates = standardlib.twoDToIso(posX, posY);
     // transform the coordinates to the actual size of the map
     coordinates.x = (coordinates.x * world.tileWidth + ((canvas.width) / 2));
     coordinates.y = coordinates.y * world.tileHeight + world.tileHeight/2;

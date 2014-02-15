@@ -1,16 +1,16 @@
-define(['CommandQueue', 'EventManager'], function (commandQueue, eventManager) {
-  eventManager.subscribe('command', function(e){
-    newCommand(e);
+define(['commandQueue', 'eventmanager'], function (commandQueue, eventmanager) {
+  eventmanager.subscribe('command', function(e){
+    newcommand(e);
   });
-  eventManager.subscribe('new.gamecycle', function(){executeQueue();});
-  function newCommand(command){
+  eventmanager.subscribe('new.gamecycle', function(){executeQueue();});
+  function newcommand(command){
     commandQueue.add(command);
   }
 
   function executeQueue(){
     var list = commandQueue.get();
     _.forEach(list, function(command){
-      eventManager.publish(command.event, command.parameters);
+      eventmanager.publish(command.event, command.parameters);
     });
     commandQueue.clear();
   }

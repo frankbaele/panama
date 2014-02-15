@@ -1,7 +1,7 @@
-define(['EventManager', 'Canvas', 'World', 'STL', 'Sprite', 'jQuery'], function (eventManager, canvas, world, stl, sprite) {
+define(['eventmanager', 'canvas', 'world', 'standardlib', 'sprite', 'jQuery'], function (eventmanager, canvas, world, standardlib, sprite) {
   var visible = {x:10, y:10};
   var centerCoordinates = {x: 10, y:10};
-  var pressedKeys = {
+  var pressedkeys = {
     up: 0,
     down: 0,
     left: 0,
@@ -31,7 +31,7 @@ define(['EventManager', 'Canvas', 'World', 'STL', 'Sprite', 'jQuery'], function 
 
   function center(posX,posY){
     // transform the grid tile to iso coordinates
-    var coordinates = stl.twoDToIso(posX, posY);
+    var coordinates = standardlib.twoDToIso(posX, posY);
     // transform the coordinates to the actual size of the map
     coordinates.x = -((coordinates.x - visible.x) * world.tileWidth + ((canvas.terrain.canvas.width) / 2));
     coordinates.y = -((coordinates.y - visible.y) * world.tileHeight + world.tileHeight/2);
@@ -41,19 +41,19 @@ define(['EventManager', 'Canvas', 'World', 'STL', 'Sprite', 'jQuery'], function 
 
   function update() {
     var inbound = {x:0, y:0};
-    if (pressedKeys.up == 1) {
+    if (pressedkeys.up == 1) {
       inbound.y--;
       inbound.x--;
     }
-    if (pressedKeys.down == 1) {
+    if (pressedkeys.down == 1) {
       inbound.y++;
       inbound.x++;
     }
-    if (pressedKeys.left == 1) {
+    if (pressedkeys.left == 1) {
       inbound.x--;
       inbound.y++;
     }
-    if (pressedKeys.right == 1) {
+    if (pressedkeys.right == 1) {
       inbound.x++;
       inbound.y--;
     }
@@ -65,10 +65,10 @@ define(['EventManager', 'Canvas', 'World', 'STL', 'Sprite', 'jQuery'], function 
       centerCoordinates.y = inbound.y;
     }
   }
-  eventManager.subscribe('game.init', function(){init();});
-  eventManager.subscribe('new.frame', function(){update();});
-  eventManager.subscribe('pan.up', function(e){pressedKeys.up = e;});
-  eventManager.subscribe('pan.down', function(e){pressedKeys.down = e;});
-  eventManager.subscribe('pan.left', function(e){pressedKeys.left = e;});
-  eventManager.subscribe('pan.right', function(e){pressedKeys.right = e;});
+  eventmanager.subscribe('game.init', function(){init();});
+  eventmanager.subscribe('new.frame', function(){update();});
+  eventmanager.subscribe('pan.up', function(e){pressedkeys.up = e;});
+  eventmanager.subscribe('pan.down', function(e){pressedkeys.down = e;});
+  eventmanager.subscribe('pan.left', function(e){pressedkeys.left = e;});
+  eventmanager.subscribe('pan.right', function(e){pressedkeys.right = e;});
 });

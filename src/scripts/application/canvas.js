@@ -1,4 +1,4 @@
-define(['EventManager', 'World'], function (eventManager, world) {
+define(['eventmanager', 'world'], function (eventmanager, world) {
   var terrain = {};
   var player = {};
   var init = function (){
@@ -15,7 +15,7 @@ define(['EventManager', 'World'], function (eventManager, world) {
     player.canvas.height = world.height * world.tileHeight;
   };
 
-  eventManager.subscribe('game.init', function(){init();});
+  eventmanager.subscribe('game.init', function(){init();});
   return {
     terrain: terrain,
     player: player

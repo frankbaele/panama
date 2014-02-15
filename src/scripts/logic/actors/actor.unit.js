@@ -1,4 +1,4 @@
-define(['actor', 'EventManager', 'Astar', 'World', 'underscore'], function (actor, eventManager, astar, world) {
+define(['actor', 'eventmanager', 'astar', 'world', 'underscore'], function (actor, eventmanager, astar, world) {
 
   function unit(sprite, coordinates) {
     _.extend(this, new actor(sprite, coordinates));
@@ -31,7 +31,7 @@ define(['actor', 'EventManager', 'Astar', 'World', 'underscore'], function (acto
         x: first.y,
         y: first.x
       };
-      eventManager.publish('command', {event: 'actor.update', parameters:this});
+      eventmanager.publish('command', {event: 'actor.update', parameters:this});
     }
   };
 
@@ -45,7 +45,7 @@ define(['actor', 'EventManager', 'Astar', 'World', 'underscore'], function (acto
   unit.prototype.attackActor = function(){
     if(this.focus !== ''){
       console.log('pew ' + this.attack +' damage');
-      eventManager.publish('command', {event: 'actor.attack.' + this.focus, parameters:this.attack});
+      eventmanager.publish('command', {event: 'actor.attack.' + this.focus, parameters:this.attack});
     }
   };
   return unit;

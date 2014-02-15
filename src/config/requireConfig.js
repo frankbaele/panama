@@ -16,34 +16,32 @@ require.config({
     angular: 'scripts/vendor/angular.min',
     'angular-ui-router': 'scripts/vendor/angular-ui-router.min',
     /* config */
-    AssetsList: 'config/AssetsList.json',
-    /* app */
-    app : 'scripts/app',
+    assetsList: 'config/assetsList.json',
     /* libs */
     RNG: 'scripts/application/libs/RNG',
-    Astar: 'scripts/application/libs/Astar',
-    World: 'scripts/application/libs/World',
-    Graph: 'scripts/application/libs/Graph',
-    GraphNode: 'scripts/application/libs/GraphNode',
-    BinaryHeap: 'scripts/application/libs/BinaryHeap',
-    SpriteSheet: 'scripts/application/libs/SpriteSheet',
-    STL: 'scripts/application/libs/StandardLibrary',
+    astar: 'scripts/application/libs/astar',
+    world: 'scripts/application/libs/world',
+    graph: 'scripts/application/libs/graph',
+    graphNode: 'scripts/application/libs/graphNode',
+    binaryHeap: 'scripts/application/libs/binaryHeap',
+    spriteSheet: 'scripts/application/libs/spriteSheet',
+    standardlib: 'scripts/application/libs/standardLibrary',
     RequestAnimationFrame: 'scripts/application/libs/RequestAnimationFrame',
     /* application */
-    AssetLoader: 'scripts/application/AssetLoader',
-    Assets : 'scripts/application/Assets',
-    Canvas : 'scripts/application/Canvas',
-    Keys : 'scripts/application/Keys',
-    Mouse : 'scripts/application/Mouse',
+    assetLoader: 'scripts/application/assetLoader',
+    assets : 'scripts/application/assets',
+    canvas : 'scripts/application/canvas',
+    keys : 'scripts/application/keys',
+    mouse : 'scripts/application/mouse',
     gamecycle : 'scripts/application/gamecycle',
     /* Config */
     config : '../config',
     /* logic */
-    EventManager: 'scripts/logic/Mediator',
-    Command: 'scripts/logic/command',
-    CommandQueue: 'scripts/logic/commandQueue',
+    eventmanager: 'scripts/logic/Mediator',
+    command: 'scripts/logic/command',
+    commandQueue: 'scripts/logic/commandQueue',
     /* Actors */
-    ActorList: 'scripts/logic/ActorList',
+    actorList: 'scripts/logic/actorList',
     actor: 'scripts/logic/actors/actor',
     'actor.unit': 'scripts/logic/actors/actor.unit',
     'actor.unit.ai': 'scripts/logic/actors/actor.unit.ai',
@@ -52,11 +50,13 @@ require.config({
     'actor.unit.human.local': 'scripts/logic/actors/actor.unit.human.local',
     'actor.unit.human.remote': 'scripts/logic/actors/actor.unit.human.remote',
     /* view */
-    Animate: 'scripts/view/Animate',
-    Input: 'scripts/view/Input',
-    Map: 'scripts/view/Map',
-    Sprite: 'scripts/view/Sprite',
-    Actors: 'scripts/view/Actors'
+    animate: 'scripts/view/animate',
+    input: 'scripts/view/input',
+    map: 'scripts/view/map',
+    sprite: 'scripts/view/sprite',
+    actors: 'scripts/view/actors',
+    /* app */
+    app : 'scripts/app'
   },
   shim: {
     'angular' : {
@@ -72,5 +72,5 @@ require.config({
       exports: '_'
     }
   },
-  deps:['app', 'gamecycle', 'Assets', 'Animate', 'Input']
+  deps:['angular', 'app', 'gamecycle', 'assets', 'animate', 'input']
 });

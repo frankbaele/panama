@@ -1,4 +1,4 @@
-define(['BinaryHeap'], function (BinaryHeap) {
+define(['binaryHeap'], function (binaryHeap) {
 
   // javascript-astar
   // http://github.com/bgrins/javascript-astar
@@ -21,7 +21,7 @@ define(['BinaryHeap'], function (BinaryHeap) {
       }
     },
     heap: function () {
-      return new BinaryHeap(function (node) {
+      return new binaryHeap(function (node) {
         return node.f;
       });
     },
