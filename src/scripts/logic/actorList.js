@@ -1,12 +1,16 @@
 define(['eventmanager', 'sprite', 'underscore'], function (eventmanager, sprite) {
   var actorList = [];
   var CleanupList = [];
+  var playerUuid = '';
   eventmanager.subscribe('actor.create', function(actor){
     actorList.push({
       uuid: actor.uuid,
       coordinates: actor.coordinates,
       sprite: actor.sprite
     });
+  });
+  eventmanager.subscribe('player.init', function(uuid){
+    playerUuid = uuid;
   });
 
   eventmanager.subscribe('actor.update', function(actor){
@@ -27,18 +31,26 @@ define(['eventmanager', 'sprite', 'underscore'], function (eventmanager, sprite)
     actorList = _.without(actorList, Actor);
   });
 
-  var getactorList = function (){
+  var getActorList = function (){
     return actorList;
-  }
+  };
+
   var getCleanUpList = function (){
     return CleanupList;
-  }
+  };
+
   var clearCleanUpList = function (){
     CleanupList = [];
-  }
+  };
+
+  var getPlayerUuid = function (){
+    return playerUuid;
+  };
+
   return {
     getCleanUpList : getCleanUpList,
     clearCleanUpList: clearCleanUpList,
-    getactorList : getactorList
+    getActorList : getActorList,
+    getPlayerUuid: getPlayerUuid
   };
 });

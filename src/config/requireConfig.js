@@ -41,6 +41,7 @@ require.config({
     command: 'scripts/logic/command',
     commandQueue: 'scripts/logic/commandQueue',
     /* Actors */
+    'player': 'scripts/logic/player',
     actorList: 'scripts/logic/actorList',
     actor: 'scripts/logic/actors/actor',
     'actor.unit': 'scripts/logic/actors/actor.unit',
@@ -72,5 +73,5 @@ require.config({
       exports: '_'
     }
   },
-  deps:['angular', 'app', 'gamecycle', 'assets', 'animate', 'input']
+  deps:['angular', 'app','player', 'gamecycle', 'assets', 'animate', 'input']
 });

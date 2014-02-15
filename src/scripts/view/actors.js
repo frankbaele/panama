@@ -40,7 +40,7 @@ define(['eventmanager', 'sprite', 'standardlib', 'world', 'canvas', 'actorList',
       sprite.draw('water.png', actor.coordinates.x, actor.coordinates.y, 'player');
     });
     actorList.clearCleanUpList();
-    _.each(actorList.getactorList(),function(actor){
+    _.each(actorList.getActorList(),function(actor){
       sprite.draw(actor.sprite, actor.coordinates.x, actor.coordinates.y, 'player');
     });
   }

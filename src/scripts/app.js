@@ -1,9 +1,9 @@
 define([
-  'app/controllers/gameController',
   'app/controllers/uiController',
+  'app/controllers/gameController',
   'app/controllers/CanvasController',
   'angular-ui-router'
-  ], function (gameController, uiController, CanvasController) {
+  ], function (uiController, gameController, CanvasController) {
 
   var app = angular.module('panama', ['ui.router']);
 

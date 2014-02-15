@@ -27,9 +27,10 @@ define(['actor.unit.human', 'eventmanager'], function (human, eventmanager) {
         that.focus = '';
       }
     });
-    eventmanager.subscribe('actor.attack' + that.uuid, function(damage){
+    eventmanager.subscribe('actor.attack.' + that.uuid, function(damage){
       that.hp = that.hp - parseInt(damage);
     });
+
     eventmanager.publish('actor.create', this);
   }
 
