@@ -1,4 +1,4 @@
-define(['eventmanager', 'standardlib'], function (eventmanager, standardlib) {
+define(['eventmanager', 'standardlib', 'actorList'], function (eventmanager, standardlib) {
   function Actor(sprite, coordinates){
     this.coordinates = coordinates;
     this.sprite = sprite;

@@ -4,7 +4,7 @@ define([
   'scripts/app/controllers/CanvasController',
   'angular',
   'angular-ui-router',
-  'player', 'gamecycle', 'assets', 'animate', 'input'
+  'gamecycle', 'assets', 'animate', 'input','player'
   ], function (uiController, gameController, CanvasController) {
 
   var app = angular.module('panama', ['ui.router']);

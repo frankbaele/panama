@@ -3,16 +3,13 @@ define(['eventmanager', 'sprite', 'underscore'], function (eventmanager, sprite)
   var CleanupList = [];
   var playerUuid = '';
   eventmanager.subscribe('actor.create', function(actor){
+    console.log(actor);
     actorList.push({
       uuid: actor.uuid,
       coordinates: actor.coordinates,
       sprite: actor.sprite
     });
   });
-  eventmanager.subscribe('player.init', function(uuid){
-    playerUuid = uuid;
-  });
-
   eventmanager.subscribe('actor.update', function(actor){
     var oldActor = _.findWhere(actorList, {uuid: actor.uuid});
     CleanupList.push({coordinates: oldActor.coordinates});
