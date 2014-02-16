@@ -81,10 +81,9 @@ module.exports = function (grunt) {
       compile: {
         options: {
           name: 'scripts/app',
-          baseUrl: "src/",
+          baseUrl: "src",
           mainConfigFile: "src/config/requireConfig.js",
-          out: "dist/scripts/game.js",
-          exclude: ['jQuery', 'underscore', 'text', 'keypress', 'angular', 'angular-ui-router']
+          out: "dist/scripts/game.js"
         }
       }
     }
