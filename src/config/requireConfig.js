@@ -55,9 +55,7 @@ require.config({
     input: 'scripts/view/input',
     map: 'scripts/view/map',
     sprite: 'scripts/view/sprite',
-    actors: 'scripts/view/actors',
-    /* app */
-    app : 'scripts/app'
+    actors: 'scripts/view/actors'
   },
   shim: {
     'angular' : {
@@ -73,5 +71,6 @@ require.config({
       exports: '_'
     }
   },
-  deps:['angular', 'app','player', 'gamecycle', 'assets', 'animate', 'input']
+  deps:['angular']
 });
+require( ['scripts/app']);

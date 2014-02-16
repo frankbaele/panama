@@ -68,11 +68,11 @@ module.exports = function (grunt) {
         flatten: false,
         filter: 'isFile'
       },
-      requireConfig: {
+      templates: {
         expand: true,
-        cwd: 'src/config',
-        src: 'requireLiveConfig.js',
-        dest: 'dist/config',
+        cwd: 'src/templates',
+        src: '**',
+        dest: 'dist/templates',
         flatten: false,
         filter: 'isFile'
       }
@@ -80,16 +80,15 @@ module.exports = function (grunt) {
     requirejs: {
       compile: {
         options: {
-          name: 'scripts/application/game',
+          name: 'scripts/app',
           baseUrl: "src/",
           mainConfigFile: "src/config/requireConfig.js",
           out: "dist/scripts/game.js",
-          exclude: ['jQuery', 'underscore', 'text', 'keypress']
+          exclude: ['jQuery', 'underscore', 'text', 'keypress', 'angular', 'angular-ui-router']
         }
       }
     }
   });
-
 
   // Load tasks...
   grunt.loadNpmTasks('grunt-contrib-connect');

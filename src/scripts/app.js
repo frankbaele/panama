@@ -1,8 +1,9 @@
 define([
-  'app/controllers/uiController',
-  'app/controllers/gameController',
-  'app/controllers/CanvasController',
-  'angular-ui-router'
+  'scripts/app/controllers/uiController',
+  'scripts/app/controllers/gameController',
+  'scripts/app/controllers/CanvasController',
+  'angular-ui-router',
+  'player', 'gamecycle', 'assets', 'animate', 'input'
   ], function (uiController, gameController, CanvasController) {
 
   var app = angular.module('panama', ['ui.router']);
@@ -12,21 +13,21 @@ define([
     // Now set up the states
     $stateProvider
       .state('menu', {
-        templateUrl: 'scripts/app/templates/menu.html',
+        templateUrl: 'templates/menu.html',
       })
       .state('game', {
         abstract: true,
-        templateUrl: "scripts/app/templates/game.html",
+        templateUrl: "templates/game.html",
         controller: 'gameController'
       })
       .state('game.content', {
         views: {
           'canvas': {
-            templateUrl:'scripts/app/templates/game.canvas.html',
+            templateUrl:'templates/game.canvas.html',
             controller: 'canvasController'
           },
           'actor': {
-            templateUrl:'scripts/app/templates/game.ui.html',
+            templateUrl:'templates/game.ui.html',
             controller: 'uiController'
           }
         }
