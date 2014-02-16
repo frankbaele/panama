@@ -54,9 +54,9 @@
         <key>maxTextureSize</key>
         <QSize>
             <key>width</key>
-            <int>512</int>
+            <int>1024</int>
             <key>height</key>
-            <int>64</int>
+            <int>16384</int>
         </QSize>
         <key>fixedTextureSize</key>
         <QSize>
@@ -112,8 +112,6 @@
         </struct>
         <key>dataFileName</key>
         <filename>panama.json</filename>
-        <key>multiPack</key>
-        <false/>
         <key>mainExtension</key>
         <string></string>
         <key>forceIdenticalLayout</key>
