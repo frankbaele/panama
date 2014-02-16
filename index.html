@@ -2,21 +2,14 @@
 
 <html lang="en">
 <head>
-  <title>Panama a multiplayer game built using HTML5 canvas</title>
+  <title>Panama a game built using HTML5 canvas en javascript</title>
   <meta charset="utf-8">
   <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0"/>
   <link rel="stylesheet" href="css/style.css">
-  <script data-main="scripts/game" src="scripts/vendor/require.js"></script>
+  <script src="scripts/vendor/require.js"></script>
+  <script src="config/requireLiveConfig.js"></script>
 </head>
 <body>
-<div id="gamecontainer">
-  <canvas id="mapCanvas" class="gamelayer"></canvas>
-  <canvas id="playerCanvas" class="gamelayer"></canvas>
-  <div class="ui"></div>
-  <div id="gamestartscreen" class="gamelayer"></div>
-  <div id="loadingscreen" class="gamelayer">
-    <div id="loadingmessage"></div>
-  </div>
-</div>
+  <div ui-view></div>
 </body>
 </html>
