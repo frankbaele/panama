@@ -75,6 +75,14 @@ module.exports = function (grunt) {
         dest: 'dist/templates',
         flatten: false,
         filter: 'isFile'
+      },
+      requireConfig: {
+        expand: true,
+        cwd: 'src/config',
+        src: 'requireLiveConfig.js',
+        dest: 'dist/config',
+        flatten: false,
+        filter: 'isFile'
       }
     },
     requirejs: {
@@ -83,7 +91,25 @@ module.exports = function (grunt) {
           name: 'scripts/app',
           baseUrl: "src",
           mainConfigFile: "src/config/requireConfig.js",
-          out: "dist/scripts/game.js"
+          out: "dist/scripts/app.js",
+          optimize: 'uglify2',
+          exclude: ['jQuery', 'underscore', 'text', 'keypress', 'angular', 'angular-ui-router'],
+          uglify2: {
+            //Example of a specialized config. If you are fine
+            //with the default options, no need to specify
+            //any of these properties.
+            output: {
+              beautify: false
+            },
+            compress: {
+              sequences: false,
+              global_defs: {
+                DEBUG: false
+              }
+            },
+            warnings: true,
+            mangle: false
+          }
         }
       }
     }

@@ -2,6 +2,7 @@ define([
   'scripts/app/controllers/uiController',
   'scripts/app/controllers/gameController',
   'scripts/app/controllers/CanvasController',
+  'angular',
   'angular-ui-router',
   'player', 'gamecycle', 'assets', 'animate', 'input'
   ], function (uiController, gameController, CanvasController) {
