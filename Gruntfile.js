@@ -13,7 +13,7 @@ module.exports = function (grunt) {
           // This will be removed later as `watch` will take care of that
           keepalive: false,
           hostname: '',
-          base: './dist'
+          base: './src'
         }
       }
     },

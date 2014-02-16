@@ -11,10 +11,11 @@ define([
       ActorController = function($scope, $interval){
         $scope.player = player.getInfo();
         $scope.$watch('player');
-        console.log($scope.player);
-        $interval(function (){
+        eventmanager.subscribe('new.gamecycle', function(){
           $scope.player = player.getInfo();
+          $scope.$apply();
         });
+
     };
 
   // Register as global constructor function
