@@ -51,7 +51,9 @@ Installation
 
 That's it. Now browse to [http://localhost:9001](http://localhost:9001).
 
+### Controles
 
+use arrow keys to pan the map and right click to move the character
 
 
 
