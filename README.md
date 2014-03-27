@@ -38,26 +38,19 @@ Installation
 
     git clone <url>
 
-### Client
+### Game
 
-1. navigate to the client subfolder
 
-    cd client
-
-2. Get all the dependencies via npm
+1. Get all the dependencies via npm
 
     npm install
 
-3. Serve the client page
+2. Serve the page
 
-    grunt serve
+    grunt server
 
-That's it. Your browser should automagically open and point to [http://localhost:9001](http://localhost:9001).
+That's it. Now browse to [http://localhost:9001](http://localhost:9001).
 
-How to play
------------
-
-This game has no rules nor goals. Yet.
 
 
 
