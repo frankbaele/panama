@@ -39,14 +39,9 @@ define(['eventmanager', 'sprite', 'underscore'], function (eventmanager, sprite)
     CleanupList = [];
   };
 
-  var getPlayerUuid = function (){
-    return playerUuid;
-  };
-
   return {
     getCleanUpList : getCleanUpList,
     clearCleanUpList: clearCleanUpList,
-    getActorList : getActorList,
-    getPlayerUuid: getPlayerUuid
+    getActorList : getActorList
   };
 });

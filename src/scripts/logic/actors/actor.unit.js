@@ -43,8 +43,7 @@ define(['actor', 'eventmanager', 'astar', 'world', 'underscore'], function (acto
   };
 
   unit.prototype.attackActor = function(){
-    if(this.focus !== ''){
-      console.log('pew ' + this.attack +' damage');
+    if(this.focus !== '' && this.focus !== this.uuid){
       eventmanager.publish('command', {event: 'actor.attack.' + this.focus, parameters:this.attack});
     }
   };

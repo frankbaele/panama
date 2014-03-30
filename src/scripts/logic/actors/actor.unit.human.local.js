@@ -30,7 +30,9 @@ define(['actor.unit.human', 'eventmanager'], function (human, eventmanager) {
     eventmanager.subscribe('actor.attack.' + that.uuid, function(damage){
       that.hp = that.hp - parseInt(damage);
     });
-
+    eventmanager.subscribe('actor.getObject.' + that.uuid, function (uuid){
+      eventmanager.publish('actor.object.' + that.uuid, this);
+    });
     eventmanager.publish('actor.create', this);
   }
 

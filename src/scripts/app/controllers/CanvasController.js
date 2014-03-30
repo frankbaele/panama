@@ -6,7 +6,6 @@ define(['eventmanager'], function (eventmanager) {
    * @constructor
    */
   canvasController = function( $scope){
-
     eventmanager.publish('game.init');
   };
 

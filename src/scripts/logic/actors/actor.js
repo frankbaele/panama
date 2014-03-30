@@ -19,5 +19,9 @@ define(['eventmanager', 'standardlib', 'actorList'], function (eventmanager, sta
   Actor.prototype.delete = function() {
     eventmanager.publish('actor.delete', this.uuid);
   };
+  Actor.prototype.getInfo = function() {
+    return this;
+  };
+
   return Actor;
 });

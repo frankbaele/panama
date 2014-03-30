@@ -19,9 +19,9 @@ define([''], function () {
     if( ! topics.hasOwnProperty( topic ) ) {
       return false;
     }
-
     for( var i = 0, len = topics[ topic ].length; i < len; i++ ) {
-      if( topics[ topic ][ i ] === callback ) {
+      // Do string comparison because you cannot compare functions.
+      if( String(topics[ topic ][ i ]) === String(callback) ) {
         topics[ topic ].splice( i, 1 );
         return true;
       }
