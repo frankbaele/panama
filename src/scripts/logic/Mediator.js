@@ -32,7 +32,6 @@ define([''], function () {
   function publish() {
     var args = Array.prototype.slice.call( arguments );
     var topic = args.shift();
-
     if( ! topics.hasOwnProperty( topic ) ) {
       return false;
     }
