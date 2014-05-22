@@ -1,9 +1,12 @@
 define(['binaryHeap'], function (binaryHeap) {
 
-  // javascript-astar
-  // http://github.com/bgrins/javascript-astar
-  // Freely distributable under the MIT License.
-  // Implements the astar search algorithm in javascript using a binary heap.
+  /**
+   * javascript-astar
+   * http://github.com/bgrins/javascript-astar
+   * Freely distributable under the MIT License.
+   * Includes Binary Heap (with modifications) from Marijn Haverbeke.
+   * http://eloquentjavascript.net/appendix2.html
+   */
 
   var astar = {
     init: function (grid) {

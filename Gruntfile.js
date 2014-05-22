@@ -108,7 +108,7 @@ module.exports = function (grunt) {
               }
             },
             warnings: true,
-            mangle: false
+            mangle: true
           }
         }
       }

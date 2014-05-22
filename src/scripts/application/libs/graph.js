@@ -1,10 +1,4 @@
 define(['graphNode'], function (graphNode) {
-  // javascript-astar
-  // http://github.com/bgrins/javascript-astar
-  // Freely distributable under the MIT License.
-  // Includes Binary Heap (with modifications) from Marijn Haverbeke.
-  // http://eloquentjavascript.net/appendix2.html
-
 
   // Creates a graph class used in the astar search algorithm.
   function graph(grid) {

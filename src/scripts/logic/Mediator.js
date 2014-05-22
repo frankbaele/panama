@@ -1,9 +1,11 @@
 define([''], function () {
-  /*
-   url: http://carldanley.com/js-mediator-pattern/
-   Mediator.subscribe( 'some event', Subscriber );
-   Mediator.publish( 'some event', 'foo bar' ); // console logs "foo bar"
+
+  /**
+   * url: http://carldanley.com/js-mediator-pattern/
+   * Mediator.subscribe( 'some event', Subscriber );
+   * Mediator.publish( 'some event', 'foo bar' ); // console logs "foo bar"
    */
+
   topics = {};
 
   function subscribe( topic, callback ) {

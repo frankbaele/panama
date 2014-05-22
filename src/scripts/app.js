@@ -8,7 +8,7 @@ define([
 
   var app = angular.module('panama', ['ui.router']);
 
-  app.config(function ($stateProvider) {
+  app.config(['$stateProvider', function ($stateProvider) {
     //
     // Now set up the states
     $stateProvider
@@ -32,7 +32,7 @@ define([
           }
         }
       });
-  });
+  }]);
   app.controller('uiController', uiController);
   app.controller('gameController', gameController);
   app.controller('canvasController', CanvasController);
