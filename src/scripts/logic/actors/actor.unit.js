@@ -1,3 +1,4 @@
+
 define(['actor', 'eventmanager', 'astar', 'world', 'underscore'], function (actor, eventmanager, astar, world) {
 
   function unit(sprite, coordinates) {
