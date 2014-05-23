@@ -1,11 +1,11 @@
-require.config({
+requirejs.config({
   paths: {
-    jQuery: 'scripts/vendor/jquery-2.0.3.min',
-    underscore: 'scripts/vendor/lodash.min',
-    text: 'scripts/vendor/require.text',
-    keypress: 'scripts/vendor/keypress',
-    angular: 'scripts/vendor/angular.min',
-    'angular-ui-router': 'scripts/vendor/angular-ui-router.min'
+    jQuery: './scripts/vendor/jquery-2.0.3.min',
+    underscore: './scripts/vendor/lodash.min',
+    text: './scripts/vendor/require.text',
+    keypress: './scripts/vendor/keypress',
+    angular: './scripts/vendor/angular.min',
+    'angular-ui-router': './scripts/vendor/angular-ui-router.min'
   },
   shim: {
     'angular' : {
@@ -23,4 +23,4 @@ require.config({
   },
   deps:['angular']
 });
-require( ['scripts/app']);
+requirejs( ['./scripts/app']);
