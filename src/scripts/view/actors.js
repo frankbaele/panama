@@ -13,19 +13,19 @@ define(['eventmanager', 'sprite', 'standardlib', 'world', 'canvas', 'actorList',
 
   function update() {
     var inbound = {x:0, y:0};
-    if (pressedkeys.up == 1) {
-      inbound.y--;0
+    if (pressedkeys.up === 1) {
+      inbound.y--;
       inbound.x--;
     }
-    if (pressedkeys.down == 1) {
+    if (pressedkeys.down === 1) {
       inbound.y++;
       inbound.x++;
     }
-    if (pressedkeys.left == 1) {
+    if (pressedkeys.left === 1) {
       inbound.x--;
       inbound.y++;
     }
-    if (pressedkeys.right == 1) {
+    if (pressedkeys.right === 1) {
       inbound.x++;
       inbound.y--;
     }
@@ -51,8 +51,8 @@ define(['eventmanager', 'sprite', 'standardlib', 'world', 'canvas', 'actorList',
     // transform the coordinates to the actual size of the map
     coordinates.x = -((coordinates.x - visible.x) * world.tileWidth + ((canvas.player.canvas.width) / 2));
     coordinates.y = -((coordinates.y - visible.y) * world.tileHeight + world.tileHeight/2);
-    $(canvas.player.canvas).css('margin-left', coordinates.x).css('marginTop', coordinates.y);
-    $(canvas.terrain.canvas).css('margin-left', coordinates.x).css('marginTop', coordinates.y);
+    jQuery(canvas.player.canvas).css('margin-left', coordinates.x).css('marginTop', coordinates.y);
+    jQuery(canvas.terrain.canvas).css('margin-left', coordinates.x).css('marginTop', coordinates.y);
   }
 
   eventmanager.subscribe('new.frame', function(){update();});

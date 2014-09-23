@@ -25,9 +25,11 @@ define(['actor', 'eventmanager', 'astar', 'world', 'underscore'], function (acto
   unit.prototype.move = function(){
     // If the path is empty do not send move commands
     if (this.path.length !== 0){
+      console.log(this.path);
       // get the first part of the path
       var first = _.first(this.path);
       this.path = _.rest(this.path);
+
       this.coordinates = {
         x: first.y,
         y: first.x

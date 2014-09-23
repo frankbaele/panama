@@ -21,6 +21,7 @@ require.config({
     RNG: 'scripts/application/libs/RNG',
     astar: 'scripts/application/libs/astar',
     world: 'scripts/application/libs/world',
+    collisionGrid: 'scripts/application/collisionGrid',
     graph: 'scripts/application/libs/graph',
     graphNode: 'scripts/application/libs/graphNode',
     binaryHeap: 'scripts/application/libs/binaryHeap',

@@ -1,4 +1,4 @@
-define(['RNG', 'underscore', 'graph'], function (RNG, _ ,graph) {
+define(['RNG', 'underscore', 'graph', 'collisionGrid'], function (RNG, _ ,graph, collisionGrid) {
   /**
    * @namespace
    * This code is an implementation of the ROT.js cellular map generation by Ondřej Žára, https://github.com/ondras/rot.js
@@ -30,6 +30,7 @@ define(['RNG', 'underscore', 'graph'], function (RNG, _ ,graph) {
   function init() {
     mapData = (_.compose(runAutomatonCycle, runAutomatonCycle, superSizemap, superSizemap, runAutomatonCycle, runAutomatonCycle, randomize, fillmap))();
     graph = new graph(mapData);
+    collisionGrid.init(mapData);
   }
 
   /**
