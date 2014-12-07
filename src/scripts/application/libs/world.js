@@ -5,8 +5,8 @@ define(['RNG', 'underscore', 'graph', 'collisionGrid'], function (RNG, _ ,graph,
    * Alea is licensed according to the http://en.wikipedia.org/wiki/MIT_License.
    */
     var
-    height = 25,
-    width = 25,
+    height = 15,
+    width = 15,
     graph,
     tileWidth = 128,
     tileHeight = 64,

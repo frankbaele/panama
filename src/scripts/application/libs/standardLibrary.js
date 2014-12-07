@@ -11,7 +11,6 @@ define(['world', 'eventmanager'], function (world, eventmanager) {
   }
 
   function isoToTwoD(posX, posY) {
-    console.log(posX, posY);
     var newCoordinates = {};
     newCoordinates.x = (posY + posX);
     newCoordinates.y = (posY - posX);

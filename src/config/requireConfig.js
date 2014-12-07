@@ -46,12 +46,7 @@ require.config({
     actorList: 'scripts/logic/actorList',
     actor: 'scripts/logic/actors/actor',
     'actor.unit': 'scripts/logic/actors/actor.unit',
-    'actor.unit.ai': 'scripts/logic/actors/actor.unit.ai',
-    'actor.unit.ai.enemy': 'scripts/logic/actors/actor.unit.ai.enemy',
-    'actor.unit.ai.friendly': 'scripts/logic/actors/actor.unit.ai.friendly',
-    'actor.unit.human': 'scripts/logic/actors/actor.unit.human',
-    'actor.unit.human.local': 'scripts/logic/actors/actor.unit.human.local',
-    'actor.unit.human.remote': 'scripts/logic/actors/actor.unit.human.remote',
+    'actor.unit.local': 'scripts/logic/actors/actor.unit.local',
     /* view */
     animate: 'scripts/view/animate',
     input: 'scripts/view/input',

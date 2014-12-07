@@ -2,7 +2,6 @@ define(['eventmanager'], function (eventmanager, world) {
   var data = '';
   var init = function (initData){
     this.data = initData;
-    console.dir(this.data);
   };
 
   var add = function () {

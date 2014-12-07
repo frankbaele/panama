@@ -4,19 +4,19 @@ define(['eventmanager', 'sprite', 'underscore'], function (eventmanager, sprite)
   var playerUuid = '';
   eventmanager.subscribe('actor.create', function(actor){
     actorList.push({
-      uuid: actor.uuid,
-      coordinates: actor.coordinates,
-      sprite: actor.sprite
+      uuid: actor.variables.uuid,
+      coordinates: actor.variables.coordinates,
+      sprite: actor.variables.sprite
     });
   });
   eventmanager.subscribe('actor.update', function(actor){
-    var oldActor = _.findWhere(actorList, {uuid: actor.uuid});
+    var oldActor = _.findWhere(actorList, {uuid: actor.variables.uuid});
     CleanupList.push({coordinates: oldActor.coordinates});
     actorList = _.without(actorList, oldActor);
     actorList.push({
-      uuid: actor.uuid,
-      coordinates: actor.coordinates,
-      sprite: actor.sprite
+      uuid: actor.variables.uuid,
+      coordinates: actor.variables.coordinates,
+      sprite: actor.variables.sprite
     });
   });
 
