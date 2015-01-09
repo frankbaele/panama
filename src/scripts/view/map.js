@@ -20,9 +20,9 @@ define(['eventmanager', 'canvas', 'world', 'standardlib', 'sprite', 'jQuery'], f
       for (var j = 0; world.width> j; j++){
         if(!world.outOfBound(coordinates.y + i,coordinates.x + j)){
           if (world.mapData[coordinates.y + i][coordinates.x + j] === 1){
-            sprite.draw("grass.png", coordinates.x + j, coordinates.y + i, "terrain");
+            sprite.draw("landscapeTiles_067.png", coordinates.x + j, coordinates.y + i, "terrain");
           } else {
-            sprite.draw("water.png", coordinates.x + j, coordinates.y + i, "terrain");
+            sprite.draw("landscapeTiles_066.png", coordinates.x + j, coordinates.y + i, "terrain");
           }
         }
       }
