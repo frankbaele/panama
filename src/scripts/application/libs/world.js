@@ -7,10 +7,10 @@ define(['RNG', 'underscore', 'graph', 'collisionGrid'], function (RNG, _ ,graph,
     var
     height = 15,
     width = 15,
-    graph,
-    tileWidth = 128,
-    tileHeight = 64,
+    tileWidth = 132,
+    tileHeight = 66,
     mapData = [],
+    mapGraph,
     born = [ 5, 6, 7, 8],
     survive = [ 4, 5, 6, 7, 8],
     topology = 8,
@@ -29,7 +29,7 @@ define(['RNG', 'underscore', 'graph', 'collisionGrid'], function (RNG, _ ,graph,
 
   function init() {
     mapData = (_.compose(runAutomatonCycle, runAutomatonCycle, superSizemap, superSizemap, runAutomatonCycle, runAutomatonCycle, randomize, fillmap))();
-    graph = new graph(mapData);
+    mapGraph = new graph(mapData);
     collisionGrid.init(mapData);
   }
 
@@ -186,7 +186,7 @@ define(['RNG', 'underscore', 'graph', 'collisionGrid'], function (RNG, _ ,graph,
     height: height,
     width: width,
     mapData: mapData,
-    graph: graph
+    graph: mapGraph
   };
 });
 

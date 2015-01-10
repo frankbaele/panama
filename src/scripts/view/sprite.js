@@ -46,11 +46,11 @@ define(['underscore', 'canvas', 'standardlib', 'world', 'assets'], function (_,c
     context.drawImage(img,
       spt.x, spt.y,
       spt.w, spt.h,
-      (coordinates.x - spt.w/2),
-      (coordinates.y - spt.h),
+      coordinates.x,
+      coordinates.y - (spt.h - world.tileHeight),
       spt.w,
       spt.h);
-  };
+  }
   return {
     draw: draw
   };
