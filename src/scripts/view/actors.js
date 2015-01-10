@@ -37,11 +37,11 @@ define(['eventmanager', 'sprite', 'standardlib', 'world', 'canvas', 'actorList',
       centerCoordinates.y = inbound.y;
     }
     _.each(actorList.getCleanUpList(),function(actor){
-      sprite.draw('water.png', actor.coordinates.x, actor.coordinates.y, 'player');
+      //sprite.draw('water.png', actor.coordinates.x, actor.coordinates.y, 'player');
     });
     actorList.clearCleanUpList();
     _.each(actorList.getActorList(),function(actor){
-      sprite.draw(actor.sprite, actor.coordinates.x, actor.coordinates.y, 'player');
+      //sprite.draw(actor.sprite, actor.coordinates.x, actor.coordinates.y, 'player');
     });
   }
 
