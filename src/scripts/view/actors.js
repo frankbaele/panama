@@ -41,7 +41,7 @@ define(['eventmanager', 'sprite', 'standardlib', 'world', 'canvas', 'actorList',
     });
     actorList.clearCleanUpList();
     _.each(actorList.getActorList(),function(actor){
-      sprite.draw(actor.sprite, actor.coordinates.x, actor.coordinates.y, 'player');
+      //sprite.draw(actor.sprite, actor.coordinates.x, actor.coordinates.y, 'player');
     });
   }
 

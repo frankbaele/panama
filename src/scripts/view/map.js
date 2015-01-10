@@ -41,19 +41,19 @@ define(['eventmanager', 'canvas', 'world', 'standardlib', 'sprite', 'jQuery'], f
 
   function update() {
     var inbound = {x:0, y:0};
-    if (pressedkeys.up == 1) {
+    if (pressedkeys.up === 1) {
       inbound.y--;
       inbound.x--;
     }
-    if (pressedkeys.down == 1) {
+    if (pressedkeys.down === 1) {
       inbound.y++;
       inbound.x++;
     }
-    if (pressedkeys.left == 1) {
+    if (pressedkeys.left === 1) {
       inbound.x--;
       inbound.y++;
     }
-    if (pressedkeys.right == 1) {
+    if (pressedkeys.right === 1) {
       inbound.x++;
       inbound.y--;
     }
