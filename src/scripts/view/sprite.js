@@ -22,13 +22,8 @@ define(['underscore', 'canvas', 'standardlib', 'world', 'assets'], function (_,c
         return;
     }
 
-    // transform the grid tile to iso coordinates
-    coordinates = standardlib.twoDToIso(posX, posY);
-    // transform the coordinates to the actual size of the map
-    coordinates.x = (coordinates.x * world.tileWidth + ((canvas.width) / 2));
-    coordinates.y = coordinates.y * world.tileHeight + world.tileHeight/2;
-    // For lop trough all the atlasses with find, because we want to exit this loop when the atlas is found.
 
+    // For lop trough all the atlasses with find, because we want to exit this loop when the atlas is found.
     _.findIndex(assets.loaded.atlas, function (sheet) {
       // Search for a sprite with the same sprite name
       spt = _.findWhere(sheet.sprite.sprites, {id: spriteName});
@@ -41,13 +36,17 @@ define(['underscore', 'canvas', 'standardlib', 'world', 'assets'], function (_,c
     if (_.isEmpty(spt)) {
       return;
     }
-    mapTrans.x = 0;
-    mapTrans.y = 0;
+    // transform the grid tile to iso coordinates
+    coordinates = standardlib.twoDToIso(posX, posY);
+    // transform the coordinates to the actual size of the map
+    coordinates.x = (coordinates.x * world.tileWidth + ((canvas.width) / 2)) - ((spt.w - world.tileWidth)/2);
+    coordinates.y = coordinates.y * world.tileHeight + (spt.w/2 - spt.h);
+
     context.drawImage(img,
       spt.x, spt.y,
       spt.w, spt.h,
-      coordinates.x - (spt.w - world.tileWidth),
-      coordinates.y - (spt.h - world.tileHeight),
+      coordinates.x,
+      coordinates.y,
       spt.w,
       spt.h);
   }

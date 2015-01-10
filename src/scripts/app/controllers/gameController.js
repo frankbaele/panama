@@ -9,7 +9,7 @@ define([
    * @constructor
    */
   gameController = function($scope){
-    var frank = new local('tower_13.png', {x:5, y:5});
+    var frank = new local('tower_13.png', {x:0, y:0});
   };
 
   // Register as global constructor function
