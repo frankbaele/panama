@@ -18,7 +18,7 @@ About
 
 ### What is Panama?
 
-A pirate rogue like coop game.
+A html 5 tower defence game build from scratch using MVC pattern en requirJS
 
 ### Current test build
 
