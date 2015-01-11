@@ -1,30 +1,21 @@
 Panama
 ======
 
-[About](#about)
+## What is Panama?
 
-* [Author](#author)
-* [What is Panama](#what-is-panama)
+A html 5 tower defence game build from scratch using MVC pattern en requirJS
 
-[Installation](#installation)
+## Current test build
 
-
-About
------
+http://frankbaele.github.io/panama/
 
 ## Author
 
 [Frank Baele](http://github.com/frankbaele)
 
-### What is Panama?
 
-A html 5 tower defence game build from scratch using MVC pattern en requirJS
 
-### Current test build
-
-http://frankbaele.github.io/panama/
-
-Installation
+Local setup
 ------------
 
 ## Dependencies
