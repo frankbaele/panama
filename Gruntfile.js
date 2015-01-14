@@ -123,7 +123,6 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-requirejs');
-  grunt.loadNpmTasks('grunt-node-webkit-builder');
   // Task aliases and tasks
   grunt.registerTask('server', [
     'connect',
