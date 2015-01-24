@@ -51,7 +51,6 @@ require.config({
     animate: 'scripts/view/animate',
     input: 'scripts/view/input',
     map: 'scripts/view/map',
-    sprite: 'scripts/view/sprite',
     actors: 'scripts/view/actors'
   },
   shim: {

@@ -1,4 +1,4 @@
-define(['eventmanager', 'sprite', 'underscore'], function (eventmanager, sprite) {
+define(['eventmanager', 'underscore'], function (eventmanager, sprite) {
   var actorList = [];
   var CleanupList = [];
   var playerUuid = '';

@@ -5,8 +5,8 @@ define(['RNG', 'underscore', 'graph', 'collisionGrid'], function (RNG, _ ,graph,
    * Alea is licensed according to the http://en.wikipedia.org/wiki/MIT_License.
    */
     var
-    height = 15,
-    width = 15,
+    height = 30,
+    width = 30,
     tileWidth = 132,
     tileHeight = 66,
     mapData = [],
@@ -28,7 +28,7 @@ define(['RNG', 'underscore', 'graph', 'collisionGrid'], function (RNG, _ ,graph,
 
 
   function init() {
-    mapData = (_.compose(runAutomatonCycle, runAutomatonCycle, superSizemap, superSizemap, runAutomatonCycle, runAutomatonCycle, randomize, fillmap))();
+    mapData = (_.compose(runAutomatonCycle, superSizemap, runAutomatonCycle, runAutomatonCycle, randomize, fillmap))();
     mapGraph = new graph(mapData);
     collisionGrid.init(mapData);
   }
