@@ -1,152 +1,44 @@
 {"frames": [
 
 {
-	"filename": "landscapeTiles_000.png",
-	"frame": {"x":806,"y":172,"w":132,"h":83},
+	"filename": "crystals_1.png",
+	"frame": {"x":407,"y":576,"w":132,"h":112},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":83},
-	"sourceSize": {"w":132,"h":83},
+	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":112},
+	"sourceSize": {"w":132,"h":112},
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
-	"filename": "landscapeTiles_001.png",
-	"frame": {"x":675,"y":457,"w":132,"h":99},
+	"filename": "crystals_2.png",
+	"frame": {"x":407,"y":692,"w":132,"h":121},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
-	"sourceSize": {"w":132,"h":99},
+	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":121},
+	"sourceSize": {"w":132,"h":121},
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
-	"filename": "landscapeTiles_002.png",
-	"frame": {"x":673,"y":257,"w":132,"h":83},
+	"filename": "crystals_3.png",
+	"frame": {"x":406,"y":815,"w":133,"h":127},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":83},
-	"sourceSize": {"w":132,"h":83},
+	"spriteSourceSize": {"x":0,"y":0,"w":133,"h":127},
+	"sourceSize": {"w":133,"h":127},
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
-	"filename": "landscapeTiles_003.png",
-	"frame": {"x":404,"y":257,"w":132,"h":83},
+	"filename": "crystals_4.png",
+	"frame": {"x":676,"y":576,"w":132,"h":114},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":83},
-	"sourceSize": {"w":132,"h":83},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_004.png",
-	"frame": {"x":809,"y":1467,"w":132,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
-	"sourceSize": {"w":132,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_005.png",
-	"frame": {"x":136,"y":1802,"w":132,"h":131},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":131},
-	"sourceSize": {"w":132,"h":131},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_006.png",
-	"frame": {"x":137,"y":1467,"w":132,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
-	"sourceSize": {"w":132,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_007.png",
-	"frame": {"x":270,"y":257,"w":132,"h":83},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":83},
-	"sourceSize": {"w":132,"h":83},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_008.png",
-	"frame": {"x":807,"y":1669,"w":132,"h":131},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":131},
-	"sourceSize": {"w":132,"h":131},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_009.png",
-	"frame": {"x":405,"y":1366,"w":133,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":133,"h":99},
-	"sourceSize": {"w":133,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_010.png",
-	"frame": {"x":136,"y":257,"w":132,"h":83},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":83},
-	"sourceSize": {"w":132,"h":83},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_011.png",
-	"frame": {"x":136,"y":1568,"w":132,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
-	"sourceSize": {"w":132,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_012.png",
-	"frame": {"x":538,"y":1802,"w":132,"h":131},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":131},
-	"sourceSize": {"w":132,"h":131},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_013.png",
-	"frame": {"x":270,"y":1568,"w":132,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
-	"sourceSize": {"w":132,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_014.png",
-	"frame": {"x":538,"y":257,"w":133,"h":83},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":133,"h":83},
-	"sourceSize": {"w":133,"h":83},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_015.png",
-	"frame": {"x":674,"y":1063,"w":132,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
-	"sourceSize": {"w":132,"h":99},
+	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":114},
+	"sourceSize": {"w":132,"h":114},
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
 	"filename": "landscapeTiles_016.png",
-	"frame": {"x":2,"y":257,"w":132,"h":83},
+	"frame": {"x":2,"y":172,"w":132,"h":83},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":83},
@@ -154,44 +46,8 @@
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
-	"filename": "landscapeTiles_017.png",
-	"frame": {"x":404,"y":1802,"w":132,"h":131},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":131},
-	"sourceSize": {"w":132,"h":131},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_018.png",
-	"frame": {"x":136,"y":1063,"w":132,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
-	"sourceSize": {"w":132,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_019.png",
-	"frame": {"x":539,"y":861,"w":133,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":133,"h":99},
-	"sourceSize": {"w":133,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_020.png",
-	"frame": {"x":485,"y":2,"w":133,"h":83},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":133,"h":83},
-	"sourceSize": {"w":133,"h":83},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
 	"filename": "landscapeTiles_021.png",
-	"frame": {"x":2,"y":1265,"w":132,"h":99},
+	"frame": {"x":538,"y":273,"w":132,"h":99},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
@@ -200,52 +56,16 @@
 },
 {
 	"filename": "landscapeTiles_022.png",
-	"frame": {"x":136,"y":1265,"w":132,"h":99},
+	"frame": {"x":806,"y":273,"w":132,"h":99},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
 	"sourceSize": {"w":132,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_023.png",
-	"frame": {"x":806,"y":1164,"w":132,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
-	"sourceSize": {"w":132,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_024.png",
-	"frame": {"x":538,"y":1164,"w":132,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
-	"sourceSize": {"w":132,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_025.png",
-	"frame": {"x":270,"y":1265,"w":132,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
-	"sourceSize": {"w":132,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_026.png",
-	"frame": {"x":538,"y":1265,"w":133,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":133,"h":99},
-	"sourceSize": {"w":133,"h":99},
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
 	"filename": "landscapeTiles_027.png",
-	"frame": {"x":807,"y":1265,"w":133,"h":99},
+	"frame": {"x":809,"y":374,"w":133,"h":99},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":133,"h":99},
@@ -254,7 +74,7 @@
 },
 {
 	"filename": "landscapeTiles_028.png",
-	"frame": {"x":2,"y":1366,"w":132,"h":99},
+	"frame": {"x":136,"y":374,"w":132,"h":99},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
@@ -263,52 +83,16 @@
 },
 {
 	"filename": "landscapeTiles_029.png",
-	"frame": {"x":673,"y":1265,"w":132,"h":99},
+	"frame": {"x":672,"y":273,"w":132,"h":99},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
 	"sourceSize": {"w":132,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_030.png",
-	"frame": {"x":404,"y":1265,"w":132,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
-	"sourceSize": {"w":132,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_031.png",
-	"frame": {"x":672,"y":1164,"w":132,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
-	"sourceSize": {"w":132,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_032.png",
-	"frame": {"x":404,"y":1164,"w":132,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
-	"sourceSize": {"w":132,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_033.png",
-	"frame": {"x":270,"y":1063,"w":133,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":133,"h":99},
-	"sourceSize": {"w":133,"h":99},
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
 	"filename": "landscapeTiles_034.png",
-	"frame": {"x":405,"y":1063,"w":133,"h":99},
+	"frame": {"x":542,"y":475,"w":133,"h":99},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":133,"h":99},
@@ -317,7 +101,7 @@
 },
 {
 	"filename": "landscapeTiles_035.png",
-	"frame": {"x":2,"y":87,"w":132,"h":83},
+	"frame": {"x":404,"y":87,"w":132,"h":83},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":83},
@@ -326,7 +110,7 @@
 },
 {
 	"filename": "landscapeTiles_036.png",
-	"frame": {"x":673,"y":1669,"w":132,"h":131},
+	"frame": {"x":810,"y":815,"w":132,"h":131},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":131},
@@ -335,132 +119,6 @@
 },
 {
 	"filename": "landscapeTiles_037.png",
-	"frame": {"x":271,"y":87,"w":132,"h":83},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":83},
-	"sourceSize": {"w":132,"h":83},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_038.png",
-	"frame": {"x":540,"y":1063,"w":132,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
-	"sourceSize": {"w":132,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_039.png",
-	"frame": {"x":808,"y":1063,"w":132,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
-	"sourceSize": {"w":132,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_040.png",
-	"frame": {"x":136,"y":1164,"w":132,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
-	"sourceSize": {"w":132,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_041.png",
-	"frame": {"x":136,"y":1366,"w":133,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":133,"h":99},
-	"sourceSize": {"w":133,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_042.png",
-	"frame": {"x":136,"y":87,"w":133,"h":83},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":133,"h":83},
-	"sourceSize": {"w":133,"h":83},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_043.png",
-	"frame": {"x":2,"y":1164,"w":132,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
-	"sourceSize": {"w":132,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_044.png",
-	"frame": {"x":754,"y":2,"w":132,"h":83},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":83},
-	"sourceSize": {"w":132,"h":83},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_045.png",
-	"frame": {"x":620,"y":2,"w":132,"h":83},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":83},
-	"sourceSize": {"w":132,"h":83},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_046.png",
-	"frame": {"x":2,"y":356,"w":132,"h":97},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":97},
-	"sourceSize": {"w":132,"h":97},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_047.png",
-	"frame": {"x":2,"y":1063,"w":132,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
-	"sourceSize": {"w":132,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_048.png",
-	"frame": {"x":672,"y":1568,"w":133,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":133,"h":99},
-	"sourceSize": {"w":133,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_049.png",
-	"frame": {"x":2,"y":1669,"w":133,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":133,"h":99},
-	"sourceSize": {"w":133,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_050.png",
-	"frame": {"x":404,"y":1568,"w":132,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
-	"sourceSize": {"w":132,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_051.png",
 	"frame": {"x":83,"y":2,"w":132,"h":83},
 	"rotated": false,
 	"trimmed": false,
@@ -469,7 +127,88 @@
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
-	"filename": "landscapeTiles_052.png",
+	"filename": "landscapeTiles_040.png",
+	"frame": {"x":404,"y":273,"w":132,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
+	"sourceSize": {"w":132,"h":99},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "landscapeTiles_041.png",
+	"frame": {"x":677,"y":475,"w":133,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":133,"h":99},
+	"sourceSize": {"w":133,"h":99},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "landscapeTiles_042.png",
+	"frame": {"x":404,"y":172,"w":133,"h":83},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":133,"h":83},
+	"sourceSize": {"w":133,"h":83},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "landscapeTiles_043.png",
+	"frame": {"x":270,"y":374,"w":132,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
+	"sourceSize": {"w":132,"h":99},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "landscapeTiles_044.png",
+	"frame": {"x":753,"y":2,"w":132,"h":83},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":83},
+	"sourceSize": {"w":132,"h":83},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "landscapeTiles_045.png",
+	"frame": {"x":136,"y":87,"w":132,"h":83},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":83},
+	"sourceSize": {"w":132,"h":83},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "landscapeTiles_048.png",
+	"frame": {"x":272,"y":475,"w":133,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":133,"h":99},
+	"sourceSize": {"w":133,"h":99},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "landscapeTiles_049.png",
+	"frame": {"x":2,"y":475,"w":133,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":133,"h":99},
+	"sourceSize": {"w":133,"h":99},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "landscapeTiles_050.png",
+	"frame": {"x":270,"y":273,"w":132,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
+	"sourceSize": {"w":132,"h":99},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "landscapeTiles_051.png",
 	"frame": {"x":217,"y":2,"w":132,"h":83},
 	"rotated": false,
 	"trimmed": false,
@@ -478,8 +217,8 @@
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
-	"filename": "landscapeTiles_053.png",
-	"frame": {"x":351,"y":2,"w":132,"h":83},
+	"filename": "landscapeTiles_052.png",
+	"frame": {"x":2,"y":87,"w":132,"h":83},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":83},
@@ -487,26 +226,17 @@
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
-	"filename": "landscapeTiles_054.png",
-	"frame": {"x":807,"y":257,"w":132,"h":97},
+	"filename": "landscapeTiles_053.png",
+	"frame": {"x":270,"y":87,"w":132,"h":83},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":97},
-	"sourceSize": {"w":132,"h":97},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_055.png",
-	"frame": {"x":538,"y":1568,"w":132,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
-	"sourceSize": {"w":132,"h":99},
+	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":83},
+	"sourceSize": {"w":132,"h":83},
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
 	"filename": "landscapeTiles_056.png",
-	"frame": {"x":405,"y":87,"w":133,"h":83},
+	"frame": {"x":539,"y":172,"w":133,"h":83},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":133,"h":83},
@@ -514,17 +244,8 @@
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
-	"filename": "landscapeTiles_057.png",
-	"frame": {"x":807,"y":1568,"w":133,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":133,"h":99},
-	"sourceSize": {"w":133,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
 	"filename": "landscapeTiles_058.png",
-	"frame": {"x":540,"y":87,"w":132,"h":83},
+	"frame": {"x":619,"y":2,"w":132,"h":83},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":83},
@@ -533,7 +254,7 @@
 },
 {
 	"filename": "landscapeTiles_059.png",
-	"frame": {"x":675,"y":1366,"w":132,"h":99},
+	"frame": {"x":2,"y":273,"w":132,"h":99},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
@@ -542,7 +263,7 @@
 },
 {
 	"filename": "landscapeTiles_060.png",
-	"frame": {"x":404,"y":172,"w":132,"h":83},
+	"frame": {"x":351,"y":2,"w":132,"h":83},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":83},
@@ -551,7 +272,7 @@
 },
 {
 	"filename": "landscapeTiles_061.png",
-	"frame": {"x":672,"y":172,"w":132,"h":83},
+	"frame": {"x":672,"y":87,"w":132,"h":83},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":83},
@@ -559,44 +280,8 @@
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
-	"filename": "landscapeTiles_062.png",
-	"frame": {"x":2,"y":1568,"w":132,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
-	"sourceSize": {"w":132,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_063.png",
-	"frame": {"x":2,"y":1467,"w":133,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":133,"h":99},
-	"sourceSize": {"w":133,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_064.png",
-	"frame": {"x":540,"y":1366,"w":133,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":133,"h":99},
-	"sourceSize": {"w":133,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_065.png",
-	"frame": {"x":271,"y":1366,"w":132,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
-	"sourceSize": {"w":132,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
 	"filename": "landscapeTiles_066.png",
-	"frame": {"x":538,"y":172,"w":132,"h":83},
+	"frame": {"x":485,"y":2,"w":132,"h":83},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":83},
@@ -605,7 +290,7 @@
 },
 {
 	"filename": "landscapeTiles_067.png",
-	"frame": {"x":406,"y":1467,"w":132,"h":99},
+	"frame": {"x":136,"y":273,"w":132,"h":99},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
@@ -614,7 +299,7 @@
 },
 {
 	"filename": "landscapeTiles_068.png",
-	"frame": {"x":675,"y":1467,"w":132,"h":99},
+	"frame": {"x":674,"y":172,"w":132,"h":99},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
@@ -631,7 +316,7 @@
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
-	"filename": "landscapeTiles_070.png",
+	"filename": "landscapeTiles_073.png",
 	"frame": {"x":136,"y":172,"w":132,"h":83},
 	"rotated": false,
 	"trimmed": false,
@@ -640,44 +325,8 @@
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
-	"filename": "landscapeTiles_071.png",
-	"frame": {"x":540,"y":1467,"w":133,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":133,"h":99},
-	"sourceSize": {"w":133,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_072.png",
-	"frame": {"x":271,"y":1467,"w":133,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":133,"h":99},
-	"sourceSize": {"w":133,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_073.png",
-	"frame": {"x":674,"y":87,"w":132,"h":83},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":83},
-	"sourceSize": {"w":132,"h":83},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_074.png",
-	"frame": {"x":270,"y":1164,"w":132,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
-	"sourceSize": {"w":132,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
 	"filename": "landscapeTiles_075.png",
-	"frame": {"x":808,"y":962,"w":132,"h":99},
+	"frame": {"x":808,"y":172,"w":132,"h":99},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
@@ -686,7 +335,7 @@
 },
 {
 	"filename": "landscapeTiles_076.png",
-	"frame": {"x":2,"y":172,"w":132,"h":83},
+	"frame": {"x":538,"y":87,"w":132,"h":83},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":83},
@@ -695,7 +344,7 @@
 },
 {
 	"filename": "landscapeTiles_077.png",
-	"frame": {"x":808,"y":87,"w":132,"h":83},
+	"frame": {"x":806,"y":87,"w":132,"h":83},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":83},
@@ -703,8 +352,8 @@
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
-	"filename": "landscapeTiles_078.png",
-	"frame": {"x":2,"y":558,"w":133,"h":99},
+	"filename": "rocks_1.png",
+	"frame": {"x":404,"y":374,"w":133,"h":99},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":133,"h":99},
@@ -712,8 +361,8 @@
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
-	"filename": "landscapeTiles_079.png",
-	"frame": {"x":540,"y":457,"w":133,"h":99},
+	"filename": "rocks_2.png",
+	"frame": {"x":539,"y":374,"w":133,"h":99},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":133,"h":99},
@@ -721,62 +370,26 @@
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
-	"filename": "landscapeTiles_080.png",
-	"frame": {"x":272,"y":457,"w":132,"h":99},
+	"filename": "rocks_3.png",
+	"frame": {"x":137,"y":576,"w":133,"h":102},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
-	"sourceSize": {"w":132,"h":99},
+	"spriteSourceSize": {"x":0,"y":0,"w":133,"h":102},
+	"sourceSize": {"w":133,"h":102},
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
-	"filename": "landscapeTiles_081.png",
-	"frame": {"x":137,"y":558,"w":132,"h":99},
+	"filename": "rocks_4.png",
+	"frame": {"x":2,"y":576,"w":133,"h":102},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
-	"sourceSize": {"w":132,"h":99},
+	"spriteSourceSize": {"x":0,"y":0,"w":133,"h":102},
+	"sourceSize": {"w":133,"h":102},
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
-	"filename": "landscapeTiles_082.png",
-	"frame": {"x":405,"y":558,"w":132,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
-	"sourceSize": {"w":132,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_083.png",
-	"frame": {"x":808,"y":558,"w":132,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
-	"sourceSize": {"w":132,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_084.png",
-	"frame": {"x":674,"y":558,"w":132,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
-	"sourceSize": {"w":132,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_085.png",
-	"frame": {"x":2,"y":659,"w":132,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
-	"sourceSize": {"w":132,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_086.png",
-	"frame": {"x":539,"y":558,"w":133,"h":99},
+	"filename": "rocks_5.png",
+	"frame": {"x":137,"y":475,"w":133,"h":99},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":133,"h":99},
@@ -784,8 +397,8 @@
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
-	"filename": "landscapeTiles_087.png",
-	"frame": {"x":137,"y":457,"w":133,"h":99},
+	"filename": "rocks_6.png",
+	"frame": {"x":407,"y":475,"w":133,"h":99},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":133,"h":99},
@@ -793,8 +406,8 @@
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
-	"filename": "landscapeTiles_088.png",
-	"frame": {"x":406,"y":457,"w":132,"h":99},
+	"filename": "rocks_7.png",
+	"frame": {"x":2,"y":374,"w":132,"h":99},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
@@ -802,354 +415,12 @@
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
-	"filename": "landscapeTiles_089.png",
-	"frame": {"x":807,"y":356,"w":132,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
-	"sourceSize": {"w":132,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_090.png",
-	"frame": {"x":270,"y":356,"w":132,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
-	"sourceSize": {"w":132,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_091.png",
-	"frame": {"x":538,"y":356,"w":132,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
-	"sourceSize": {"w":132,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_092.png",
-	"frame": {"x":404,"y":356,"w":132,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
-	"sourceSize": {"w":132,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_093.png",
-	"frame": {"x":2,"y":457,"w":133,"h":99},
+	"filename": "rocks_8.png",
+	"frame": {"x":674,"y":374,"w":133,"h":99},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":133,"h":99},
 	"sourceSize": {"w":133,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_094.png",
-	"frame": {"x":672,"y":356,"w":133,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":133,"h":99},
-	"sourceSize": {"w":133,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_095.png",
-	"frame": {"x":271,"y":558,"w":132,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
-	"sourceSize": {"w":132,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_096.png",
-	"frame": {"x":404,"y":659,"w":132,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
-	"sourceSize": {"w":132,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_097.png",
-	"frame": {"x":136,"y":659,"w":132,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
-	"sourceSize": {"w":132,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_098.png",
-	"frame": {"x":539,"y":1669,"w":132,"h":131},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":131},
-	"sourceSize": {"w":132,"h":131},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_099.png",
-	"frame": {"x":674,"y":861,"w":132,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
-	"sourceSize": {"w":132,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_100.png",
-	"frame": {"x":405,"y":861,"w":132,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
-	"sourceSize": {"w":132,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_101.png",
-	"frame": {"x":136,"y":861,"w":133,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":133,"h":99},
-	"sourceSize": {"w":133,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_102.png",
-	"frame": {"x":808,"y":861,"w":133,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":133,"h":99},
-	"sourceSize": {"w":133,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_103.png",
-	"frame": {"x":136,"y":962,"w":132,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
-	"sourceSize": {"w":132,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_104.png",
-	"frame": {"x":539,"y":962,"w":132,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
-	"sourceSize": {"w":132,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_105.png",
-	"frame": {"x":405,"y":962,"w":132,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
-	"sourceSize": {"w":132,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_106.png",
-	"frame": {"x":405,"y":1669,"w":132,"h":131},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":131},
-	"sourceSize": {"w":132,"h":131},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_107.png",
-	"frame": {"x":673,"y":962,"w":133,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":133,"h":99},
-	"sourceSize": {"w":133,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_108.png",
-	"frame": {"x":270,"y":962,"w":133,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":133,"h":99},
-	"sourceSize": {"w":133,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_109.png",
-	"frame": {"x":270,"y":1802,"w":132,"h":131},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":131},
-	"sourceSize": {"w":132,"h":131},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_110.png",
-	"frame": {"x":2,"y":962,"w":132,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
-	"sourceSize": {"w":132,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_111.png",
-	"frame": {"x":271,"y":861,"w":132,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
-	"sourceSize": {"w":132,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_112.png",
-	"frame": {"x":2,"y":861,"w":132,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
-	"sourceSize": {"w":132,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_113.png",
-	"frame": {"x":672,"y":659,"w":133,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":133,"h":99},
-	"sourceSize": {"w":133,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_114.png",
-	"frame": {"x":807,"y":659,"w":133,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":133,"h":99},
-	"sourceSize": {"w":133,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_115.png",
-	"frame": {"x":2,"y":1802,"w":132,"h":131},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":131},
-	"sourceSize": {"w":132,"h":131},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_116.png",
-	"frame": {"x":538,"y":659,"w":132,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
-	"sourceSize": {"w":132,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_117.png",
-	"frame": {"x":270,"y":659,"w":132,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
-	"sourceSize": {"w":132,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_118.png",
-	"frame": {"x":2,"y":760,"w":133,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":133,"h":99},
-	"sourceSize": {"w":133,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_119.png",
-	"frame": {"x":271,"y":760,"w":132,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
-	"sourceSize": {"w":132,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_120.png",
-	"frame": {"x":271,"y":1669,"w":132,"h":129},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":129},
-	"sourceSize": {"w":132,"h":129},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_121.png",
-	"frame": {"x":674,"y":760,"w":132,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
-	"sourceSize": {"w":132,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_122.png",
-	"frame": {"x":539,"y":760,"w":133,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":133,"h":99},
-	"sourceSize": {"w":133,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_123.png",
-	"frame": {"x":808,"y":760,"w":132,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
-	"sourceSize": {"w":132,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_124.png",
-	"frame": {"x":137,"y":1669,"w":132,"h":129},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":129},
-	"sourceSize": {"w":132,"h":129},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_125.png",
-	"frame": {"x":405,"y":760,"w":132,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
-	"sourceSize": {"w":132,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_126.png",
-	"frame": {"x":137,"y":760,"w":132,"h":99},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":99},
-	"sourceSize": {"w":132,"h":99},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "landscapeTiles_127.png",
-	"frame": {"x":136,"y":356,"w":132,"h":98},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":98},
-	"sourceSize": {"w":132,"h":98},
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
@@ -1160,14 +431,122 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":79,"h":72},
 	"sourceSize": {"w":79,"h":72},
 	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "trees_1.png",
+	"frame": {"x":272,"y":576,"w":133,"h":111},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":133,"h":111},
+	"sourceSize": {"w":133,"h":111},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "trees_10.png",
+	"frame": {"x":676,"y":815,"w":132,"h":130},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":130},
+	"sourceSize": {"w":132,"h":130},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "trees_11.png",
+	"frame": {"x":137,"y":692,"w":133,"h":118},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":133,"h":118},
+	"sourceSize": {"w":133,"h":118},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "trees_12.png",
+	"frame": {"x":2,"y":815,"w":133,"h":123},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":133,"h":123},
+	"sourceSize": {"w":133,"h":123},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "trees_2.png",
+	"frame": {"x":676,"y":692,"w":133,"h":121},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":133,"h":121},
+	"sourceSize": {"w":133,"h":121},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "trees_3.png",
+	"frame": {"x":541,"y":576,"w":133,"h":113},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":133,"h":113},
+	"sourceSize": {"w":133,"h":113},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "trees_4.png",
+	"frame": {"x":541,"y":815,"w":133,"h":127},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":133,"h":127},
+	"sourceSize": {"w":133,"h":127},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "trees_5.png",
+	"frame": {"x":272,"y":815,"w":132,"h":126},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":126},
+	"sourceSize": {"w":132,"h":126},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "trees_6.png",
+	"frame": {"x":137,"y":815,"w":133,"h":124},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":133,"h":124},
+	"sourceSize": {"w":133,"h":124},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "trees_7.png",
+	"frame": {"x":541,"y":692,"w":133,"h":121},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":133,"h":121},
+	"sourceSize": {"w":133,"h":121},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "trees_8.png",
+	"frame": {"x":272,"y":692,"w":133,"h":118},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":133,"h":118},
+	"sourceSize": {"w":133,"h":118},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "trees_9.png",
+	"frame": {"x":2,"y":692,"w":133,"h":116},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":133,"h":116},
+	"sourceSize": {"w":133,"h":116},
+	"pivot": {"x":0.5,"y":0.5}
 }],
 "meta": {
 	"app": "http://www.codeandweb.com/texturepacker",
 	"version": "1.0",
 	"image": "panama.png",
 	"format": "RGBA8888",
-	"size": {"w":943,"h":1935},
+	"size": {"w":944,"h":948},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:c59e42101b5571e92fac7bdba068572b:e81e7cecd480ce3172fac344014ac032:16acbfc3e7af3822b64fc3d89d57c998$"
+	"smartupdate": "$TexturePacker:SmartUpdate:7bc72967977796dd5f34976260e42606:f6d04fc84b89c2945de7720f7cf9cdfa:16acbfc3e7af3822b64fc3d89d57c998$"
 }
 }

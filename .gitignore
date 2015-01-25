@@ -19,3 +19,4 @@ results
 dist
 npm-debug.log
 node_modules
+.idea
