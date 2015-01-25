@@ -4,23 +4,14 @@ define([
         'world',
         'standardlib',
         'assets',
-        'RNG',
         'underscore',
         'jQuery'
     ],
-    function (eventmanager, canvas, world, standardlib, assets, RNG) {
-        var visible = {x: 10, y: 10};
-        var centerCoordinates = {x: 10, y: 10};
-        var pressedkeys = {
-            up: 0,
-            down: 0,
-            left: 0,
-            right: 0
-        };
+    function (eventmanager, canvas, world, standardlib, assets) {
 
         function init() {
             draw();
-            center(centerCoordinates.x, centerCoordinates.y);
+            center(world.center);
         }
 
         function draw() {
@@ -32,19 +23,26 @@ define([
                         if (world.mapData[coordinates.y + i][coordinates.x + j] === 1) {
                             drawTile({
                                 sprite: "trees_2.png",
-                                posX: coordinates.x + j,
-                                posY: coordinates.y + i
+                                x: coordinates.x + j,
+                                y: coordinates.y + i
                             });
                         } else {
                             drawTile({
                                 sprite: "landscapeTiles_067.png",
-                                posX: coordinates.x + j,
-                                posY: coordinates.y + i
+                                x: coordinates.x + j,
+                                y: coordinates.y + i
                             });
                         }
                     }
                 }
             }
+            // For reference mark the center of the map
+
+            drawTile({
+                sprite: "crystals_1.png",
+                x: world.center.x,
+                y: world.center.y
+            });
         }
         function drawTile(config) {
             var spt,
@@ -65,10 +63,10 @@ define([
             }
 
             // transform the grid tile to iso coordinates
-            coordinates = standardlib.twoDToIso(config.posX, config.posY);
+            coordinates = standardlib.twoDToIso(config.x, config.y);
             // transform the coordinates to the actual size of the map
             coordinates.x = (coordinates.x * world.tileWidth + ((canvas.terrain.canvas.width) / 2)) - ((spt.w - world.tileWidth) / 2) - world.tileWidth / 2;
-            coordinates.y = coordinates.y * world.tileHeight + (spt.w / 2 - spt.h);
+            coordinates.y = world.padding.y + coordinates.y * world.tileHeight + (spt.w / 2 - spt.h);
 
             canvas.terrain.context.drawImage(
                 img,
@@ -80,58 +78,25 @@ define([
                 spt.h);
         }
 
-        function center(posX, posY) {
+        function center(config) {
+            var xCorrection = canvas.actors.canvas.width/2;
+            var yCorrection = canvas.actors.canvas.height/2;
+
             // transform the grid tile to iso coordinates
-            var coordinates = standardlib.twoDToIso(posX, posY);
+            var coordinates = standardlib.twoDToIso(config.x, config.y);
             // transform the coordinates to the actual size of the map
-            coordinates.x = -((coordinates.x - visible.x) * world.tileWidth + ((canvas.terrain.canvas.width) / 2));
-            coordinates.y = -((coordinates.y - visible.y) * world.tileHeight + world.tileHeight / 2);
-            $(canvas.terrain.canvas).css('margin-left', coordinates.x).css('marginTop', coordinates.y);
+            coordinates.x = -((coordinates.x) * world.tileWidth + ((canvas.terrain.canvas.width) / 2) - xCorrection);
+            coordinates.y = -((coordinates.y - 1) * world.tileHeight + world.tileHeight / 2) + yCorrection;
+            $(canvas.terrain.canvas).css('margin-left', coordinates.x).css('margin-top', coordinates.y);
         }
 
-        function update() {
-            var inbound = {x: 0, y: 0};
-            if (pressedkeys.up === 1) {
-                inbound.y--;
-                inbound.x--;
-            }
-            if (pressedkeys.down === 1) {
-                inbound.y++;
-                inbound.x++;
-            }
-            if (pressedkeys.left === 1) {
-                inbound.x--;
-                inbound.y++;
-            }
-            if (pressedkeys.right === 1) {
-                inbound.x++;
-                inbound.y--;
-            }
-            // Only update the map position if there is a change.
-            if (inbound.x !== 0 || inbound.y !== 0) {
-                inbound = world.inBoundTile(centerCoordinates.x + inbound.x, centerCoordinates.y + inbound.y);
-                center(inbound.x, inbound.y);
-                centerCoordinates.x = inbound.x;
-                centerCoordinates.y = inbound.y;
-            }
+        function update(){
+            center(world.center);
         }
-
-        eventmanager.subscribe('game.init', function () {
-            init();
-        });
         eventmanager.subscribe('new.frame', function () {
             update();
         });
-        eventmanager.subscribe('pan.up', function (e) {
-            pressedkeys.up = e;
-        });
-        eventmanager.subscribe('pan.down', function (e) {
-            pressedkeys.down = e;
-        });
-        eventmanager.subscribe('pan.left', function (e) {
-            pressedkeys.left = e;
-        });
-        eventmanager.subscribe('pan.right', function (e) {
-            pressedkeys.right = e;
+        eventmanager.subscribe('game.init', function () {
+            init();
         });
     });

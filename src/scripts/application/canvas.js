@@ -8,8 +8,8 @@ define(['eventmanager', 'world'], function (eventmanager, world) {
     actors.canvas = document.getElementById("actorsCanvas");
     actors.context = actors.canvas.getContext("2d");
 
-    terrain.canvas.width = world.width * world.tileWidth;
-    terrain.canvas.height = world.height * world.tileHeight;
+    terrain.canvas.width = world.width * world.tileWidth + world.padding.x * 2;
+    terrain.canvas.height = world.height * world.tileHeight + world.padding.y * 2;
 
     actors.canvas.width = window.innerWidth;
     actors.canvas.height = window.innerHeight;

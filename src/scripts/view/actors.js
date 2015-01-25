@@ -19,7 +19,7 @@ define([
 
             });
         }
-        function drawTile(config) {
+        function drawActor(config) {
             var spt,
                 coordinates,
                 img;
