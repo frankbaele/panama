@@ -20,7 +20,7 @@ define([
         born = [5, 6, 7, 8],
         survive = [4, 5, 6, 7, 8],
         topology = 8,
-        center = {x: 0, y: 0},
+        center = {x: width, y: height},
         probability = 0.47,
         padding ={
             x: 50,

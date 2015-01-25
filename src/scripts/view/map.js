@@ -36,13 +36,6 @@ define([
                     }
                 }
             }
-            // For reference mark the center of the map
-
-            drawTile({
-                sprite: "crystals_1.png",
-                x: world.center.x,
-                y: world.center.y
-            });
         }
         function drawTile(config) {
             var spt,
