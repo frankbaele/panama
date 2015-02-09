@@ -1,16 +1,16 @@
 define(['actor.unit', 'eventmanager'], function (unit, eventmanager) {
+  return function (spec) {
+    var that = unit(spec);
+    var stats = {
+      focus : ''
+    }
+    _.extend(that.variables, stats);
 
-  var that = unit;
+    that.checkRightClick = function(e) {
+      that.variables.goal = e;
+      that.generatePath();
+    };
 
-  var stats = {
-    focus : ''
+    return that;
   }
-  _.extend(that.variables, stats);
-
-  that.checkRightClick = function(e) {
-    that.variables.goal = e;
-    that.generatePath();
-  };
-
-  return that;
 });
