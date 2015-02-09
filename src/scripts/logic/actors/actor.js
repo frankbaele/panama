@@ -1,64 +1,60 @@
-define(['eventmanager', 'standardlib', 'actorList'], function (eventmanager, standardlib) {
+define(['eventmanager', 'actorList', 'standardlib'], function (eventmanager, actorList, standardlib) {
+  var that = {};
 
-  var Actor = function(sprite, coordinates){
-    this.variables.coordinates = coordinates;
-    this.variables.sprite = sprite;
-    var that = this;
+  that.init = function(sprite, coordinates){
+    that.variables.coordinates = coordinates;
+    that.variables.sprite = sprite;
+    that.variables.uuid = standardlib.guid();
     // register all the event handlers
-    _.each(this.handlers, function(handlers, type){
-      if(type =='publish'){
-        _.each(handlers, function(handler, event){
-          eventmanager[type](event, eval(handler));
-        })
-      } else {
-        _.each(handlers, function(handler, event){
-          eventmanager[type](event, function(object){
-            eval(handler);
-          });
-        });
-      }
-
+    /*
+    _.each(that.handlers, function(handlers, type){
+      _.each(handlers, function(handler, event){
+        eventmanager[type](event,that[handler].apply());
+      });
     })
+    */
+
+    return that;
   };
-  Actor.prototype.variables = {
+
+  that.variables = {
     coordinates: '',
     sprite: '',
-    uuid: standardlib.guid(),
     hp: 0
-  }
+  };
 
-  Actor.prototype.handlers = {
+  that.handlers = {
     'publish' :{
-      'actor.create'  : 'that;'
+      'actor.create'  : 'getInfo'
     },
     'subscribe' : {
-      'mouse.click.right': 'that.checkRightClick(object);',
-      'mouse.click.left': 'that.checkLeftClick(object);',
-      'actor.selected': 'that.focus = object;',
-      'actor.unselected': 'if(that.focus === object){that.focus = "";}',
-      'actor.delete': 'if(that.focus === object){that.focus = "";}',
-      'new.gamecycle': 'that.move();'
-    }
-  };
-  Actor.prototype.checkLeftClick = function(e) {
-    if(e.x == this.variables.coordinates.x && e.y == this.variables.coordinates.y){
-      this.variables.selected = true;
-      eventmanager.publish('actor.selected', this.variables.uuid);
-    } else if (this.variables.selected){
-      this.variables.selected = false;
-      eventmanager.publish('actor.unselected', this.variables.uuid);
+      'mouse.click.right': 'checkRightClick',
+      'mouse.click.left': 'checkLeftClick',
+      'actor.selected': 'checkFocus',
+      'new.gamecycle': 'move'
     }
   };
 
-  Actor.prototype.delete = function() {
-    var that = this;
-    eventmanager.publish('actor.delete', this.variables.uuid);
+  that.checkLeftClick = function(e) {
+    if(e.x == that.variables.coordinates.x && e.y == that.variables.coordinates.y){
+      that.variables.selected = true;
+      eventmanager.publish('actor.selected', that.variables.uuid);
+    } else if (that.variables.selected){
+      that.variables.selected = false;
+      eventmanager.publish('actor.unselected', that.variables.uuid);
+    }
   };
 
-  Actor.prototype.getInfo = function() {
-    return this.variables;
+  that.checkFocus = function(uuid) {
+
+  };
+  that.getInfo = function () {
+    return that;
+  }
+  that.destroy = function () {
+    eventmanager.publish('actor.delete', variables.uuid);
   };
 
-  return Actor;
 
+  return that;
 });

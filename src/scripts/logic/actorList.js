@@ -1,30 +1,32 @@
 define(['eventmanager', 'underscore'], function (eventmanager, sprite) {
   var actorList = [];
-  var CleanupList = [];
-  var playerUuid = '';
+  var cleanupList = [];
+
   eventmanager.subscribe('actor.create', function(actor){
     actorList.push({
       uuid: actor.variables.uuid,
       coordinates: actor.variables.coordinates,
-      sprite: actor.variables.sprite
+      sprite: actor.variables.sprite,
+      rendered: false
     });
+
   });
   eventmanager.subscribe('actor.update', function(actor){
     var oldActor = _.findWhere(actorList, {uuid: actor.variables.uuid});
-    CleanupList.push({coordinates: oldActor.coordinates});
     actorList = _.without(actorList, oldActor);
     actorList.push({
       uuid: actor.variables.uuid,
       coordinates: actor.variables.coordinates,
-      sprite: actor.variables.sprite
+      sprite: actor.variables.sprite,
+      rendered: oldActor.rendered
     });
   });
 
   eventmanager.subscribe('actor.delete', function(uuid){
     // delete the give Actor from the list
-    var Actor = _.findWhere(actorList, {uuid: uuid});
-    CleanupList.push({coordinates: Actor.coordinates});
-    actorList = _.without(actorList, Actor);
+    var actor = _.findWhere(actorList, {uuid: uuid});
+    cleanupList.push(actor.variables.uuid);
+    actorList = _.without(actorList, actor);
   });
 
   var getActorList = function (){
@@ -32,11 +34,11 @@ define(['eventmanager', 'underscore'], function (eventmanager, sprite) {
   };
 
   var getCleanUpList = function (){
-    return CleanupList;
+    return cleanupList;
   };
 
   var clearCleanUpList = function (){
-    CleanupList = [];
+    cleanupList = [];
   };
 
   return {

@@ -1,7 +1,7 @@
 
 define(['actor', 'eventmanager', 'astar', 'world', 'underscore'], function (actor, eventmanager, astar, world) {
 
-  var unit = actor;
+  var that = actor;
 
   var stats = {
     path : [],
@@ -14,41 +14,44 @@ define(['actor', 'eventmanager', 'astar', 'world', 'underscore'], function (acto
     hp : 50,
     attack : 10
   }
-  // extend the existing variables with the new one
-  _.extend(unit.prototype.variables, stats);
 
-  unit.prototype.generatePath = function(actor) {
-    var start = world.graph.nodes[this.variables.coordinates.y][this.variables.coordinates.x];
-    var end = world.graph.nodes[this.variables.goal.y][this.variables.goal.x];
-    this.variables.path = astar.search(world.graph.nodes, start, end, true);
+  // extend the existing variables with the new one
+  _.extend(that.variables, stats);
+
+  that.generatePath = function() {
+    console.log(that);
+    var start = world.graph.nodes[that.variables.coordinates.y][that.variables.coordinates.x];
+    var end = world.graph.nodes[that.variables.goal.y][that.variables.goal.x];
+    that.variables.path = astar.search(world.graph.nodes, start, end, true);
   };
-  unit.prototype.move = function(){
+
+  that.move = function(){
 
     // If the path is empty do not send move commands
-    if (this.variables.path.length !== 0){
-      console.log('move');
+    if (that.variables.path.length !== 0){
       // get the first part of the path
-      var first = _.first(this.variables.path);
-      this.variables.path = _.rest(this.variables.path);
+      var first = _.first(that.variables.path);
+      that.variables.path = _.rest(that.variables.path);
 
-      this.variables.coordinates = {
+      that.variables.coordinates = {
         x: first.y,
         y: first.x
       };
-      eventmanager.publish('command', {event: 'actor.update', parameters:this});
+      eventmanager.publish('command', {event: 'actor.update', parameters:that});
     }
   };
-  unit.prototype.checkDeath = function(){
-    if (this.hp <= 0 && !this.death){
-      this.death = true;
-      this.delete();
+  that.checkDeath = function(){
+    if (that.hp <= 0 && !that.death){
+      that.death = true;
+      that.delete();
     }
   };
 
-  unit.prototype.attackActor = function(){
-    if(this.focus !== '' && this.focus !== this.uuid){
-      eventmanager.publish('command', {event: 'actor.attack.' + this.focus, parameters:this.attack});
+  that.attackActor = function(){
+    if(that.focus !== '' && that.focus !== that.uuid){
+      eventmanager.publish('command', {event: 'actor.attack.' + that.focus, parameters:that.attack});
     }
   };
-  return unit;
+
+  return that;
 });

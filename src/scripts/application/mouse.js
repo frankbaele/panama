@@ -31,21 +31,7 @@ define(['canvas', 'standardlib', 'eventmanager'], function (canvas, standardlib,
     return false;
   };
   var init = function() {
-    canvas.actors.canvas.addEventListener("click", function(e){
-        var coordinates = canvas.actors.canvas.relmouseCoordinates(e);
-        coordinates = standardlib.worldPosToGridPos(coordinates.x, coordinates.y, canvas.actors.canvas.width);
-        leftmouseCallback(coordinates);
-      },
-      false
-    );
 
-    canvas.actors.canvas.addEventListener("contextmenu", function(e){
-        var coordinates = canvas.actors.canvas.relmouseCoordinates(e);
-        coordinates = standardlib.worldPosToGridPos(coordinates.x, coordinates.y, canvas.actors.canvas.width);
-        rightmouseCallback(coordinates);
-      },
-      false
-    );
   };
 
   function setLeftmouseCallback(newCallback) {

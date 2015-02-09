@@ -72,8 +72,8 @@ define([
         }
 
         function center(config) {
-            var xCorrection = canvas.actors.canvas.width/2;
-            var yCorrection = canvas.actors.canvas.height/2;
+            var xCorrection =  window.innerWidth/2;
+            var yCorrection = window.innerHeight/2;
 
             // transform the grid tile to iso coordinates
             var coordinates = standardlib.twoDToIso(config.x, config.y);
