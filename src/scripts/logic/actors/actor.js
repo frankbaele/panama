@@ -1,14 +1,17 @@
 define(['eventmanager', 'actorList', 'standardlib'], function (eventmanager, actorList, standardlib) {
   return function (spec){
     var that = {};
-    // register all the event handlers
-    /*
-     _.each(that.handlers, function(handlers, type){
-     _.each(handlers, function(handler, event){
-     eventmanager[type](event,that[handler].apply());
-     });
-     })
-     */
+
+    that.init = function () {
+      // register all the event handlers
+      _.each(that.handlers, function(handlers, type){
+        _.each(handlers, function(handler, event_type){
+          eventmanager[type](event_type,that[handler]);
+        });
+      });
+    };
+
+
     that.variables = {
         coordinates : spec.coordinates,
         sprite : spec.sprite,
@@ -21,10 +24,8 @@ define(['eventmanager', 'actorList', 'standardlib'], function (eventmanager, act
         'actor.create'  : 'getInfo'
       },
       'subscribe' : {
-        'mouse.click.right': 'checkRightClick',
         'mouse.click.left': 'checkLeftClick',
-        'actor.selected': 'checkFocus',
-        'new.gamecycle': 'move'
+        'actor.selected': 'checkFocus'
       }
     };
     that.checkLeftClick = function(e) {

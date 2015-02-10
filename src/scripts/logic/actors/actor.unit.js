@@ -15,18 +15,21 @@ define(['actor', 'eventmanager', 'astar', 'world', 'underscore'], function (acto
       attack : 10
     }
 
+    var subscribe = {
+      'new.gamecycle': 'move'
+    };
+
     // extend the existing variables with the new one
     _.extend(that.variables, stats);
+    _.extend(that.handlers.subscribe, subscribe);
 
     that.generatePath = function() {
-      console.log(that);
       var start = world.graph.nodes[that.variables.coordinates.y][that.variables.coordinates.x];
       var end = world.graph.nodes[that.variables.goal.y][that.variables.goal.x];
       that.variables.path = astar.search(world.graph.nodes, start, end, true);
     };
 
     that.move = function(){
-
       // If the path is empty do not send move commands
       if (that.variables.path.length !== 0){
         // get the first part of the path
@@ -38,18 +41,6 @@ define(['actor', 'eventmanager', 'astar', 'world', 'underscore'], function (acto
           y: first.x
         };
         eventmanager.publish('command', {event: 'actor.update', parameters:that});
-      }
-    };
-    that.checkDeath = function(){
-      if (that.hp <= 0 && !that.death){
-        that.death = true;
-        that.delete();
-      }
-    };
-
-    that.attackActor = function(){
-      if(that.focus !== '' && that.focus !== that.uuid){
-        eventmanager.publish('command', {event: 'actor.attack.' + that.focus, parameters:that.attack});
       }
     };
     return that;

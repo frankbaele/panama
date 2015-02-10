@@ -43,6 +43,7 @@ define(['canvas', 'standardlib', 'eventmanager'], function (canvas, standardlib,
   }
 
   eventmanager.subscribe('game.init', function(){init();});
+
   return {
     setLeftmouseCallback: setLeftmouseCallback,
     setRightmouseCallback: setRightmouseCallback

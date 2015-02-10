@@ -6,9 +6,17 @@ define(['actor.unit', 'eventmanager'], function (unit, eventmanager) {
     }
     _.extend(that.variables, stats);
 
+    var subscribe = {
+      'mouse.click.right': 'checkRightClick'
+    };
+
+    _.extend(that.handlers.subscribe, subscribe);
+
     that.checkRightClick = function(e) {
-      that.variables.goal = e;
-      that.generatePath();
+      if(typeof e !== 'undefined'){
+        that.variables.goal = e;
+        that.generatePath();
+      }
     };
 
     return that;

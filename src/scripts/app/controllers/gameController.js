@@ -10,9 +10,8 @@ define([
    */
   gameController = function($scope){
     var player = local({sprite : 'tower_13.png', coordinates : {x:30, y:30}});
-    console.log(player);
+    player.init();
     var player_2 = local({sprite: 'tower_13.png', coordinates : {x:30, y:30}});
-    console.log(player_2);
   };
 
   // Register as global constructor function
