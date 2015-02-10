@@ -7,13 +7,13 @@ define(['actor.unit', 'eventmanager'], function (unit, eventmanager) {
     _.extend(that.variables, stats);
 
     var subscribe = {
-      'mouse.click.right': 'checkRightClick'
+      'map.click': 'checkMapClick'
     };
 
     _.extend(that.handlers.subscribe, subscribe);
 
-    that.checkRightClick = function(e) {
-      if(typeof e !== 'undefined'){
+    that.checkMapClick = function(e) {
+      if(that.selected){
         that.variables.goal = e;
         that.generatePath();
       }

@@ -42,12 +42,4 @@ define(['eventmanager', 'mouse', 'keypress'], function (eventmanager, mouse) {
     }
   ];
   keypress.register_many(my_combos);
-
-  mouse.setLeftmouseCallback(function(e){
-    eventmanager.publish('mouse.click.left', e);
-  });
-  mouse.setRightmouseCallback(function(e){
-    eventmanager.publish('mouse.click.right', e)
-  });
-
 });
