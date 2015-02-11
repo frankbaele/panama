@@ -8,6 +8,9 @@ define(['eventmanager', 'underscore'], function (eventmanager, sprite) {
       uuid: actor.variables.uuid,
       coordinates: actor.variables.coordinates,
       sprite: actor.variables.sprite,
+      width: actor.variables.width,
+      height: actor.variables.height,
+      direction: actor.variables.direction,
       rendered: false
     });
   });

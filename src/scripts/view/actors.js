@@ -7,12 +7,8 @@ define([
         'jQuery',
         'underscore'],
     function (eventmanager, standardlib, world, actorList, assets) {
-        function init() {
-            console.log(actorList.getActorList());
-        }
 
         function update() {
-
             _.each(actorList.getCleanUpList(), function (actor) {
                 $('canvas.' + actor.uuid).remove();
             });
@@ -21,18 +17,36 @@ define([
 
             _.each(actorList.getActorList(), function (actor) {
                 // Check if the actor is inbound, so we can clean up or create the canvas for the actor
-                if(!actorInbound(actor.coordinates)){
-                    if(!actor.rendered){
-                        $('.ActorsWrapper').append('<canvas class="' + actor.uuid + '"></canvas>');
+                if (actorInbound(actor.coordinates)) {
+                    if (!actor.rendered) {
+                        $('.ActorsWrapper').append('<canvas id="' + actor.uuid + '"></canvas>');
+                        actor.canvas = document.getElementById(actor.uuid);
+                        actor.canvas.width = actor.width;
+                        actor.canvas.height = actor.height;
                         actor.rendered = true;
+                        updateActor(actor);
+                    } else{
+                        updateActor(actor);
                     }
                 } else {
-                    if(actor.rendered){
-                        $('canvas.' + actor.uuid).remove();
+                    if (actor.rendered) {
+                        $('canvas#' + actor.uuid).remove();
                         actor.rendered = false;
+                        actor.canvas = '';
                     }
                 }
             });
+
+        }
+        function updateActor(actor){
+
+        }
+
+        function updateActorPosition(actor){
+
+        }
+
+        function updateActorSprite(actor){
 
         }
 
@@ -40,8 +54,7 @@ define([
             var coordinates = standardlib.twoDToIso(config.x, config.y);
             var isoCenter = standardlib.twoDToIso(world.center.x, world.center.y);
             var width = Math.ceil(window.innerWidth / world.tileWidth);
-            var height = Math.ceil(window.innerHeigh / world.tileHeight);
-
+            var height = Math.ceil(window.innerHeight / world.tileHeight);
             if ((coordinates.x >= (isoCenter.x - width / 2)) && coordinates.x <= (isoCenter.x + width / 2)) {
                 if ((coordinates.y >= (isoCenter.y - height / 2)) && coordinates.y <= (isoCenter.y + height / 2)) {
                     return true;
@@ -75,6 +88,7 @@ define([
 
         }
 
-  eventmanager.subscribe('new.frame', function(){update();});
-  eventmanager.subscribe('game.init', function(){init();});
+        eventmanager.subscribe('new.frame', function () {
+            update();
+        });
     });
