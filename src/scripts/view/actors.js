@@ -39,11 +39,28 @@ define([
 
         }
         function updateActor(actor){
+            updateActorPosition(actor);
+            updateActorSprite(actor);
+
 
         }
 
         function updateActorPosition(actor){
+            var width = Math.ceil(window.innerWidth / (world.tileWidth/2));
+            var height = Math.ceil(window.innerHeight / (world.tileHeight/2));
+            var coordinates = standardlib.twoDToIso(actor.coordinates.x, actor.coordinates.y);
+            var isoCenter = standardlib.twoDToIso(world.center.x, world.center.y);
 
+
+            var y = coordinates.y - (isoCenter.y - height / 2);
+            var top = y * (world.tileHeight/2);
+            $(actor.canvas).css('top', top);
+
+            var x = coordinates.x - (isoCenter.x - width / 2);
+            console.log(width);
+            console.log(x);
+            var left = x * (world.tileWidth/2);
+            $(actor.canvas).css('left', left);
         }
 
         function updateActorSprite(actor){
@@ -53,8 +70,8 @@ define([
         function actorInbound(config) {
             var coordinates = standardlib.twoDToIso(config.x, config.y);
             var isoCenter = standardlib.twoDToIso(world.center.x, world.center.y);
-            var width = Math.ceil(window.innerWidth / world.tileWidth);
-            var height = Math.ceil(window.innerHeight / world.tileHeight);
+            var width = Math.ceil(window.innerWidth / (world.tileWidth/2));
+            var height = Math.ceil(window.innerHeight / (world.tileHeight/2));
             if ((coordinates.x >= (isoCenter.x - width / 2)) && coordinates.x <= (isoCenter.x + width / 2)) {
                 if ((coordinates.y >= (isoCenter.y - height / 2)) && coordinates.y <= (isoCenter.y + height / 2)) {
                     return true;

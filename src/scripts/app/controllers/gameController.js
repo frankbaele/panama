@@ -9,9 +9,9 @@ define([
    * @constructor
    */
   gameController = function($scope){
-    var player = local({sprite : 'tower_13.png', coordinates : {x:30, y:30}});
+    var player = local({coordinates : {x:30, y:30}});
     player.init();
-    var player_2 = local({sprite: 'tower_13.png', coordinates : {x:30, y:30}});
+    var player_2 = local({coordinates : {x:30, y:30}});
     player_2.init();
   };
 

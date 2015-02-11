@@ -1,5 +1,7 @@
 #gamecontainer{
-
+  position: fixed;
+  width: 100%;
+  height: 100%;
 }
 .ActorInfo{
   width: 100%;
@@ -11,9 +13,16 @@
 
 #mapCanvas{
   border: 1px solid white;
+  position:absolute;
+  left:0;
+  top:0;
 }
 .ActorsWrapper{
+  width: 100%;
+  height: 100%;
+  position: relative;
   canvas{
     background: red;
+    position: absolute;
   }
 }

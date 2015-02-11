@@ -14,7 +14,6 @@ define(['eventmanager', 'actorList', 'standardlib', 'world'], function (eventman
 
         that.variables = {
             coordinates: spec.coordinates,
-            sprite: spec.sprite,
             width: world.tileWidth,
             height: world.tileHeight,
             uuid: standardlib.guid(),
@@ -31,6 +30,7 @@ define(['eventmanager', 'actorList', 'standardlib', 'world'], function (eventman
                 'actor.selected': 'checkFocus'
             }
         };
+
         that.checkLeftClick = function (e) {
             if (e.x == that.variables.coordinates.x && e.y == that.variables.coordinates.y) {
                 that.variables.selected = true;
