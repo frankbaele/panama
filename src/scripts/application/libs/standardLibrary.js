@@ -16,6 +16,7 @@ define(['world', 'eventmanager'], function (world, eventmanager) {
     newCoordinates.y = (posY - posX);
     return newCoordinates;
   };
+
   function twoDToIso(posX, posY) {
     var newCoordinates = {};
     newCoordinates.x = ((posX - posY) / 2);

@@ -11,7 +11,7 @@ define([
   gameController = function($scope){
     var player = local({coordinates : {x:30, y:30}});
     player.init();
-    var player_2 = local({coordinates : {x:30, y:30}});
+    var player_2 = local({coordinates : {x:25, y:28}});
     player_2.init();
   };
 

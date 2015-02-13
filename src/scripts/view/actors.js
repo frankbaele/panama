@@ -23,6 +23,7 @@ define([
                         actor.canvas = document.getElementById(actor.uuid);
                         actor.canvas.width = actor.width;
                         actor.canvas.height = actor.height;
+                        actor.canvas.context = actor.canvas.getContext("2d");
                         actor.rendered = true;
                         updateActor(actor);
                     } else{
@@ -40,26 +41,21 @@ define([
         }
         function updateActor(actor){
             updateActorPosition(actor);
-            updateActorSprite(actor);
-
-
+            //updateActorSprite(actor);
         }
 
         function updateActorPosition(actor){
-            var width = Math.ceil(window.innerWidth / (world.tileWidth/2));
-            var height = Math.ceil(window.innerHeight / (world.tileHeight/2));
+            var width = window.innerWidth / (world.tileWidth);
+            var height = window.innerHeight / (world.tileHeight);
             var coordinates = standardlib.twoDToIso(actor.coordinates.x, actor.coordinates.y);
-            var isoCenter = standardlib.twoDToIso(world.center.x, world.center.y);
+            var isoCenter = world.center;
 
-
-            var y = coordinates.y - (isoCenter.y - height / 2);
-            var top = y * (world.tileHeight/2);
+            var y = (coordinates.y - isoCenter.y) + height / 2;
+            var top = (y * (world.tileHeight)) - world.tileHeight/2 - world.padding.y;
             $(actor.canvas).css('top', top);
 
             var x = coordinates.x - (isoCenter.x - width / 2);
-            console.log(width);
-            console.log(x);
-            var left = x * (world.tileWidth/2);
+            var left = (x * (world.tileWidth) - world.tileWidth/2);
             $(actor.canvas).css('left', left);
         }
 
@@ -69,7 +65,7 @@ define([
 
         function actorInbound(config) {
             var coordinates = standardlib.twoDToIso(config.x, config.y);
-            var isoCenter = standardlib.twoDToIso(world.center.x, world.center.y);
+            var isoCenter = world.center;
             var width = Math.ceil(window.innerWidth / (world.tileWidth/2));
             var height = Math.ceil(window.innerHeight / (world.tileHeight/2));
             if ((coordinates.x >= (isoCenter.x - width / 2)) && coordinates.x <= (isoCenter.x + width / 2)) {
@@ -86,6 +82,8 @@ define([
         }
 
         function drawActor(config) {
+
+            // For lop trough all the atlasses with find, because we want to exit this loop when the atlas is found.
             var spt,
                 coordinates,
                 img;
@@ -102,6 +100,28 @@ define([
             if (_.isEmpty(spt)) {
                 return;
             }
+
+            config.canvas.context.drawImage(
+                img,
+                spt.x, spt.y,
+                spt.w, spt.h,
+                coordinates.x,
+                coordinates.y,
+                spt.w,
+                spt.h);
+        }
+
+        function center() {
+            var xCorrection =  window.innerWidth/2;
+            var yCorrection = window.innerHeight/2;
+
+            // transform the grid tile to iso coordinates
+            var coordinates = {};
+            // transform the coordinates to the actual size of the map
+            coordinates.x = -((world.center.x) * world.tileWidth + ((canvas.terrain.canvas.width) / 2) - xCorrection);
+            coordinates.y = -((world.center.y - 1) * world.tileHeight + world.tileHeight / 2) + yCorrection;
+            $(canvas.terrain.canvas).css('margin-left', coordinates.x).css('margin-top', coordinates.y);
+        }
 
         }
 

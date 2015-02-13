@@ -2,8 +2,7 @@ define([
     'RNG',
     'underscore',
     'graph',
-    'eventmanager',
-    'collisionGrid'], function (RNG, _, graph, eventmanager, collisionGrid) {
+    'eventmanager'], function (RNG, _, graph, eventmanager) {
 
     /**
      * @namespace
@@ -20,7 +19,7 @@ define([
         born = [5, 6, 7, 8],
         survive = [4, 5, 6, 7, 8],
         topology = 8,
-        center = {x: width, y: height},
+        center = twoDToIso(width, height),
         probability = 0.47,
         padding ={
             x: 50,
@@ -47,7 +46,6 @@ define([
     function init() {
         mapData = (_.compose(runAutomatonCycle, superSizemap, runAutomatonCycle, runAutomatonCycle, randomize, fillmap))();
         mapGraph = new graph(mapData);
-        collisionGrid.init(mapData);
     }
 
     /**
@@ -96,7 +94,12 @@ define([
 
         return result;
     }
-
+    function twoDToIso(posX, posY) {
+        var newCoordinates = {};
+        newCoordinates.x = ((posX - posY) / 2);
+        newCoordinates.y = ((posX + posY) / 2);
+        return newCoordinates;
+    };
     function runAutomatonCycle(data) {
         var count = 0;
         var newmap = fillmap();
@@ -166,7 +169,7 @@ define([
     }
 
     function inBoundTile(posX, posY) {
-        // check if the unoTile is inbound and correct if not
+        /*
         if (outOfBound(posX, posY)) {
             if (posX <= 0) {
                 posX = 0;
@@ -180,6 +183,7 @@ define([
                 posY = height - 1;
             }
         }
+        */
         return {x: posX, y: posY};
     }
 
@@ -194,20 +198,16 @@ define([
     function update() {
         var inbound = {x: 0, y: 0};
         if (pressedkeys.up === 1) {
-            inbound.y--;
-            inbound.x--;
+            inbound.y = inbound.y - 0.5;
         }
         if (pressedkeys.down === 1) {
-            inbound.y++;
-            inbound.x++;
+            inbound.y = inbound.y + 0.5;
         }
         if (pressedkeys.left === 1) {
-            inbound.x--;
-            inbound.y++;
+            inbound.x = inbound.x - 0.5;
         }
         if (pressedkeys.right === 1) {
-            inbound.x++;
-            inbound.y--;
+            inbound.x = inbound.x + 0.5;
         }
         // Only update the map position if there is a change.
         if (inbound.x !== 0 || inbound.y !== 0) {

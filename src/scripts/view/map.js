@@ -11,7 +11,7 @@ define([
 
         function init() {
             draw();
-            center(world.center);
+            center();
         }
 
         function draw() {
@@ -71,15 +71,15 @@ define([
                 spt.h);
         }
 
-        function center(config) {
+        function center() {
             var xCorrection =  window.innerWidth/2;
             var yCorrection = window.innerHeight/2;
 
             // transform the grid tile to iso coordinates
-            var coordinates = standardlib.twoDToIso(config.x, config.y);
+            var coordinates = {};
             // transform the coordinates to the actual size of the map
-            coordinates.x = -((coordinates.x) * world.tileWidth + ((canvas.terrain.canvas.width) / 2) - xCorrection);
-            coordinates.y = -((coordinates.y - 1) * world.tileHeight + world.tileHeight / 2) + yCorrection;
+            coordinates.x = -((world.center.x) * world.tileWidth + ((canvas.terrain.canvas.width) / 2) - xCorrection);
+            coordinates.y = -((world.center.y - 1) * world.tileHeight + world.tileHeight / 2) + yCorrection;
             $(canvas.terrain.canvas).css('margin-left', coordinates.x).css('margin-top', coordinates.y);
         }
 
