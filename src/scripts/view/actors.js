@@ -41,7 +41,7 @@ define([
         }
         function updateActor(actor){
             updateActorPosition(actor);
-            //updateActorSprite(actor);
+            updateActorSprite(actor);
         }
 
         function updateActorPosition(actor){
@@ -60,7 +60,14 @@ define([
         }
 
         function updateActorSprite(actor){
-
+            if(typeof actor.sprite[actor.state][actor.direction][actor.spriteIndex] === 'undefined') {
+                actor.spriteIndex = 0;
+            }
+            drawActor({
+                sprite: actor.sprite[actor.state][actor.direction][actor.spriteIndex],
+                canvas: actor.canvas
+            });
+            actor.spriteIndex++;
         }
 
         function actorInbound(config) {
@@ -85,7 +92,6 @@ define([
 
             // For lop trough all the atlasses with find, because we want to exit this loop when the atlas is found.
             var spt,
-                coordinates,
                 img;
             // For lop trough all the atlasses with find, because we want to exit this loop when the atlas is found.
             _.findIndex(assets.loaded.atlas, function (sheet) {
@@ -100,13 +106,13 @@ define([
             if (_.isEmpty(spt)) {
                 return;
             }
-
+            config.canvas.context.clearRect ( 0 , 0 , config.canvas.width, config.canvas.height );
             config.canvas.context.drawImage(
                 img,
                 spt.x, spt.y,
                 spt.w, spt.h,
-                coordinates.x,
-                coordinates.y,
+                0,
+                0,
                 spt.w,
                 spt.h);
         }
@@ -123,7 +129,7 @@ define([
             $(canvas.terrain.canvas).css('margin-left', coordinates.x).css('margin-top', coordinates.y);
         }
 
-        }
+
 
         eventmanager.subscribe('new.frame', function () {
             update();

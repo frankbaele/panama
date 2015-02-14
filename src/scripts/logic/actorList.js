@@ -11,6 +11,7 @@ define(['eventmanager', 'underscore'], function (eventmanager, sprite) {
       width: actor.variables.width,
       height: actor.variables.height,
       direction: actor.variables.direction,
+      state: actor.variables.state,
       rendered: false
     });
   });
@@ -21,7 +22,10 @@ define(['eventmanager', 'underscore'], function (eventmanager, sprite) {
       uuid: actor.variables.uuid,
       coordinates: actor.variables.coordinates,
       sprite: actor.variables.sprite,
-      rendered: oldActor.rendered
+      rendered: oldActor.rendered,
+      direction: oldActor.variables.direction,
+      state: oldActor.variables.state,
+      spriteIndex: 0
     });
   });
 
