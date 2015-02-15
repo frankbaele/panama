@@ -1,4 +1,4 @@
-define(['actor.unit', 'eventmanager'], function (unit, eventmanager) {
+define(['actor.unit.local', 'eventmanager'], function (unit, eventmanager) {
     return function (spec) {
         var that = unit(spec);
         var stats = {
@@ -40,19 +40,6 @@ define(['actor.unit', 'eventmanager'], function (unit, eventmanager) {
         };
 
         _.extend(that.variables, stats);
-        function changeDirection(actor){
-            setTimeout(function(){
-                if(actor.variables.direction <= 2){
-                    actor.variables.direction++;
-                }
-                else{
-                    actor.variables.direction = 0;
-                }
-                changeDirection(actor);
-                eventmanager.publish('actor.update', that.getInfo());
-            }, 2000)
-        }
-        changeDirection(that);
         return that;
     }
 });

@@ -8,6 +8,8 @@ define(['canvas', 'eventmanager'], function (canvas, eventmanager) {
     var canvasY = 0;
     var currentElement = this;
 
+
+
     do {
       totalOffsetX += currentElement.offsetLeft - currentElement.scrollLeft;
       totalOffsetY += currentElement.offsetTop - currentElement.scrollTop;
@@ -17,6 +19,11 @@ define(['canvas', 'eventmanager'], function (canvas, eventmanager) {
     canvasX = event.pageX - totalOffsetX;
     canvasY = event.pageY - totalOffsetY;
     return {x: canvasX, y: canvasY};
+  };
+  window.oncontextmenu = function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    return false;
   };
   var init = function() {
 

@@ -22,9 +22,14 @@ define([
                         $('.ActorsWrapper').append('<canvas id="' + actor.uuid + '"></canvas>');
                         actor.canvas = document.getElementById(actor.uuid);
                         actor.canvas.context = actor.canvas.getContext("2d");
+                        actor.canvas.addEventListener("click", function () {
+                                eventmanager.publish('actor.selected', actor.uuid)
+                            }
+                        );
                         actor.rendered = true;
+
                         updateActor(actor);
-                    } else{
+                    } else {
                         updateActor(actor);
                     }
                 } else {
@@ -37,28 +42,29 @@ define([
             });
 
         }
-        function updateActor(actor){
+
+        function updateActor(actor) {
             updateActorPosition(actor);
             updateActorSprite(actor);
         }
 
 
-        function updateActorPosition(actor){
+        function updateActorPosition(actor) {
             var width = window.innerWidth / (world.tileWidth);
             var height = window.innerHeight / (world.tileHeight);
             var coordinates = standardlib.twoDToIso(actor.coordinates.x, actor.coordinates.y);
             var isoCenter = world.center;
             var y = (coordinates.y - isoCenter.y);
-            var bottom = ((height/2 - y) * (world.tileHeight));
+            var bottom = ((height / 2 - y) * (world.tileHeight));
             $(actor.canvas).css('bottom', bottom);
 
             var x = coordinates.x - (isoCenter.x - width / 2);
-            var left = (x * (world.tileWidth) - actor.sprite.center.x) ;
+            var left = (x * (world.tileWidth) - actor.sprite.center.x);
             $(actor.canvas).css('left', left);
         }
 
-        function updateActorSprite(actor){
-            if(typeof actor.sprite[actor.state][actor.direction][actor.spriteIndex] === 'undefined') {
+        function updateActorSprite(actor) {
+            if (typeof actor.sprite[actor.state][actor.direction][actor.spriteIndex] === 'undefined') {
                 actor.spriteIndex = 0;
             }
             drawActor({
@@ -71,8 +77,8 @@ define([
         function actorInbound(config) {
             var coordinates = standardlib.twoDToIso(config.x, config.y);
             var isoCenter = world.center;
-            var width = Math.ceil(window.innerWidth / (world.tileWidth/2));
-            var height = Math.ceil(window.innerHeight / (world.tileHeight/2));
+            var width = Math.ceil(window.innerWidth / (world.tileWidth / 2));
+            var height = Math.ceil(window.innerHeight / (world.tileHeight / 2));
             if ((coordinates.x >= (isoCenter.x - width / 2)) && coordinates.x <= (isoCenter.x + width / 2)) {
                 if ((coordinates.y >= (isoCenter.y - height / 2)) && coordinates.y <= (isoCenter.y + height / 2)) {
                     return true;
@@ -104,8 +110,8 @@ define([
             if (_.isEmpty(spt)) {
                 return;
             }
-            config.canvas.context.clearRect ( 0 , 0 , config.canvas.width, config.canvas.height );
-            config.canvas.width =  spt.w;
+            config.canvas.context.clearRect(0, 0, config.canvas.width, config.canvas.height);
+            config.canvas.width = spt.w;
             config.canvas.height = spt.h;
             config.canvas.context.drawImage(
                 img,
@@ -116,6 +122,7 @@ define([
                 spt.w,
                 spt.h);
         }
+
         eventmanager.subscribe('new.frame', function () {
             update();
         });

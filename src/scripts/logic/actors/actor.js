@@ -24,24 +24,19 @@ define(['eventmanager', 'actorList', 'standardlib', 'world'], function (eventman
 
         that.handlers = {
             'subscribe': {
-                'mouse.click.left': 'checkLeftClick',
-                'actor.selected': 'checkFocus'
+                'actor.selected': 'actorSelect'
             }
         };
 
-        that.checkLeftClick = function (e) {
-            if (e.x == that.variables.coordinates.x && e.y == that.variables.coordinates.y) {
+        that.actorSelect = function (uuid) {
+            if(that.variables.uuid == uuid){
                 that.variables.selected = true;
-                eventmanager.publish('actor.selected', that.variables.uuid);
-            } else if (that.variables.selected) {
+            } else {
                 that.variables.selected = false;
-                eventmanager.publish('actor.unselected', that.variables.uuid);
             }
         };
 
-        that.checkFocus = function (uuid) {
 
-        };
         that.getInfo = function () {
             return that;
         }

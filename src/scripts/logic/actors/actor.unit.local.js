@@ -14,7 +14,7 @@ define(['actor.unit', 'eventmanager'], function (unit, eventmanager) {
     _.extend(that.handlers.subscribe, subscribe);
 
     that.checkMapClick = function(e) {
-      if(that.selected){
+      if(that.variables.selected){
         that.variables.goal = e;
         that.generatePath();
       }

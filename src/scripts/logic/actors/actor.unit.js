@@ -27,6 +27,7 @@ define(['actor', 'eventmanager', 'astar', 'world', 'underscore'], function (acto
       var start = world.graph.nodes[that.variables.coordinates.y][that.variables.coordinates.x];
       var end = world.graph.nodes[that.variables.goal.y][that.variables.goal.x];
       that.variables.path = astar.search(world.graph.nodes, start, end, true);
+      console.log('tes');
     };
 
     that.move = function(){
@@ -36,6 +37,21 @@ define(['actor', 'eventmanager', 'astar', 'world', 'underscore'], function (acto
         var first = _.first(that.variables.path);
         that.variables.path = _.rest(that.variables.path);
 
+        var change = {
+          x: that.variables.coordinates.x - first.y,
+          y: that.variables.coordinates.y - first.x
+        }
+        console.log(first);
+        console.log(that.variables.coordinates);
+        if(change.x == -1){
+          that.variables.direction = 0;
+        } else if(change.x == 1){
+          that.variables.direction = 2;
+        } else if(change.y == -1) {
+          that.variables.direction = 1;
+        } else if(change.y == 1){
+          that.variables.direction = 3;
+        }
         that.variables.coordinates = {
           x: first.y,
           y: first.x
