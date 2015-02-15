@@ -21,8 +21,6 @@ define([
                     if (!actor.rendered) {
                         $('.ActorsWrapper').append('<canvas id="' + actor.uuid + '"></canvas>');
                         actor.canvas = document.getElementById(actor.uuid);
-                        actor.canvas.width = actor.width;
-                        actor.canvas.height = actor.height;
                         actor.canvas.context = actor.canvas.getContext("2d");
                         actor.rendered = true;
                         updateActor(actor);
@@ -44,18 +42,18 @@ define([
             updateActorSprite(actor);
         }
 
+
         function updateActorPosition(actor){
             var width = window.innerWidth / (world.tileWidth);
             var height = window.innerHeight / (world.tileHeight);
             var coordinates = standardlib.twoDToIso(actor.coordinates.x, actor.coordinates.y);
             var isoCenter = world.center;
-
-            var y = (coordinates.y - isoCenter.y) + height / 2;
-            var top = (y * (world.tileHeight)) - world.tileHeight/2 - world.padding.y;
-            $(actor.canvas).css('top', top);
+            var y = (coordinates.y - isoCenter.y);
+            var bottom = ((height/2 - y) * (world.tileHeight));
+            $(actor.canvas).css('bottom', bottom);
 
             var x = coordinates.x - (isoCenter.x - width / 2);
-            var left = (x * (world.tileWidth) - world.tileWidth/2);
+            var left = (x * (world.tileWidth) - actor.sprite.center.x) ;
             $(actor.canvas).css('left', left);
         }
 
@@ -107,6 +105,8 @@ define([
                 return;
             }
             config.canvas.context.clearRect ( 0 , 0 , config.canvas.width, config.canvas.height );
+            config.canvas.width =  spt.w;
+            config.canvas.height = spt.h;
             config.canvas.context.drawImage(
                 img,
                 spt.x, spt.y,
@@ -116,21 +116,6 @@ define([
                 spt.w,
                 spt.h);
         }
-
-        function center() {
-            var xCorrection =  window.innerWidth/2;
-            var yCorrection = window.innerHeight/2;
-
-            // transform the grid tile to iso coordinates
-            var coordinates = {};
-            // transform the coordinates to the actual size of the map
-            coordinates.x = -((world.center.x) * world.tileWidth + ((canvas.terrain.canvas.width) / 2) - xCorrection);
-            coordinates.y = -((world.center.y - 1) * world.tileHeight + world.tileHeight / 2) + yCorrection;
-            $(canvas.terrain.canvas).css('margin-left', coordinates.x).css('margin-top', coordinates.y);
-        }
-
-
-
         eventmanager.subscribe('new.frame', function () {
             update();
         });

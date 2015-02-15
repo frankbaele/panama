@@ -3,7 +3,6 @@ define(['eventmanager', 'underscore'], function (eventmanager, sprite) {
   var cleanupList = [];
 
   eventmanager.subscribe('actor.create', function(actor){
-    actor = actor();
     actorList.push({
       uuid: actor.variables.uuid,
       coordinates: actor.variables.coordinates,
@@ -12,19 +11,22 @@ define(['eventmanager', 'underscore'], function (eventmanager, sprite) {
       height: actor.variables.height,
       direction: actor.variables.direction,
       state: actor.variables.state,
+      canvas: {},
       rendered: false
     });
   });
   eventmanager.subscribe('actor.update', function(actor){
     var oldActor = _.findWhere(actorList, {uuid: actor.variables.uuid});
     actorList = _.without(actorList, oldActor);
+    console.log(oldActor.rendered);
     actorList.push({
       uuid: actor.variables.uuid,
       coordinates: actor.variables.coordinates,
       sprite: actor.variables.sprite,
       rendered: oldActor.rendered,
-      direction: oldActor.variables.direction,
-      state: oldActor.variables.state,
+      canvas: oldActor.canvas,
+      direction: actor.variables.direction,
+      state: actor.variables.state,
       spriteIndex: 0
     });
   });

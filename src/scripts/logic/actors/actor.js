@@ -9,6 +9,7 @@ define(['eventmanager', 'actorList', 'standardlib', 'world'], function (eventman
                     eventmanager[type](event_type, that[handler]);
                 });
             });
+            eventmanager.publish('actor.create', that.getInfo());
         };
 
 
@@ -22,9 +23,6 @@ define(['eventmanager', 'actorList', 'standardlib', 'world'], function (eventman
         };
 
         that.handlers = {
-            'publish': {
-                'actor.create': 'getInfo'
-            },
             'subscribe': {
                 'mouse.click.left': 'checkLeftClick',
                 'actor.selected': 'checkFocus'

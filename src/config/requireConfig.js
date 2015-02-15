@@ -44,6 +44,7 @@ require.config({
     /* Actors */
     'player': 'scripts/logic/player',
     actorList: 'scripts/logic/actorList',
+    plane: 'scripts/logic/actors/plane',
     actor: 'scripts/logic/actors/actor',
     'actor.unit': 'scripts/logic/actors/actor.unit',
     'actor.unit.local': 'scripts/logic/actors/actor.unit.local',

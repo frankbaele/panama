@@ -79,7 +79,7 @@ define([
             var coordinates = {};
             // transform the coordinates to the actual size of the map
             coordinates.x = -((world.center.x) * world.tileWidth + ((canvas.terrain.canvas.width) / 2) - xCorrection);
-            coordinates.y = -((world.center.y - 1) * world.tileHeight + world.tileHeight / 2) + yCorrection;
+            coordinates.y = -((world.center.y + 1) * world.tileHeight) + yCorrection;
             $(canvas.terrain.canvas).css('margin-left', coordinates.x).css('margin-top', coordinates.y);
         }
 
