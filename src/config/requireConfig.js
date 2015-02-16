@@ -31,7 +31,6 @@ require.config({
     /* application */
     assetLoader: 'scripts/application/assetLoader',
     assets : 'scripts/application/assets',
-    canvas : 'scripts/application/canvas',
     keys : 'scripts/application/keys',
     mouse : 'scripts/application/mouse',
     gamecycle : 'scripts/application/gamecycle',

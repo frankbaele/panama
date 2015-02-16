@@ -1,21 +1,32 @@
 define([
         'eventmanager',
-        'canvas',
         'world',
         'standardlib',
         'assets',
         'underscore',
         'jQuery'
     ],
-    function (eventmanager, canvas, world, standardlib, assets) {
-
+    function (eventmanager, world, standardlib, assets) {
+        var terrain = {};
         function init() {
+            terrain.canvas = document.getElementById("mapCanvas");
+            terrain.context = terrain.canvas.getContext("2d");
+            terrain.canvas.width = world.width * world.tileWidth + world.padding.x * 2;
+            terrain.canvas.height = world.height * world.tileHeight + world.padding.y * 2;
+            terrain.canvas.addEventListener("contextmenu",
+                function (e) {
+                    var coordinates = terrain.canvas.relmouseCoordinates(e);
+                    coordinates = standardlib.worldPosToGridPos(coordinates.x, coordinates.y, terrain.canvas.width);
+                    eventmanager.publish('map.click', coordinates)
+                },
+                false
+            );
             draw();
             center();
         }
 
         function draw() {
-            canvas.terrain.context.clearRect(0, 0, canvas.terrain.canvas.width, canvas.terrain.canvas.height);
+            terrain.context.clearRect(0, 0, terrain.canvas.width, terrain.canvas.height);
             var coordinates = {x: 0, y: 0};
             for (var i = 0; world.height > i; i++) {
                 for (var j = 0; world.width > j; j++) {
@@ -58,10 +69,10 @@ define([
             // transform the grid tile to iso coordinates
             coordinates = standardlib.twoDToIso(config.x, config.y);
             // transform the coordinates to the actual size of the map
-            coordinates.x = (coordinates.x * world.tileWidth + ((canvas.terrain.canvas.width) / 2)) - ((spt.w - world.tileWidth) / 2) - world.tileWidth / 2;
+            coordinates.x = (coordinates.x * world.tileWidth + ((terrain.canvas.width) / 2)) - ((spt.w - world.tileWidth) / 2) - world.tileWidth / 2;
             coordinates.y = world.padding.y + coordinates.y * world.tileHeight + (spt.w / 2 - spt.h);
 
-            canvas.terrain.context.drawImage(
+            terrain.context.drawImage(
                 img,
                 spt.x, spt.y,
                 spt.w, spt.h,
@@ -70,7 +81,6 @@ define([
                 spt.w,
                 spt.h);
         }
-
         function center() {
             var xCorrection =  window.innerWidth/2;
             var yCorrection = window.innerHeight/2;
@@ -78,9 +88,9 @@ define([
             // transform the grid tile to iso coordinates
             var coordinates = {};
             // transform the coordinates to the actual size of the map
-            coordinates.x = -((world.center.x) * world.tileWidth + ((canvas.terrain.canvas.width) / 2) - xCorrection);
+            coordinates.x = -((world.center.x) * world.tileWidth + ((terrain.canvas.width) / 2) - xCorrection);
             coordinates.y = -((world.center.y + 1) * world.tileHeight) + yCorrection;
-            $(canvas.terrain.canvas).css('margin-left', coordinates.x).css('margin-top', coordinates.y);
+            $(terrain.canvas).css('margin-left', coordinates.x).css('margin-top', coordinates.y);
         }
 
         function update(){

@@ -1,4 +1,4 @@
-define(['canvas', 'eventmanager'], function (canvas, eventmanager) {
+define(['eventmanager'], function (eventmanager) {
 
   // This snippet gives back some nice canvas relative coordinates
   HTMLCanvasElement.prototype.relmouseCoordinates = function (event) {
