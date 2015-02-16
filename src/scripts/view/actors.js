@@ -126,4 +126,10 @@ define([
         eventmanager.subscribe('new.frame', function () {
             update();
         });
+        eventmanager.subscribe('center.update.start', function () {
+            $('.ActorsWrapper').removeClass('no-panning');
+        })
+        eventmanager.subscribe('center.update.stop', function () {
+            $('.ActorsWrapper').addClass('no-panning');
+        })
     });
