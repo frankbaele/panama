@@ -94,7 +94,10 @@ define(['actor.unit.local', 'eventmanager'], function (unit, eventmanager) {
                         'plane/explode/color0_Plane_Large_face3_fiery_explode_11.png',
                     ]
                 }
-            }
+            },
+            health : 75,
+            death : false,
+            hp : 100
         };
 
         _.extend(that.variables, stats);

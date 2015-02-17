@@ -7,7 +7,7 @@ define([
         'jQuery',
         'underscore'],
     function (eventmanager, standardlib, world, actorList, assets) {
-        var healthbarHeight = 15;
+        var healthbarHeight = 7.5;
 
         function update() {
             _.each(actorList.getCleanUpList(), function (actor) {
@@ -79,7 +79,9 @@ define([
 
             if(actor.variables.selected){
                 drawHealthBar({
-                    canvas: actor.variables.canvas
+                    canvas: actor.variables.canvas,
+                    health: actor.variables.health,
+                    hp: actor.variables.hp
                 })
             }
 
@@ -135,7 +137,11 @@ define([
         }
 
         function drawHealthBar (config){
-            config.canvas.context.fillRect(0,0,config.canvas.width, healthbarHeight);
+            config.canvas.context.fillStyle = 'red';
+            config.canvas.context.fillRect((config.canvas.width - 40)/2,0,38, healthbarHeight-2);
+            config.canvas.context.fillStyle = 'green';
+            var health = config.health/config.hp;
+            config.canvas.context.fillRect((config.canvas.width - 40)/2,0,(38) * health, healthbarHeight-2);
         }
         eventmanager.subscribe('new.frame', function () {
             update();

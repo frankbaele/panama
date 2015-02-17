@@ -11,7 +11,7 @@ define(['actor', 'eventmanager', 'astar', 'world', 'underscore'], function (acto
       intelligence : 0,
       health : 0,
       death : false,
-      hp : 50,
+      hp : 0,
       attack : 10
     }
 
@@ -27,7 +27,6 @@ define(['actor', 'eventmanager', 'astar', 'world', 'underscore'], function (acto
       var start = world.graph.nodes[that.variables.coordinates.y][that.variables.coordinates.x];
       var end = world.graph.nodes[that.variables.goal.y][that.variables.goal.x];
       that.variables.path = astar.search(world.graph.nodes, start, end, true);
-      console.log('tes');
     };
 
     that.move = function(){
