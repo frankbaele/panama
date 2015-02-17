@@ -41,8 +41,6 @@ define(['actor', 'eventmanager', 'astar', 'world', 'underscore'], function (acto
           x: that.variables.coordinates.x - first.y,
           y: that.variables.coordinates.y - first.x
         }
-        console.log(first);
-        console.log(that.variables.coordinates);
         if(change.x == -1){
           that.variables.direction = 0;
         } else if(change.x == 1){

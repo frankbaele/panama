@@ -23,12 +23,4 @@
   canvas{
     position: absolute;
   }
-  &.no-panning{
-    canvas{
-      transition: all linear 0.4s;
-    }
-  }
-}
-canvas{
-  transition: all linear 0.2s;
 }

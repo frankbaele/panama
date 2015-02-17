@@ -19,7 +19,9 @@ define(['eventmanager', 'actorList', 'standardlib', 'world'], function (eventman
             height: world.tileHeight,
             uuid: standardlib.guid(),
             direction: 'down',
-            hp: 0
+            hp: 0,
+            rendered : false,
+            canvas : {}
         };
 
         that.handlers = {
