@@ -21,10 +21,12 @@ define([
                 },
                 false
             );
+            terrain.canvas.addEventListener('mouseDown', function(e){
+                console.log(e);
+            })
             draw();
             center();
         }
-
         function draw() {
             terrain.context.clearRect(0, 0, terrain.canvas.width, terrain.canvas.height);
             var coordinates = {x: 0, y: 0};
@@ -92,7 +94,6 @@ define([
             coordinates.y = -((world.center.y + 1) * world.tileHeight) + yCorrection;
             $(terrain.canvas).css('margin-left', coordinates.x).css('margin-top', coordinates.y);
         }
-
         function update(){
             center(world.center);
         }

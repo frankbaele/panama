@@ -26,8 +26,8 @@ define(['world', 'eventmanager'], function (world, eventmanager) {
 
   function worldPosToGridPos(PosX, PosY){
     // todo Rewrite me -> new canvas
-    var gridPosX = (PosX / (world.tileWidth/2) + PosY / (world.tileHeight/2))/2 - world.width/2;
-    var gridPosY = (PosY / (world.tileHeight/2) - (PosX / (world.tileWidth/2)))/2 + world.height/2;
+    var gridPosX = (PosX / (world.tileWidth/2) + PosY / (world.tileHeight/2))/2 - world.width/2 + world.padding;
+    var gridPosY = (PosY / (world.tileHeight/2) - (PosX / (world.tileWidth/2)))/2 + world.height/2 + world.padding;
     gridPosX = Math.floor(gridPosX);
     gridPosY = Math.floor(gridPosY);
     return {x: gridPosX, y: gridPosY};

@@ -24,3 +24,9 @@
     position: absolute;
   }
 }
+.selectionWindow{
+  border: 1px solid green;
+  background: rgba(green, 0.5);
+  height: 0;
+  width: 0;
+}
