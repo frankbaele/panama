@@ -21,12 +21,62 @@ define([
                 },
                 false
             );
-            terrain.canvas.addEventListener('mouseDown', function(e){
-                console.log(e);
-            })
+            terrain.canvas.addEventListener('mousedown', function(e){
+                $(".ghost-select").addClass("ghost-active");
+                $(".ghost-select").css({
+                    'left': e.pageX,
+                    'top': e.pageY
+                });
+
+                initialW = e.pageX;
+                initialH = e.pageY;
+
+                $(document).bind("mouseup", selectElements);
+                $(document).bind("mousemove", openSelector);
+            });
+            // Listen to the window for the release, otherwise we have a release when leaving the map canvas.
             draw();
             center();
         }
+        function selectElements(e) {
+            $(document).unbind("mousemove", openSelector);
+            $(document).unbind("mouseup", selectElements);
+            $(".ghost-select").removeClass("ghost-active");
+            $(".ghost-select").css({
+                'left': 0,
+                'top' : 0,
+                'width': 0,
+                'height': 0
+            })
+
+
+            ////////////////////////////////////////////////
+
+        }
+        function openSelector(e) {
+            var w = Math.abs(initialW - e.pageX);
+            var h = Math.abs(initialH - e.pageY);
+
+            $(".ghost-select").css({
+                'width': w,
+                'height': h
+            });
+            if (e.pageX <= initialW && e.pageY >= initialH) {
+                $(".ghost-select").css({
+                    'left': e.pageX
+                });
+            } else if (e.pageY <= initialH && e.pageX >= initialW) {
+                $(".ghost-select").css({
+                    'top': e.pageY
+                });
+            } else if (e.pageY < initialH && e.pageX < initialW) {
+                $(".ghost-select").css({
+                    'left': e.pageX,
+                    "top": e.pageY
+                });
+            }
+        }
+
         function draw() {
             terrain.context.clearRect(0, 0, terrain.canvas.width, terrain.canvas.height);
             var coordinates = {x: 0, y: 0};
