@@ -17,7 +17,7 @@ define([
                 function (e) {
                     var coordinates = terrain.canvas.relmouseCoordinates(e);
                     coordinates = standardlib.worldPosToGridPos(coordinates.x, coordinates.y, terrain.canvas.width);
-                    eventmanager.publish('map.click', coordinates)
+                    eventmanager.publish('map.click', coordinates);
                 },
                 false
             );
@@ -31,32 +31,39 @@ define([
                 initialW = e.pageX;
                 initialH = e.pageY;
 
-                $(document).bind("mouseup", selectElements);
-                $(document).bind("mousemove", openSelector);
+                $(document).bind("mouseup", defineSelection);
+                $(document).bind("mousemove", updateSelector);
             });
             // Listen to the window for the release, otherwise we have a release when leaving the map canvas.
             draw();
             center();
         }
-        function selectElements(e) {
-            $(document).unbind("mousemove", openSelector);
-            $(document).unbind("mouseup", selectElements);
-            $(".ghost-select").removeClass("ghost-active");
+        // Calculate the selection and reset the selection box.
+        function defineSelection(e) {
+            $(document).unbind("mousemove", updateSelector);
+            $(document).unbind("mouseup", defineSelection);
+
+            var element = $(".ghost-select");
+
+            eventmanager.publish('map.selection', {
+                width: element.width(),
+                height: element.height(),
+                left: element.offset().left,
+                top: element.offset().top
+            });
+            //Reset the selection div.
             $(".ghost-select").css({
                 'left': 0,
                 'top' : 0,
                 'width': 0,
                 'height': 0
-            })
-
-
-            ////////////////////////////////////////////////
-
+            }).removeClass("ghost-active");
         }
-        function openSelector(e) {
+
+        // Update the selection box with the new width and height based on placement of the cursor
+        function updateSelector(e) {
             var w = Math.abs(initialW - e.pageX);
             var h = Math.abs(initialH - e.pageY);
-
             $(".ghost-select").css({
                 'width': w,
                 'height': h

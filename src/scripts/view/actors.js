@@ -107,7 +107,6 @@ define([
         }
 
         function drawActor(config) {
-
             // For lop trough all the atlasses with find, because we want to exit this loop when the atlas is found.
             var spt,
                 img;
@@ -143,6 +142,14 @@ define([
             var health = config.health/config.hp;
             config.canvas.context.fillRect((config.canvas.width - 40)/2,0,(38) * health, healthbarHeight-2);
         }
+
+        function applySelection (selection){
+            // Remove all previous selections.
+            _.each(actorList.getActorList(), function (actor) {
+                actor.variables.selected = false;
+            });
+        }
+
         eventmanager.subscribe('new.frame', function () {
             update();
         });
@@ -151,5 +158,8 @@ define([
         })
         eventmanager.subscribe('center.update.stop', function () {
             $('.ActorsWrapper').addClass('no-panning');
+        })
+        eventmanager.subscribe('map.selection', function(selection){
+            applySelection(selection);
         })
     });
