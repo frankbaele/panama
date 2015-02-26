@@ -8,6 +8,7 @@ define([
     ],
     function (eventmanager, world, standardlib, assets) {
         var terrain = {};
+
         function init() {
             terrain.canvas = document.getElementById("mapCanvas");
             terrain.context = terrain.canvas.getContext("2d");
@@ -16,12 +17,11 @@ define([
             terrain.canvas.addEventListener("contextmenu",
                 function (e) {
                     var coordinates = terrain.canvas.relmouseCoordinates(e);
-                    coordinates = standardlib.worldPosToGridPos(coordinates.x, coordinates.y, terrain.canvas.width);
+                    coordinates = standardlib.worldPosToGridPos(coordinates.x, coordinates.y);
                     eventmanager.publish('map.click', coordinates);
-                },
-                false
+                }
             );
-            terrain.canvas.addEventListener('mousedown', function(e){
+            terrain.canvas.addEventListener('mouseddown', function (e) {
                 $(".ghost-select").addClass("ghost-active");
                 $(".ghost-select").css({
                     'left': e.pageX,
@@ -38,6 +38,7 @@ define([
             draw();
             center();
         }
+
         // Calculate the selection and reset the selection box.
         function defineSelection(e) {
             $(document).unbind("mousemove", updateSelector);
@@ -54,7 +55,7 @@ define([
             //Reset the selection div.
             $(".ghost-select").css({
                 'left': 0,
-                'top' : 0,
+                'top': 0,
                 'width': 0,
                 'height': 0
             }).removeClass("ghost-active");
@@ -106,7 +107,13 @@ define([
                     }
                 }
             }
+            drawTile({
+                x: 30,
+                y: 30,
+                sprite: "trees_1.png"
+            });
         }
+
         function drawTile(config) {
             var spt,
                 coordinates,
@@ -140,9 +147,10 @@ define([
                 spt.w,
                 spt.h);
         }
+
         function center() {
-            var xCorrection =  window.innerWidth/2;
-            var yCorrection = window.innerHeight/2;
+            var xCorrection = window.innerWidth / 2;
+            var yCorrection = window.innerHeight / 2;
 
             // transform the grid tile to iso coordinates
             var coordinates = {};
@@ -151,9 +159,11 @@ define([
             coordinates.y = -((world.center.y + 1) * world.tileHeight) + yCorrection;
             $(terrain.canvas).css('margin-left', coordinates.x).css('margin-top', coordinates.y);
         }
-        function update(){
+
+        function update() {
             center(world.center);
         }
+
         eventmanager.subscribe('new.frame', function () {
             update();
         });
