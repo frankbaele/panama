@@ -56,7 +56,7 @@ define([
             var coordinates = standardlib.twoDToIso(actor.variables.coordinates.x, actor.variables.coordinates.y);
             var isoCenter = world.center;
             var y = (coordinates.y - isoCenter.y);
-            var bottom = ((height / 2 - y) * (world.tileHeight));
+            var bottom = ((height / 2 - y - 1) * (world.tileHeight)) + 20;
             $(actor.variables.canvas).css('z-index', actor.variables.coordinates.y).css('bottom', bottom);
 
             var x = coordinates.x - (isoCenter.x - width / 2);

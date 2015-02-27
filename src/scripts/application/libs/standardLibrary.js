@@ -19,19 +19,22 @@ define(['world', 'eventmanager'], function (world, eventmanager) {
 
     function twoDToIso(posX, posY) {
         var newCoordinates = {};
-        newCoordinates.x = ((posX - posY) / 2);
-        newCoordinates.y = ((posX + posY) / 2);
+        newCoordinates.x = (posX - posY);
+        newCoordinates.y = (posX + posY);
         return newCoordinates;
     };
 
     function worldPosToGridPos(PosX, PosY) {
-        var gridPosX = ((PosX) / (world.tileWidth)) - world.width / 2;
-        var gridPosY = ((PosY - 16) / (world.tileHeight));
-        gridPosX = Math.floor(gridPosX);
-        gridPosY = Math.floor(gridPosY);
+        var x = PosX;
+        var y = PosY;
+        x = (x / (world.tileWidth / 2) + y / (world.tileHeight / 2)) / 2;
+        y = (y / (world.tileHeight / 2) - (x / (world.tileWidth / 2))) / 2;
 
-        console.log(isoToTwoD(gridPosX, gridPosY));
-        return {x: gridPosX, y: gridPosY};
+        x = Math.floor(x);
+        y = Math.floor(y);
+        x =  x - world.width/2;
+        console.log(x, y);
+        return ({x:x,y:y});
     };
 
     function windowPosToGridPos(config) {
@@ -60,4 +63,3 @@ define(['world', 'eventmanager'], function (world, eventmanager) {
         checkWait: checkWait
     };
 })
-;

@@ -12,9 +12,9 @@ define([
         function init() {
             terrain.canvas = document.getElementById("mapCanvas");
             terrain.context = terrain.canvas.getContext("2d");
-            terrain.canvas.width = world.width * world.tileWidth + world.padding.x * 2;
-            terrain.canvas.height = world.height * world.tileHeight + world.padding.y * 2;
-            terrain.canvas.addEventListener("contextmenu",
+            terrain.canvas.width = world.width * world.tileWidth;
+            terrain.canvas.height = world.height * world.tileHeight;
+            terrain.canvas.addEventListener("click",
                 function (e) {
                     var coordinates = terrain.canvas.relmouseCoordinates(e);
                     coordinates = standardlib.worldPosToGridPos(coordinates.x, coordinates.y);
@@ -95,23 +95,20 @@ define([
                             drawTile({
                                 sprite: "trees_2.png",
                                 x: coordinates.x + j,
-                                y: coordinates.y + i
+                                y: coordinates.y + i,
+                                correction: 15
                             });
                         } else {
                             drawTile({
-                                sprite: "landscapeTiles_067.png",
+                                sprite: "landscapeTiles_066.png",
                                 x: coordinates.x + j,
-                                y: coordinates.y + i
+                                y: coordinates.y + i,
+                                correction: 15
                             });
                         }
                     }
                 }
             }
-            drawTile({
-                x: 30,
-                y: 30,
-                sprite: "trees_1.png"
-            });
         }
 
         function drawTile(config) {
@@ -135,8 +132,8 @@ define([
             // transform the grid tile to iso coordinates
             coordinates = standardlib.twoDToIso(config.x, config.y);
             // transform the coordinates to the actual size of the map
-            coordinates.x = (coordinates.x * world.tileWidth + ((terrain.canvas.width) / 2)) - ((spt.w - world.tileWidth) / 2) - world.tileWidth / 2;
-            coordinates.y = world.padding.y + coordinates.y * world.tileHeight + (spt.w / 2 - spt.h);
+            coordinates.x = (coordinates.x * world.tileWidth/2 + ((terrain.canvas.width) / 2)) - ((spt.w - world.tileWidth) / 2) - world.tileWidth / 2;
+            coordinates.y = (coordinates.y * world.tileHeight/2 + (spt.w / 2 - (spt.h - config.correction)));
 
             terrain.context.drawImage(
                 img,
@@ -156,7 +153,7 @@ define([
             var coordinates = {};
             // transform the coordinates to the actual size of the map
             coordinates.x = -((world.center.x) * world.tileWidth + ((terrain.canvas.width) / 2) - xCorrection);
-            coordinates.y = -((world.center.y + 1) * world.tileHeight) + yCorrection;
+            coordinates.y = -(((world.center.y) * world.tileHeight)) + yCorrection;
             $(terrain.canvas).css('margin-left', coordinates.x).css('margin-top', coordinates.y);
         }
 

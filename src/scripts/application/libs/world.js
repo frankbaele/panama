@@ -19,12 +19,8 @@ define([
         born = [5, 6, 7, 8],
         survive = [4, 5, 6, 7, 8],
         topology = 8,
-        center = twoDToIso(width, height),
+        center = twoDToIso(30, 30),
         probability = 0.47,
-        padding ={
-            x: 50,
-            y: 50
-        },
         dirs = [
             [0, -1],
             [1, -1],
@@ -94,12 +90,14 @@ define([
 
         return result;
     }
+    
     function twoDToIso(posX, posY) {
         var newCoordinates = {};
         newCoordinates.x = ((posX - posY) / 2);
         newCoordinates.y = ((posX + posY) / 2);
         return newCoordinates;
     };
+
     function runAutomatonCycle(data) {
         var count = 0;
         var newmap = fillmap();
@@ -125,10 +123,6 @@ define([
         }
         return newmap;
 
-    }
-
-    function set(x, y, value) {
-        mapData[x][y] = value;
     }
 
     function superSizemap(map) {
@@ -247,7 +241,6 @@ define([
         width: width,
         mapData: mapData,
         center: center,
-        padding: padding,
         graph: mapGraph
     };
 });
