@@ -17,7 +17,6 @@ define([
             actorList.clearCleanUpList();
 
             _.each(actorList.getActorList(), function (actor) {
-
                 // Check if the actor is inbound, so we can clean up or create the canvas for the actor
                 if (actorInbound(actor.variables.coordinates)) {
                     if (!actor.variables.rendered) {
@@ -65,7 +64,6 @@ define([
         }
 
         function updateActorSprite(actor) {
-
             actor.variables.canvas.context.clearRect(0, 0, actor.variables.canvas.width, actor.variables.canvas.height);
 
             if (typeof actor.variables.sprite[actor.variables.state][actor.variables.direction][actor.variables.spriteIndex] === 'undefined') {
@@ -91,8 +89,8 @@ define([
         function actorInbound(config) {
             var coordinates = standardlib.twoDToIso(config.x, config.y);
             var isoCenter = world.center;
-            var width = Math.ceil(window.innerWidth / (world.tileWidth / 2));
-            var height = Math.ceil(window.innerHeight / (world.tileHeight / 2));
+            var width = Math.ceil(window.innerWidth / (world.tileWidth));
+            var height = Math.ceil(window.innerHeight / (world.tileHeight));
             if ((coordinates.x >= (isoCenter.x - width / 2)) && coordinates.x <= (isoCenter.x + width / 2)) {
                 if ((coordinates.y >= (isoCenter.y - height / 2)) && coordinates.y <= (isoCenter.y + height / 2)) {
                     return true;

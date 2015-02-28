@@ -19,21 +19,18 @@ define(['world', 'eventmanager'], function (world, eventmanager) {
 
     function twoDToIso(posX, posY) {
         var newCoordinates = {};
-        newCoordinates.x = (posX - posY);
-        newCoordinates.y = (posX + posY);
+        newCoordinates.x = (posX - posY) / 2;
+        newCoordinates.y = (posX + posY) / 2;
         return newCoordinates;
     };
 
     function worldPosToGridPos(PosX, PosY) {
-        var x = PosX;
-        var y = PosY;
-        x = (x / (world.tileWidth / 2) + y / (world.tileHeight / 2)) / 2;
-        y = (y / (world.tileHeight / 2) - (x / (world.tileWidth / 2))) / 2;
-
+        var x = (PosX / (world.tileWidth / 2) + PosY / (world.tileHeight / 2)) / 2;
+        var y = (PosY/ (world.tileHeight / 2) - PosX / (world.tileWidth / 2)) / 2;
         x = Math.floor(x);
         y = Math.floor(y);
-        x =  x - world.width/2;
-        console.log(x, y);
+        x = x - world.width/2;
+        y = y + world.height/2;
         return ({x:x,y:y});
     };
 

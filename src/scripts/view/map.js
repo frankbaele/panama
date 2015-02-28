@@ -132,8 +132,8 @@ define([
             // transform the grid tile to iso coordinates
             coordinates = standardlib.twoDToIso(config.x, config.y);
             // transform the coordinates to the actual size of the map
-            coordinates.x = (coordinates.x * world.tileWidth/2 + ((terrain.canvas.width) / 2)) - ((spt.w - world.tileWidth) / 2) - world.tileWidth / 2;
-            coordinates.y = (coordinates.y * world.tileHeight/2 + (spt.w / 2 - (spt.h - config.correction)));
+            coordinates.x = (coordinates.x * world.tileWidth + ((terrain.canvas.width) / 2)) - ((spt.w - world.tileWidth) / 2) - world.tileWidth / 2;
+            coordinates.y = (coordinates.y * world.tileHeight + (spt.w / 2 - (spt.h - config.correction)));
 
             terrain.context.drawImage(
                 img,

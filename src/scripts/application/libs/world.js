@@ -90,7 +90,7 @@ define([
 
         return result;
     }
-    
+
     function twoDToIso(posX, posY) {
         var newCoordinates = {};
         newCoordinates.x = ((posX - posY) / 2);
