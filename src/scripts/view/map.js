@@ -14,7 +14,7 @@ define([
             terrain.context = terrain.canvas.getContext("2d");
             terrain.canvas.width = world.width * world.tileWidth;
             terrain.canvas.height = world.height * world.tileHeight;
-            terrain.canvas.addEventListener("click",
+            terrain.canvas.addEventListener("contextmenu",
                 function (e) {
                     var coordinates = terrain.canvas.relmouseCoordinates(e);
                     coordinates = standardlib.worldPosToGridPos(coordinates.x, coordinates.y);

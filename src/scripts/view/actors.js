@@ -150,10 +150,10 @@ define([
             coordinatesWindow.y = -(((world.center.y) * world.tileHeight)) + yCorrection;
             var left = -coordinatesWindow.x  + selection.left;
             var top = -coordinatesWindow.y + selection.top;
-            var topLeft = standardlib.worldPosToGridPos(left, top)
-            console.log(topLeft);
+            var topLeft = standardlib.worldPosToGridPos(left, top);
+            topLeft = standardlib.twoDToIso(topLeft.x, topLeft.y);
             var bottomRight = standardlib.worldPosToGridPos(left + selection.width, top + selection.height);
-            console.log(bottomRight);
+            bottomRight = standardlib.twoDToIso(bottomRight.x, bottomRight.y)
             _.each(actorList.getActorList(), function (actor) {
                 var coordinates = standardlib.twoDToIso(actor.variables.coordinates.x, actor.variables.coordinates.y);
                 if ((coordinates.x >= topLeft.x) && coordinates.x <= bottomRight.x) {
