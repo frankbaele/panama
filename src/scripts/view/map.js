@@ -21,18 +21,22 @@ define([
                     eventmanager.publish('map.click', coordinates);
                 }
             );
-            terrain.canvas.addEventListener('mouseddown', function (e) {
-                $(".ghost-select").addClass("ghost-active");
-                $(".ghost-select").css({
-                    'left': e.pageX,
-                    'top': e.pageY
-                });
+            terrain.canvas.addEventListener('mousedown', function (event) {
 
-                initialW = e.pageX;
-                initialH = e.pageY;
+                if (event.which == 1) {
+                    $(".ghost-select").addClass("ghost-active");
+                    $(".ghost-select").css({
+                        'left': event.pageX,
+                        'top': event.pageY
+                    });
 
-                $(document).bind("mouseup", defineSelection);
-                $(document).bind("mousemove", updateSelector);
+                    initialW = event.pageX;
+                    initialH = event.pageY;
+
+                    $(document).bind("mouseup", defineSelection);
+                    $(document).bind("mousemove", updateSelector);
+                }
+
             });
             // Listen to the window for the release, otherwise we have a release when leaving the map canvas.
             draw();

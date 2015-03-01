@@ -31,7 +31,6 @@ define(['world', 'eventmanager'], function (world, eventmanager) {
         var y = (PosY/ (world.tileHeight / 2) - (PosX / (world.tileWidth / 2))) / 2;
         x = Math.floor(x);
         y = Math.floor(y);
-        console.log(x, y);
         return ({x:x,y:y});
     };
 

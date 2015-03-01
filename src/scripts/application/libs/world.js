@@ -19,7 +19,7 @@ define([
         born = [5, 6, 7, 8],
         survive = [4, 5, 6, 7, 8],
         topology = 8,
-        center = twoDToIso(0, 0),
+        center = twoDToIso(30, 30),
         probability = 0.47,
         dirs = [
             [0, -1],

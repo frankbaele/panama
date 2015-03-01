@@ -143,8 +143,31 @@ define([
 
         function applySelection (selection){
             // Remove all previous selections.
+            var xCorrection = window.innerWidth / 2;
+            var yCorrection = window.innerHeight / 2;
+            var coordinatesWindow = {};
+            coordinatesWindow.x = -((world.center.x) * world.tileWidth + ((world.width*world.tileWidth) / 2) - xCorrection);
+            coordinatesWindow.y = -(((world.center.y) * world.tileHeight)) + yCorrection;
+            var left = -coordinatesWindow.x  + selection.left;
+            var top = -coordinatesWindow.y + selection.top;
+            var topLeft = standardlib.worldPosToGridPos(left, top)
+            console.log(topLeft);
+            var bottomRight = standardlib.worldPosToGridPos(left + selection.width, top + selection.height);
+            console.log(bottomRight);
             _.each(actorList.getActorList(), function (actor) {
-                actor.variables.selected = false;
+                var coordinates = standardlib.twoDToIso(actor.variables.coordinates.x, actor.variables.coordinates.y);
+                if ((coordinates.x >= topLeft.x) && coordinates.x <= bottomRight.x) {
+                    if ((coordinates.y >= topLeft.y) && coordinates.y <= bottomRight.y) {
+
+                        actor.variables.selected = true;
+                    }
+                    else {
+                        actor.variables.selected = false;
+                    }
+                }
+                else {
+                    actor.variables.selected = false;
+                }
             });
         }
 
