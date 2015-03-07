@@ -92,7 +92,7 @@ module.exports = function (grunt) {
         },
         bower: {
             dev: {
-                dest: 'dist/vendor'
+                dest: 'dist/scripts/vendor'
             }
         },
         requirejs: {
