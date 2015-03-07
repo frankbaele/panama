@@ -103,7 +103,7 @@ module.exports = function (grunt) {
                     mainConfigFile: "src/config/requireConfig.js",
                     out: "dist/scripts/app.js",
                     optimize: 'uglify2',
-                    exclude: ['jquery', 'lodash', 'text', 'Keypress'],
+                    exclude: ['jquery', 'text', 'Keypress'],
                     uglify2: {
                         //Example of a specialized config. If you are fine
                         //with the default options, no need to specify

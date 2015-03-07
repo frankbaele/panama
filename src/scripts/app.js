@@ -1,4 +1,4 @@
-define(['lodash', 'jquery', 'plane', 'assetLoader', 'eventmanager', 'gamecycle', 'animate', 'input'], function (_, jquery,plane, assetLoader, eventmanager) {
+define(['lodash', 'jquery', 'plane', 'assetLoader', 'eventmanager', 'gamecycle', 'animate', 'input'], function (lodash, jquery,plane, assetLoader, eventmanager) {
 
     var promises = assetLoader.preloadassets();
     plane({coordinates: {x: 30, y: 30}}).init();
