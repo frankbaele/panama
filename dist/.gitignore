@@ -1,0 +1,22 @@
+#################
+## npm
+#################
+
+lib-cov
+*.seed
+*.log
+*.csv
+*.dat
+*.out
+*.pid
+*.gz
+
+.grunt
+
+pids
+logs
+results
+dist
+npm-debug.log
+node_modules
+.idea
