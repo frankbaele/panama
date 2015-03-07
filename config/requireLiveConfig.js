@@ -1,17 +1,13 @@
 requirejs.config({
-  paths: {
-    jQuery: './scripts/vendor/jquery-2.0.3.min',
-    underscore: './scripts/vendor/lodash.min',
-    text: './scripts/vendor/require.text',
-    keypress: './scripts/vendor/keypress'
-  },
-  shim: {
-    'jQuery': {
-      'exports' : 'jQuery'
+    paths: {
+        text: 'vendor/text',
+        Keypress: 'vendor/keypress-2.1.0.min',
+        jquery: 'vendor/dist/jquery',
+        lodash: 'vendor/lodash',
+        q: 'vendor/q'
     },
-    'underscore': {
-      exports: '_'
-    }
-  }
+    packages: [
+
+    ]
 });
-requirejs( ['./scripts/app']);
+requirejs(['./scripts/app']);
