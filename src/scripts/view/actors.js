@@ -3,10 +3,8 @@ define([
         'standardlib',
         'world',
         'actorList',
-        'assets',
-        'jQuery',
-        'underscore'],
-    function (eventmanager, standardlib, world, actorList, assets) {
+        'assetLoader'],
+    function (eventmanager, standardlib, world, actorList, assetLoader) {
         var healthbarHeight = 7.5;
 
         function update() {
@@ -109,7 +107,7 @@ define([
             var spt,
                 img;
             // For lop trough all the atlasses with find, because we want to exit this loop when the atlas is found.
-            _.findIndex(assets.loaded.atlas, function (sheet) {
+            _.findIndex(assetLoader.assets.loaded.atlas, function (sheet) {
                 // Search for a sprite with the same sprite name
                 spt = _.findWhere(sheet.sprite.sprites, {id: config.sprite});
                 img = sheet.sprite.img;

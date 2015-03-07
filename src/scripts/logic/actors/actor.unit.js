@@ -1,5 +1,5 @@
 
-define(['actor', 'eventmanager', 'astar', 'world', 'underscore'], function (actor, eventmanager, astar, world) {
+define(['actor', 'eventmanager', 'astar', 'world'], function (actor, eventmanager, astar, world) {
   return function (spec){
     var that = actor(spec);
 

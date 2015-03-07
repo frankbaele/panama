@@ -1,8 +1,7 @@
 define([
     'RNG',
-    'underscore',
     'graph',
-    'eventmanager'], function (RNG, _, graph, eventmanager) {
+    'eventmanager'], function (RNG, graph, eventmanager) {
 
     /**
      * @namespace

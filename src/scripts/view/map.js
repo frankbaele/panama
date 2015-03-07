@@ -2,14 +2,13 @@ define([
         'eventmanager',
         'world',
         'standardlib',
-        'assets',
-        'underscore',
-        'jQuery'
+        'assetLoader'
     ],
-    function (eventmanager, world, standardlib, assets) {
+    function (eventmanager, world, standardlib, assetLoader) {
         var terrain = {};
 
         function init() {
+            console.log('startdrawing');
             terrain.canvas = document.getElementById("mapCanvas");
             terrain.context = terrain.canvas.getContext("2d");
             terrain.canvas.width = world.width * world.tileWidth;
@@ -120,7 +119,7 @@ define([
                 coordinates,
                 img;
             // For lop trough all the atlasses with find, because we want to exit this loop when the atlas is found.
-            _.findIndex(assets.loaded.atlas, function (sheet) {
+            _.findIndex(assetLoader.assets.loaded.atlas, function (sheet) {
                 // Search for a sprite with the same sprite name
                 spt = _.findWhere(sheet.sprite.sprites, {id: config.sprite});
                 img = sheet.sprite.img;

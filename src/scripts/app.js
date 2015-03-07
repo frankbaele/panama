@@ -1,8 +1,8 @@
-define([ 'plane', 'assets', 'eventmanager', 'gamecycle', 'animate', 'input'], function (plane, assets, eventmanager) {
-    assets.load(function(){
-        setTimeout(function(){eventmanager.publish('game.init');}, 250);
+define(['lodash', 'jquery', 'plane', 'assetLoader', 'eventmanager', 'gamecycle', 'animate', 'input'], function (lodash,jquery,plane, assetLoader, eventmanager) {
+    assetLoader.preloadassets().then(function(){
+        eventmanager.publish('game.init');
+    });
 
-    })
     plane({coordinates : {x:30, y:30}}).init();
     plane({coordinates : {x:29, y:30}}).init();
     plane({coordinates : {x:31, y:30}}).init();

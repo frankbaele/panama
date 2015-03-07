@@ -1,4 +1,4 @@
-define(['eventmanager', 'underscore'], function (eventmanager, sprite) {
+define(['eventmanager'], function (eventmanager) {
   var actorList = [];
   var cleanupList = [];
 

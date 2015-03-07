@@ -1,28 +1,36 @@
-define(['spriteSheet', 'underscore', 'jQuery'], function (spriteSheet) {
+define(['spriteSheet', 'text!assetsList', 'q'], function (spriteSheet, assetsList, Q) {
     var defers = [];
-    var preloadassets = function (assets) {
-        var that = this;
+    var assets = {
+        config: {},
+        loaded: {
+            atlas: [],
+            music: []
+        }
+    };
+
+    assets.config = JSON.parse(assetsList);
+
+    var preloadassets = function () {
         // loop through the asset object and load each asset file
         _.forEach(assets.config, function (asset) {
-            var defer = $.Deferred();
+            var deferred = Q.defer();
             switch (asset.type) {
                 case 'atlas':
-                    that.loadAtlas(asset, function (loadedAsset) {
+                    loadAtlas(asset, function (loadedAsset) {
                         // now put all the loaded data in a spriteSheet object and inject it into the loaded atlas array.
                         assets.loaded.atlas.push({
                             name: asset.name,
                             sprite: new spriteSheet(loadedAsset.configuration, loadedAsset.file)
                         });
-                        defer.resolve();
+                        deferred.resolve();
                     });
                     break;
-
                 case 'music':
                     break;
             }
-            defers.push(defer);
+            defers.push(deferred);
         });
-        return defers;
+        return Q.all(defers);
     };
 
     var loadAtlas = function (asset, callback) {
@@ -43,6 +51,7 @@ define(['spriteSheet', 'underscore', 'jQuery'], function (spriteSheet) {
 
     return {
         preloadassets: preloadassets,
-        loadAtlas: loadAtlas
+        loadAtlas: loadAtlas,
+        assets: assets
     };
 });
