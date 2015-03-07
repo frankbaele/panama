@@ -31,11 +31,11 @@ define(['spriteSheet', 'underscore', 'jQuery'], function (spriteSheet) {
             asset.configuration = data;
         }).then(function () {
                 var img = new Image();
+                img.src = asset.file;
                 img.onload = function(){
+                    asset.file = img;
                     callback(asset);
                 };
-                img.src = asset.file;
-                asset.file = img;
 
             }
         );

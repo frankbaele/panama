@@ -93,7 +93,7 @@ module.exports = function (grunt) {
           mainConfigFile: "src/config/requireConfig.js",
           out: "dist/scripts/app.js",
           optimize: 'uglify2',
-          exclude: ['jQuery', 'underscore', 'text', 'keypress', 'angular', 'angular-ui-router'],
+          exclude: ['jQuery', 'underscore', 'text', 'keypress'],
           uglify2: {
             //Example of a specialized config. If you are fine
             //with the default options, no need to specify
@@ -130,7 +130,6 @@ module.exports = function (grunt) {
   ]);
   grunt.registerTask('build', [
     'copy',
-    'sass:dist',
     'requirejs'
   ]);
 };
