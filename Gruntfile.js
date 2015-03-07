@@ -59,14 +59,6 @@ module.exports = function (grunt) {
                 flatten: false,
                 filter: 'isFile'
             },
-            vendor: {
-                expand: true,
-                cwd: 'src/scripts/vendor',
-                src: '**',
-                dest: 'dist/scripts/vendor',
-                flatten: false,
-                filter: 'isFile'
-            },
             templates: {
                 expand: true,
                 cwd: 'src/templates',
@@ -98,6 +90,11 @@ module.exports = function (grunt) {
                 }
             }
         },
+        bower: {
+            dev: {
+                dest: 'dist/vendor'
+            }
+        },
         requirejs: {
             compile: {
                 options: {
@@ -106,7 +103,7 @@ module.exports = function (grunt) {
                     mainConfigFile: "src/config/requireConfig.js",
                     out: "dist/scripts/app.js",
                     optimize: 'uglify2',
-                    exclude: ['jQuery', 'underscore', 'text', 'keypress'],
+                    exclude: ['jquery', 'lodash', 'text', 'Keypress'],
                     uglify2: {
                         //Example of a specialized config. If you are fine
                         //with the default options, no need to specify
@@ -129,6 +126,7 @@ module.exports = function (grunt) {
     });
 
     // Load tasks...
+    grunt.loadNpmTasks('grunt-bower');
     grunt.loadNpmTasks('grunt-bower-requirejs');
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-open');
@@ -144,6 +142,7 @@ module.exports = function (grunt) {
     ]);
     grunt.registerTask('build', [
         'copy',
+        'bower',
         'requirejs'
     ]);
 };

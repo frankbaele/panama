@@ -1,6 +1,6 @@
 require.config({
     paths: {
-        text: '../bower_components/text/text',
+        text: 'bower_components/text/text',
         assetsList: 'config/assetsList.json',
         RNG: 'scripts/application/libs/RNG',
         astar: 'scripts/application/libs/astar',
@@ -30,10 +30,10 @@ require.config({
         input: 'scripts/view/input',
         map: 'scripts/view/map',
         actors: 'scripts/view/actors',
-        Keypress: '../bower_components/Keypress/keypress-2.1.0.min',
-        jquery: '../bower_components/jquery/dist/jquery',
-        q: '../bower_components/q/q',
-        lodash: '../bower_components/lodash/lodash'
+        Keypress: 'bower_components/Keypress/keypress-2.1.0.min',
+        jquery: 'bower_components/jquery/dist/jquery',
+        q: 'bower_components/q/q',
+        lodash: 'bower_components/lodash/lodash'
     },
     packages: [
 

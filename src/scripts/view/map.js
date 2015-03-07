@@ -8,7 +8,6 @@ define([
         var terrain = {};
 
         function init() {
-            console.log('startdrawing');
             terrain.canvas = document.getElementById("mapCanvas");
             terrain.context = terrain.canvas.getContext("2d");
             terrain.canvas.width = world.width * world.tileWidth;
@@ -137,7 +136,6 @@ define([
             // transform the coordinates to the actual size of the map
             coordinates.x = (coordinates.x * world.tileWidth + ((terrain.canvas.width) / 2)) - ((spt.w - world.tileWidth) / 2) - world.tileWidth / 2;
             coordinates.y = (coordinates.y * world.tileHeight + (spt.w / 2 - (spt.h - config.correction)));
-
             terrain.context.drawImage(
                 img,
                 spt.x, spt.y,

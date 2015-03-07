@@ -1,4 +1,4 @@
-define(['spriteSheet', 'text!assetsList', 'q'], function (spriteSheet, assetsList, Q) {
+define(['spriteSheet', 'text!assetsList', 'q', 'eventmanager'], function (spriteSheet, assetsList, Q, eventmanager) {
     var defers = [];
     var assets = {
         config: {},
@@ -13,45 +13,34 @@ define(['spriteSheet', 'text!assetsList', 'q'], function (spriteSheet, assetsLis
     var preloadassets = function () {
         // loop through the asset object and load each asset file
         _.forEach(assets.config, function (asset) {
-            var deferred = Q.defer();
+
             switch (asset.type) {
                 case 'atlas':
-                    loadAtlas(asset, function (loadedAsset) {
-                        // now put all the loaded data in a spriteSheet object and inject it into the loaded atlas array.
-                        assets.loaded.atlas.push({
-                            name: asset.name,
-                            sprite: new spriteSheet(loadedAsset.configuration, loadedAsset.file)
-                        });
-                        deferred.resolve();
-                    });
+                    jQuery.getJSON(asset.configuration, function (data) {
+                        asset.configuration = data;
+                    }).then(function () {
+                            var img = new Image();
+                            img.src = asset.file;
+                            img.onload = function(){
+
+                                assets.loaded.atlas.push({
+                                    name: asset.name,
+                                    sprite: new spriteSheet(asset.configuration, img)
+                                });
+                                eventmanager.publish('game.init');
+                            };
+                        }
+                    );
+
                     break;
                 case 'music':
                     break;
             }
-            defers.push(deferred);
         });
-        return Q.all(defers);
-    };
-
-    var loadAtlas = function (asset, callback) {
-        // first get the configuration over json en then load the image object.
-        jQuery.getJSON(asset.configuration, function (data) {
-            asset.configuration = data;
-        }).then(function () {
-                var img = new Image();
-                img.src = asset.file;
-                img.onload = function(){
-                    asset.file = img;
-                    callback(asset);
-                };
-
-            }
-        );
     };
 
     return {
         preloadassets: preloadassets,
-        loadAtlas: loadAtlas,
         assets: assets
     };
 });
