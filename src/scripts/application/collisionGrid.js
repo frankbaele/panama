@@ -1,30 +1,34 @@
-define(['eventmanager'], function (eventmanager, world) {
-  var data = '';
-  var init = function (initData){
-    this.data = initData;
-  };
+define(['eventmanager', 'world'], function (eventmanager, world) {
+    var that = {};
+    that.grid = [];
+    that.init = function () {
+        // add the world grid
+        that.grid = _.cloneDeep(world.mapData);
+    };
 
-  var add = function () {
+    that.update = function (config){
+        // check if the new coordinates are open.
+        if(that.grid[config.too.y][config.too.x] === 0){
+            that.grid[config.too.y][config.too.x] = 1;
+            // if old coordinates are given open them up again.
+            if(typeof config.from !== 'undefined'){
+                that.grid[config.from.y][config.from.x] = 0;
+            }
+            // Execute the success callback if it exists
+            if(typeof config.success !== 'undefined'){
+                config.success();
+            }
+        } else{
+            // execute the failure callback.
+            if(typeof config.failure !== 'undefined'){
+                config.failure();
+            }
+        }
+    };
+    that.isOpen = function(config){
+        return that.grid[config.new.y][config.new.x] === 0;
+    };
 
-  }
-
-  var remove = function () {
-
-  }
-
-  var update = function () {
-
-  }
-
-  var isOpen = function () {
-
-  }
-
-  return {
-    init: init,
-    add: add,
-    remove: remove,
-    update: update,
-    isOpen: isOpen
-  };
+    that.init();
+    return that;
 });
