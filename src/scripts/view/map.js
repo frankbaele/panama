@@ -2,16 +2,17 @@ define([
         'eventmanager',
         'world',
         'standardlib',
+        'center',
         'assetLoader'
     ],
-    function (eventmanager, world, standardlib, assetLoader) {
+    function (eventmanager, world, standardlib, center, assetLoader) {
         var terrain = {};
 
         function init() {
             terrain.canvas = document.getElementById("mapCanvas");
             terrain.context = terrain.canvas.getContext("2d");
-            terrain.canvas.width = world.width * world.tileWidth;
-            terrain.canvas.height = world.height * world.tileHeight;
+            terrain.canvas.width = app.config.terrain.grid.width * app.config.terrain.tile.width;
+            terrain.canvas.height = app.config.terrain.grid.height * app.config.terrain.tile.height;
             terrain.canvas.addEventListener("contextmenu",
                 function (e) {
                     var coordinates = terrain.canvas.relmouseCoordinates(e);
@@ -38,7 +39,7 @@ define([
             });
             // Listen to the window for the release, otherwise we have a release when leaving the map canvas.
             draw();
-            center();
+            centerMap();
         }
 
         // Calculate the selection and reset the selection box.
@@ -90,24 +91,22 @@ define([
         function draw() {
             terrain.context.clearRect(0, 0, terrain.canvas.width, terrain.canvas.height);
             var coordinates = {x: 0, y: 0};
-            for (var i = 0; world.height > i; i++) {
-                for (var j = 0; world.width > j; j++) {
-                    if (!world.outOfBound(coordinates.y + i, coordinates.x + j)) {
-                        if (world.mapData[coordinates.y + i][coordinates.x + j] === 1) {
-                            drawTile({
-                                sprite: "trees_2.png",
-                                x: coordinates.x + j,
-                                y: coordinates.y + i,
-                                correction: 15
-                            });
-                        } else {
-                            drawTile({
-                                sprite: "landscapeTiles_066.png",
-                                x: coordinates.x + j,
-                                y: coordinates.y + i,
-                                correction: 15
-                            });
-                        }
+            for (var i = 0; i < world.grid.length; i++) {
+                for (var j = 0; j < world.grid[0].length; j++) {
+                    if (world.grid[coordinates.y+j][coordinates.x+i] === 1) {
+                        drawTile({
+                            sprite: "trees_2.png",
+                            x: coordinates.x + j,
+                            y: coordinates.y + i,
+                            correction: 15
+                        });
+                    } else {
+                        drawTile({
+                            sprite: "landscapeTiles_066.png",
+                            x: coordinates.x + j,
+                            y: coordinates.y + i,
+                            correction: 15
+                        });
                     }
                 }
             }
@@ -130,12 +129,11 @@ define([
             if (_.isEmpty(spt)) {
                 return;
             }
-
             // transform the grid tile to iso coordinates
             coordinates = standardlib.twoDToIso(config.x, config.y);
             // transform the coordinates to the actual size of the map
-            coordinates.x = (coordinates.x * world.tileWidth + ((terrain.canvas.width) / 2)) - ((spt.w - world.tileWidth) / 2) - world.tileWidth / 2;
-            coordinates.y = (coordinates.y * world.tileHeight + (spt.w / 2 - (spt.h - config.correction)));
+            coordinates.x = (coordinates.x * app.config.terrain.tile.width + ((terrain.canvas.width) / 2)) - ((spt.w - app.config.terrain.tile.width) / 2) - app.config.terrain.tile.width / 2;
+            coordinates.y = (coordinates.y * app.config.terrain.tile.height + (spt.w / 2 - (spt.h - config.correction)));
             terrain.context.drawImage(
                 img,
                 spt.x, spt.y,
@@ -145,21 +143,20 @@ define([
                 spt.w,
                 spt.h);
         }
-
-        function center() {
+        function centerMap() {
             var xCorrection = window.innerWidth / 2;
             var yCorrection = window.innerHeight / 2;
 
             // transform the grid tile to iso coordinates
             var coordinates = {};
             // transform the coordinates to the actual size of the map
-            coordinates.x = -((world.center.x) * world.tileWidth + ((terrain.canvas.width) / 2) - xCorrection);
-            coordinates.y = -(((world.center.y) * world.tileHeight)) + yCorrection;
+            coordinates.x = -((center.x/2) * app.config.terrain.grid.width + ((terrain.canvas.width) / 2) - xCorrection);
+            coordinates.y = -(((center.y/2) * app.config.terrain.grid.height)) + yCorrection;
             $(terrain.canvas).css('margin-left', coordinates.x).css('margin-top', coordinates.y);
         }
 
         function update() {
-            center(world.center);
+            centerMap(center);
         }
 
         eventmanager.subscribe('new.frame', function () {

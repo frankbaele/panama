@@ -13,6 +13,7 @@ require.config({
         standardlib: 'scripts/application/libs/standardLibrary',
         RequestAnimationFrame: 'scripts/application/libs/RequestAnimationFrame',
         assetLoader: 'scripts/application/assetLoader',
+        center: 'scripts/application/center',
         keys: 'scripts/application/keys',
         mouse: 'scripts/application/mouse',
         gamecycle: 'scripts/application/gamecycle',
@@ -34,9 +35,6 @@ require.config({
         jquery: 'bower_components/jquery/dist/jquery',
         q: 'bower_components/q/q',
         lodash: 'bower_components/lodash/lodash'
-    },
-    packages: [
-
-    ]
+    }
 });
 require(['scripts/app']);
