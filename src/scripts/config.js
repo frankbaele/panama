@@ -1,6 +1,6 @@
 var app = {
     config : {
-        collision:{
+        actor:{
             grid:{
                 width: 120,
                 height: 120

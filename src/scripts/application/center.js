@@ -1,5 +1,5 @@
 define(['eventmanager'],function (eventmanager) {
-    var center = twoDToIso(app.config.collision.grid.height/2, app.config.collision.grid.width/2);
+    var center = twoDToIso(app.config.actor.grid.height/2, app.config.actor.grid.width/2);
 
     var pressedkeys = {
         up: 0,

@@ -1,10 +1,10 @@
 define([
         'eventmanager',
         'standardlib',
-        'world',
         'actorList',
+        'center',
         'assetLoader'],
-    function (eventmanager, standardlib, world, actorList, assetLoader) {
+    function (eventmanager, standardlib, actorList, center, assetLoader) {
         var healthbarHeight = 7.5;
 
         function update() {
@@ -48,16 +48,16 @@ define([
         }
 
         function updateActorPosition(actor) {
-            var width = window.innerWidth / (world.tileWidth);
-            var height = window.innerHeight / (world.tileHeight);
+            var width = window.innerWidth / (app.config.actor.tile.width);
+            var height = window.innerHeight / (app.config.actor.tile.height);
             var coordinates = standardlib.twoDToIso(actor.variables.coordinates.x, actor.variables.coordinates.y);
-            var isoCenter = world.center;
+            var isoCenter = center;
             var y = (coordinates.y - isoCenter.y);
-            var bottom = ((height / 2 - y - 1) * (world.tileHeight)) + 20;
+            var bottom = ((height / 2 - y - 1) * (app.config.actor.tile.height)) + 20;
             $(actor.variables.canvas).css('z-index', actor.variables.coordinates.y).css('bottom', bottom);
 
             var x = coordinates.x - (isoCenter.x - width / 2);
-            var left = (x * (world.tileWidth) - actor.variables.sprite.center.x);
+            var left = (x * (app.config.actor.tile.width) - actor.variables.sprite.center.x);
             $(actor.variables.canvas).css('left', left);
         }
 
@@ -86,9 +86,9 @@ define([
 
         function actorInbound(config) {
             var coordinates = standardlib.twoDToIso(config.x, config.y);
-            var isoCenter = world.center;
-            var width = Math.ceil(window.innerWidth / (world.tileWidth));
-            var height = Math.ceil(window.innerHeight / (world.tileHeight));
+            var isoCenter = center;
+            var width = Math.ceil(window.innerWidth / (app.config.actor.tile.width));
+            var height = Math.ceil(window.innerHeight / (app.config.actor.tile.height));
             if ((coordinates.x >= (isoCenter.x - width / 2)) && coordinates.x <= (isoCenter.x + width / 2)) {
                 if ((coordinates.y >= (isoCenter.y - height / 2)) && coordinates.y <= (isoCenter.y + height / 2)) {
                     return true;
@@ -144,8 +144,8 @@ define([
             var xCorrection = window.innerWidth / 2;
             var yCorrection = window.innerHeight / 2;
             var coordinatesWindow = {};
-            coordinatesWindow.x = -((world.center.x) * world.tileWidth + ((world.width*world.tileWidth) / 2) - xCorrection);
-            coordinatesWindow.y = -(((world.center.y) * world.tileHeight)) + yCorrection;
+            coordinatesWindow.x = -((center.x) * app.config.actor.tile.width + ((world.width*app.config.actor.tile.width) / 2) - xCorrection);
+            coordinatesWindow.y = -(((center.y) * app.config.actor.tile.height)) + yCorrection;
             var left = -coordinatesWindow.x  + selection.left;
             var top = -coordinatesWindow.y + selection.top;
             var topLeft = standardlib.worldPosToGridPos(left, top);

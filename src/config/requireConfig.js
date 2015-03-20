@@ -17,7 +17,7 @@ require.config({
         keys: 'scripts/application/keys',
         mouse: 'scripts/application/mouse',
         gamecycle: 'scripts/application/gamecycle',
-        config: '../config',
+        pathfinding: 'scripts/application/pathfinding',
         eventmanager: 'scripts/logic/Mediator',
         command: 'scripts/logic/command',
         commandQueue: 'scripts/logic/commandQueue',

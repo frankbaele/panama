@@ -4,7 +4,7 @@ define(['actor.unit', 'eventmanager'], function (unit, eventmanager) {
         var stats = {
             focus: '',
             state: 'base'
-        }
+        };
         _.extend(that.variables, stats);
 
         var subscribe = {
@@ -14,10 +14,8 @@ define(['actor.unit', 'eventmanager'], function (unit, eventmanager) {
         _.extend(that.handlers.subscribe, subscribe);
 
         that.checkMapClick = function (e) {
-
             if (that.variables.selected) {
-                that.variables.goal = e;
-                that.generatePath();
+                that.generatePath(e);
             }
         };
 

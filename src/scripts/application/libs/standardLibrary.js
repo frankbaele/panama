@@ -1,4 +1,4 @@
-define(['world', 'eventmanager'], function (world, eventmanager) {
+define([, 'eventmanager'], function (eventmanager) {
     function s4() {
         return Math.floor((1 + Math.random()) * 0x10000)
             .toString(16)
@@ -24,19 +24,15 @@ define(['world', 'eventmanager'], function (world, eventmanager) {
         return newCoordinates;
     };
 
-    function worldPosToGridPos(PosX, PosY) {
-        PosX = PosX - (world.width/2 * world.tileWidth);
+    function worldPosToGridPos(config) {
+        config.x = config.x - (app.config.actor.grid.width/2 * app.config.actor.tile.width);
         // Add correction for the centering of the map
-        var x = (PosX / (world.tileWidth / 2) + PosY / (world.tileHeight / 2)) / 2;
-        var y = (PosY/ (world.tileHeight / 2) - (PosX / (world.tileWidth / 2))) / 2;
+        var x = (config.x / (app.config.actor.tile.width / 2) + config.y / (app.config.actor.tile.height / 2)) / 2;
+        var y = (config.y/ (app.config.actor.tile.height / 2) - (config.x / (app.config.actor.tile.width / 2))) / 2;
         x = Math.floor(x);
         y = Math.floor(y);
         return ({x:x,y:y});
     };
-
-    function windowPosToGridPos(config) {
-
-    }
 
     function checkWait(conditionFunction, resultFunction) {
         var tev = setInterval(function () {
@@ -56,7 +52,6 @@ define(['world', 'eventmanager'], function (world, eventmanager) {
         isoToTwoD: isoToTwoD,
         twoDToIso: twoDToIso,
         worldPosToGridPos: worldPosToGridPos,
-        windowPosToGridPos: windowPosToGridPos,
         checkWait: checkWait
     };
 })

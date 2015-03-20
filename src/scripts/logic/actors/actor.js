@@ -1,10 +1,29 @@
-define(['eventmanager', 'standardlib', 'world', 'collisionGrid'], function (eventmanager, standardlib, world, collisionGrid) {
+define(['eventmanager', 'standardlib', 'collisionGrid'], function (eventmanager, standardlib, collisionGrid) {
     return function (spec) {
         var that = {};
+        that.variables = {
+            coordinates: spec.coordinates,
+            collision: {
+                width: 2,
+                height: 2
+            },
+            tile:{
+                width: app.config.terrain.tile.width,
+                height: app.config.terrain.tile.height
+            },
+            uuid: standardlib.guid(),
+            direction: 'down',
+            hp: 0,
+            rendered: false,
+            canvas: {}
+        };
 
         that.init = function () {
             var config = {
-                too: spec.coordinates,
+                too: standardlib.worldPosToGridPos(spec.coordinates),
+                from: standardlib.worldPosToGridPos(spec.coordinates),
+                height: that.variables.collision.height,
+                width: that.variables.collision.width,
                 success: function () {
                     // register all the event handlers
                     _.each(that.handlers, function (handlers, type) {
@@ -22,16 +41,7 @@ define(['eventmanager', 'standardlib', 'world', 'collisionGrid'], function (even
         };
 
 
-        that.variables = {
-            coordinates: spec.coordinates,
-            width: world.tileWidth,
-            height: world.tileHeight,
-            uuid: standardlib.guid(),
-            direction: 'down',
-            hp: 0,
-            rendered: false,
-            canvas: {}
-        };
+
 
         that.handlers = {
             'subscribe': {
