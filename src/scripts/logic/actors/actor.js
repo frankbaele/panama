@@ -19,7 +19,6 @@ define(['eventmanager', 'standardlib', 'collisionGrid'], function (eventmanager,
         };
 
         that.init = function () {
-            console.log( stl.worldPosToGridPos(spec.coordinates));
             var config = {
                 too: stl.worldPosToGridPos(spec.coordinates),
                 height: that.variables.collision.height,

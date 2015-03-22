@@ -1,4 +1,4 @@
-define(['actor', 'eventmanager', 'pathfinding'], function (actor, eventmanager, pathfinding) {
+define(['actor', 'eventmanager', 'collisionGrid', 'standardlib'], function (actor, eventmanager, collisionGrid, stl) {
     return function (spec) {
         var that = actor(spec);
 
@@ -24,8 +24,25 @@ define(['actor', 'eventmanager', 'pathfinding'], function (actor, eventmanager, 
         _.extend(that.handlers.subscribe, subscribe);
 
         that.move = function () {
+            var moveTo = {
+                x: that.variables.coordinates.x + that.variables.speed,
+                y: that.variables.coordinates.y + that.variables.speed
+            };
             //that.variables.coordinates.x = that.variables.coordinates.x + that.variables.speed;
             //that.variables.coordinates.y = that.variables.coordinates.y + that.variables.speed;
+            var config = {
+                too: stl.worldPosToGridPos(moveTo),
+                from: stl.worldPosToGridPos(that.variables.coordinates),
+                height: that.variables.collision.height,
+                width: that.variables.collision.width,
+                success: function () {
+                    that.variables.coordinates = moveTo;
+                },
+                failure: function () {
+                    // Creation failed coordinates are blocked.
+                }
+            };
+            collisionGrid.update(config);
         };
 
         that.generatePath = function (coordinates){

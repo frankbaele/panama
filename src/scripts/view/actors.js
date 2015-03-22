@@ -53,10 +53,9 @@ define([
             var height = window.innerHeight;
 
             var y = actor.variables.coordinates.y - (center.y * app.config.actor.tile.height);
-            var bottom = (height / 2 - y - 1)  + 20;
-            var x = (actor.variables.coordinates.x - app.config.actor.tile.width * app.config.actor.grid.width/2 - app.config.actor.tile.width/2) - (center.x * app.config.actor.tile.width - width / 2);
-            var left = (x - actor.variables.sprite.center.x);
+            var bottom = (height / 2 - y) - (app.config.actor.tile.height * (actor.variables.collision.height));
 
+            var left = (actor.variables.coordinates.x - (app.config.actor.tile.width * app.config.actor.grid.width/2) - app.config.actor.tile.width) - (center.x * app.config.actor.tile.width - width / 2);
             $(actor.variables.canvas)
                 .css('z-index', actor.variables.coordinates.y)
                 .css('bottom', bottom)
