@@ -4,7 +4,7 @@ define([
         'actorList',
         'center',
         'assetLoader'],
-    function (eventmanager, standardlib, actorList, center, assetLoader) {
+    function (eventmanager, stl, actorList, center, assetLoader) {
         var healthbarHeight = 7.5;
 
         function update() {
@@ -50,7 +50,7 @@ define([
         function updateActorPosition(actor) {
             var width = window.innerWidth / (app.config.actor.tile.width);
             var height = window.innerHeight / (app.config.actor.tile.height);
-            var coordinates = standardlib.twoDToIso(actor.variables.coordinates.x, actor.variables.coordinates.y);
+            var coordinates = stl.twoDToIso(actor.variables.coordinates.x, actor.variables.coordinates.y);
             var isoCenter = center;
             var y = (coordinates.y - isoCenter.y);
             var bottom = ((height / 2 - y - 1) * (app.config.actor.tile.height)) + 20;
@@ -85,7 +85,7 @@ define([
         }
 
         function actorInbound(config) {
-            var coordinates = standardlib.twoDToIso(config.x, config.y);
+            var coordinates = stl.twoDToIso(config.x, config.y);
             var isoCenter = center;
             var width = Math.ceil(window.innerWidth / (app.config.actor.tile.width));
             var height = Math.ceil(window.innerHeight / (app.config.actor.tile.height));
@@ -148,12 +148,12 @@ define([
             coordinatesWindow.y = -(((center.y) * app.config.actor.tile.height)) + yCorrection;
             var left = -coordinatesWindow.x  + selection.left;
             var top = -coordinatesWindow.y + selection.top;
-            var topLeft = standardlib.worldPosToGridPos(left, top);
-            topLeft = standardlib.twoDToIso(topLeft.x, topLeft.y);
-            var bottomRight = standardlib.worldPosToGridPos(left + selection.width, top + selection.height);
-            bottomRight = standardlib.twoDToIso(bottomRight.x, bottomRight.y)
+            var topLeft = stl.worldPosToGridPos(left, top);
+            topLeft = stl.twoDToIso(topLeft.x, topLeft.y);
+            var bottomRight = stl.worldPosToGridPos(left + selection.width, top + selection.height);
+            bottomRight = stl.twoDToIso(bottomRight.x, bottomRight.y)
             _.each(actorList.getActorList(), function (actor) {
-                var coordinates = standardlib.twoDToIso(actor.variables.coordinates.x, actor.variables.coordinates.y);
+                var coordinates = stl.twoDToIso(actor.variables.coordinates.x, actor.variables.coordinates.y);
                 if ((coordinates.x >= topLeft.x) && coordinates.x <= bottomRight.x) {
                     if ((coordinates.y >= topLeft.y) && coordinates.y <= bottomRight.y) {
 

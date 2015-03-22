@@ -21,7 +21,6 @@ define(['RNG'], function (RNG) {
 
     function init() {
         grid = (_.compose(runAutomatonCycle, superSizemap, runAutomatonCycle, runAutomatonCycle, randomize, fillmap))();
-        console.log(grid);
     }
 
     /**

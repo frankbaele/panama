@@ -1,4 +1,4 @@
-define(['eventmanager', 'standardlib', 'collisionGrid'], function (eventmanager, standardlib, collisionGrid) {
+define(['eventmanager', 'standardlib', 'collisionGrid'], function (eventmanager, stl, collisionGrid) {
     return function (spec) {
         var that = {};
         that.variables = {
@@ -11,7 +11,7 @@ define(['eventmanager', 'standardlib', 'collisionGrid'], function (eventmanager,
                 width: app.config.terrain.tile.width,
                 height: app.config.terrain.tile.height
             },
-            uuid: standardlib.guid(),
+            uuid: stl.guid(),
             direction: 'down',
             hp: 0,
             rendered: false,
@@ -20,8 +20,7 @@ define(['eventmanager', 'standardlib', 'collisionGrid'], function (eventmanager,
 
         that.init = function () {
             var config = {
-                too: standardlib.worldPosToGridPos(spec.coordinates),
-                from: standardlib.worldPosToGridPos(spec.coordinates),
+                too: stl.worldPosToGridPos(spec.coordinates),
                 height: that.variables.collision.height,
                 width: that.variables.collision.width,
                 success: function () {

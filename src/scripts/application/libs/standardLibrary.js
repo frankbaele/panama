@@ -22,9 +22,9 @@ define([, 'eventmanager'], function (eventmanager) {
         newCoordinates.x = (posX - posY) / 2;
         newCoordinates.y = (posX + posY) / 2;
         return newCoordinates;
-    };
-
+    }
     function worldPosToGridPos(config) {
+        config = _.cloneDeep(config);
         config.x = config.x - (app.config.actor.grid.width/2 * app.config.actor.tile.width);
         // Add correction for the centering of the map
         var x = (config.x / (app.config.actor.tile.width / 2) + config.y / (app.config.actor.tile.height / 2)) / 2;
@@ -32,7 +32,12 @@ define([, 'eventmanager'], function (eventmanager) {
         x = Math.floor(x);
         y = Math.floor(y);
         return ({x:x,y:y});
-    };
+    }
+
+    function difference(array) {
+        var rest = concat.apply(ArrayProto, slice.call(arguments, 1));
+        return _.filter(array, function(value){ return !_.contains(rest, value); });
+    }
 
     function checkWait(conditionFunction, resultFunction) {
         var tev = setInterval(function () {
@@ -49,6 +54,7 @@ define([, 'eventmanager'], function (eventmanager) {
 
     return {
         guid: guid,
+        difference: difference,
         isoToTwoD: isoToTwoD,
         twoDToIso: twoDToIso,
         worldPosToGridPos: worldPosToGridPos,
