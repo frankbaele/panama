@@ -13,9 +13,6 @@ define(['eventmanager', 'world', 'standardlib'], function (eventmanager, world, 
                 height: config.height,
                 width: config.width
             });
-            _.each(tooArray, function(item){
-                console.log(that.grid[item.y][item.x]);
-            });
             var fromArray = that.generateUpdateArray({
                 grid: config.from,
                 height: config.height,

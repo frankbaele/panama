@@ -16,6 +16,7 @@ define([
 
             _.each(actorList.getActorList(), function (actor) {
                 // Check if the actor is inbound, so we can clean up or create the canvas for the actor
+
                 if (actorInbound(actor.variables.coordinates)) {
                     if (!actor.variables.rendered) {
                         $('.ActorsWrapper').append('<canvas id="' + actor.variables.uuid + '"></canvas>');
@@ -48,17 +49,18 @@ define([
         }
 
         function updateActorPosition(actor) {
-            var width = window.innerWidth / (app.config.actor.tile.width);
-            var height = window.innerHeight / (app.config.actor.tile.height);
-            var coordinates = stl.twoDToIso(actor.variables.coordinates.x, actor.variables.coordinates.y);
-            var isoCenter = center;
-            var y = (coordinates.y - isoCenter.y);
-            var bottom = ((height / 2 - y - 1) * (app.config.actor.tile.height)) + 20;
-            $(actor.variables.canvas).css('z-index', actor.variables.coordinates.y).css('bottom', bottom);
+            var width = window.innerWidth;
+            var height = window.innerHeight;
 
-            var x = coordinates.x - (isoCenter.x - width / 2);
-            var left = (x * (app.config.actor.tile.width) - actor.variables.sprite.center.x);
-            $(actor.variables.canvas).css('left', left);
+            var y = actor.variables.coordinates.y - (center.y * app.config.actor.tile.height);
+            var bottom = (height / 2 - y - 1)  + 20;
+            var x = (actor.variables.coordinates.x - app.config.actor.tile.width * app.config.actor.grid.width/2 - app.config.actor.tile.width/2) - (center.x * app.config.actor.tile.width - width / 2);
+            var left = (x - actor.variables.sprite.center.x);
+
+            $(actor.variables.canvas)
+                .css('z-index', actor.variables.coordinates.y)
+                .css('bottom', bottom)
+                .css('left', left);
         }
 
         function updateActorSprite(actor) {
@@ -68,24 +70,17 @@ define([
                 actor.variables.spriteIndex = 0;
             }
 
-            drawActor({
-                sprite: actor.variables.sprite[actor.variables.state][actor.variables.direction][actor.variables.spriteIndex],
-                canvas: actor.variables.canvas
-            });
+            drawActor(actor);
 
             if(actor.variables.selected){
-                drawHealthBar({
-                    canvas: actor.variables.canvas,
-                    health: actor.variables.health,
-                    hp: actor.variables.hp
-                })
+                drawHealthBar(actor);
             }
 
             actor.variables.spriteIndex++;
         }
 
         function actorInbound(config) {
-            var coordinates = stl.twoDToIso(config.x, config.y);
+            var coordinates = stl.worldPosToIsoPos({x: config.x, y: config.y});
             var isoCenter = center;
             var width = Math.ceil(window.innerWidth / (app.config.actor.tile.width));
             var height = Math.ceil(window.innerHeight / (app.config.actor.tile.height));
@@ -102,14 +97,14 @@ define([
             }
         }
 
-        function drawActor(config) {
+        function drawActor(actor) {
             // For lop trough all the atlasses with find, because we want to exit this loop when the atlas is found.
             var spt,
                 img;
             // For lop trough all the atlasses with find, because we want to exit this loop when the atlas is found.
             _.findIndex(assetLoader.assets.loaded.atlas, function (sheet) {
                 // Search for a sprite with the same sprite name
-                spt = _.findWhere(sheet.sprite.sprites, {id: config.sprite});
+                spt = _.findWhere(sheet.sprite.sprites, {id: actor.variables.sprite[actor.variables.state][actor.variables.direction][actor.variables.spriteIndex]});
                 img = sheet.sprite.img;
                 // exit find loop when sprite is found.
                 if (!_.isEmpty(sheet)) {
@@ -119,24 +114,26 @@ define([
             if (_.isEmpty(spt)) {
                 return;
             }
-            config.canvas.width = spt.w;
-            config.canvas.height = spt.h + healthbarHeight;
-            config.canvas.context.drawImage(
+            actor.variables.canvas.width = app.config.actor.tile.width * actor.variables.collision.width;
+            actor.variables.canvas.height = app.config.actor.tile.height * actor.variables.collision.height * 1.5;
+            var x = actor.variables.canvas.width/2 - spt.w/2;
+            var y = actor.variables.canvas.height - spt.h;
+            actor.variables.canvas.context.drawImage(
                 img,
                 spt.x, spt.y,
                 spt.w, spt.h,
-                0,
-                healthbarHeight,
+                x,
+                y,
                 spt.w,
                 spt.h);
         }
 
-        function drawHealthBar (config){
-            config.canvas.context.fillStyle = 'red';
-            config.canvas.context.fillRect((config.canvas.width - 40)/2,0,38, healthbarHeight-2);
-            config.canvas.context.fillStyle = 'green';
-            var health = config.health/config.hp;
-            config.canvas.context.fillRect((config.canvas.width - 40)/2,0,(38) * health, healthbarHeight-2);
+        function drawHealthBar (actor){
+            actor.variables.canvas.context.fillStyle = 'red';
+            actor.variables.canvas.context.fillRect((actor.variables.canvas.width - 40)/2,0,38, healthbarHeight-2);
+            actor.variables.canvas.context.fillStyle = 'green';
+            var health = actor.variables.health/actor.variables.hp;
+            actor.variables.canvas.context.fillRect((actor.variables.canvas.width - 40)/2,0,(38) * health, healthbarHeight-2);
         }
 
         function applySelection (selection){

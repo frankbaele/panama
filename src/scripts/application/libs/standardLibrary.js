@@ -23,20 +23,21 @@ define([, 'eventmanager'], function (eventmanager) {
         newCoordinates.y = (posX + posY) / 2;
         return newCoordinates;
     }
+
     function worldPosToGridPos(config) {
         config = _.cloneDeep(config);
         config.x = config.x - (app.config.actor.grid.width/2 * app.config.actor.tile.width);
         // Add correction for the centering of the map
-        var x = (config.x / (app.config.actor.tile.width / 2) + config.y / (app.config.actor.tile.height / 2)) / 2;
+        var x = (config.x/ (app.config.actor.tile.width / 2) + config.y / (app.config.actor.tile.height / 2)) / 2;
         var y = (config.y/ (app.config.actor.tile.height / 2) - (config.x / (app.config.actor.tile.width / 2))) / 2;
         x = Math.floor(x);
         y = Math.floor(y);
         return ({x:x,y:y});
     }
 
-    function difference(array) {
-        var rest = concat.apply(ArrayProto, slice.call(arguments, 1));
-        return _.filter(array, function(value){ return !_.contains(rest, value); });
+    function worldPosToIsoPos(config){
+        var gridCoordinates = worldPosToGridPos(config);
+        return twoDToIso(gridCoordinates.x, gridCoordinates.y);
     }
 
     function checkWait(conditionFunction, resultFunction) {
@@ -54,10 +55,10 @@ define([, 'eventmanager'], function (eventmanager) {
 
     return {
         guid: guid,
-        difference: difference,
         isoToTwoD: isoToTwoD,
         twoDToIso: twoDToIso,
         worldPosToGridPos: worldPosToGridPos,
+        worldPosToIsoPos: worldPosToIsoPos,
         checkWait: checkWait
     };
 })
