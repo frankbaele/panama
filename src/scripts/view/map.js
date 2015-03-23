@@ -110,13 +110,6 @@ define([
                     }
                 }
             }
-
-            drawTile({
-                sprite: "landscapeTiles_066.png",
-                x: 30,
-                y: 30,
-                correction: 0
-            });
         }
 
         function drawTile(config) {
@@ -158,8 +151,8 @@ define([
             var coordinates = {};
             // transform the coordinates to the actual size of the map
 
-            coordinates.x = -((center.x/2) * app.config.terrain.tile.width + ((terrain.canvas.width) / 2) - xCorrection);
-            coordinates.y = -(((center.y/2) * app.config.terrain.tile.height)) + yCorrection;
+            coordinates.x = -(center.x * app.config.actor.tile.width + ((terrain.canvas.width) / 2) - xCorrection);
+            coordinates.y = -((center.y + (app.config.terrain.tile.height/app.config.actor.tile.height)) * app.config.actor.tile.height) + yCorrection;
             $(terrain.canvas).css('margin-left', coordinates.x).css('margin-top', coordinates.y);
         }
 

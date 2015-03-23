@@ -1,4 +1,4 @@
-define(['actor', 'eventmanager', 'collisionGrid', 'standardlib'], function (actor, eventmanager, collisionGrid, stl) {
+define(['actor', 'eventmanager', 'collisionGrid', 'standardlib', 'pathfinding'], function (actor, eventmanager, collisionGrid, stl, pathfinding) {
     return function (spec) {
         var that = actor(spec);
 
@@ -11,7 +11,7 @@ define(['actor', 'eventmanager', 'collisionGrid', 'standardlib'], function (acto
             health: 0,
             death: false,
             hp: 0,
-            speed: 5,
+            speed: 20,
             attack: 10
         };
 
@@ -24,12 +24,11 @@ define(['actor', 'eventmanager', 'collisionGrid', 'standardlib'], function (acto
         _.extend(that.handlers.subscribe, subscribe);
 
         that.move = function () {
+            /*
             var moveTo = {
-                x: that.variables.coordinates.x + that.variables.speed,
+                x: that.variables.coordinates.x,
                 y: that.variables.coordinates.y + that.variables.speed
             };
-            //that.variables.coordinates.x = that.variables.coordinates.x + that.variables.speed;
-            //that.variables.coordinates.y = that.variables.coordinates.y + that.variables.speed;
             var config = {
                 too: stl.worldPosToGridPos(moveTo),
                 from: stl.worldPosToGridPos(that.variables.coordinates),
@@ -43,6 +42,7 @@ define(['actor', 'eventmanager', 'collisionGrid', 'standardlib'], function (acto
                 }
             };
             collisionGrid.update(config);
+            */
         };
 
         that.generatePath = function (coordinates){

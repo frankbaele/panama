@@ -20,12 +20,12 @@ define(['eventmanager', 'world', 'standardlib'], function (eventmanager, world, 
                 width: config.width
             });
 
-            var filterdFromArray = that.intersect(fromArray, tooArray);
-            var filterdTooArray = that.intersect(tooArray, fromArray);
+            var filterdromArray = that.intersect(fromArray, tooArray);
+            tooArray = that.intersect(tooArray, fromArray);
 
             var open = true;
             // check if the new coordinates are open.
-            _.each(filterdTooArray, function(coordinate){
+            _.each(tooArray, function(coordinate){
                 if (that.grid[coordinate.y][coordinate.x] !== 0) {
                     open = false;
                 }
@@ -33,11 +33,11 @@ define(['eventmanager', 'world', 'standardlib'], function (eventmanager, world, 
 
             if(open){
                 // close the new too coordinates
-                _.each(filterdTooArray, function(coordinate){
+                _.each(tooArray, function(coordinate){
                     that.grid[coordinate.y][coordinate.x] = 1;
                 });
                 // open up the unpopulated from coordinates
-                _.each(filterdFromArray, function(coordinate){
+                _.each(fromArray, function(coordinate){
                     that.grid[coordinate.y][coordinate.x] = 0;
                 });
 

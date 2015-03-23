@@ -23,13 +23,13 @@
 
   canvas{
     position: absolute;
-    background: black;
   }
   &.no-pannig{
     canvas{
       left: 0;
       bottom: 0;
-      transition: all 0.5s;
+
+      transition: all 0.3s;
     }
   }
 }

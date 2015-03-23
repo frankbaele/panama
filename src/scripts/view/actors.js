@@ -53,7 +53,7 @@ define([
             var height = window.innerHeight;
 
             var y = actor.variables.coordinates.y - (center.y * app.config.actor.tile.height);
-            var bottom = (height / 2 - y) - (app.config.actor.tile.height * (actor.variables.collision.height));
+            var bottom = (height / 2 - y);
 
             var left = (actor.variables.coordinates.x - (app.config.actor.tile.width * app.config.actor.grid.width/2) - app.config.actor.tile.width) - (center.x * app.config.actor.tile.width - width / 2);
             $(actor.variables.canvas)
@@ -115,8 +115,9 @@ define([
             }
             actor.variables.canvas.width = app.config.actor.tile.width * actor.variables.collision.width;
             actor.variables.canvas.height = app.config.actor.tile.height * actor.variables.collision.height * 1.5;
+
             var x = actor.variables.canvas.width/2 - spt.w/2;
-            var y = actor.variables.canvas.height - spt.h;
+            var y = actor.variables.canvas.height - spt.h - actor.variables.sprite.center.y;
             actor.variables.canvas.context.drawImage(
                 img,
                 spt.x, spt.y,
@@ -140,16 +141,14 @@ define([
             var xCorrection = window.innerWidth / 2;
             var yCorrection = window.innerHeight / 2;
             var coordinatesWindow = {};
-            coordinatesWindow.x = -((center.x) * app.config.actor.tile.width + ((world.width*app.config.actor.tile.width) / 2) - xCorrection);
+            coordinatesWindow.x = -((center.x) * app.config.actor.tile.width + ((app.config.actor.grid.width*app.config.actor.tile.width) / 2) - xCorrection);
             coordinatesWindow.y = -(((center.y) * app.config.actor.tile.height)) + yCorrection;
             var left = -coordinatesWindow.x  + selection.left;
             var top = -coordinatesWindow.y + selection.top;
-            var topLeft = stl.worldPosToGridPos(left, top);
-            topLeft = stl.twoDToIso(topLeft.x, topLeft.y);
-            var bottomRight = stl.worldPosToGridPos(left + selection.width, top + selection.height);
-            bottomRight = stl.twoDToIso(bottomRight.x, bottomRight.y)
+            var topLeft = stl.worldPosToIsoPos({x:left,y: top});
+            var bottomRight = stl.worldPosToIsoPos({x: left + selection.width, y: top + selection.height});
             _.each(actorList.getActorList(), function (actor) {
-                var coordinates = stl.twoDToIso(actor.variables.coordinates.x, actor.variables.coordinates.y);
+                var coordinates = stl.worldPosToIsoPos({x:actor.variables.coordinates.x, y:actor.variables.coordinates.y});
                 if ((coordinates.x >= topLeft.x) && coordinates.x <= bottomRight.x) {
                     if ((coordinates.y >= topLeft.y) && coordinates.y <= bottomRight.y) {
 

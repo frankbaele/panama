@@ -10,6 +10,7 @@ define(['actor.unit.local', 'eventmanager'], function (unit, eventmanager) {
                     x: 24,
                     y: 20
                 },
+                height: 80,
                 base: {
                     0: [
                         'plane/base/Plane_Large_face0_0.png',
