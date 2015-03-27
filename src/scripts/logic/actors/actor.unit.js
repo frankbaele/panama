@@ -24,25 +24,7 @@ define(['actor', 'eventmanager', 'collisionGrid', 'standardlib', 'pathfinding'],
         _.extend(that.handlers.subscribe, subscribe);
 
         that.move = function () {
-
-            var moveTo = {
-                x: that.variables.coordinates.x + that.variables.speed,
-                y: that.variables.coordinates.y + that.variables.speed
-            };
-            var config = {
-                too: stl.worldPosToGridPos(moveTo),
-                from: stl.worldPosToGridPos(that.variables.coordinates),
-                height: that.variables.collision.height,
-                width: that.variables.collision.width,
-                success: function () {
-                    that.variables.coordinates = moveTo;
-                },
-                failure: function () {
-                    // Creation failed coordinates are blocked.
-                }
-            };
-            collisionGrid.update(config);
-
+            //pathfinding.move()
         };
 
         that.generatePath = function (coordinates){

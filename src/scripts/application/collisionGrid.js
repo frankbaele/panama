@@ -1,17 +1,25 @@
-define(['eventmanager', 'world', 'standardlib'], function (eventmanager, world, stl) {
+define(['eventmanager', 'world', 'graph'], function (eventmanager, world, graph) {
         var that = {};
         that.init = function () {
             // add the world grid and double it.
-            that.grid = superSizemap(_.cloneDeep(world.grid));
+            that.grid = {};
+            that.grid.dynamic = superSizemap(_.cloneDeep(world.grid));
+            that.grid.static = _.cloneDeep(that.grid.dynamic);
+            //Force empty update so the graph gets generated.
+            that.updateStatic({
+                tooArray: [],
+                fromArray: []
+            });
         };
         /**
          * update the collisionGrid
          * @param from
-         * @param
+         * @param too
+         * @param height
+         * @param static:boolean
          */
         that.update = function (config) {
             // Correct the unset and set array where there is overlap between from and too
-
 
             var tooArray = that.generateUpdateArray({
                 grid: config.too,
@@ -31,7 +39,7 @@ define(['eventmanager', 'world', 'standardlib'], function (eventmanager, world, 
             var open = true;
             // check if the new coordinates are open.
             _.each(tooArray, function(coordinate){
-                if (that.grid[coordinate.x][coordinate.y] !== 0) {
+                if (that.grid.dynamic[coordinate.x][coordinate.y] !== 0) {
                     open = false;
                 }
             });
@@ -39,16 +47,23 @@ define(['eventmanager', 'world', 'standardlib'], function (eventmanager, world, 
             if(open){
                 // close the new too coordinates
                 _.each(tooArray, function(coordinate){
-                    that.grid[coordinate.x][coordinate.y] = 1;
+                    that.grid.dynamic[coordinate.x][coordinate.y] = 1;
                 });
                 // open up the unpopulated from coordinates
                 _.each(fromArray, function(coordinate){
-                    that.grid[coordinate.x][coordinate.y] = 0;
+                    that.grid.dynamic[coordinate.x][coordinate.y] = 0;
                 });
 
                 // Execute the success callback if it exists
                 if (typeof config.success !== 'undefined') {
                     config.success();
+                }
+                // update the static grid also(e.g. building)
+                if(config.static){
+                    that.updateStatic({
+                        tooArray: tooArray,
+                        fromArray: fromArray
+                    });
                 }
             } else {
                 // execute the failure callback.
@@ -99,7 +114,22 @@ define(['eventmanager', 'world', 'standardlib'], function (eventmanager, world, 
          * @returns {boolean}
          */
         that.isOpen = function (config) {
-            return that.grid[config.new.y][config.new.x] === 0;
+            return that.grid.dynamic[config.new.y][config.new.x] === 0;
+        };
+        /**
+         * Update the static collision map and regenerates the graph for it.
+         * @param config
+         */
+        that.updateStatic = function (config){
+            // close the new too coordinates
+            _.each(config.tooArray, function(coordinate){
+                that.grid.static[coordinate.x][coordinate.y] = 1;
+            });
+            // open up the unpopulated from coordinates
+            _.each(config.fromArray, function(coordinate){
+                that.grid.static[coordinate.x][coordinate.y] = 0;
+            });
+            that.grid.graph = new graph(that.grid.static);
         };
         /**
          * Doubles a given array and returns it
