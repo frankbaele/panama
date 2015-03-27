@@ -37,4 +37,3 @@ require.config({
         lodash: 'bower_components/lodash/lodash'
     }
 });
-require(['scripts/app']);

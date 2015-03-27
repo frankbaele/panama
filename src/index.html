@@ -5,14 +5,12 @@
     <title>Panama a game built using HTML5 canvas en javascript</title>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0"/>
-    <link rel="stylesheet" href="css/style.css">
-    <script src="scripts/config.js"></script>
-    <script src="bower_components/requirejs/require.js"></script>
-    <script src="config/requireConfig.js"></script>
+
+    <!-- 1. Load platform support before any code that touches the DOM. -->
+    <script src="bower_components/webcomponentsjs/webcomponents.min.js"></script>
+    <link rel="import" href="elements/menu.html">
+    <link rel="import" href="elements/game.html">
 </head>
-<div id="gamecontainer">
-    <canvas id="mapCanvas" class="gamelayer"></canvas>
-    <div class="ActorsWrapper"></div>
-    <div class="ghost-select"></div>
-</div>
+    <main-menu></main-menu>
+    <game-container></game-container>
 </html>

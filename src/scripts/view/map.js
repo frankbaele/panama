@@ -9,7 +9,7 @@ define([
         var terrain = {};
 
         function init() {
-            terrain.canvas = document.getElementById("mapCanvas");
+            terrain.canvas = app.config.shadowRoot.getElementById("mapCanvas");
             terrain.context = terrain.canvas.getContext("2d");
             terrain.canvas.width = app.config.terrain.grid.width * app.config.terrain.tile.width;
             terrain.canvas.height = app.config.terrain.grid.height * app.config.terrain.tile.height;
@@ -21,7 +21,6 @@ define([
                 }
             );
             terrain.canvas.addEventListener('mousedown', function (event) {
-
                 if (event.which == 1) {
                     $(".ghost-select").addClass("ghost-active");
                     $(".ghost-select").css({
@@ -32,8 +31,8 @@ define([
                     initialW = event.pageX;
                     initialH = event.pageY;
 
-                    $(document).bind("mouseup", defineSelection);
-                    $(document).bind("mousemove", updateSelector);
+                    $(app.config.shadowRoot).bind("mouseup", defineSelection);
+                    $(app.config.shadowRoot).bind("mousemove", updateSelector);
                 }
 
             });
@@ -44,10 +43,10 @@ define([
 
         // Calculate the selection and reset the selection box.
         function defineSelection(e) {
-            $(document).unbind("mousemove", updateSelector);
-            $(document).unbind("mouseup", defineSelection);
+            $(app.config.shadowRoot).unbind("mousemove", updateSelector);
+            $(app.config.shadowRoot).unbind("mouseup", defineSelection);
 
-            var element = $(".ghost-select");
+            var element = $(app.config.shadowRoot).find(".ghost-select");
 
             eventmanager.publish('map.selection', {
                 width: element.width(),
@@ -56,7 +55,7 @@ define([
                 top: element.offset().top
             });
             //Reset the selection div.
-            $(".ghost-select").css({
+            $(app.config.shadowRoot).find(".ghost-select").css({
                 'left': 0,
                 'top': 0,
                 'width': 0,
@@ -68,20 +67,20 @@ define([
         function updateSelector(e) {
             var w = Math.abs(initialW - e.pageX);
             var h = Math.abs(initialH - e.pageY);
-            $(".ghost-select").css({
+            $(app.config.shadowRoot).find(".ghost-select").css({
                 'width': w,
                 'height': h
             });
             if (e.pageX <= initialW && e.pageY >= initialH) {
-                $(".ghost-select").css({
+                $(app.config.shadowRoot).find(".ghost-select").css({
                     'left': e.pageX
                 });
             } else if (e.pageY <= initialH && e.pageX >= initialW) {
-                $(".ghost-select").css({
+                $(app.config.shadowRoot).find(".ghost-select").css({
                     'top': e.pageY
                 });
             } else if (e.pageY < initialH && e.pageX < initialW) {
-                $(".ghost-select").css({
+                $(app.config.shadowRoot).find(".ghost-select").css({
                     'left': e.pageX,
                     "top": e.pageY
                 });
@@ -153,7 +152,7 @@ define([
 
             coordinates.x = -(center.x * app.config.actor.tile.width + ((terrain.canvas.width) / 2) - xCorrection);
             coordinates.y = -((center.y + (app.config.terrain.tile.height/app.config.actor.tile.height)) * app.config.actor.tile.height) + yCorrection;
-            $(terrain.canvas).css('margin-left', coordinates.x).css('margin-top', coordinates.y);
+            $(app.config.shadowRoot).find(terrain.canvas).css('margin-left', coordinates.x).css('margin-top', coordinates.y);
         }
 
         function update() {

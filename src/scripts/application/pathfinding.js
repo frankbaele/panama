@@ -11,7 +11,6 @@ define(['collisionGrid'], function (collisionGrid) {
         that.move = function () {
             // If the path is empty do not send move commands
             if (that.variables.path.length !== 0) {
-
                 // get the first part of the path
                 var first = _.first(that.variables.path);
 

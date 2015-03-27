@@ -9,7 +9,7 @@ define([
 
         function update() {
             _.each(actorList.getCleanUpList(), function (actor) {
-                $('canvas.' + actor.uuid).remove();
+                $(app.config.shadowRoot).find('canvas.' + actor.uuid).remove();
             });
 
             actorList.clearCleanUpList();
@@ -19,8 +19,9 @@ define([
 
                 if (actorInbound(actor.variables.coordinates)) {
                     if (!actor.variables.rendered) {
-                        $('.ActorsWrapper').append('<canvas id="' + actor.variables.uuid + '"></canvas>');
-                        actor.variables.canvas = document.getElementById(actor.variables.uuid);
+                        app.config.shadowRoot.getElementById('ActorsWrapper')
+                            .insertAdjacentHTML('beforeend','<canvas id="' + actor.variables.uuid + '"></canvas>');
+                        actor.variables.canvas = app.config.shadowRoot.getElementById(actor.variables.uuid);
                         actor.variables.canvas.context = actor.variables.canvas.getContext("2d");
                         actor.variables.canvas.addEventListener("click", function () {
                                 eventmanager.publish('actor.selected', actor.variables.uuid)
@@ -34,7 +35,7 @@ define([
                     }
                 } else {
                     if (actor.variables.rendered) {
-                        $('canvas#' + actor.variables.uuid).remove();
+                        $(app.config.shadowRoot).find('canvas#' + actor.variables.uuid).remove();
                         actor.variables.rendered = false;
                         actor.variables.canvas = '';
                     }
@@ -56,7 +57,7 @@ define([
             var bottom = (height / 2 - y);
 
             var left = (actor.variables.coordinates.x - (app.config.actor.tile.width * app.config.actor.grid.width/2) - app.config.actor.tile.width) - (center.x * app.config.actor.tile.width - width / 2);
-            $(actor.variables.canvas)
+            $(app.config.shadowRoot).find(actor.variables.canvas)
                 .css('z-index', actor.variables.coordinates.y)
                 .css('bottom', bottom)
                 .css('left', left);
@@ -168,10 +169,10 @@ define([
             update();
         });
         eventmanager.subscribe('center.update.start', function () {
-            $('.ActorsWrapper').removeClass('no-panning');
+            $(app.config.shadowRoot).find('.ActorsWrapper').removeClass('no-panning');
         })
         eventmanager.subscribe('center.update.stop', function () {
-            $('.ActorsWrapper').addClass('no-panning');
+            $(app.config.shadowRoot).find('.ActorsWrapper').addClass('no-panning');
         })
         eventmanager.subscribe('map.selection', function(selection){
             applySelection(selection);
