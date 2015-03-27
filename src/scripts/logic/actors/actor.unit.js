@@ -24,9 +24,9 @@ define(['actor', 'eventmanager', 'collisionGrid', 'standardlib', 'pathfinding'],
         _.extend(that.handlers.subscribe, subscribe);
 
         that.move = function () {
-            /*
+
             var moveTo = {
-                x: that.variables.coordinates.x,
+                x: that.variables.coordinates.x + that.variables.speed,
                 y: that.variables.coordinates.y + that.variables.speed
             };
             var config = {
@@ -42,7 +42,7 @@ define(['actor', 'eventmanager', 'collisionGrid', 'standardlib', 'pathfinding'],
                 }
             };
             collisionGrid.update(config);
-            */
+
         };
 
         that.generatePath = function (coordinates){

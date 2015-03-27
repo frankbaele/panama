@@ -4,6 +4,11 @@ define(['eventmanager', 'world', 'standardlib'], function (eventmanager, world, 
             // add the world grid and double it.
             that.grid = superSizemap(_.cloneDeep(world.grid));
         };
+        /**
+         * update the collisionGrid
+         * @param from
+         * @param
+         */
         that.update = function (config) {
             // Correct the unset and set array where there is overlap between from and too
 
@@ -26,7 +31,7 @@ define(['eventmanager', 'world', 'standardlib'], function (eventmanager, world, 
             var open = true;
             // check if the new coordinates are open.
             _.each(tooArray, function(coordinate){
-                if (that.grid[coordinate.y][coordinate.x] !== 0) {
+                if (that.grid[coordinate.x][coordinate.y] !== 0) {
                     open = false;
                 }
             });
@@ -34,11 +39,11 @@ define(['eventmanager', 'world', 'standardlib'], function (eventmanager, world, 
             if(open){
                 // close the new too coordinates
                 _.each(tooArray, function(coordinate){
-                    that.grid[coordinate.y][coordinate.x] = 1;
+                    that.grid[coordinate.x][coordinate.y] = 1;
                 });
                 // open up the unpopulated from coordinates
                 _.each(fromArray, function(coordinate){
-                    that.grid[coordinate.y][coordinate.x] = 0;
+                    that.grid[coordinate.x][coordinate.y] = 0;
                 });
 
                 // Execute the success callback if it exists
