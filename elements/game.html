@@ -1,0 +1,24 @@
+<link rel="import"
+      href="../scripts/vendor/polymer.html">
+
+<polymer-element name="game-container">
+    <template>
+        <link rel="stylesheet" href="../css/style.css">
+        <div id="gamecontainer">
+            <canvas id="mapCanvas" class="gamelayer"></canvas>
+            <div id="ActorsWrapper"></div>
+            <div id="ghost-select"></div>
+        </div>
+    </template>
+    <script src="../scripts/config.js"></script>
+    <script src="../scripts/vendor/require.js"></script>
+    <script src="../config/requireLiveConfig.js"></script>
+    <script>
+        Polymer({
+            ready: function(){
+                app.config.shadowRoot = this.shadowRoot;
+                require(['scripts/app']);
+            }
+        });
+    </script>
+</polymer-element>
