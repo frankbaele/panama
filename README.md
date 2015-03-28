@@ -35,6 +35,9 @@ Local setup
 1. Get all the dependencies via npm
 
     npm install
+2. Get all the bower deps
+    
+    bower install
 
 2. Serve the page
 
