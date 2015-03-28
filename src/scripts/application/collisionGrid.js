@@ -1,4 +1,4 @@
-define(['eventmanager', 'world', 'graph'], function (eventmanager, world, graph) {
+define(['eventmanager', 'world', 'pathfinding'], function (eventmanager, world, PF) {
         var that = {};
         that.init = function () {
             // add the world grid and double it.
@@ -129,7 +129,7 @@ define(['eventmanager', 'world', 'graph'], function (eventmanager, world, graph)
             _.each(config.fromArray, function(coordinate){
                 that.grid.static[coordinate.x][coordinate.y] = 0;
             });
-            that.grid.graph = new graph(that.grid.static);
+            that.grid.graph =  new PF.Grid(that.grid.static.length, that.grid.static[0].length ,that.grid.static);
         };
         /**
          * Doubles a given array and returns it

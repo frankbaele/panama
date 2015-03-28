@@ -17,7 +17,7 @@ define([
             _.each(actorList.getActorList(), function (actor) {
                 // Check if the actor is inbound, so we can clean up or create the canvas for the actor
 
-                if (actorInbound(actor.variables.coordinates)) {
+                if (actorInbound(actor.variables.coordinates.current)) {
                     if (!actor.variables.rendered) {
                         app.config.shadowRoot.getElementById('ActorsWrapper')
                             .insertAdjacentHTML('beforeend','<canvas id="' + actor.variables.uuid + '"></canvas>');
@@ -53,12 +53,12 @@ define([
             var width = window.innerWidth;
             var height = window.innerHeight;
 
-            var y = actor.variables.coordinates.y - (center.y * app.config.actor.tile.height);
+            var y = actor.variables.coordinates.current.y - (center.y * app.config.actor.tile.height);
             var bottom = (height / 2 - y);
 
-            var left = (actor.variables.coordinates.x - (app.config.actor.tile.width * app.config.actor.grid.width/2) - app.config.actor.tile.width) - (center.x * app.config.actor.tile.width - width / 2);
+            var left = (actor.variables.coordinates.current.x - (app.config.actor.tile.width * app.config.actor.grid.width/2) - app.config.actor.tile.width) - (center.x * app.config.actor.tile.width - width / 2);
             $(app.config.shadowRoot).find(actor.variables.canvas)
-                .css('z-index', actor.variables.coordinates.y)
+                .css('z-index', actor.variables.coordinates.current.y)
                 .css('bottom', bottom)
                 .css('left', left);
         }
@@ -149,7 +149,7 @@ define([
             var topLeft = stl.worldPosToIsoPos({x:left,y: top});
             var bottomRight = stl.worldPosToIsoPos({x: left + selection.width, y: top + selection.height});
             _.each(actorList.getActorList(), function (actor) {
-                var coordinates = stl.worldPosToIsoPos({x:actor.variables.coordinates.x, y:actor.variables.coordinates.y});
+                var coordinates = stl.worldPosToIsoPos({x:actor.variables.coordinates.current.x, y:actor.variables.coordinates.current.y});
                 if ((coordinates.x >= topLeft.x) && coordinates.x <= bottomRight.x) {
                     if ((coordinates.y >= topLeft.y) && coordinates.y <= bottomRight.y) {
 

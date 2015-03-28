@@ -3,12 +3,8 @@ require.config({
         text: 'bower_components/text/text',
         assetsList: 'config/assetsList.json',
         RNG: 'scripts/application/libs/RNG',
-        astar: 'scripts/application/libs/astar',
         world: 'scripts/application/libs/world',
         collisionGrid: 'scripts/application/collisionGrid',
-        graph: 'scripts/application/libs/graph',
-        graphNode: 'scripts/application/libs/graphNode',
-        binaryHeap: 'scripts/application/libs/binaryHeap',
         spriteSheet: 'scripts/application/libs/spriteSheet',
         standardlib: 'scripts/application/libs/standardLibrary',
         RequestAnimationFrame: 'scripts/application/libs/RequestAnimationFrame',
@@ -17,7 +13,7 @@ require.config({
         keys: 'scripts/application/keys',
         mouse: 'scripts/application/mouse',
         gamecycle: 'scripts/application/gamecycle',
-        pathfinding: 'scripts/application/pathfinding',
+        actorMovement: 'scripts/logic/actorMovement',
         eventmanager: 'scripts/logic/Mediator',
         command: 'scripts/logic/command',
         commandQueue: 'scripts/logic/commandQueue',
@@ -34,6 +30,7 @@ require.config({
         Keypress: 'bower_components/Keypress/keypress-2.1.0.min',
         jquery: 'bower_components/jquery/dist/jquery',
         q: 'bower_components/q/q',
-        lodash: 'bower_components/lodash/lodash'
+        lodash: 'bower_components/lodash/lodash',
+        pathfinding: 'bower_components/pathfinding/pathfinding-browser'
     }
 });

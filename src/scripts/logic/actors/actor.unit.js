@@ -1,4 +1,4 @@
-define(['actor', 'eventmanager', 'collisionGrid', 'standardlib', 'pathfinding'], function (actor, eventmanager, collisionGrid, stl, pathfinding) {
+define(['actor', 'eventmanager', 'collisionGrid', 'standardlib', 'actorMovement'], function (actor, eventmanager, collisionGrid, stl, actorMovement) {
     return function (spec) {
         var that = actor(spec);
 
@@ -27,15 +27,17 @@ define(['actor', 'eventmanager', 'collisionGrid', 'standardlib', 'pathfinding'],
          */
         that.move = function () {
             if (that.variables.path.length > 0) {
-                pathfinding.move(that.variables.path, function () {
-
+                actorMovement.move({
+                    path: that.variables.path,
+                    coordinates: that.variables.coordinates.current,
+                    speed: that.variables.speed
                 })
             }
         };
 
         that.generatePath = function (coordinates) {
-            that.variables.path = pathfinding.generatePath({
-                from: that.variables.coordinates,
+            that.variables.path = actorMovement.generatePath({
+                from: that.variables.coordinates.current,
                 too: coordinates
             });
         };

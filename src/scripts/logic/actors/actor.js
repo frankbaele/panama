@@ -2,7 +2,10 @@ define(['eventmanager', 'standardlib', 'collisionGrid'], function (eventmanager,
     return function (spec) {
         var that = {};
         that.variables = {
-            coordinates: spec.coordinates,
+            coordinates: {
+                current: spec.coordinates,
+                previous: spec.coordinates
+            },
             collision: {
                 width: 2,
                 height: 2

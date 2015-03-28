@@ -39,7 +39,16 @@ define([, 'eventmanager'], function (eventmanager) {
         var gridCoordinates = worldPosToGridPos(config);
         return twoDToIso(gridCoordinates.x, gridCoordinates.y);
     }
+    function gridPosToWorldPos(config){
+        var iso = twoDToIso(config.x, config.y);
+        var y = iso.y * app.config.actor.tile.height;
+        var x = iso.x * app.config.actor.tile.width + (app.config.actor.grid.width/2 * app.config.actor.tile.width);
 
+        return{
+            x:x,
+            y:y
+        }
+    }
     function checkWait(conditionFunction, resultFunction) {
         var tev = setInterval(function () {
             if (conditionFunction()) {
@@ -59,6 +68,7 @@ define([, 'eventmanager'], function (eventmanager) {
         twoDToIso: twoDToIso,
         worldPosToGridPos: worldPosToGridPos,
         worldPosToIsoPos: worldPosToIsoPos,
+        gridPosToWorldPos: gridPosToWorldPos,
         checkWait: checkWait
     };
 })
