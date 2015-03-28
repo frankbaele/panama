@@ -61,9 +61,9 @@ module.exports = function (grunt) {
             },
             templates: {
                 expand: true,
-                cwd: 'src/templates',
+                cwd: 'src/elements',
                 src: '**',
-                dest: 'dist/templates',
+                dest: 'dist/elements',
                 flatten: false,
                 filter: 'isFile'
             },
@@ -142,7 +142,6 @@ module.exports = function (grunt) {
     ]);
     grunt.registerTask('build', [
         'copy',
-        'bower',
         'requirejs'
     ]);
 };

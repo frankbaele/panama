@@ -1,4 +1,4 @@
-define([, 'eventmanager'], function (eventmanager) {
+define(['eventmanager'], function (eventmanager) {
     function s4() {
         return Math.floor((1 + Math.random()) * 0x10000)
             .toString(16)
@@ -70,4 +70,4 @@ define([, 'eventmanager'], function (eventmanager) {
         gridPosToWorldPos: gridPosToWorldPos,
         checkWait: checkWait
     };
-})
+});
