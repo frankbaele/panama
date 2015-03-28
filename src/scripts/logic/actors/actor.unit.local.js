@@ -1,4 +1,4 @@
-define(['actor.unit', 'eventmanager'], function (unit, eventmanager) {
+define(['actor.unit'], function (unit) {
     return function (spec) {
         var that = unit(spec);
         var stats = {

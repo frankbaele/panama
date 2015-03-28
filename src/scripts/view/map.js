@@ -16,14 +16,13 @@ define([
             terrain.canvas.addEventListener("contextmenu",
                 function (e) {
                     var coordinates = terrain.canvas.relmouseCoordinates(e);
-                    coordinates = standardlib.worldPosToGridPos(coordinates.x, coordinates.y);
                     eventmanager.publish('map.click', coordinates);
                 }
             );
             terrain.canvas.addEventListener('mousedown', function (event) {
                 if (event.which == 1) {
-                    $(".ghost-select").addClass("ghost-active");
-                    $(".ghost-select").css({
+                    $(app.config.shadowRoot).find("#ghost-select").addClass("ghost-active");
+                    $(app.config.shadowRoot).find("#ghost-select").css({
                         'left': event.pageX,
                         'top': event.pageY
                     });
@@ -31,8 +30,8 @@ define([
                     initialW = event.pageX;
                     initialH = event.pageY;
 
-                    $(app.config.shadowRoot).bind("mouseup", defineSelection);
-                    $(app.config.shadowRoot).bind("mousemove", updateSelector);
+                    $(document).bind("mouseup", defineSelection);
+                    $(document).bind("mousemove", updateSelector);
                 }
 
             });
@@ -43,19 +42,19 @@ define([
 
         // Calculate the selection and reset the selection box.
         function defineSelection(e) {
-            $(app.config.shadowRoot).unbind("mousemove", updateSelector);
-            $(app.config.shadowRoot).unbind("mouseup", defineSelection);
+            $(document).unbind("mousemove", updateSelector);
+            $(document).unbind("mouseup", defineSelection);
 
-            var element = $(app.config.shadowRoot).find(".ghost-select");
-
+            var element = app.config.shadowRoot.getElementById('ghost-select');
             eventmanager.publish('map.selection', {
-                width: element.width(),
-                height: element.height(),
-                left: element.offset().left,
-                top: element.offset().top
+                width: element.offsetWidth,
+                height: element.offsetHeight,
+                left: element.offsetLeft,
+                top: element.offsetTop
+
             });
             //Reset the selection div.
-            $(app.config.shadowRoot).find(".ghost-select").css({
+            $(app.config.shadowRoot).find("#ghost-select").css({
                 'left': 0,
                 'top': 0,
                 'width': 0,
@@ -67,20 +66,20 @@ define([
         function updateSelector(e) {
             var w = Math.abs(initialW - e.pageX);
             var h = Math.abs(initialH - e.pageY);
-            $(app.config.shadowRoot).find(".ghost-select").css({
+            $(app.config.shadowRoot).find("#ghost-select").css({
                 'width': w,
                 'height': h
             });
             if (e.pageX <= initialW && e.pageY >= initialH) {
-                $(app.config.shadowRoot).find(".ghost-select").css({
+                $(app.config.shadowRoot).find("#ghost-select").css({
                     'left': e.pageX
                 });
             } else if (e.pageY <= initialH && e.pageX >= initialW) {
-                $(app.config.shadowRoot).find(".ghost-select").css({
+                $(app.config.shadowRoot).find("#ghost-select").css({
                     'top': e.pageY
                 });
             } else if (e.pageY < initialH && e.pageX < initialW) {
-                $(app.config.shadowRoot).find(".ghost-select").css({
+                $(app.config.shadowRoot).find("#ghost-select").css({
                     'left': e.pageX,
                     "top": e.pageY
                 });
