@@ -9,14 +9,14 @@
     "grunt-contrib-watch": "~0.6.1",
     "grunt-contrib-jshint": "~0.11.1",
     "grunt-sass": "~0.18.1",
-    "node-sass": "~3.0.0-alpha",
+    "node-sass": "~2.0.1",
     "node-neat": "~1.7.1-beta1",
     "grunt-contrib-copy": "~0.8.0",
     "grunt-requirejs": "~0.4.2",
     "grunt-usemin": "~3.0.0",
     "grunt-bower-requirejs": "~2.0.0",
     "grunt-bower": "~0.18.0",
-    "grunt-browserify": "~3.5.0"
+    "grunt-browserify": "~3.6.0"
   },
   "dependencies": {
     "bower": "~1.3.12",

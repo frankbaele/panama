@@ -130,7 +130,7 @@ define([
             // transform the grid tile to iso coordinates
             coordinates = standardlib.twoDToIso(config.x, config.y);
             // transform the coordinates to the actual size of the map
-            coordinates.x = (coordinates.x * app.config.terrain.tile.width + ((terrain.canvas.width) / 2)) - ((spt.w - app.config.terrain.tile.width) / 2) - app.config.terrain.tile.width / 2;
+            coordinates.x = (coordinates.x * app.config.terrain.tile.width + ((terrain.canvas.width) / 2))  - app.config.terrain.tile.width / 2;
             coordinates.y = (coordinates.y * app.config.terrain.tile.height + (spt.w / 2 - (spt.h - config.correction)));
             terrain.context.drawImage(
                 img,
@@ -144,7 +144,6 @@ define([
         function centerMap() {
             var xCorrection = window.innerWidth / 2;
             var yCorrection = window.innerHeight / 2;
-
             // transform the grid tile to iso coordinates
             var coordinates = {};
             // transform the coordinates to the actual size of the map

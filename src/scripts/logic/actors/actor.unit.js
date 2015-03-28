@@ -11,7 +11,7 @@ define(['actor', 'eventmanager', 'collisionGrid', 'standardlib', 'actorMovement'
             health: 0,
             death: false,
             hp: 0,
-            speed: 20,
+            speed: 5,
             attack: 10
         };
 

@@ -35,11 +35,11 @@ define(['collisionGrid', 'standardlib','pathfinding' ], function (collisionGrid,
 
         if(config.coordinates.y > localGoal.y){
             var difference = config.coordinates.y - localGoal.y;
-            config.coordinates.y = difference <= config.speed ? localGoal.y : config.coordinates.y - config.speed;
+            config.coordinates.y = difference <= config.speed ? localGoal.y : config.coordinates.y - config.speed/2;
 
         } else if(config.coordinates.y < localGoal.y){
             var difference =  localGoal.y - config.coordinates.y;
-            config.coordinates.y = difference <= config.speed ? localGoal.y : config.coordinates.y + config.speed;
+            config.coordinates.y = difference <= config.speed ? localGoal.y : config.coordinates.y + config.speed/2;
         }
         // If on mark move to the next path point
         if(config.coordinates.x == localGoal.x && config.coordinates.y == localGoal.y){
