@@ -11,7 +11,7 @@ define(['collisionGrid', 'standardlib','pathfinding' ], function (collisionGrid,
             dontCrossCorners: true
         });
         var path = finder.findPath(from.y, from.x, too.y, too.x, grid);
-        //path =  PF.Util.smoothenPath(grid, path);
+        path =  PF.Util.smoothenPath(grid, path);
         // remove the first item as it is the current location
         path.shift();
         return path;
@@ -29,6 +29,7 @@ define(['collisionGrid', 'standardlib','pathfinding' ], function (collisionGrid,
 
         // Override the previous width the current
         previous = _.cloneDeep(current);
+
         // Convert the top path waypoint to pixel position
         var localGoal = stl.gridPosToWorldPos({
             x:config.path[0][1],

@@ -6,7 +6,7 @@ define(['eventmanager','command'], function (eventmanager) {
 
   function gameCycle() {
     // Call next cycle.
-    setTimeout(gameCycle, 200);
+    setTimeout(gameCycle, app.config.cycle);
     // Execute the previous cycle commands.
     eventmanager.publish('new.gamecycle');
     // Generate commands to executed next cycle.

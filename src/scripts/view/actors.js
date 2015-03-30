@@ -54,11 +54,28 @@ define([
             var height = window.innerHeight;
             var current = actor.variables.coordinates.current;
             var next = actor.variables.coordinates.next;
-            current = next;
-            var y = next.y - (center.y * app.config.actor.tile.height);
+            var difference = 0;
+            var speed = actor.variables.speed/(app.config.framerate/(1000/app.config.cycle) -1 );
+            if(current.x > next.x){
+                difference = current.x - next.x;
+                current.x = difference <= speed ? next.x : current.x - speed;
+            } else if(current.x < next.x){
+                difference = next.x - current.x;
+                current.x = difference <= speed ? next.x : current.x + speed;
+            }
+            // Y update
+            if(current.y > next.y){
+                difference = current.y - next.y;
+                current.y = difference <= speed ? next.y : current.y - speed/2;
+            } else if(current.y < next.y){
+                difference = next.y - current.y;
+                current.y = difference <= speed ? next.y : current.y + speed/2;
+            }
+
+            var y = current.y - (center.y * app.config.actor.tile.height);
             var bottom = (height / 2 - y);
 
-            var left = (next.x - (app.config.actor.tile.width * app.config.actor.grid.width/2) - app.config.actor.tile.width) - (center.x * app.config.actor.tile.width - width / 2);
+            var left = (current.x - (app.config.actor.tile.width * app.config.actor.grid.width/2) - app.config.actor.tile.width) - (center.x * app.config.actor.tile.width - width / 2);
             $(app.config.shadowRoot).find(actor.variables.canvas)
                 .css('z-index', Math.floor(actor.variables.coordinates.current.y/app.config.actor.tile.height))
                 .css('bottom', bottom)
