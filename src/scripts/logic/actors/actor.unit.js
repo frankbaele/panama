@@ -29,7 +29,7 @@ define(['actor', 'eventmanager', 'collisionGrid', 'standardlib', 'actorMovement'
             if (that.variables.path.length > 0) {
                 actorMovement.move({
                     path: that.variables.path,
-                    coordinates: that.variables.coordinates.current,
+                    coordinates: that.variables.coordinates,
                     speed: that.variables.speed
                 })
             }

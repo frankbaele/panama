@@ -52,15 +52,18 @@ define([
         function updateActorPosition(actor) {
             var width = window.innerWidth;
             var height = window.innerHeight;
-
-            var y = actor.variables.coordinates.current.y - (center.y * app.config.actor.tile.height);
+            var current = actor.variables.coordinates.current;
+            var next = actor.variables.coordinates.next;
+            current = next;
+            var y = next.y - (center.y * app.config.actor.tile.height);
             var bottom = (height / 2 - y);
 
-            var left = (actor.variables.coordinates.current.x - (app.config.actor.tile.width * app.config.actor.grid.width/2) - app.config.actor.tile.width) - (center.x * app.config.actor.tile.width - width / 2);
+            var left = (next.x - (app.config.actor.tile.width * app.config.actor.grid.width/2) - app.config.actor.tile.width) - (center.x * app.config.actor.tile.width - width / 2);
             $(app.config.shadowRoot).find(actor.variables.canvas)
-                .css('z-index', actor.variables.coordinates.current.y)
+                .css('z-index', Math.floor(actor.variables.coordinates.current.y/app.config.actor.tile.height))
                 .css('bottom', bottom)
                 .css('left', left);
+
         }
 
         function updateActorSprite(actor) {

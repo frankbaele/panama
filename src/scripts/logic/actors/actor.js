@@ -4,7 +4,8 @@ define(['eventmanager', 'standardlib', 'collisionGrid'], function (eventmanager,
         that.variables = {
             coordinates: {
                 current: spec.coordinates,
-                previous: spec.coordinates
+                previous: spec.coordinates,
+                next: spec.coordinates
             },
             collision: {
                 width: 2,
