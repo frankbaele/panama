@@ -58,6 +58,7 @@ define([
                 x: current.x - next.x,
                 y: current.y - next.y
             };
+
             if(change.x < 0){
                 actor.variables.direction = 0;
             } else if(change.x > 0){

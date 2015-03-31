@@ -14,6 +14,7 @@ define(['collisionGrid', 'standardlib','pathfinding' ], function (collisionGrid,
         path =  PF.Util.smoothenPath(grid, path);
         // remove the first item as it is the current location
         path.shift();
+        console.log(path);
         return path;
     };
     /**
@@ -41,11 +42,11 @@ define(['collisionGrid', 'standardlib','pathfinding' ], function (collisionGrid,
         // Y update
         if(current.y > localGoal.y){
             var difference = current.y - localGoal.y;
-            next.y = difference <= config.speed ? localGoal.y : current.y - config.speed;
+            next.y = difference <= config.speed ? localGoal.y : current.y - config.speed/2;
 
         } else if(current.y < localGoal.y){
             var difference =  localGoal.y - current.y;
-            next.y = difference <= config.speed ? localGoal.y : current.y + config.speed;
+            next.y = difference <= config.speed ? localGoal.y : current.y + config.speed/2;
         }
         // If on mark move to the next path point
         if(current.x == localGoal.x && current.y == localGoal.y){
