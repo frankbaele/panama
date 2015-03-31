@@ -59,14 +59,6 @@ module.exports = function (grunt) {
                 flatten: false,
                 filter: 'isFile'
             },
-            templates: {
-                expand: true,
-                cwd: 'src/elements',
-                src: '**',
-                dest: 'dist/elements',
-                flatten: false,
-                filter: 'isFile'
-            },
             requireConfig: {
                 expand: true,
                 cwd: 'src/config',
