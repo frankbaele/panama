@@ -51,13 +51,12 @@ define([
         }
 
         function updateActorDirection(actor){
-            var previous = actor.variables.coordinates.previous;
+            var next = actor.variables.coordinates.next;
             var current = actor.variables.coordinates.current;
-            console.log(previous);
-            console.log(current);
+
             var change = {
-                x: previous.x - current.x,
-                y: previous.y - current.y
+                x: current.x - next.x,
+                y: current.y - next.y
             };
             if(change.x < 0){
                 actor.variables.direction = 0;
@@ -75,7 +74,7 @@ define([
             var height = window.innerHeight;
             var current = actor.variables.coordinates.current;
             var next = actor.variables.coordinates.next;
-
+            actor.variables.coordinates.previous = _.cloneDeep(current);
             var speed = actor.variables.speed/(app.config.framerate/(1000/app.config.cycle) -1 );
             if(current.x > next.x){
                 var difference = current.x - next.x;

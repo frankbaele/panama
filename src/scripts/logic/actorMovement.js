@@ -24,10 +24,6 @@ define(['collisionGrid', 'standardlib','pathfinding' ], function (collisionGrid,
     that.move = function (config) {
         var current = config.coordinates.current;
         var next = config.coordinates.next;
-        var previous = config.coordinates.previous;
-
-        // Override the previous width the current
-        previous = _.cloneDeep(current);
 
         // Convert the top path waypoint to pixel position
         var localGoal = stl.gridPosToWorldPos({
