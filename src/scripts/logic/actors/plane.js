@@ -99,7 +99,7 @@ define(['actor.unit.local', 'eventmanager'], function (unit, eventmanager) {
             health : 75,
             death : false,
             hp : 100,
-            speed: 50
+            speed: 25
         };
 
         _.extend(that.variables, stats);

@@ -45,8 +45,29 @@ define([
         }
 
         function updateActor(actor) {
+            updateActorDirection(actor);
             updateActorPosition(actor);
             updateActorSprite(actor);
+        }
+
+        function updateActorDirection(actor){
+            var previous = actor.variables.coordinates.previous;
+            var current = actor.variables.coordinates.current;
+            console.log(previous);
+            console.log(current);
+            var change = {
+                x: previous.x - current.x,
+                y: previous.y - current.y
+            };
+            if(change.x < 0){
+                actor.variables.direction = 0;
+            } else if(change.x > 0){
+                actor.variables.direction = 2;
+            } else if(change.y < 0) {
+                actor.variables.direction = 1;
+            } else if(change.y > 0){
+                actor.variables.direction = 3;
+            }
         }
 
         function updateActorPosition(actor) {
@@ -54,24 +75,24 @@ define([
             var height = window.innerHeight;
             var current = actor.variables.coordinates.current;
             var next = actor.variables.coordinates.next;
-            var difference = 0;
+
             var speed = actor.variables.speed/(app.config.framerate/(1000/app.config.cycle) -1 );
             if(current.x > next.x){
-                difference = current.x - next.x;
+                var difference = current.x - next.x;
                 current.x = difference <= speed ? next.x : current.x - speed;
             } else if(current.x < next.x){
-                difference = next.x - current.x;
+                var difference = next.x - current.x;
                 current.x = difference <= speed ? next.x : current.x + speed;
             }
+
             // Y update
             if(current.y > next.y){
-                difference = current.y - next.y;
+                var difference = current.y - next.y;
                 current.y = difference <= speed ? next.y : current.y - speed/2;
             } else if(current.y < next.y){
-                difference = next.y - current.y;
+                var difference = next.y - current.y;
                 current.y = difference <= speed ? next.y : current.y + speed/2;
             }
-
             var y = current.y - (center.y * app.config.actor.tile.height);
             var bottom = (height / 2 - y);
 

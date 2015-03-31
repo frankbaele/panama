@@ -25,7 +25,6 @@ define(['collisionGrid', 'standardlib','pathfinding' ], function (collisionGrid,
         var current = config.coordinates.current;
         var next = config.coordinates.next;
         var previous = config.coordinates.previous;
-        var difference = 0;
 
         // Override the previous width the current
         previous = _.cloneDeep(current);
@@ -37,20 +36,20 @@ define(['collisionGrid', 'standardlib','pathfinding' ], function (collisionGrid,
         });
         // X update
         if(current.x > localGoal.x){
-            difference = current.x - localGoal.x;
+            var difference = current.x - localGoal.x;
             next.x = difference <= config.speed ? localGoal.x : current.x - config.speed;
         } else if(current.x < localGoal.x){
-            difference =  localGoal.x - current.x;
+            var difference =  localGoal.x - current.x;
             next.x = difference <= config.speed ? localGoal.x : current.x + config.speed;
         }
         // Y update
         if(current.y > localGoal.y){
-            difference = current.y - localGoal.y;
-            next.y = difference <= config.speed ? localGoal.y : current.y - config.speed/2;
+            var difference = current.y - localGoal.y;
+            next.y = difference <= config.speed ? localGoal.y : current.y - config.speed;
 
         } else if(current.y < localGoal.y){
-            difference =  localGoal.y - current.y;
-            next.y = difference <= config.speed ? localGoal.y : current.y + config.speed/2;
+            var difference =  localGoal.y - current.y;
+            next.y = difference <= config.speed ? localGoal.y : current.y + config.speed;
         }
         // If on mark move to the next path point
         if(current.x == localGoal.x && current.y == localGoal.y){
