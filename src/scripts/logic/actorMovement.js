@@ -3,7 +3,6 @@ define(['collisionGrid', 'standardlib','pathfinding' ], function (collisionGrid,
 
     that.generatePath = function (config) {
         var grid = collisionGrid.grid.graph.clone();
-
         var from = stl.worldPosToGridPos(config.from);
         var too = stl.worldPosToGridPos(config.too);
         var finder = new PF.AStarFinder({
@@ -43,8 +42,17 @@ define(['collisionGrid', 'standardlib','pathfinding' ], function (collisionGrid,
     function generateLocalPath(config){
         var spliceValue = config.path.length > 5 ? 5 : config.path.length;
         if(spliceValue > 1){
-            //config.path.splice(config.path, 0, spliceValue);
-            var gridPos = stl.worldPosToGridPos(config.variables.coordinates.current);
+            config.path.splice(config.path, 0, spliceValue);
+            var gridPos = stl.worldPosToGridPos(config.coordinates.current);
+            var grid = collisionGrid.getSubGrid({
+                x: gridPos.x,
+                y: gridPos.y,
+                height: spliceValue,
+                width: spliceValue
+            });
+
+            var path = finder.findPath(gridPos.y, gridPos.x, config.path[0][0], config.path[0][1], grid);
+            config.path = _.merge(path, config.path);
 
         }
     }

@@ -122,12 +122,12 @@ define(['eventmanager', 'world', 'pathfinding'], function (eventmanager, world, 
         that.getSubGrid = function (config) {
             var array = [];
             for (var i = 0; i < config.height; i++) {
-                array[i] = [];
+                array[config.x + i] = [];
                 for (var j = 0; j < config.width; j++) {
-                    array[i][j] = that.grid.dynamic[i][j];
+                    array[config.x + i][config.y + j] = that.grid.dynamic[config.x + i][config.y +j];
                 }
             }
-            return array;
+            return new PF.Grid(array.length, array.length, array);
         };
         /**
          * Update the static collision map and regenerates the graph for it.
