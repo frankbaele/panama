@@ -11,10 +11,8 @@ define(['collisionGrid', 'standardlib','pathfinding' ], function (collisionGrid,
             dontCrossCorners: true
         });
         var path = finder.findPath(from.y, from.x, too.y, too.x, grid);
-        path =  PF.Util.smoothenPath(grid, path);
         // remove the first item as it is the current location
         path.shift();
-        console.log(path);
         return path;
     };
     /**
@@ -24,13 +22,45 @@ define(['collisionGrid', 'standardlib','pathfinding' ], function (collisionGrid,
      */
     that.move = function (config) {
         var current = config.coordinates.current;
-        var next = config.coordinates.next;
-
         // Convert the top path waypoint to pixel position
+        var too = updatePosition(config);
+
+        collisionGrid.update({
+            from: stl.worldPosToGridPos(current),
+            too: stl.worldPosToGridPos(too),
+            height: config.height,
+            width: config.width,
+            success: function(){
+                config.coordinates.next = _.cloneDeep(too);
+            },
+            failure: function(){
+                generateLocalPath(config);
+            }
+        });
+
+    };
+
+    function generateLocalPath(config){
+        var spliceValue = config.path.length > 5 ? 5 : config.path.length;
+        if(spliceValue > 1){
+            //config.path.splice(config.path, 0, spliceValue);
+            var gridPos = stl.worldPosToGridPos(config.variables.coordinates.current);
+
+        }
+    }
+    /**
+     * Move the actor towards the goal
+     * @param config
+     */
+    function updatePosition(config){
+        var current = config.coordinates.current;
+
         var localGoal = stl.gridPosToWorldPos({
             x:config.path[0][1],
             y:config.path[0][0]
         });
+
+        var next = _.cloneDeep(current);
         // X update
         if(current.x > localGoal.x){
             var difference = current.x - localGoal.x;
@@ -52,8 +82,9 @@ define(['collisionGrid', 'standardlib','pathfinding' ], function (collisionGrid,
         if(current.x == localGoal.x && current.y == localGoal.y){
             config.path.shift();
         }
-    };
 
+        return next;
+    }
     return that;
 });
 

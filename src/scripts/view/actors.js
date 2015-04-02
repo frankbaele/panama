@@ -76,7 +76,7 @@ define([
             var current = actor.variables.coordinates.current;
             var next = actor.variables.coordinates.next;
             actor.variables.coordinates.previous = _.cloneDeep(current);
-            var speed = actor.variables.speed/(app.config.framerate/(1000/app.config.cycle) -1 );
+            var speed = actor.variables.speed/(app.config.framerate/(1000/app.config.cycle));
             if(current.x > next.x){
                 var difference = current.x - next.x;
                 current.x = difference <= speed ? next.x : current.x - speed;
@@ -84,7 +84,6 @@ define([
                 var difference = next.x - current.x;
                 current.x = difference <= speed ? next.x : current.x + speed;
             }
-
             // Y update
             if(current.y > next.y){
                 var difference = current.y - next.y;

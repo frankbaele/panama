@@ -5,6 +5,8 @@ define(['actor', 'eventmanager', 'collisionGrid', 'standardlib', 'actorMovement'
         var stats = {
             path: [],
             focus: '',
+            height: 2,
+            width: 2,
             strenght: 0,
             dexterity: 0,
             intelligence: 0,
@@ -30,7 +32,9 @@ define(['actor', 'eventmanager', 'collisionGrid', 'standardlib', 'actorMovement'
                 actorMovement.move({
                     path: that.variables.path,
                     coordinates: that.variables.coordinates,
-                    speed: that.variables.speed
+                    speed: that.variables.speed,
+                    height: that.variables.height,
+                    width: that.variables.width
                 })
             }
         };

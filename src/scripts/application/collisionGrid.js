@@ -20,7 +20,6 @@ define(['eventmanager', 'world', 'pathfinding'], function (eventmanager, world, 
          */
         that.update = function (config) {
             // Correct the unset and set array where there is overlap between from and too
-
             var tooArray = that.generateUpdateArray({
                 grid: config.too,
                 height: config.height,
@@ -38,19 +37,19 @@ define(['eventmanager', 'world', 'pathfinding'], function (eventmanager, world, 
 
             var open = true;
             // check if the new coordinates are open.
-            _.each(tooArray, function(coordinate){
+            _.each(tooArray, function (coordinate) {
                 if (that.grid.dynamic[coordinate.x][coordinate.y] !== 0) {
                     open = false;
                 }
             });
 
-            if(open){
+            if (open) {
                 // close the new too coordinates
-                _.each(tooArray, function(coordinate){
+                _.each(tooArray, function (coordinate) {
                     that.grid.dynamic[coordinate.x][coordinate.y] = 1;
                 });
                 // open up the unpopulated from coordinates
-                _.each(fromArray, function(coordinate){
+                _.each(fromArray, function (coordinate) {
                     that.grid.dynamic[coordinate.x][coordinate.y] = 0;
                 });
 
@@ -59,7 +58,7 @@ define(['eventmanager', 'world', 'pathfinding'], function (eventmanager, world, 
                     config.success();
                 }
                 // update the static grid also(e.g. building)
-                if(config.static){
+                if (config.static) {
                     that.updateStatic({
                         tooArray: tooArray,
                         fromArray: fromArray
@@ -117,19 +116,33 @@ define(['eventmanager', 'world', 'pathfinding'], function (eventmanager, world, 
             return that.grid.dynamic[config.new.y][config.new.x] === 0;
         };
         /**
+         *
+         * @param config
+         */
+        that.getSubGrid = function (config) {
+            var array = [];
+            for (var i = 0; i < config.height; i++) {
+                array[i] = [];
+                for (var j = 0; j < config.width; j++) {
+                    array[i][j] = that.grid.dynamic[i][j];
+                }
+            }
+            return array;
+        };
+        /**
          * Update the static collision map and regenerates the graph for it.
          * @param config
          */
-        that.updateStatic = function (config){
+        that.updateStatic = function (config) {
             // close the new too coordinates
-            _.each(config.tooArray, function(coordinate){
+            _.each(config.tooArray, function (coordinate) {
                 that.grid.static[coordinate.x][coordinate.y] = 1;
             });
             // open up the unpopulated from coordinates
-            _.each(config.fromArray, function(coordinate){
+            _.each(config.fromArray, function (coordinate) {
                 that.grid.static[coordinate.x][coordinate.y] = 0;
             });
-            that.grid.graph =  new PF.Grid(that.grid.static.length, that.grid.static[0].length ,that.grid.static);
+            that.grid.graph = new PF.Grid(that.grid.static.length, that.grid.static[0].length, that.grid.static);
         };
         /**
          * Doubles a given array and returns it
