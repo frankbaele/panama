@@ -20,7 +20,7 @@ define([
                 if (actorInbound(actor.variables.coordinates.current)) {
                     if (!actor.variables.rendered) {
                         app.config.shadowRoot.getElementById('ActorsWrapper')
-                            .insertAdjacentHTML('beforeend','<canvas id="' + actor.variables.uuid + '"></canvas>');
+                            .insertAdjacentHTML('beforeend', '<canvas id="' + actor.variables.uuid + '"></canvas>');
                         actor.variables.canvas = app.config.shadowRoot.getElementById(actor.variables.uuid);
                         actor.variables.canvas.context = actor.variables.canvas.getContext("2d");
                         actor.variables.canvas.addEventListener("click", function () {
@@ -29,25 +29,22 @@ define([
                         );
                         actor.variables.rendered = true;
 
-                        updateActor(actor);
-                    } else {
-                        updateActor(actor);
                     }
+
+                    updateActorDirection(actor);
+                    updateActorPosition(actor);
+                    updateActorSprite(actor);
+
                 } else {
                     if (actor.variables.rendered) {
                         $(app.config.shadowRoot).find('canvas#' + actor.variables.uuid).remove();
                         actor.variables.rendered = false;
                         actor.variables.canvas = '';
                     }
+                    updateActorPosition(actor);
                 }
             });
 
-        }
-
-        function updateActor(actor) {
-            updateActorDirection(actor);
-            updateActorPosition(actor);
-            updateActorSprite(actor);
         }
 
         function updateActorDirection(actor){
