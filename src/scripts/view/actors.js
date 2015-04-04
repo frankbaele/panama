@@ -91,8 +91,7 @@ define([
             }
             var y = current.y - (center.y * app.config.actor.tile.height);
             var bottom = (height / 2 - y);
-
-            var left = (current.x - (app.config.actor.tile.width * app.config.actor.grid.width/2) - app.config.actor.tile.width) - (center.x * app.config.actor.tile.width - width / 2);
+            var left = (current.x - (app.config.actor.tile.width * app.config.actor.grid.width/2) - actor.variables.sprite.width/2) - (center.x * app.config.actor.tile.width - width / 2);
             $(app.config.shadowRoot).find(actor.variables.canvas)
                 .css('z-index', Math.floor(actor.variables.coordinates.current.y/app.config.actor.tile.height))
                 .css('bottom', bottom)
@@ -151,11 +150,11 @@ define([
             if (_.isEmpty(spt)) {
                 return;
             }
-            actor.variables.canvas.width = app.config.actor.tile.width * actor.variables.collision.width;
-            actor.variables.canvas.height = app.config.actor.tile.height * actor.variables.collision.height * 1.5;
+            actor.variables.canvas.width = actor.variables.sprite.width;
+            actor.variables.canvas.height =  actor.variables.sprite.height + healthbarHeight;
 
-            var x = actor.variables.canvas.width/2 - spt.w/2;
-            var y = actor.variables.canvas.height - spt.h - actor.variables.sprite.center.y;
+            var x = 0;
+            var y = actor.variables.canvas.height - spt.h;
             actor.variables.canvas.context.drawImage(
                 img,
                 spt.x, spt.y,

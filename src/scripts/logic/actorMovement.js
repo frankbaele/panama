@@ -1,15 +1,15 @@
 define(['collisionGrid', 'standardlib','pathfinding' ], function (collisionGrid, stl, PF) {
     var that = {};
+    that.finder = new PF.AStarFinder({
+        allowDiagonal: true,
+        dontCrossCorners: true
+    });
 
     that.generatePath = function (config) {
         var grid = collisionGrid.grid.graph.clone();
         var from = stl.worldPosToGridPos(config.from);
         var too = stl.worldPosToGridPos(config.too);
-        var finder = new PF.AStarFinder({
-            allowDiagonal: true,
-            dontCrossCorners: true
-        });
-        var path = finder.findPath(from.y, from.x, too.y, too.x, grid);
+        var path = that.finder.findPath(from.y, from.x, too.y, too.x, grid);
         // remove the first item as it is the current location
         path.shift();
         return path;
@@ -22,8 +22,13 @@ define(['collisionGrid', 'standardlib','pathfinding' ], function (collisionGrid,
     that.move = function (config) {
         var current = config.coordinates.current;
         // Convert the top path waypoint to pixel position
-        var too = updatePosition(config);
 
+        config.localGoal = stl.gridPosToWorldPos({
+            x:config.path[0][1],
+            y:config.path[0][0]
+        });
+
+        var too = updatePosition(config);
         collisionGrid.update({
             from: stl.worldPosToGridPos(current),
             too: stl.worldPosToGridPos(too),
@@ -34,27 +39,48 @@ define(['collisionGrid', 'standardlib','pathfinding' ], function (collisionGrid,
             },
             failure: function(result){
                 //generateLocalPath(config);
-                //config.coordinates.next = _.cloneDeep(too);
             }
         });
+
+        // If on mark move to the next path point
+        if(current.x == config.localGoal.x && current.y == config.localGoal.y){
+            config.path.shift();
+        }
 
     };
 
     function generateLocalPath(config){
-        var spliceValue = config.path.length > 5 ? 5 : config.path.length;
+        var spliceValue = config.path.length > 5 ? 4 : config.path.length - 1;
+
         if(spliceValue > 1){
-            config.path.splice(config.path, 0, spliceValue);
+            config.path.splice(0, spliceValue);
+
             var gridPos = stl.worldPosToGridPos(config.coordinates.current);
+            // Reorder the start and end values by actual position
+            var start = {};
+            var end = {};
+            start.x = gridPos.x <= config.path[0][1]? gridPos.x : config.path[0][1];
+            end.x = gridPos.x > config.path[0][1]? gridPos.x : config.path[0][1];
+
+            start.y = gridPos.y <= config.path[0][0]? gridPos.y : config.path[0][0];
+            end.y = gridPos.y > config.path[0][0]? gridPos.y : config.path[0][0];
             var grid = collisionGrid.getSubGrid({
-                x: gridPos.x,
-                y: gridPos.y,
-                height: spliceValue,
-                width: spliceValue
+                start:start,
+                end: end
             });
 
-            var path = finder.findPath(gridPos.y, gridPos.x, config.path[0][0], config.path[0][1], grid);
-            config.path = _.merge(path, config.path);
-
+            var path = that.finder.findPath(
+                gridPos.y - start.y,
+                gridPos.x - start.x,
+                config.path[0][0] - start.x,
+                config.path[0][1] - start.y,
+                grid);
+            path.shift();
+            _.each(path, function(item){
+                item[0] = item[0] + start.x;
+                item[1] = item[1] + start.y;
+            });
+            config.path = path.concat(config.path);
         }
     }
     /**
@@ -63,35 +89,24 @@ define(['collisionGrid', 'standardlib','pathfinding' ], function (collisionGrid,
      */
     function updatePosition(config){
         var current = config.coordinates.current;
-
-        var localGoal = stl.gridPosToWorldPos({
-            x:config.path[0][1],
-            y:config.path[0][0]
-        });
-
         var next = _.cloneDeep(current);
         // X update
-        if(current.x > localGoal.x){
-            var difference = current.x - localGoal.x;
-            next.x = difference <= config.speed ? localGoal.x : current.x - config.speed;
-        } else if(current.x < localGoal.x){
-            var difference =  localGoal.x - current.x;
-            next.x = difference <= config.speed ? localGoal.x : current.x + config.speed;
+        if(current.x > config.localGoal.x){
+            var difference = current.x - config.localGoal.x;
+            next.x = difference <= config.speed ? config.localGoal.x : current.x - config.speed;
+        } else if(current.x < config.localGoal.x){
+            var difference =  config.localGoal.x - current.x;
+            next.x = difference <= config.speed ? config.localGoal.x : current.x + config.speed;
         }
         // Y update
-        if(current.y > localGoal.y){
-            var difference = current.y - localGoal.y;
-            next.y = difference <= config.speed ? localGoal.y : current.y - config.speed/2;
+        if(current.y > config.localGoal.y){
+            var difference = current.y - config.localGoal.y;
+            next.y = difference <= config.speed ? config.localGoal.y : current.y - config.speed/2;
 
-        } else if(current.y < localGoal.y){
-            var difference =  localGoal.y - current.y;
-            next.y = difference <= config.speed ? localGoal.y : current.y + config.speed/2;
+        } else if(current.y < config.localGoal.y){
+            var difference =  config.localGoal.y - current.y;
+            next.y = difference <= config.speed ? config.localGoal.y : current.y + config.speed/2;
         }
-        // If on mark move to the next path point
-        if(current.x == localGoal.x && current.y == localGoal.y){
-            config.path.shift();
-        }
-
         return next;
     }
     return that;

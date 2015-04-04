@@ -32,24 +32,24 @@ define(['eventmanager', 'world', 'pathfinding'], function (eventmanager, world, 
                 width: config.width
             });
             if(!_.isEqual(fromArray, tooArray)){
-                tooArray = that.intersect(tooArray, fromArray);
-                fromArray = that.intersect(fromArray, tooArray);
+                var temp = that.intersect(tooArray, fromArray);
                 var open = true;
                 // check if the new coordinates are open.
-                _.each(tooArray, function (coordinate) {
+                _.each(temp, function (coordinate) {
                     if (that.grid.dynamic[coordinate.x][coordinate.y] !== 0) {
                         open = false;
                     }
                 });
 
                 if (open) {
-                    // close the new too coordinates
-                    _.each(tooArray, function (coordinate) {
-                        that.grid.dynamic[coordinate.x][coordinate.y] = 1;
-                    });
                     // open up the unpopulated from coordinates
                     _.each(fromArray, function (coordinate) {
                         that.grid.dynamic[coordinate.x][coordinate.y] = 0;
+                    });
+
+                    // close the new too coordinates
+                    _.each(tooArray, function (coordinate) {
+                        that.grid.dynamic[coordinate.x][coordinate.y] = 1;
                     });
 
                     // Execute the success callback if it exists
@@ -126,27 +126,29 @@ define(['eventmanager', 'world', 'pathfinding'], function (eventmanager, world, 
          */
         that.getSubGrid = function (config) {
             var array = [];
-            for (var i = 0; i < config.height; i++) {
-                array[config.x + i] = [];
-                for (var j = 0; j < config.width; j++) {
-                    array[config.x + i][config.y + j] = that.grid.dynamic[config.x + i][config.y +j];
+            var size = config.end.x - config.start.x < config.end.y - config.start.y ? config.end.y - config.start.y : config.end.x - config.start.x;
+            for (var i = 0; i <= size; i++) {
+                array[i] = [];
+                for (var j = 0; j <= size; j++) {
+                    array[i][j] = that.grid.dynamic[config.start.x + i][config.start.y + j];
                 }
             }
-            return new PF.Grid(array.length, array.length, array);
+            return new PF.Grid(size+1, size+1, array);
         };
         /**
          * Update the static collision map and regenerates the graph for it.
          * @param config
          */
         that.updateStatic = function (config) {
-            // close the new too coordinates
-            _.each(config.tooArray, function (coordinate) {
-                that.grid.static[coordinate.x][coordinate.y] = 1;
-            });
             // open up the unpopulated from coordinates
             _.each(config.fromArray, function (coordinate) {
                 that.grid.static[coordinate.x][coordinate.y] = 0;
             });
+            // close the new too coordinates
+            _.each(config.tooArray, function (coordinate) {
+                that.grid.static[coordinate.x][coordinate.y] = 1;
+            });
+
             that.grid.graph = new PF.Grid(that.grid.static.length, that.grid.static[0].length, that.grid.static);
         };
         /**

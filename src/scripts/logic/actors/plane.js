@@ -6,8 +6,8 @@ define(['actor.unit.local', 'eventmanager'], function (unit, eventmanager) {
             state: 'base',
             direction: 0,
             collision: {
-                width: 2,
-                height: 2
+                width: 1,
+                height: 1
             },
             sprite :{
                 center: {
@@ -15,6 +15,7 @@ define(['actor.unit.local', 'eventmanager'], function (unit, eventmanager) {
                     y: 20
                 },
                 height: 80,
+                width: 55,
                 base: {
                     0: [
                         'plane/base/Plane_Large_face0_0.png',
