@@ -31,45 +31,50 @@ define(['eventmanager', 'world', 'pathfinding'], function (eventmanager, world, 
                 height: config.height,
                 width: config.width
             });
-
-            var filterdromArray = that.intersect(fromArray, tooArray);
-            tooArray = that.intersect(tooArray, fromArray);
-
-            var open = true;
-            // check if the new coordinates are open.
-            _.each(tooArray, function (coordinate) {
-                if (that.grid.dynamic[coordinate.x][coordinate.y] !== 0) {
-                    open = false;
-                }
-            });
-
-            if (open) {
-                // close the new too coordinates
+            if(!_.isEqual(fromArray, tooArray)){
+                tooArray = that.intersect(tooArray, fromArray);
+                fromArray = that.intersect(fromArray, tooArray);
+                var open = true;
+                // check if the new coordinates are open.
                 _.each(tooArray, function (coordinate) {
-                    that.grid.dynamic[coordinate.x][coordinate.y] = 1;
-                });
-                // open up the unpopulated from coordinates
-                _.each(fromArray, function (coordinate) {
-                    that.grid.dynamic[coordinate.x][coordinate.y] = 0;
+                    if (that.grid.dynamic[coordinate.x][coordinate.y] !== 0) {
+                        open = false;
+                    }
                 });
 
-                // Execute the success callback if it exists
+                if (open) {
+                    // close the new too coordinates
+                    _.each(tooArray, function (coordinate) {
+                        that.grid.dynamic[coordinate.x][coordinate.y] = 1;
+                    });
+                    // open up the unpopulated from coordinates
+                    _.each(fromArray, function (coordinate) {
+                        that.grid.dynamic[coordinate.x][coordinate.y] = 0;
+                    });
+
+                    // Execute the success callback if it exists
+                    if (typeof config.success !== 'undefined') {
+                        config.success();
+                    }
+                    // update the static grid also(e.g. building)
+                    if (config.static) {
+                        that.updateStatic({
+                            tooArray: tooArray,
+                            fromArray: fromArray
+                        });
+                    }
+                } else {
+                    // execute the failure callback.
+                    if (typeof config.failure !== 'undefined') {
+                        config.failure(tooArray);
+                    }
+                }
+            } else {
                 if (typeof config.success !== 'undefined') {
                     config.success();
                 }
-                // update the static grid also(e.g. building)
-                if (config.static) {
-                    that.updateStatic({
-                        tooArray: tooArray,
-                        fromArray: fromArray
-                    });
-                }
-            } else {
-                // execute the failure callback.
-                if (typeof config.failure !== 'undefined') {
-                    config.failure();
-                }
             }
+
         };
         /**
          * Generates an collision array based on the coordinate and dimensions

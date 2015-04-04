@@ -32,8 +32,9 @@ define(['collisionGrid', 'standardlib','pathfinding' ], function (collisionGrid,
             success: function(){
                 config.coordinates.next = _.cloneDeep(too);
             },
-            failure: function(){
-                generateLocalPath(config);
+            failure: function(result){
+                //generateLocalPath(config);
+                //config.coordinates.next = _.cloneDeep(too);
             }
         });
 

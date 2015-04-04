@@ -8,8 +8,8 @@ define(['eventmanager', 'standardlib', 'collisionGrid'], function (eventmanager,
                 next: _.cloneDeep(spec.coordinates)
             },
             collision: {
-                width: 2,
-                height: 2
+                width: 1,
+                height: 1
             },
             tile:{
                 width: app.config.terrain.tile.width,

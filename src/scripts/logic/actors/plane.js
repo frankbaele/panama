@@ -5,6 +5,10 @@ define(['actor.unit.local', 'eventmanager'], function (unit, eventmanager) {
             focus : '',
             state: 'base',
             direction: 0,
+            collision: {
+                width: 2,
+                height: 2
+            },
             sprite :{
                 center: {
                     x: 24,
@@ -101,7 +105,6 @@ define(['actor.unit.local', 'eventmanager'], function (unit, eventmanager) {
             hp : 100,
             speed: 25
         };
-
         _.extend(that.variables, stats);
         return that;
     }
