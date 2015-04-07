@@ -133,14 +133,13 @@ define(['eventmanager', 'world', 'pathfinding', 'eventmanager', 'assetLoader', '
          */
         that.getSubGrid = function (config) {
             var array = [];
-            var size = config.end.x - config.start.x < config.end.y - config.start.y ? config.end.y - config.start.y : config.end.x - config.start.x;
-            for (var i = 0; i <= size; i++) {
+            for (var i = 0; i <= config.size; i++) {
                 array[i] = [];
-                for (var j = 0; j <= size; j++) {
+                for (var j = 0; j <= config.size; j++) {
                     array[i][j] = that.grid.dynamic[config.start.x + i][config.start.y + j];
                 }
             }
-            return new PF.Grid(size+1, size+1, array);
+            return new PF.Grid(config.size+1, config.size+1, array);
         };
         /**
          * Update the static collision map and regenerates the graph for it.

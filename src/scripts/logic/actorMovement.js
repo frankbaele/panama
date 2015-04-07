@@ -51,11 +51,9 @@ define(['collisionGrid', 'standardlib','pathfinding' ], function (collisionGrid,
     };
 
     function generateLocalPath(config){
-        var spliceValue = config.path.length > 5 ? 4 : config.path.length - 1;
-
+        var spliceValue = config.path.length > 5 ? 5 : config.path.length - 1;
         if(spliceValue > 1){
             config.path.splice(0, spliceValue);
-
             var gridPos = stl.worldPosToGridPos(config.coordinates.current);
             // Reorder the start and end values by actual position
             var start = {};
@@ -65,24 +63,33 @@ define(['collisionGrid', 'standardlib','pathfinding' ], function (collisionGrid,
 
             start.y = gridPos.y <= config.path[0][0]? gridPos.y : config.path[0][0];
             end.y = gridPos.y > config.path[0][0]? gridPos.y : config.path[0][0];
+
+            var size = end.x - start.x < end.y - start.y ? end.y - start.y : end.x - start.x;
+            var negativeSize = {
+                x: start.x < size ? start.x: size,
+                y: start.y < size ? start.y: size
+            };
             var grid = collisionGrid.getSubGrid({
-                start:start,
-                end: end
+                start:{
+                    x: start.x - negativeSize.x,
+                    y: start.y - negativeSize.y
+                },
+                size:size + (negativeSize.x < negativeSize.y ? negativeSize.x : negativeSize.y)
             });
 
             var path = that.finder.findPath(
-                gridPos.y - start.y,
-                gridPos.x - start.x,
-                config.path[0][0] - start.x,
-                config.path[0][1] - start.y,
+                start.y - start.y,
+                start.x - start.x,
+                end.y - start.y,
+                end.x - start.x,
                 grid);
-            path.shift();
             _.each(path, function(item){
-                item[0] = item[0] + start.x;
-                item[1] = item[1] + start.y;
+                item[0] = item[0] + start.y;
+                item[1] = item[1] + start.x;
             });
             config.path = path.concat(config.path);
         }
+
     }
     /**
      * Move the actor towards the goal
