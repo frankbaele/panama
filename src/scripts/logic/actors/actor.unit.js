@@ -33,8 +33,8 @@ define(['actor', 'eventmanager', 'collisionGrid', 'standardlib', 'actorMovement'
                     path: that.variables.path,
                     coordinates: that.variables.coordinates,
                     speed: that.variables.speed,
-                    height: that.variables.height,
-                    width: that.variables.width
+                    height: that.variables.collision.height,
+                    width: that.variables.collision.width
                 })
             }
         };

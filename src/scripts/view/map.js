@@ -141,6 +141,7 @@ define([
                 spt.w,
                 spt.h);
         }
+
         function centerMap() {
             var xCorrection = window.innerWidth / 2;
             var yCorrection = window.innerHeight / 2;

@@ -21,6 +21,9 @@ var app = {
                 width: 132,
                 height: 66
             }
+        },
+        debug: {
+
         }
     }
 };

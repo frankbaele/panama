@@ -29,6 +29,7 @@ define(['collisionGrid', 'standardlib','pathfinding' ], function (collisionGrid,
         });
 
         var too = updatePosition(config);
+
         collisionGrid.update({
             from: stl.worldPosToGridPos(current),
             too: stl.worldPosToGridPos(too),
@@ -92,19 +93,19 @@ define(['collisionGrid', 'standardlib','pathfinding' ], function (collisionGrid,
         var next = _.cloneDeep(current);
         // X update
         if(current.x > config.localGoal.x){
-            var difference = current.x - config.localGoal.x;
+            var difference = config.localGoal.x - current.x;
             next.x = difference <= config.speed ? config.localGoal.x : current.x - config.speed;
         } else if(current.x < config.localGoal.x){
-            var difference =  config.localGoal.x - current.x;
+            var difference = current.x - config.localGoal.x;
             next.x = difference <= config.speed ? config.localGoal.x : current.x + config.speed;
         }
         // Y update
         if(current.y > config.localGoal.y){
-            var difference = current.y - config.localGoal.y;
+            var difference = config.localGoal.y - current.y;
             next.y = difference <= config.speed ? config.localGoal.y : current.y - config.speed/2;
 
         } else if(current.y < config.localGoal.y){
-            var difference =  config.localGoal.y - current.y;
+            var difference =  current.y - config.localGoal.y;
             next.y = difference <= config.speed ? config.localGoal.y : current.y + config.speed/2;
         }
         return next;

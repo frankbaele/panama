@@ -1,5 +1,7 @@
-define(['eventmanager', 'world', 'pathfinding'], function (eventmanager, world, PF) {
+define(['eventmanager', 'world', 'pathfinding', 'eventmanager', 'assetLoader', 'standardlib', 'center'], function (eventmanager, world, PF, eventmanager, assetLoader, standardlib, center) {
         var that = {};
+        that.updateQueue = [];
+        that.debugGrid = {};
         that.init = function () {
             // add the world grid and double it.
             that.grid = {};
@@ -11,6 +13,19 @@ define(['eventmanager', 'world', 'pathfinding'], function (eventmanager, world, 
                 fromArray: []
             });
         };
+
+
+        that.update = function (config) {
+            that.updateQueue.push(config);
+        };
+
+        that.executeUpdateQueue = function (){
+            var queue = _.cloneDeep(that.updateQueue);
+            that.updateQueue = [];
+            _.each(queue, function(update){
+                that.checkUpdate(update);
+            })
+        };
         /**
          * update the collisionGrid
          * @param from
@@ -18,7 +33,7 @@ define(['eventmanager', 'world', 'pathfinding'], function (eventmanager, world, 
          * @param height
          * @param static:boolean
          */
-        that.update = function (config) {
+        that.checkUpdate = function (config){
             // Correct the unset and set array where there is overlap between from and too
             var tooArray = that.generateUpdateArray({
                 grid: config.too,
@@ -31,50 +46,42 @@ define(['eventmanager', 'world', 'pathfinding'], function (eventmanager, world, 
                 height: config.height,
                 width: config.width
             });
-            if(!_.isEqual(fromArray, tooArray)){
-                var temp = that.intersect(tooArray, fromArray);
-                var open = true;
-                // check if the new coordinates are open.
-                _.each(temp, function (coordinate) {
-                    if (that.grid.dynamic[coordinate.x][coordinate.y] !== 0) {
-                        open = false;
-                    }
+            var temp = that.intersect(tooArray, fromArray);
+            var open = true;
+            // check if the new coordinates are open.
+            _.each(temp, function (coordinate) {
+                if (that.grid.dynamic[coordinate.x][coordinate.y] !== 0) {
+                    open = false;
+                }
+            });
+            if (open) {
+                // open up the unpopulated from coordinates
+                _.each(fromArray, function (coordinate) {
+                    that.grid.dynamic[coordinate.x][coordinate.y] = 0;
                 });
 
-                if (open) {
-                    // open up the unpopulated from coordinates
-                    _.each(fromArray, function (coordinate) {
-                        that.grid.dynamic[coordinate.x][coordinate.y] = 0;
-                    });
+                // close the new too coordinates
+                _.each(tooArray, function (coordinate) {
+                    that.grid.dynamic[coordinate.x][coordinate.y] = 1;
+                });
 
-                    // close the new too coordinates
-                    _.each(tooArray, function (coordinate) {
-                        that.grid.dynamic[coordinate.x][coordinate.y] = 1;
-                    });
-
-                    // Execute the success callback if it exists
-                    if (typeof config.success !== 'undefined') {
-                        config.success();
-                    }
-                    // update the static grid also(e.g. building)
-                    if (config.static) {
-                        that.updateStatic({
-                            tooArray: tooArray,
-                            fromArray: fromArray
-                        });
-                    }
-                } else {
-                    // execute the failure callback.
-                    if (typeof config.failure !== 'undefined') {
-                        config.failure(tooArray);
-                    }
-                }
-            } else {
+                // Execute the success callback if it exists
                 if (typeof config.success !== 'undefined') {
                     config.success();
                 }
+                // update the static grid also(e.g. building)
+                if (config.static) {
+                    that.updateStatic({
+                        tooArray: tooArray,
+                        fromArray: fromArray
+                    });
+                }
+            } else {
+                // execute the failure callback.
+                if (typeof config.failure !== 'undefined') {
+                    config.failure(tooArray);
+                }
             }
-
         };
         /**
          * Generates an collision array based on the coordinate and dimensions
@@ -156,6 +163,7 @@ define(['eventmanager', 'world', 'pathfinding'], function (eventmanager, world, 
          * @param map
          * @returns {Array}
          */
+
         function superSizemap(map) {
             var newmap = [];
             var amount = 2;
@@ -175,6 +183,9 @@ define(['eventmanager', 'world', 'pathfinding'], function (eventmanager, world, 
         }
 
         that.init();
+        eventmanager.subscribe('new.gamecycle', function(){
+            that.executeUpdateQueue();
+        });
         return that;
     }
 )
