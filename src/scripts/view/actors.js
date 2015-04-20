@@ -3,8 +3,9 @@ define([
         'standardlib',
         'actorList',
         'center',
-        'assetLoader'],
-    function (eventmanager, stl, actorList, center, assetLoader) {
+        'assetLoader',
+        'collisionGrid'],
+    function (eventmanager, stl, actorList, center, assetLoader, collisionGrid) {
         var healthbarHeight = 7.5;
 
         function update() {
@@ -16,7 +17,6 @@ define([
 
             _.each(actorList.getActorList(), function (actor) {
                 // Check if the actor is inbound, so we can clean up or create the canvas for the actor
-
                 if (actorInbound(actor.variables.coordinates.current)) {
                     if (!actor.variables.rendered) {
                         app.config.shadowRoot.getElementById('ActorsWrapper')
@@ -47,22 +47,20 @@ define([
 
         }
 
-        function updateActorDirection(actor){
+        function updateActorDirection(actor) {
             var next = actor.variables.coordinates.next;
             var current = actor.variables.coordinates.current;
-
             var change = {
                 x: current.x - next.x,
                 y: current.y - next.y
             };
-
-            if(change.x < 0){
+            if (change.x < 0) {
                 actor.variables.direction = 0;
-            } else if(change.x > 0){
+            } else if (change.x > 0) {
                 actor.variables.direction = 2;
-            } else if(change.y < 0) {
+            } else if (change.y < 0) {
                 actor.variables.direction = 1;
-            } else if(change.y > 0){
+            } else if (change.y > 0) {
                 actor.variables.direction = 3;
             }
         }
@@ -73,30 +71,57 @@ define([
             var current = actor.variables.coordinates.current;
             var next = actor.variables.coordinates.next;
             actor.variables.coordinates.previous = _.cloneDeep(current);
-            var speed = actor.variables.speed/(app.config.framerate/(1000/app.config.cycle));
-            if(current.x > next.x){
+            var speed = actor.variables.speed / (app.config.framerate / (1000 / app.config.cycle));
+            var temp = {};
+            if (current.x > next.x) {
                 var difference = current.x - next.x;
-                current.x = difference <= speed ? next.x : current.x - speed;
-            } else if(current.x < next.x){
+                temp.x = difference <= speed ? next.x : current.x - speed;
+            } else if (current.x < next.x) {
                 var difference = next.x - current.x;
-                current.x = difference <= speed ? next.x : current.x + speed;
+                temp.x = difference <= speed ? next.x : current.x + speed;
+            } else {
+                temp.x = current.x;
             }
             // Y update
-            if(current.y > next.y){
+            if (current.y > next.y) {
                 var difference = current.y - next.y;
-                current.y = difference <= speed ? next.y : current.y - speed/2;
-            } else if(current.y < next.y){
+                temp.y = difference <= speed ? next.y : current.y - speed / 2;
+            } else if (current.y < next.y) {
                 var difference = next.y - current.y;
-                current.y = difference <= speed ? next.y : current.y + speed/2;
+                temp.y = difference <= speed ? next.y : current.y + speed / 2;
+            } else {
+                temp.y = current.y;
             }
-            var y = current.y - (center.y * app.config.actor.tile.height);
-            var bottom = (height / 2 - y);
-            var left = (current.x - (app.config.actor.tile.width * app.config.actor.grid.width/2) - actor.variables.sprite.width/2) - (center.x * app.config.actor.tile.width - width / 2);
-            $(app.config.shadowRoot).find(actor.variables.canvas)
-                .css('z-index', Math.floor(actor.variables.coordinates.current.y/app.config.actor.tile.height))
-                .css('bottom', bottom)
-                .css('left', left);
+            var config = {
+                from: stl.worldPosToGridPos(current),
+                too: stl.worldPosToGridPos(temp),
+                height: actor.variables.collision.height,
+                width: actor.variables.collision.width,
+                static: false,
+                success: function () {
+                    actor.variables.coordinates.current = _.cloneDeep(temp);
+                    var y = current.y - (center.y * app.config.actor.tile.height);
+                    var bottom = (height / 2 - y);
+                    var left = (current.x - (app.config.actor.tile.width * app.config.actor.grid.width / 2) - actor.variables.sprite.width / 2) - (center.x * app.config.actor.tile.width - width / 2);
 
+                    $(app.config.shadowRoot).find(actor.variables.canvas)
+                        .css('z-index', Math.floor(actor.variables.coordinates.current.y / app.config.actor.tile.height))
+                        .css('bottom', bottom)
+                        .css('left', left);
+                    actor.variables.stuck = false;
+                },
+                failure: function () {
+                    var y = current.y - (center.y * app.config.actor.tile.height);
+                    var bottom = (height / 2 - y);
+                    var left = (current.x - (app.config.actor.tile.width * app.config.actor.grid.width / 2) - actor.variables.sprite.width / 2) - (center.x * app.config.actor.tile.width - width / 2);
+                    $(app.config.shadowRoot).find(actor.variables.canvas)
+                        .css('z-index', Math.floor(actor.variables.coordinates.current.y / app.config.actor.tile.height))
+                        .css('bottom', bottom)
+                        .css('left', left);
+                    actor.variables.stuck = true;
+                }
+            };
+            collisionGrid.update(config);
         }
 
         function updateActorSprite(actor) {
@@ -105,13 +130,10 @@ define([
             if (typeof actor.variables.sprite[actor.variables.state][actor.variables.direction][actor.variables.spriteIndex] === 'undefined') {
                 actor.variables.spriteIndex = 0;
             }
-
             drawActor(actor);
-
-            if(actor.variables.selected){
+            if (actor.variables.selected) {
                 drawHealthBar(actor);
             }
-
             actor.variables.spriteIndex++;
         }
 
@@ -151,7 +173,7 @@ define([
                 return;
             }
             actor.variables.canvas.width = actor.variables.sprite.width;
-            actor.variables.canvas.height =  actor.variables.sprite.height + healthbarHeight;
+            actor.variables.canvas.height = actor.variables.sprite.height + healthbarHeight;
 
             var x = 0;
             var y = actor.variables.canvas.height - spt.h;
@@ -165,27 +187,30 @@ define([
                 spt.h);
         }
 
-        function drawHealthBar (actor){
+        function drawHealthBar(actor) {
             actor.variables.canvas.context.fillStyle = 'red';
-            actor.variables.canvas.context.fillRect((actor.variables.canvas.width - 40)/2,0,38, healthbarHeight-2);
+            actor.variables.canvas.context.fillRect((actor.variables.canvas.width - 40) / 2, 0, 38, healthbarHeight - 2);
             actor.variables.canvas.context.fillStyle = 'green';
-            var health = actor.variables.health/actor.variables.hp;
-            actor.variables.canvas.context.fillRect((actor.variables.canvas.width - 40)/2,0,(38) * health, healthbarHeight-2);
+            var health = actor.variables.health / actor.variables.hp;
+            actor.variables.canvas.context.fillRect((actor.variables.canvas.width - 40) / 2, 0, (38) * health, healthbarHeight - 2);
         }
 
-        function applySelection (selection){
+        function applySelection(selection) {
             // Remove all previous selections.
             var xCorrection = window.innerWidth / 2;
             var yCorrection = window.innerHeight / 2;
             var coordinatesWindow = {};
-            coordinatesWindow.x = -((center.x) * app.config.actor.tile.width + ((app.config.actor.grid.width*app.config.actor.tile.width) / 2) - xCorrection);
+            coordinatesWindow.x = -((center.x) * app.config.actor.tile.width + ((app.config.actor.grid.width * app.config.actor.tile.width) / 2) - xCorrection);
             coordinatesWindow.y = -(((center.y) * app.config.actor.tile.height)) + yCorrection;
-            var left = -coordinatesWindow.x  + selection.left;
+            var left = -coordinatesWindow.x + selection.left;
             var top = -coordinatesWindow.y + selection.top;
-            var topLeft = stl.worldPosToIsoPos({x:left,y: top});
+            var topLeft = stl.worldPosToIsoPos({x: left, y: top});
             var bottomRight = stl.worldPosToIsoPos({x: left + selection.width, y: top + selection.height});
             _.each(actorList.getActorList(), function (actor) {
-                var coordinates = stl.worldPosToIsoPos({x:actor.variables.coordinates.current.x, y:actor.variables.coordinates.current.y});
+                var coordinates = stl.worldPosToIsoPos({
+                    x: actor.variables.coordinates.current.x,
+                    y: actor.variables.coordinates.current.y
+                });
                 if ((coordinates.x >= topLeft.x) && coordinates.x <= bottomRight.x) {
                     if ((coordinates.y >= topLeft.y) && coordinates.y <= bottomRight.y) {
 
@@ -206,11 +231,11 @@ define([
         });
         eventmanager.subscribe('center.update.start', function () {
             $(app.config.shadowRoot).find('.ActorsWrapper').removeClass('no-panning');
-        })
+        });
         eventmanager.subscribe('center.update.stop', function () {
             $(app.config.shadowRoot).find('.ActorsWrapper').addClass('no-panning');
-        })
-        eventmanager.subscribe('map.selection', function(selection){
+        });
+        eventmanager.subscribe('map.selection', function (selection) {
             applySelection(selection);
         })
     });

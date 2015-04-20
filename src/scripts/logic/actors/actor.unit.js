@@ -14,7 +14,8 @@ define(['actor', 'eventmanager', 'collisionGrid', 'standardlib', 'actorMovement'
             death: false,
             hp: 0,
             speed: 5,
-            attack: 10
+            attack: 10,
+            stuck: false
         };
 
         var subscribe = {
@@ -42,7 +43,8 @@ define(['actor', 'eventmanager', 'collisionGrid', 'standardlib', 'actorMovement'
         that.generatePath = function (coordinates) {
             that.variables.path = actorMovement.generatePath({
                 from: that.variables.coordinates.current,
-                too: coordinates
+                too: coordinates,
+                stuck: that.variables.stuck
             });
         };
 

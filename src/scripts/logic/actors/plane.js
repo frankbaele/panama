@@ -6,8 +6,8 @@ define(['actor.unit.local', 'eventmanager'], function (unit, eventmanager) {
             state: 'base',
             direction: 0,
             collision: {
-                width: 1,
-                height: 1
+                width: 2,
+                height: 2
             },
             sprite :{
                 center: {

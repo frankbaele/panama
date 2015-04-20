@@ -14,18 +14,6 @@ define(['eventmanager', 'world', 'pathfinding', 'eventmanager', 'assetLoader', '
             });
         };
 
-
-        that.update = function (config) {
-            that.updateQueue.push(config);
-        };
-
-        that.executeUpdateQueue = function (){
-            var queue = _.cloneDeep(that.updateQueue);
-            that.updateQueue = [];
-            _.each(queue, function(update){
-                that.checkUpdate(update);
-            })
-        };
         /**
          * update the collisionGrid
          * @param from
@@ -33,7 +21,7 @@ define(['eventmanager', 'world', 'pathfinding', 'eventmanager', 'assetLoader', '
          * @param height
          * @param static:boolean
          */
-        that.checkUpdate = function (config){
+        that.update = function (config){
             // Correct the unset and set array where there is overlap between from and too
             var tooArray = that.generateUpdateArray({
                 grid: config.too,
@@ -46,6 +34,7 @@ define(['eventmanager', 'world', 'pathfinding', 'eventmanager', 'assetLoader', '
                 height: config.height,
                 width: config.width
             });
+
             var temp = that.intersect(tooArray, fromArray);
             var open = true;
             // check if the new coordinates are open.
@@ -77,6 +66,7 @@ define(['eventmanager', 'world', 'pathfinding', 'eventmanager', 'assetLoader', '
                     });
                 }
             } else {
+
                 // execute the failure callback.
                 if (typeof config.failure !== 'undefined') {
                     config.failure(tooArray);
@@ -182,9 +172,6 @@ define(['eventmanager', 'world', 'pathfinding', 'eventmanager', 'assetLoader', '
         }
 
         that.init();
-        eventmanager.subscribe('new.gamecycle', function(){
-            that.executeUpdateQueue();
-        });
         return that;
     }
 )
