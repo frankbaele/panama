@@ -35,16 +35,18 @@ define(['actor', 'eventmanager', 'collisionGrid', 'standardlib', 'actorMovement'
                     coordinates: that.variables.coordinates,
                     speed: that.variables.speed,
                     height: that.variables.collision.height,
-                    width: that.variables.collision.width
+                    width: that.variables.collision.width,
+                    stuck: that.variables.stuck
                 })
             }
         };
 
         that.generatePath = function (coordinates) {
             that.variables.path = actorMovement.generatePath({
-                from: that.variables.coordinates.current,
-                too: coordinates,
-                stuck: that.variables.stuck
+                from: stl.worldPosToGridPos(that.variables.coordinates.current),
+                too: stl.worldPosToGridPos(coordinates),
+                path: that.variables.path,
+                steer: that.variables.steer
             });
         };
 

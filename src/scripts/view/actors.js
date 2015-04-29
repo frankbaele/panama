@@ -3,19 +3,34 @@ define([
         'standardlib',
         'actorList',
         'center',
+        'steer',
         'assetLoader',
         'collisionGrid'],
-    function (eventmanager, stl, actorList, center, assetLoader, collisionGrid) {
+    function (eventmanager, stl, actorList, center, steer, assetLoader, collisionGrid) {
         var healthbarHeight = 7.5;
 
-        function update() {
+        function update(delta) {
             _.each(actorList.getCleanUpList(), function (actor) {
                 $(app.config.shadowRoot).find('canvas.' + actor.uuid).remove();
             });
-
+            collisionGrid.steer.domain.preUpdate();
             actorList.clearCleanUpList();
-
             _.each(actorList.getActorList(), function (actor) {
+                if (!_.isEmpty(actor.variables.path)) {
+
+                    var point = {
+                        x : actor.variables.path[0][1] * app.config.actor.car.width,
+                        y : actor.variables.path[0][0] * app.config.actor.car.height
+                    };
+                    console.log(point);
+                    console.log(stl.carWorldPosToIsoWorldPos(point));
+                    var seekForce = steer.controls.Behavior.arrival(actor.variables.steer, point);
+                    actor.variables.steer.applyForce(seekForce);
+                    actor.variables.coordinates.current = stl.carWorldPosToIsoWorldPos({
+                        x:actor.variables.steer.getb2X(),
+                        y:actor.variables.steer.getb2Y()
+                    });
+                }
                 // Check if the actor is inbound, so we can clean up or create the canvas for the actor
                 if (actorInbound(actor.variables.coordinates.current)) {
                     if (!actor.variables.rendered) {
@@ -44,7 +59,7 @@ define([
                     updateActorPosition(actor);
                 }
             });
-
+            collisionGrid.steer.domain.update(delta);
         }
 
         function updateActorDirection(actor) {
@@ -69,64 +84,20 @@ define([
             var width = window.innerWidth;
             var height = window.innerHeight;
             var current = actor.variables.coordinates.current;
-            var next = actor.variables.coordinates.next;
             actor.variables.coordinates.previous = _.cloneDeep(current);
-            var speed = actor.variables.speed / (app.config.framerate / (1000 / app.config.cycle));
-            var temp = {};
-            if (current.x > next.x) {
-                var difference = current.x - next.x;
-                temp.x = difference <= speed ? next.x : current.x - speed;
-            } else if (current.x < next.x) {
-                var difference = next.x - current.x;
-                temp.x = difference <= speed ? next.x : current.x + speed;
-            } else {
-                temp.x = current.x;
-            }
-            // Y update
-            if (current.y > next.y) {
-                var difference = current.y - next.y;
-                temp.y = difference <= speed ? next.y : current.y - speed / 2;
-            } else if (current.y < next.y) {
-                var difference = next.y - current.y;
-                temp.y = difference <= speed ? next.y : current.y + speed / 2;
-            } else {
-                temp.y = current.y;
-            }
-            var config = {
-                from: stl.worldPosToGridPos(current),
-                too: stl.worldPosToGridPos(temp),
-                height: actor.variables.collision.height,
-                width: actor.variables.collision.width,
-                static: false,
-                success: function () {
-                    actor.variables.coordinates.current = _.cloneDeep(temp);
-                    var y = current.y - (center.y * app.config.actor.tile.height);
-                    var bottom = (height / 2 - y);
-                    var left = (current.x - (app.config.actor.tile.width * app.config.actor.grid.width / 2) - actor.variables.sprite.width / 2) - (center.x * app.config.actor.tile.width - width / 2);
+            var y = current.y - (center.y * app.config.actor.tile.height);
+            var bottom = (height / 2 - y);
+            var left = (current.x - (app.config.actor.tile.width * app.config.actor.grid.width / 2) - actor.variables.sprite.width / 2) - (center.x * app.config.actor.tile.width - width / 2);
 
-                    $(app.config.shadowRoot).find(actor.variables.canvas)
-                        .css('z-index', Math.floor(actor.variables.coordinates.current.y / app.config.actor.tile.height))
-                        .css('bottom', bottom)
-                        .css('left', left);
-                    actor.variables.stuck = false;
-                },
-                failure: function () {
-                    var y = current.y - (center.y * app.config.actor.tile.height);
-                    var bottom = (height / 2 - y);
-                    var left = (current.x - (app.config.actor.tile.width * app.config.actor.grid.width / 2) - actor.variables.sprite.width / 2) - (center.x * app.config.actor.tile.width - width / 2);
-                    $(app.config.shadowRoot).find(actor.variables.canvas)
-                        .css('z-index', Math.floor(actor.variables.coordinates.current.y / app.config.actor.tile.height))
-                        .css('bottom', bottom)
-                        .css('left', left);
-                    actor.variables.stuck = true;
-                }
-            };
-            collisionGrid.update(config);
+            $(app.config.shadowRoot).find(actor.variables.canvas)
+                .css('z-index', Math.floor(actor.variables.coordinates.current.y / app.config.actor.tile.height))
+                .css('bottom', bottom)
+                .css('left', left);
+            actor.variables.stuck = false;
         }
 
         function updateActorSprite(actor) {
             actor.variables.canvas.context.clearRect(0, 0, actor.variables.canvas.width, actor.variables.canvas.height);
-
             if (typeof actor.variables.sprite[actor.variables.state][actor.variables.direction][actor.variables.spriteIndex] === 'undefined') {
                 actor.variables.spriteIndex = 0;
             }
@@ -226,8 +197,8 @@ define([
             });
         }
 
-        eventmanager.subscribe('new.frame', function () {
-            update();
+        eventmanager.subscribe('new.frame', function (delta) {
+            update(delta);
         });
         eventmanager.subscribe('center.update.start', function () {
             $(app.config.shadowRoot).find('.ActorsWrapper').removeClass('no-panning');

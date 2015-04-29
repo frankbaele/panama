@@ -128,7 +128,7 @@ define([
                 return;
             }
             // transform the grid tile to iso coordinates
-            coordinates = standardlib.twoDToIso(config.x, config.y);
+            coordinates = standardlib.twoDToIso({x:config.x, y:config.y});
             // transform the coordinates to the actual size of the map
             coordinates.x = (coordinates.x * app.config.terrain.tile.width + ((terrain.canvas.width) / 2))  - app.config.terrain.tile.width / 2;
             coordinates.y = (coordinates.y * app.config.terrain.tile.height + (spt.w / 2 - (spt.h - config.correction)));

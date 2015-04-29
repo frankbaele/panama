@@ -1,4 +1,4 @@
-define(['eventmanager', 'standardlib', 'collisionGrid'], function (eventmanager, stl, collisionGrid) {
+define(['eventmanager', 'standardlib', 'steer'], function (eventmanager, stl, steer) {
     return function (spec) {
         var that = {};
         that.variables = {
@@ -23,28 +23,24 @@ define(['eventmanager', 'standardlib', 'collisionGrid'], function (eventmanager,
         };
 
         that.init = function () {
-            var config = {
-                too: stl.worldPosToGridPos(spec.coordinates),
-                height: that.variables.collision.height,
-                width: that.variables.collision.width,
-                success: function () {
-                    // register all the event handlers
-                    _.each(that.handlers, function (handlers, type) {
-                        _.each(handlers, function (handler, event_type) {
-                            eventmanager[type](event_type, that[handler]);
-                        });
-                    });
-                    eventmanager.publish('actor.create', that.getInfo());
-                },
-                failure: function () {
-                    // Creation failed coordinates are blocked.
-                }
-            };
-            collisionGrid.update(config);
+            // register all the event handlers
+            _.each(that.handlers, function (handlers, type) {
+                _.each(handlers, function (handler, event_type) {
+                    eventmanager[type](event_type, that[handler]);
+                });
+            });
+            var carthCoords = stl.isoWorldPosToCarWorldPos(that.variables.coordinates.current);
+            that.variables.steer = steer.item.Creator.createUnit({
+                x: carthCoords.x,
+                y: carthCoords.y,
+                radius: 10,
+                maxForce: 2,
+                maxSpeed: 10,
+                dynamic: true,
+                canCollide: true
+            });
+            eventmanager.publish('actor.create', that.getInfo());
         };
-
-
-
 
         that.handlers = {
             'subscribe': {

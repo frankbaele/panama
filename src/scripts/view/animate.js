@@ -1,8 +1,13 @@
-define(['eventmanager', 'RequestAnimationFrame', 'map', 'actors'], function (eventmanager, RequestAnimationFrame) {
-  function animate() {
-    eventmanager.publish('new.frame');
-    window.setTimeout(animate, 1000/app.config.framerate);
-  }
-  eventmanager.subscribe('game.init', function(){animate();});
-  return {};
+define(['eventmanager', 'RequestAnimationFrame', 'map', 'actors'], function (eventmanager) {
+    var frame = 0;
+    function animate() {
+        frame++;
+        eventmanager.publish('new.frame', frame);
+        window.setTimeout(animate, 1000 / app.config.framerate);
+    }
+
+    eventmanager.subscribe('game.init', function () {
+        animate();
+    });
+    return {};
 });

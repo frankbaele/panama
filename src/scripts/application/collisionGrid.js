@@ -1,13 +1,21 @@
-define(['eventmanager', 'world', 'pathfinding', 'eventmanager', 'assetLoader', 'standardlib', 'center'], function (eventmanager, world, PF, eventmanager, assetLoader, standardlib, center) {
+define(['eventmanager', 'world', 'PF', 'steer'], function (eventmanager, world, PF, steer) {
         var that = {};
         that.updateQueue = [];
         that.debugGrid = {};
         that.init = function () {
             // add the world grid and double it.
             that.grid = {};
+            that.steer = {};
             that.grid.dynamic = superSizemap(_.cloneDeep(world.grid));
             that.grid.static = _.cloneDeep(that.grid.dynamic);
-            //Force empty update so the graph gets generated.
+            //Create the empty steering
+            that.steer.domain = new steer.Domain();
+            that.steer.domain.createB2World(new box2d.b2Vec2(0, 0));
+            steer.item.Creator.setDomainReference(that.steer.domain);
+            steer.item.Creator.pixelCreateFormat = true;
+            var blockSize = new steer.Vector(app.config.actor.tile.width, app.config.actor.tile.height);
+            var cinfo = { x: 0, y: 0, gridSize: new steer.Vector(app.config.actor.grid.width, app.config.actor.grid.height), blockSize: blockSize };
+            that.steer.grid = steer.item.Creator.createGridmap(cinfo);
             that.updateStatic({
                 tooArray: [],
                 fromArray: []

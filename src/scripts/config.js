@@ -1,6 +1,6 @@
 var app = {
     config : {
-        framerate: 15,
+        framerate: 30,
         cycle: 100,
         actor:{
             grid:{
@@ -10,6 +10,10 @@ var app = {
             tile:{
                 width: 66,
                 height: 33
+            },
+            car: {
+                height: 33,
+                width: 33
             }
         },
         terrain : {
