@@ -31,6 +31,12 @@ require.config({
         jquery: 'bower_components/jquery/dist/jquery',
         q: 'bower_components/q/q',
         lodash: 'bower_components/lodash/lodash',
-        PF: 'bower_components/pathfinding/pathfinding-browser'
+        PF: 'bower_components/pathfinding/pathfinding-browser',
+        RVO: 'bower_components/rvo2.js/lib/rvo2'
+    },
+    shim:{
+        RVO:{
+            exports: 'RVO'
+        }
     }
 });

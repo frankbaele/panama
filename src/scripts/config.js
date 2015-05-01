@@ -1,6 +1,6 @@
 var app = {
     config : {
-        framerate: 15,
+        framerate: 60,
         cycle: 100,
         actor:{
             grid:{

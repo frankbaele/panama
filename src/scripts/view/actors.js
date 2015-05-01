@@ -4,8 +4,9 @@ define([
         'actorList',
         'center',
         'assetLoader',
+        'RVO',
         'collisionGrid'],
-    function (eventmanager, stl, actorList, center, assetLoader, collisionGrid) {
+    function (eventmanager, stl, actorList, center, assetLoader, RVO, collisionGrid) {
         var healthbarHeight = 7.5;
 
         function update(delta) {
@@ -15,12 +16,17 @@ define([
             });
             actorList.clearCleanUpList();
             _.each(actors, function (actor) {
-                if (!_.isEmpty(actor.variables.path)) {
+                var agent =  collisionGrid.simulator.agents[actor.agent];
+                var goal = actor.variables.coordinates.next;
+                var goalVector = RVO.Vector.subtract([goal.x, goal.y], agent.position);
+                if (RVO.Vector.absSq(goalVector) > 1) {
+                    goalVector = RVO.Vector.normalize(goalVector);
+                }
+                agent.prefVelocity = goalVector;
 
-                    var point = {
-                        x : actor.variables.path[0][1] * app.config.actor.car.width,
-                        y : actor.variables.path[0][0] * app.config.actor.car.height
-                    };
+                actor.variables.coordinates.current = {
+                    x : agent.position[0],
+                    y : agent.position[1]
                 }
                 // Check if the actor is inbound, so we can clean up or create the canvas for the actor
                 if (actorInbound(actor.variables.coordinates.current)) {
@@ -50,9 +56,10 @@ define([
                     updateActorPosition(actor);
                 }
             });
+            collisionGrid.simulator.doStep();
         }
-
         function updateActorDirection(actor) {
+            /*
             var next = actor.variables.coordinates.next;
             var current = actor.variables.coordinates.current;
             var change = {
@@ -68,6 +75,7 @@ define([
             } else if (change.y > 0) {
                 actor.variables.direction = 3;
             }
+            */
         }
 
         function updateActorPosition(actor) {

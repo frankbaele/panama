@@ -1,4 +1,4 @@
-define(['eventmanager', 'standardlib'], function (eventmanager, stl) {
+define(['eventmanager', 'standardlib','collisionGrid'], function (eventmanager, stl, collisionGrid) {
     return function (spec) {
         var that = {};
         that.uuid = stl.guid();
@@ -29,7 +29,7 @@ define(['eventmanager', 'standardlib'], function (eventmanager, stl) {
                     eventmanager[type](event_type, that[handler]);
                 });
             });
-            var carthCoords = stl.isoWorldPosToCarWorldPos(that.variables.coordinates.current);
+            that.agent = collisionGrid.simulator.addAgent([that.variables.coordinates.current.x,that.variables.coordinates.current.y]);
             eventmanager.publish('actor.create', that.getInfo());
         };
 

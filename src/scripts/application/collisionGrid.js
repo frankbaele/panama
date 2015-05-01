@@ -1,10 +1,15 @@
-define(['eventmanager', 'world', 'PF'], function (eventmanager, world, PF) {
+define(['eventmanager', 'world', 'PF', 'RVO'], function (eventmanager, world, PF, RVO) {
         var that = {};
         that.updateQueue = [];
         that.debugGrid = {};
+
         that.init = function () {
             // add the world grid and double it.
-
+            that.grid = {};
+            that.grid.dynamic = superSizemap(_.cloneDeep(world.grid));
+            that.grid.static = _.cloneDeep(that.grid.dynamic);
+            that.simulator = new RVO.Simulator(2, 50, 5, 10, 10, 100, 1, [0, 0]);
+            //Force empty update so the graph gets generated.
             that.updateStatic({
                 tooArray: [],
                 fromArray: []
@@ -171,5 +176,4 @@ define(['eventmanager', 'world', 'PF'], function (eventmanager, world, PF) {
         that.init();
         return that;
     }
-)
-;
+);

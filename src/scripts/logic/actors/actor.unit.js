@@ -30,14 +30,7 @@ define(['actor', 'eventmanager', 'collisionGrid', 'standardlib', 'actorMovement'
          */
         that.move = function () {
             if (that.variables.path.length > 0) {
-                actorMovement.move({
-                    path: that.variables.path,
-                    coordinates: that.variables.coordinates,
-                    speed: that.variables.speed,
-                    height: that.variables.collision.height,
-                    width: that.variables.collision.width,
-                    stuck: that.variables.stuck
-                })
+                actorMovement.move(that)
             }
         };
 
