@@ -1,6 +1,7 @@
-define(['eventmanager', 'standardlib', 'steer'], function (eventmanager, stl, steer) {
+define(['eventmanager', 'standardlib'], function (eventmanager, stl) {
     return function (spec) {
         var that = {};
+        that.uuid = stl.guid();
         that.variables = {
             coordinates: {
                 current: spec.coordinates,
@@ -15,7 +16,6 @@ define(['eventmanager', 'standardlib', 'steer'], function (eventmanager, stl, st
                 width: app.config.terrain.tile.width,
                 height: app.config.terrain.tile.height
             },
-            uuid: stl.guid(),
             direction: 'down',
             hp: 0,
             rendered: false,
@@ -30,15 +30,6 @@ define(['eventmanager', 'standardlib', 'steer'], function (eventmanager, stl, st
                 });
             });
             var carthCoords = stl.isoWorldPosToCarWorldPos(that.variables.coordinates.current);
-            that.variables.steer = steer.item.Creator.createUnit({
-                x: carthCoords.x,
-                y: carthCoords.y,
-                radius: 10,
-                maxForce: 2,
-                maxSpeed: 10,
-                dynamic: true,
-                canCollide: true
-            });
             eventmanager.publish('actor.create', that.getInfo());
         };
 
@@ -49,7 +40,7 @@ define(['eventmanager', 'standardlib', 'steer'], function (eventmanager, stl, st
         };
 
         that.actorSelect = function (uuid) {
-            if (that.variables.uuid == uuid) {
+            if (that.uuid == uuid) {
                 that.variables.selected = true;
             } else {
                 that.variables.selected = false;
@@ -61,7 +52,7 @@ define(['eventmanager', 'standardlib', 'steer'], function (eventmanager, stl, st
             return that;
         };
         that.destroy = function () {
-            eventmanager.publish('actor.delete', variables.uuid);
+            eventmanager.publish('actor.delete', that.uuid);
         };
         return that;
     };

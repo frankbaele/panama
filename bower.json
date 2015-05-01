@@ -24,7 +24,6 @@
     "app-router": "~2.6.0",
     "polymer": "~0.5.5",
     "pathfinding": "~0.4.16",
-    "steer.js": "https://github.com/amoyeh/steer.js.git",
-    "box2d": "*"
+    "rvo2.js": "https://github.com/paulwe/rvo2.js.git"
   }
 }

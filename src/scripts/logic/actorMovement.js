@@ -1,4 +1,4 @@
-define(['collisionGrid', 'standardlib','PF', 'steer'], function (collisionGrid, stl, PF, steer) {
+define(['collisionGrid', 'standardlib','PF'], function (collisionGrid, stl, PF) {
     var that = {};
     that.finder = new PF.AStarFinder({
         allowDiagonal: true,

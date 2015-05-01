@@ -3,43 +3,34 @@ define([
         'standardlib',
         'actorList',
         'center',
-        'steer',
         'assetLoader',
         'collisionGrid'],
-    function (eventmanager, stl, actorList, center, steer, assetLoader, collisionGrid) {
+    function (eventmanager, stl, actorList, center, assetLoader, collisionGrid) {
         var healthbarHeight = 7.5;
 
         function update(delta) {
+            var actors = actorList.getActorList();
             _.each(actorList.getCleanUpList(), function (actor) {
                 $(app.config.shadowRoot).find('canvas.' + actor.uuid).remove();
             });
-            collisionGrid.steer.domain.preUpdate();
             actorList.clearCleanUpList();
-            _.each(actorList.getActorList(), function (actor) {
+            _.each(actors, function (actor) {
                 if (!_.isEmpty(actor.variables.path)) {
 
                     var point = {
                         x : actor.variables.path[0][1] * app.config.actor.car.width,
                         y : actor.variables.path[0][0] * app.config.actor.car.height
                     };
-                    console.log(point);
-                    console.log(stl.carWorldPosToIsoWorldPos(point));
-                    var seekForce = steer.controls.Behavior.arrival(actor.variables.steer, point);
-                    actor.variables.steer.applyForce(seekForce);
-                    actor.variables.coordinates.current = stl.carWorldPosToIsoWorldPos({
-                        x:actor.variables.steer.getb2X(),
-                        y:actor.variables.steer.getb2Y()
-                    });
                 }
                 // Check if the actor is inbound, so we can clean up or create the canvas for the actor
                 if (actorInbound(actor.variables.coordinates.current)) {
                     if (!actor.variables.rendered) {
                         app.config.shadowRoot.getElementById('ActorsWrapper')
-                            .insertAdjacentHTML('beforeend', '<canvas id="' + actor.variables.uuid + '"></canvas>');
-                        actor.variables.canvas = app.config.shadowRoot.getElementById(actor.variables.uuid);
+                            .insertAdjacentHTML('beforeend', '<canvas id="' + actor.uuid + '"></canvas>');
+                        actor.variables.canvas = app.config.shadowRoot.getElementById(actor.uuid);
                         actor.variables.canvas.context = actor.variables.canvas.getContext("2d");
                         actor.variables.canvas.addEventListener("click", function () {
-                                eventmanager.publish('actor.selected', actor.variables.uuid)
+                                eventmanager.publish('actor.selected', actor.uuid)
                             }
                         );
                         actor.variables.rendered = true;
@@ -52,14 +43,13 @@ define([
 
                 } else {
                     if (actor.variables.rendered) {
-                        $(app.config.shadowRoot).find('canvas#' + actor.variables.uuid).remove();
+                        $(app.config.shadowRoot).find('canvas#' + actor.uuid).remove();
                         actor.variables.rendered = false;
                         actor.variables.canvas = '';
                     }
                     updateActorPosition(actor);
                 }
             });
-            collisionGrid.steer.domain.update(delta);
         }
 
         function updateActorDirection(actor) {

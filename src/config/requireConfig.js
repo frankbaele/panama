@@ -31,13 +31,6 @@ require.config({
         jquery: 'bower_components/jquery/dist/jquery',
         q: 'bower_components/q/q',
         lodash: 'bower_components/lodash/lodash',
-        PF: 'bower_components/pathfinding/pathfinding-browser',
-        steer: 'bower_components/steer.js/bin/steer',
-        box2d: 'bower_components/steer.js/src/box2d'
-    },
-    shim: {
-        box2d: {
-            exports: 'box2d'
-        }
+        PF: 'bower_components/pathfinding/pathfinding-browser'
     }
 });

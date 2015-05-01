@@ -45,8 +45,7 @@ define(['actor', 'eventmanager', 'collisionGrid', 'standardlib', 'actorMovement'
             that.variables.path = actorMovement.generatePath({
                 from: stl.worldPosToGridPos(that.variables.coordinates.current),
                 too: stl.worldPosToGridPos(coordinates),
-                path: that.variables.path,
-                steer: that.variables.steer
+                path: that.variables.path
             });
         };
 
