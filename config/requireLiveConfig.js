@@ -5,7 +5,13 @@ requirejs.config({
         jquery: 'scripts/vendor/jquery',
         lodash: 'scripts/vendor/lodash',
         q: 'scripts/vendor/q',
-        pathfinding: 'scripts/vendor/pathfinding-browser'
+        pathfinding: 'scripts/vendor/pathfinding-browser',
+        RVO: 'scripts/vendor/rvo2.min'
+    },
+    shim:{
+        RVO:{
+            exports: 'RVO'
+        }
     },
     packages: [
 
