@@ -9,7 +9,7 @@ define(['collisionGrid', 'standardlib', 'PF', 'RVO'], function (collisionGrid, s
         var path = that.finder.findPath(config.from.y, config.from.x, config.too.y, config.too.x, grid);
         // remove the first item as it is the current location
         var newPath = PF.Util.smoothenPath(grid, path);
-        console.log(newPath);
+        newPath.shift();
         return newPath;
     };
 
@@ -32,7 +32,10 @@ define(['collisionGrid', 'standardlib', 'PF', 'RVO'], function (collisionGrid, s
                 });
             }
         } else {
-            actor.variables.coordinates.next = next;
+            actor.variables.coordinates.next = stl.gridPosToWorldPos({
+                x: actor.variables.path[0][1],
+                y: actor.variables.path[0][0]
+            });
         }
     };
     function reachedGoal(current, goal) {

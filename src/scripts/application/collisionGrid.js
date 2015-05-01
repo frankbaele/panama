@@ -1,4 +1,4 @@
-define(['eventmanager', 'world', 'PF', 'RVO'], function (eventmanager, world, PF, RVO) {
+define(['eventmanager', 'world', 'PF', 'RVO', 'standardlib'], function (eventmanager, world, PF, RVO, stl) {
         var that = {};
         that.updateQueue = [];
         that.debugGrid = {};
@@ -8,12 +8,28 @@ define(['eventmanager', 'world', 'PF', 'RVO'], function (eventmanager, world, PF
             that.grid = {};
             that.grid.dynamic = superSizemap(_.cloneDeep(world.grid));
             that.grid.static = _.cloneDeep(that.grid.dynamic);
-            that.simulator = new RVO.Simulator(2, 50, 5, 10, 10, 100, 1, [0, 0]);
+            that.simulator = new RVO.Simulator(2, 75, 10, 5, 5, 100, 1, [0, 0]);
             //Force empty update so the graph gets generated.
             that.updateStatic({
                 tooArray: [],
                 fromArray: []
             });
+            for (var i = 0; i < that.grid.static.length; i++) {
+                for (var j = 0; j < that.grid.static[0].length; j++) {
+                    if (that.grid.static[j][i] === 1) {
+                        var coords = stl.gridPosToWorldPos({
+                            x: i,
+                            y: j
+                        });
+                        that.simulator.addObstacle([
+                            [coords.x, coords.y - app.config.actor.tile.height/2],
+                            [coords.x + app.config.actor.tile.width/2, coords.y ],
+                            [coords.x, coords.y + app.config.actor.tile.height/2],
+                            [coords.x - app.config.actor.tile.width/2, coords.y]
+                        ]);
+                    }
+                }
+            }
         };
 
         /**
