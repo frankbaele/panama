@@ -17,17 +17,23 @@ define([
             actorList.clearCleanUpList();
             _.each(actors, function (actor) {
                 var agent =  collisionGrid.simulator.agents[actor.agent];
-                var goal = actor.variables.coordinates.next;
-                var goalVector = RVO.Vector.subtract([goal.x, goal.y], agent.position);
-                if (RVO.Vector.absSq(goalVector) > 1) {
-                    goalVector = RVO.Vector.normalize(goalVector);
+
+                if(actor.variables.coordinates.next !== null){
+                    var goal = actor.variables.coordinates.next;
+                    var goalVector = RVO.Vector.subtract([goal.x, goal.y], agent.position);
+                    if (RVO.Vector.absSq(goalVector) > 1) {
+                        goalVector = RVO.Vector.normalize(goalVector);
+                    }
+                } else {
+                    goalVector = [0,0]
                 }
+
                 agent.prefVelocity = goalVector;
 
                 actor.variables.coordinates.current = {
                     x : agent.position[0],
                     y : agent.position[1]
-                }
+                };
                 // Check if the actor is inbound, so we can clean up or create the canvas for the actor
                 if (actorInbound(actor.variables.coordinates.current)) {
                     if (!actor.variables.rendered) {

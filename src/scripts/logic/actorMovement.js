@@ -26,13 +26,15 @@ define(['collisionGrid', 'standardlib', 'PF', 'RVO'], function (collisionGrid, s
             y: actor.variables.path[0][0]
         });
         // If on mark move to the next path point
-        if(reachedGoal([actor.variables.coordinates.current.y, actor.variables.coordinates.current.x],[next.y, next.x])){
+        if(reachedGoal([actor.variables.coordinates.current.y, actor.variables.coordinates.current.x],[next.y, next.x], actor.variables.radius)){
             actor.variables.path.shift();
             if (actor.variables.path.length > 0) {
                 actor.variables.coordinates.next = stl.gridPosToWorldPos({
                     x: actor.variables.path[0][1],
                     y: actor.variables.path[0][0]
                 });
+            } else {
+                actor.variables.coordinates.next = null;
             }
         } else {
             actor.variables.coordinates.next = stl.gridPosToWorldPos({
@@ -41,11 +43,11 @@ define(['collisionGrid', 'standardlib', 'PF', 'RVO'], function (collisionGrid, s
             });
         }
     };
-    function reachedGoal(current, goal) {
-        if (RVO.Vector.absSq(RVO.Vector.subtract(current, goal)) > 1) {
-            return false;
+    function reachedGoal(current, goal, radius) {
+        if (Math.pow(goal[0] - current[0], 2) + Math.pow(goal[1] - current[1],2) <= Math.pow(radius, 2)) {
+            return true;
         }
-        return true;
+        return false;
     }
 
     return that;

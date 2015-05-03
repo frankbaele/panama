@@ -6,12 +6,13 @@ define(['eventmanager', 'standardlib','collisionGrid'], function (eventmanager, 
             coordinates: {
                 current: spec.coordinates,
                 previous: _.cloneDeep(spec.coordinates),
-                next: _.cloneDeep(spec.coordinates)
+                next: null
             },
             collision: {
                 width: 1,
                 height: 1
             },
+            radius: 50,
             tile:{
                 width: app.config.terrain.tile.width,
                 height: app.config.terrain.tile.height

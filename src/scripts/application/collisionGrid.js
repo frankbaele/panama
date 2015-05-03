@@ -8,7 +8,7 @@ define(['eventmanager', 'world', 'PF', 'RVO', 'standardlib', 'center'], function
             that.grid = {};
             that.grid.dynamic = superSizemap(_.cloneDeep(world.grid));
             that.grid.static = _.cloneDeep(that.grid.dynamic);
-            that.simulator = new RVO.Simulator(4, 60, 10, 5, 5, 30, 1, [0, 0]);
+            that.simulator = new RVO.Simulator(4, 40, 10, 5, 5, 20, 1, [0, 0]);
             //Force empty update so the graph gets generated.
             that.updateStatic({
                 tooArray: [],
@@ -30,9 +30,7 @@ define(['eventmanager', 'world', 'PF', 'RVO', 'standardlib', 'center'], function
                     }
                 }
             }
-
             that.simulator.processObstacles();
-            console.log(that.simulator.obstacles);
         };
 
         /**
