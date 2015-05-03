@@ -18,8 +18,8 @@ define(['eventmanager', 'world', 'PF', 'RVO', 'standardlib', 'center'], function
                 for (var j = 0; j < that.grid.static[0].length; j++) {
                     if (that.grid.static[j][i] === 1) {
                         var coords = stl.gridPosToWorldPos({
-                            x: i,
-                            y: j
+                            x: j,
+                            y: i
                         });
                         that.simulator.addObstacle([
                             [coords.x, coords.y - app.config.actor.tile.height/2],
@@ -30,7 +30,9 @@ define(['eventmanager', 'world', 'PF', 'RVO', 'standardlib', 'center'], function
                     }
                 }
             }
+
             that.simulator.processObstacles();
+            console.log(that.simulator.obstacles);
         };
 
         /**
