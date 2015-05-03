@@ -1,4 +1,4 @@
-define(['eventmanager', 'world', 'PF', 'RVO', 'standardlib'], function (eventmanager, world, PF, RVO, stl) {
+define(['eventmanager', 'world', 'PF', 'RVO', 'standardlib', 'center'], function (eventmanager, world, PF, RVO, stl, center) {
         var that = {};
         that.updateQueue = [];
         that.debugGrid = {};
@@ -8,7 +8,7 @@ define(['eventmanager', 'world', 'PF', 'RVO', 'standardlib'], function (eventman
             that.grid = {};
             that.grid.dynamic = superSizemap(_.cloneDeep(world.grid));
             that.grid.static = _.cloneDeep(that.grid.dynamic);
-            that.simulator = new RVO.Simulator(2, 75, 10, 5, 5, 100, 1, [0, 0]);
+            that.simulator = new RVO.Simulator(4, 60, 10, 5, 5, 30, 1, [0, 0]);
             //Force empty update so the graph gets generated.
             that.updateStatic({
                 tooArray: [],
@@ -30,6 +30,7 @@ define(['eventmanager', 'world', 'PF', 'RVO', 'standardlib'], function (eventman
                     }
                 }
             }
+            that.simulator.processObstacles();
         };
 
         /**
@@ -188,7 +189,6 @@ define(['eventmanager', 'world', 'PF', 'RVO', 'standardlib'], function (eventman
             }
             return newmap;
         }
-
         that.init();
         return that;
     }
