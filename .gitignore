@@ -16,3 +16,4 @@ dist
 npm-debug.log
 node_modules
 bower_components
+src/bower_components
