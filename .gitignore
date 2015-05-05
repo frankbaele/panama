@@ -10,7 +10,7 @@ nbproject
 dist
 # Ignore sass-cache files.
 *.sass-cache*
-
+*bower_components*
 # Node stuff
 .grunt
 npm-debug.log
