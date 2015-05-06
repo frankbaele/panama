@@ -93,14 +93,14 @@ define([
                 for (var j = 0; j < world.grid[0].length; j++) {
                     if (world.grid[coordinates.y+j][coordinates.x+i] === 1) {
                         drawTile({
-                            sprite: "trees_2.png",
+                            sprite: "details/trees_2.png",
                             x: coordinates.x + j,
                             y: coordinates.y + i,
                             correction: 15
                         });
                     } else {
                         drawTile({
-                            sprite: "landscapeTiles_066.png",
+                            sprite: "landscape/landscapeTiles_066.png",
                             x: coordinates.x + j,
                             y: coordinates.y + i,
                             correction: 15

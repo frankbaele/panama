@@ -6,15 +6,15 @@
     "file": "./art/terrain.png"
   },
   "1" : {
-    "name": "actors",
+    "name": "units",
     "type": "atlas",
-    "configuration": "./art/actors.json",
-    "file": "./art/actors.png"
+    "configuration": "./art/units.json",
+    "file": "./art/units.png"
   },
-  "1" : {
-    "name": "actors",
+  "2" : {
+    "name": "towers",
     "type": "atlas",
-    "configuration": "./art/actors.json",
-    "file": "./art/actors.png"
+    "configuration": "./art/towers.json",
+    "file": "./art/towers.png"
   }
 }
