@@ -14,6 +14,7 @@ define(['eventmanager', 'world', 'PF', 'RVO', 'standardlib', 'center'], function
                 tooArray: [],
                 fromArray: []
             });
+            /*
             for (var i = 0; i < that.grid.static.length; i++) {
                 for (var j = 0; j < that.grid.static[0].length; j++) {
                     if (that.grid.static[j][i] === 1) {
@@ -30,6 +31,7 @@ define(['eventmanager', 'world', 'PF', 'RVO', 'standardlib', 'center'], function
                     }
                 }
             }
+            */
             that.simulator.processObstacles();
         };
 

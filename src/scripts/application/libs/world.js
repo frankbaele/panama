@@ -115,7 +115,6 @@ define(['RNG'], function (RNG) {
         return newmap;
     }
 
-    init();
     return {
         grid: grid
     };

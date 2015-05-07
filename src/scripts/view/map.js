@@ -100,7 +100,7 @@ define([
                         });
                     } else {
                         drawTile({
-                            sprite: "landscape/landscapeTiles_066.png",
+                            sprite: "landscape/landscape_28.png",
                             x: coordinates.x + j,
                             y: coordinates.y + i,
                             correction: 15
@@ -117,19 +117,21 @@ define([
             // For lop trough all the atlasses with find, because we want to exit this loop when the atlas is found.
             _.findIndex(assetLoader.assets.loaded.atlas, function (sheet) {
                 // Search for a sprite with the same sprite name
-                spt = _.findWhere(sheet.sprite.sprites, {id: config.sprite});
-                img = sheet.sprite.img;
+                var temp = _.findWhere(sheet.sprite.sprites, {id: config.sprite});
                 // exit find loop when sprite is found.
-                if (!_.isEmpty(sheet)) {
-                    return;
+                if (!_.isEmpty(temp)) {
+                    spt = temp;
+                    img = sheet.sprite.img;
                 }
             });
+
             if (_.isEmpty(spt)) {
                 return;
             }
             // transform the grid tile to iso coordinates
             coordinates = standardlib.twoDToIso({x:config.x, y:config.y});
             // transform the coordinates to the actual size of the map
+
             coordinates.x = (coordinates.x * app.config.terrain.tile.width + ((terrain.canvas.width) / 2))  - app.config.terrain.tile.width / 2;
             coordinates.y = (coordinates.y * app.config.terrain.tile.height + (spt.w / 2 - (spt.h - config.correction)));
             terrain.context.drawImage(
