@@ -5,7 +5,6 @@ define(['q', 'world'], function ($q, world) {
     that.load = function (name) {
         var defer = $q.defer();
         jQuery.getJSON('/maps/' + name + '/' + name + '.json').then(function (data) {
-                console.log(data);
                 app.config.terrain.grid = {
                     width: data.width,
                     height: data.height
@@ -15,10 +14,8 @@ define(['q', 'world'], function ($q, world) {
                     width: data.width * 2,
                     height: data.height * 2
                 };
-
-                world.grid = generateWorldMap(_.findWhere(data.layers, function(layer){
-                    return layer.name == 'tiles';
-                }));
+                app.config.collision = _.findWhere(data.layers, {name : 'collision'});
+                world.grid = generateWorldMap(_.findWhere(data.layers, {name : 'tiles'}));
                 defer.resolve();
             }
         );

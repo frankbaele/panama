@@ -1,5 +1,4 @@
 define(['RNG'], function (RNG) {
-
     var
         width = app.config.terrain.grid.width,
         height = app.config.terrain.grid.height,

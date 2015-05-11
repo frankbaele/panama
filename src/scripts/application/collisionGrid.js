@@ -1,38 +1,26 @@
-define(['eventmanager', 'world', 'PF', 'RVO', 'standardlib', 'center'], function (eventmanager, world, PF, RVO, stl, center) {
+define(['eventmanager', 'PF', 'RVO', 'standardlib'], function (eventmanager, PF, RVO, stl) {
         var that = {};
         that.updateQueue = [];
         that.debugGrid = {};
 
         that.init = function () {
             // add the world grid and double it.
-            that.grid = {};
-            that.grid.dynamic = superSizemap(_.cloneDeep(world.grid));
-            that.grid.static = _.cloneDeep(that.grid.dynamic);
-            that.simulator = new RVO.Simulator(4, 40, 10, 5, 5, 20, 1, [0, 0]);
-            //Force empty update so the graph gets generated.
-            that.updateStatic({
-                tooArray: [],
-                fromArray: []
-            });
-            /*
-            for (var i = 0; i < that.grid.static.length; i++) {
-                for (var j = 0; j < that.grid.static[0].length; j++) {
-                    if (that.grid.static[j][i] === 1) {
-                        var coords = stl.gridPosToWorldPos({
-                            x: j,
-                            y: i
-                        });
-                        that.simulator.addObstacle([
-                            [coords.x, coords.y - app.config.actor.tile.height/2],
-                            [coords.x + app.config.actor.tile.width/2, coords.y ],
-                            [coords.x, coords.y + app.config.actor.tile.height/2],
-                            [coords.x - app.config.actor.tile.width/2, coords.y]
-                        ]);
-                    }
+            that.grid = that.fillmap(app.config.terrain.grid.height, app.config.terrain.grid.width);
+            _.each(app.config.collision.objects, function (collisionObject) {
+                if (!_.isUndefined(collisionObject)) {
+                    var gridCoords = that.PolygonToGridCoordinates(collisionObject);
+                    var size = {
+                        x : gridCoords[1].x - gridCoords[0].x,
+                        y : gridCoords[2].y - gridCoords[0].y
+                    };
+                    that.setSubGrid({
+                        size:size,
+                        start: gridCoords[0]
+                    })
                 }
-            }
-            */
-            that.simulator.processObstacles();
+            });
+            that.grid = superSizemap(that.grid);
+            //that.simulator.processObstacles();
         };
 
         /**
@@ -42,7 +30,7 @@ define(['eventmanager', 'world', 'PF', 'RVO', 'standardlib', 'center'], function
          * @param height
          * @param static:boolean
          */
-        that.update = function (config){
+        that.update = function (config) {
             // Correct the unset and set array where there is overlap between from and too
             var tooArray = that.generateUpdateArray({
                 grid: config.too,
@@ -130,6 +118,33 @@ define(['eventmanager', 'world', 'PF', 'RVO', 'standardlib', 'center'], function
             });
             return array;
         };
+        that.PolygonToGridCoordinates = function (object) {
+            var gridCoordinates = [];
+            _.each(object.polygon, function (coordinate) {
+                var isoCoordinates = {
+                    x: (coordinate.x + object.x)/app.config.terrain.tile.height,
+                    y: (coordinate.y + object.y)/app.config.terrain.tile.height
+                };
+                gridCoordinates.push(isoCoordinates);
+            });
+            return gridCoordinates;
+        };
+
+        that.fillmap = function (height, width) {
+            var
+                data = [],
+                y,
+                x;
+
+            for (y = 0; y < height; y++) {
+                data[y] = [];
+                for (x = 0; x < width; x++) {
+                    data[y][x] = 0;
+                }
+            }
+            return data;
+        };
+
         /**
          * Checks if the given tile is open or not
          * @param config
@@ -142,15 +157,14 @@ define(['eventmanager', 'world', 'PF', 'RVO', 'standardlib', 'center'], function
          *
          * @param config
          */
-        that.getSubGrid = function (config) {
+        that.setSubGrid = function (config) {
             var array = [];
-            for (var i = 0; i <= config.size; i++) {
+            for (var i = 0; i < config.size.y; i++) {
                 array[i] = [];
-                for (var j = 0; j <= config.size; j++) {
-                    array[i][j] = that.grid.dynamic[config.start.x + i][config.start.y + j];
+                for (var j = 0; j < config.size.x; j++) {
+                    that.grid[config.start.y + i][config.start.x + j] = 1;
                 }
             }
-            return new PF.Grid(config.size+1, config.size+1, array);
         };
         /**
          * Update the static collision map and regenerates the graph for it.
@@ -191,6 +205,7 @@ define(['eventmanager', 'world', 'PF', 'RVO', 'standardlib', 'center'], function
             }
             return newmap;
         }
+
         that.init();
         return that;
     }

@@ -13,37 +13,29 @@
         }, 
         {
          "draworder":"topdown",
-         "height":30,
+         "height":0,
          "name":"collision",
          "objects":[
                 {
                  "height":0,
-                 "id":1,
+                 "id":24,
                  "name":"",
-                 "polyline":[
+                 "polygon":[
                         {
                          "x":0,
                          "y":0
                         }, 
                         {
-                         "x":0,
-                         "y":-726
-                        }, 
-                        {
-                         "x":-792,
-                         "y":-726
-                        }, 
-                        {
-                         "x":-792,
+                         "x":198,
                          "y":0
                         }, 
                         {
-                         "x":-66,
-                         "y":0
+                         "x":198,
+                         "y":1254
                         }, 
                         {
                          "x":0,
-                         "y":0
+                         "y":1254
                         }],
                  "properties":
                     {
@@ -53,37 +45,29 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":792,
-                 "y":1980
+                 "x":0,
+                 "y":0
                 }, 
                 {
                  "height":0,
-                 "id":2,
+                 "id":25,
                  "name":"",
-                 "polyline":[
+                 "polygon":[
                         {
                          "x":0,
                          "y":0
                         }, 
                         {
-                         "x":0,
-                         "y":-1254
-                        }, 
-                        {
-                         "x":-198,
-                         "y":-1254
-                        }, 
-                        {
-                         "x":-198,
-                         "y":-66
-                        }, 
-                        {
-                         "x":-198,
+                         "x":792,
                          "y":0
                         }, 
                         {
+                         "x":792,
+                         "y":726
+                        }, 
+                        {
                          "x":0,
-                         "y":0
+                         "y":726
                         }],
                  "properties":
                     {
@@ -93,149 +77,29 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":198,
+                 "x":0,
                  "y":1254
                 }, 
                 {
                  "height":0,
-                 "id":4,
+                 "id":26,
                  "name":"",
-                 "polyline":[
+                 "polygon":[
                         {
                          "x":0,
                          "y":0
-                        }, 
-                        {
-                         "x":-594,
-                         "y":0
-                        }, 
-                        {
-                         "x":-594,
-                         "y":-330
-                        }, 
-                        {
-                         "x":0,
-                         "y":-330
-                        }, 
-                        {
-                         "x":0,
-                         "y":-132
-                        }, 
-                        {
-                         "x":0,
-                         "y":0
-                        }],
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":924,
-                 "y":1122
-                }, 
-                {
-                 "height":0,
-                 "id":5,
-                 "name":"",
-                 "polyline":[
-                        {
-                         "x":0,
-                         "y":0
-                        }, 
-                        {
-                         "x":858,
-                         "y":0
-                        }, 
-                        {
-                         "x":858,
-                         "y":-264
-                        }, 
-                        {
-                         "x":0,
-                         "y":-264
-                        }, 
-                        {
-                         "x":0,
-                         "y":0
-                        }],
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":198,
-                 "y":660
-                }, 
-                {
-                 "height":0,
-                 "id":7,
-                 "name":"",
-                 "polyline":[
-                        {
-                         "x":0,
-                         "y":0
-                        }, 
-                        {
-                         "x":0,
-                         "y":264
                         }, 
                         {
                          "x":594,
-                         "y":264
+                         "y":0
                         }, 
                         {
                          "x":594,
-                         "y":-264
+                         "y":330
                         }, 
                         {
                          "x":0,
-                         "y":-264
-                        }, 
-                        {
-                         "x":0,
-                         "y":0
-                        }],
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":1056,
-                 "y":660
-                }, 
-                {
-                 "height":0,
-                 "id":9,
-                 "name":"",
-                 "polyline":[
-                        {
-                         "x":0,
-                         "y":0
-                        }, 
-                        {
-                         "x":1650,
-                         "y":0
-                        }, 
-                        {
-                         "x":1650,
-                         "y":-264
-                        }, 
-                        {
-                         "x":0,
-                         "y":-264
-                        }, 
-                        {
-                         "x":0,
-                         "y":0
+                         "y":330
                         }],
                  "properties":
                     {
@@ -246,13 +110,109 @@
                  "visible":true,
                  "width":0,
                  "x":330,
-                 "y":264
+                 "y":792
                 }, 
                 {
                  "height":0,
-                 "id":13,
+                 "id":28,
                  "name":"",
-                 "polyline":[
+                 "polygon":[
+                        {
+                         "x":0,
+                         "y":0
+                        }, 
+                        {
+                         "x":858,
+                         "y":0
+                        }, 
+                        {
+                         "x":858,
+                         "y":264
+                        }, 
+                        {
+                         "x":0,
+                         "y":264
+                        }],
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":198,
+                 "y":396
+                }, 
+                {
+                 "height":0,
+                 "id":29,
+                 "name":"",
+                 "polygon":[
+                        {
+                         "x":0,
+                         "y":0
+                        }, 
+                        {
+                         "x":594,
+                         "y":0
+                        }, 
+                        {
+                         "x":594,
+                         "y":528
+                        }, 
+                        {
+                         "x":0,
+                         "y":528
+                        }],
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1056,
+                 "y":396
+                }, 
+                {
+                 "height":0,
+                 "id":30,
+                 "name":"",
+                 "polygon":[
+                        {
+                         "x":0,
+                         "y":0
+                        }, 
+                        {
+                         "x":1650,
+                         "y":0
+                        }, 
+                        {
+                         "x":1650,
+                         "y":264
+                        }, 
+                        {
+                         "x":0,
+                         "y":264
+                        }],
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":330,
+                 "y":0
+                }, 
+                {
+                 "height":0,
+                 "id":31,
+                 "name":"",
+                 "polygon":[
                         {
                          "x":0,
                          "y":0
@@ -263,15 +223,11 @@
                         }, 
                         {
                          "x":198,
-                         "y":792
+                         "y":1716
                         }, 
                         {
                          "x":0,
-                         "y":792
-                        }, 
-                        {
-                         "x":0,
-                         "y":0
+                         "y":1716
                         }],
                  "properties":
                     {
@@ -286,28 +242,24 @@
                 }, 
                 {
                  "height":0,
-                 "id":15,
+                 "id":32,
                  "name":"",
-                 "polyline":[
+                 "polygon":[
                         {
                          "x":0,
                          "y":0
                         }, 
                         {
-                         "x":-1056,
+                         "x":858,
                          "y":0
                         }, 
                         {
-                         "x":-1056,
+                         "x":858,
                          "y":924
                         }, 
                         {
                          "x":0,
                          "y":924
-                        }, 
-                        {
-                         "x":0,
-                         "y":0
                         }],
                  "properties":
                     {
@@ -317,17 +269,17 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":1980,
+                 "x":924,
                  "y":1056
                 }],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
-         "width":30,
+         "width":0,
          "x":0,
          "y":0
         }],
- "nextobjectid":16,
+ "nextobjectid":33,
  "orientation":"isometric",
  "properties":
     {

@@ -7,7 +7,6 @@ define([
     ],
     function (eventmanager, world, standardlib, center, assetLoader) {
         var terrain = {};
-
         function init() {
             terrain.canvas = app.config.shadowRoot.getElementById("mapCanvas");
             terrain.context = terrain.canvas.getContext("2d");
