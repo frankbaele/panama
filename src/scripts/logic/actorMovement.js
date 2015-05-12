@@ -5,7 +5,7 @@ define(['collisionGrid', 'standardlib', 'PF', 'RVO'], function (collisionGrid, s
         dontCrossCorners: true
     });
     that.generatePath = function (config) {
-        var grid = collisionGrid.grid.graph.clone();
+        var grid = collisionGrid.graph.clone();
 
         config.from.x = config.from.x > 0? config.from.x : 0;
         config.from.y = config.from.y > 0? config.from.y : 0;

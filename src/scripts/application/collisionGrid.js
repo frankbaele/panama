@@ -6,21 +6,33 @@ define(['eventmanager', 'PF', 'RVO', 'standardlib'], function (eventmanager, PF,
         that.init = function () {
             // add the world grid and double it.
             that.grid = that.fillmap(app.config.terrain.grid.height, app.config.terrain.grid.width);
+            that.simulator = new RVO.Simulator(4, 40, 10, 5, 5, 20, 1, [0, 0]);
             _.each(app.config.collision.objects, function (collisionObject) {
                 if (!_.isUndefined(collisionObject)) {
                     var gridCoords = that.PolygonToGridCoordinates(collisionObject);
                     var size = {
-                        x : gridCoords[1].x - gridCoords[0].x,
-                        y : gridCoords[2].y - gridCoords[0].y
+                        x: gridCoords[1].x - gridCoords[0].x,
+                        y: gridCoords[2].y - gridCoords[0].y
                     };
                     that.setSubGrid({
-                        size:size,
+                        size: size,
                         start: gridCoords[0]
-                    })
+                    });
+                    var isoCoordinates = that.PolygonToIsoWorldCoordinates(collisionObject);
+                    that.simulator.addObstacle([
+                        [isoCoordinates[0].x, isoCoordinates[0].y ],
+                        [isoCoordinates[1].x, isoCoordinates[1].y ],
+                        [isoCoordinates[2].x, isoCoordinates[2].y ],
+                        [isoCoordinates[3].x, isoCoordinates[3].y ]
+                    ]);
                 }
             });
+            // The orignal map has been filled up now double it in size to have more precise grid, indepent from the terrain.
             that.grid = superSizemap(that.grid);
-            //that.simulator.processObstacles();
+            // Generate the node tree for the pathfinding
+            that.graph = new PF.Grid(that.grid.length, that.grid[0].length, that.grid);
+            // Proces the polygons objects we added to the simulator
+            that.simulator.processObstacles();
         };
 
         /**
@@ -48,31 +60,24 @@ define(['eventmanager', 'PF', 'RVO', 'standardlib'], function (eventmanager, PF,
             var open = true;
             // check if the new coordinates are open.
             _.each(temp, function (coordinate) {
-                if (that.grid.dynamic[coordinate.x][coordinate.y] !== 0) {
+                if (that.grid[coordinate.x][coordinate.y] !== 0) {
                     open = false;
                 }
             });
             if (open) {
                 // open up the unpopulated from coordinates
                 _.each(fromArray, function (coordinate) {
-                    that.grid.dynamic[coordinate.x][coordinate.y] = 0;
+                    that.grid[coordinate.x][coordinate.y] = 0;
                 });
 
                 // close the new too coordinates
                 _.each(tooArray, function (coordinate) {
-                    that.grid.dynamic[coordinate.x][coordinate.y] = 1;
+                    that.grid[coordinate.x][coordinate.y] = 1;
                 });
-
+                that.graph = new PF.Grid(that.grid.length, that.grid[0].length, that.grid);
                 // Execute the success callback if it exists
                 if (typeof config.success !== 'undefined') {
                     config.success();
-                }
-                // update the static grid also(e.g. building)
-                if (config.static) {
-                    that.updateStatic({
-                        tooArray: tooArray,
-                        fromArray: fromArray
-                    });
                 }
             } else {
 
@@ -81,6 +86,7 @@ define(['eventmanager', 'PF', 'RVO', 'standardlib'], function (eventmanager, PF,
                     config.failure(tooArray);
                 }
             }
+
         };
         /**
          * Generates an collision array based on the coordinate and dimensions
@@ -122,14 +128,24 @@ define(['eventmanager', 'PF', 'RVO', 'standardlib'], function (eventmanager, PF,
             var gridCoordinates = [];
             _.each(object.polygon, function (coordinate) {
                 var isoCoordinates = {
-                    x: (coordinate.x + object.x)/app.config.terrain.tile.height,
-                    y: (coordinate.y + object.y)/app.config.terrain.tile.height
+                    x: (coordinate.x + object.x) / app.config.terrain.tile.height,
+                    y: (coordinate.y + object.y) / app.config.terrain.tile.height
                 };
                 gridCoordinates.push(isoCoordinates);
             });
             return gridCoordinates;
         };
-
+        that.PolygonToIsoWorldCoordinates = function (object) {
+            var isoCoordinates = [];
+            _.each(object.polygon, function (coordinate) {
+                var isoCoordinate = stl.carWorldPosToIsoWorldPos({
+                    x: coordinate.x + object.x,
+                    y: coordinate.y + object.y
+                });
+                isoCoordinates.push(isoCoordinate);
+            });
+            return isoCoordinates;
+        };
         that.fillmap = function (height, width) {
             var
                 data = [],
@@ -151,7 +167,7 @@ define(['eventmanager', 'PF', 'RVO', 'standardlib'], function (eventmanager, PF,
          * @returns {boolean}
          */
         that.isOpen = function (config) {
-            return that.grid.dynamic[config.new.y][config.new.x] === 0;
+            return that.grid[config.new.y][config.new.x] === 0;
         };
         /**
          *
@@ -165,22 +181,6 @@ define(['eventmanager', 'PF', 'RVO', 'standardlib'], function (eventmanager, PF,
                     that.grid[config.start.y + i][config.start.x + j] = 1;
                 }
             }
-        };
-        /**
-         * Update the static collision map and regenerates the graph for it.
-         * @param config
-         */
-        that.updateStatic = function (config) {
-            // open up the unpopulated from coordinates
-            _.each(config.fromArray, function (coordinate) {
-                that.grid.static[coordinate.x][coordinate.y] = 0;
-            });
-            // close the new too coordinates
-            _.each(config.tooArray, function (coordinate) {
-                that.grid.static[coordinate.x][coordinate.y] = 1;
-            });
-
-            that.grid.graph = new PF.Grid(that.grid.static.length, that.grid.static[0].length, that.grid.static);
         };
         /**
          * Doubles a given array and returns it
