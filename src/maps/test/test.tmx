@@ -196,10 +196,10 @@
  </tileset>
  <layer name="tiles" width="30" height="30">
   <data encoding="base64" compression="zlib">
-   eJzTZmBg0IZicSjWpjMetZe+9tIKDzZ7h2v8jdpLfroaDvZSO86Gk73ULK8Gs73UxANV1o6W8aP2jto7au+ovYPHXgCB54j1
+   eJztldsOwiAMhonnKB6jxnfgBbY5de//VHZJG5Eolo2CF7v4AvTmy186ZpRSBlkiOgFm8GbzSvFvXin6epsvtU/1mN5ceUN7wfWOVPisxMirM3s5372k94Hc8Vwl8hI3T94Y70aXPqf2xvwvtOcZsPjBFNgBF4tNTy+HFXACDhZ79Zq9a6CXg89bo7dguEOd5N0CR+CM69rKSmstkFc7+8Ly0b6K5HVdrre0el1iTdpLkLfrXLVvY8Psc8PwSN2vywQYe5DyzjPlHbzvPAFmylS8
   </data>
  </layer>
- <objectgroup name="collision">
+ <objectgroup name="collision" visible="0">
   <object id="24" x="0" y="0">
    <polygon points="0,0 198,0 198,1254 0,1254"/>
   </object>

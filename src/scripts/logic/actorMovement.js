@@ -6,7 +6,6 @@ define(['collisionGrid', 'standardlib', 'PF', 'RVO'], function (collisionGrid, s
     });
     that.generatePath = function (config) {
         var grid = collisionGrid.graph.clone();
-
         config.from.x = config.from.x > 0? config.from.x : 0;
         config.from.y = config.from.y > 0? config.from.y : 0;
         var path = that.finder.findPath(config.from.y, config.from.x, config.too.y, config.too.x, grid);

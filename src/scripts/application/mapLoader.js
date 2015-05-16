@@ -4,12 +4,18 @@ define(['q', 'world'], function ($q, world) {
 
     that.load = function (name) {
         var defer = $q.defer();
-        jQuery.getJSON('/maps/' + name + '/' + name + '.json').then(function (data) {
+        jQuery.getJSON('/maps/' + name + '/' + name + '.json')
+            .then(function (data) {
                 app.config.terrain.grid = {
                     width: data.width,
                     height: data.height
                 };
-
+                // get the tilset and put it in config
+                app.config.terrain.tileSet = _.findWhere(data.tilesets, {name : 'terrain'});
+                // remove the path to the terrain folder, so we can easily match on it.
+                _.each(app.config.terrain.tileSet.tiles, function(tile){
+                    tile.image = tile.image.split("terrain/").pop();
+                });
                 app.config.actor.grid = {
                     width: data.width * 2,
                     height: data.height * 2
@@ -24,7 +30,6 @@ define(['q', 'world'], function ($q, world) {
 
     function generateWorldMap(layer){
         var grid = [];
-
         for(var i = 0; i < layer.width; i++){
             grid.push(layer.data.splice(0,30));
         }

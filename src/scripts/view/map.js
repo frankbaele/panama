@@ -25,7 +25,6 @@ define([
                         'left': event.pageX,
                         'top': event.pageY
                     });
-
                     initialW = event.pageX;
                     initialH = event.pageY;
 
@@ -90,21 +89,13 @@ define([
             var coordinates = {x: 0, y: 0};
             for (var i = 0; i < world.grid.length; i++) {
                 for (var j = 0; j < world.grid[0].length; j++) {
-                    if (world.grid[coordinates.y+j][coordinates.x+i] === 1) {
-                        drawTile({
-                            sprite: "details/trees_2.png",
-                            x: coordinates.x + j,
-                            y: coordinates.y + i,
-                            correction: 15
-                        });
-                    } else {
-                        drawTile({
-                            sprite: "landscape/landscape_28.png",
-                            x: coordinates.x + j,
-                            y: coordinates.y + i,
-                            correction: 15
-                        });
-                    }
+                    var tile = world.grid[i][j] -1;
+                    drawTile({
+                        sprite: app.config.terrain.tileSet.tiles[tile].image,
+                        x: j,
+                        y: i,
+                        correction: 15
+                    });
                 }
             }
         }

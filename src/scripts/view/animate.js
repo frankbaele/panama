@@ -1,5 +1,6 @@
 define(['eventmanager', 'RequestAnimationFrame', 'map', 'actors'], function (eventmanager) {
     var frame = 0;
+
     function animate() {
         frame++;
         eventmanager.publish('new.frame', frame);
