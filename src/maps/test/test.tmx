@@ -2,201 +2,393 @@
 <map version="1.0" orientation="isometric" renderorder="right-down" width="30" height="30" tilewidth="132" tileheight="66" nextobjectid="35">
  <tileset firstgid="1" name="terrain" tilewidth="133" tileheight="130">
   <tile id="0">
+   <properties>
+    <property name="walkable" value="true"/>
+   </properties>
    <image width="132" height="99" source="../../art/terrain/landscape/landscape_39.png"/>
   </tile>
   <tile id="1">
+   <properties>
+    <property name="walkable" value="true"/>
+   </properties>
    <image width="132" height="99" source="../../art/terrain/landscape/landscape_38.png"/>
   </tile>
   <tile id="2">
+   <properties>
+    <property name="walkable" value="false"/>
+   </properties>
    <image width="133" height="99" source="../../art/terrain/landscape/landscape_37.png"/>
   </tile>
   <tile id="3">
+   <properties>
+    <property name="walkable" value="false"/>
+   </properties>
    <image width="132" height="99" source="../../art/terrain/landscape/landscape_36.png"/>
   </tile>
   <tile id="4">
+   <properties>
+    <property name="walkable" value="true"/>
+   </properties>
    <image width="132" height="99" source="../../art/terrain/landscape/landscape_35.png"/>
   </tile>
   <tile id="5">
+   <properties>
+    <property name="walkable" value="true"/>
+   </properties>
    <image width="132" height="99" source="../../art/terrain/landscape/landscape_34.png"/>
   </tile>
   <tile id="6">
+   <properties>
+    <property name="walkable" value="false"/>
+   </properties>
    <image width="132" height="99" source="../../art/terrain/landscape/landscape_33.png"/>
   </tile>
   <tile id="7">
+   <properties>
+    <property name="walkable" value="true"/>
+   </properties>
    <image width="132" height="99" source="../../art/terrain/landscape/landscape_32.png"/>
   </tile>
   <tile id="8">
+   <properties>
+    <property name="walkable" value="true"/>
+   </properties>
    <image width="132" height="99" source="../../art/terrain/landscape/landscape_31.png"/>
   </tile>
   <tile id="9">
+   <properties>
+    <property name="walkable" value="true"/>
+   </properties>
    <image width="132" height="99" source="../../art/terrain/landscape/landscape_30.png"/>
   </tile>
   <tile id="10">
+   <properties>
+    <property name="walkable" value="true"/>
+   </properties>
    <image width="132" height="99" source="../../art/terrain/landscape/landscape_29.png"/>
   </tile>
   <tile id="11">
+   <properties>
+    <property name="walkable" value="true"/>
+   </properties>
    <image width="132" height="99" source="../../art/terrain/landscape/landscape_28.png"/>
   </tile>
   <tile id="12">
+   <properties>
+    <property name="walkable" value="true"/>
+   </properties>
    <image width="132" height="115" source="../../art/terrain/landscape/landscape_27.png"/>
   </tile>
   <tile id="13">
+   <properties>
+    <property name="walkable" value="true"/>
+   </properties>
    <image width="132" height="99" source="../../art/terrain/landscape/landscape_26.png"/>
   </tile>
   <tile id="14">
+   <properties>
+    <property name="walkable" value="true"/>
+   </properties>
    <image width="132" height="99" source="../../art/terrain/landscape/landscape_25.png"/>
   </tile>
   <tile id="15">
+   <properties>
+    <property name="walkable" value="true"/>
+   </properties>
    <image width="132" height="99" source="../../art/terrain/landscape/landscape_24.png"/>
   </tile>
   <tile id="16">
+   <properties>
+    <property name="walkable" value="true"/>
+   </properties>
    <image width="132" height="115" source="../../art/terrain/landscape/landscape_23.png"/>
   </tile>
   <tile id="17">
+   <properties>
+    <property name="walkable" value="true"/>
+   </properties>
    <image width="132" height="115" source="../../art/terrain/landscape/landscape_22.png"/>
   </tile>
   <tile id="18">
+   <properties>
+    <property name="walkable" value="true"/>
+   </properties>
    <image width="132" height="83" source="../../art/terrain/landscape/landscape_21.png"/>
   </tile>
   <tile id="19">
+   <properties>
+    <property name="walkable" value="true"/>
+   </properties>
    <image width="132" height="115" source="../../art/terrain/landscape/landscape_20.png"/>
   </tile>
   <tile id="20">
+   <properties>
+    <property name="walkable" value="true"/>
+   </properties>
    <image width="132" height="99" source="../../art/terrain/landscape/landscape_19.png"/>
   </tile>
   <tile id="21">
+   <properties>
+    <property name="walkable" value="true"/>
+   </properties>
    <image width="132" height="115" source="../../art/terrain/landscape/landscape_18.png"/>
   </tile>
   <tile id="22">
+   <properties>
+    <property name="walkable" value="true"/>
+   </properties>
    <image width="132" height="83" source="../../art/terrain/landscape/landscape_17.png"/>
   </tile>
   <tile id="23">
+   <properties>
+    <property name="walkable" value="true"/>
+   </properties>
    <image width="132" height="99" source="../../art/terrain/landscape/landscape_16.png"/>
   </tile>
   <tile id="24">
+   <properties>
+    <property name="walkable" value="true"/>
+   </properties>
    <image width="132" height="99" source="../../art/terrain/landscape/landscape_15.png"/>
   </tile>
   <tile id="25">
+   <properties>
+    <property name="walkable" value="true"/>
+   </properties>
    <image width="132" height="99" source="../../art/terrain/landscape/landscape_14.png"/>
   </tile>
   <tile id="26">
+   <properties>
+    <property name="walkable" value="true"/>
+   </properties>
    <image width="132" height="99" source="../../art/terrain/landscape/landscape_13.png"/>
   </tile>
   <tile id="27">
+   <properties>
+    <property name="walkable" value="true"/>
+   </properties>
    <image width="132" height="99" source="../../art/terrain/landscape/landscape_12.png"/>
   </tile>
   <tile id="28">
+   <properties>
+    <property name="walkable" value="true"/>
+   </properties>
    <image width="132" height="99" source="../../art/terrain/landscape/landscape_11.png"/>
   </tile>
   <tile id="29">
+   <properties>
+    <property name="walkable" value="true"/>
+   </properties>
    <image width="132" height="99" source="../../art/terrain/landscape/landscape_10.png"/>
   </tile>
   <tile id="30">
+   <properties>
+    <property name="walkable" value="true"/>
+   </properties>
    <image width="132" height="99" source="../../art/terrain/landscape/landscape_09.png"/>
   </tile>
   <tile id="31">
+   <properties>
+    <property name="walkable" value="true"/>
+   </properties>
    <image width="132" height="115" source="../../art/terrain/landscape/landscape_08.png"/>
   </tile>
   <tile id="32">
+   <properties>
+    <property name="walkable" value="true"/>
+   </properties>
    <image width="132" height="99" source="../../art/terrain/landscape/landscape_07.png"/>
   </tile>
   <tile id="33">
+   <properties>
+    <property name="walkable" value="true"/>
+   </properties>
    <image width="132" height="99" source="../../art/terrain/landscape/landscape_06.png"/>
   </tile>
   <tile id="34">
+   <properties>
+    <property name="walkable" value="false"/>
+   </properties>
    <image width="132" height="99" source="../../art/terrain/landscape/landscape_05.png"/>
   </tile>
   <tile id="35">
+   <properties>
+    <property name="walkable" value="true"/>
+   </properties>
    <image width="132" height="99" source="../../art/terrain/landscape/landscape_04.png"/>
   </tile>
   <tile id="36">
+   <properties>
+    <property name="walkable" value="true"/>
+   </properties>
    <image width="132" height="99" source="../../art/terrain/landscape/landscape_03.png"/>
   </tile>
   <tile id="37">
+   <properties>
+    <property name="walkable" value="true"/>
+   </properties>
    <image width="132" height="99" source="../../art/terrain/landscape/landscape_02.png"/>
   </tile>
   <tile id="38">
+   <properties>
+    <property name="walkable" value="false"/>
+   </properties>
    <image width="132" height="99" source="../../art/terrain/landscape/landscape_01.png"/>
   </tile>
   <tile id="39">
+   <properties>
+    <property name="walkable" value="false"/>
+   </properties>
    <image width="132" height="99" source="../../art/terrain/landscape/landscape_00.png"/>
   </tile>
   <tile id="40">
+   <properties>
+    <property name="walkable" value="false"/>
+   </properties>
    <image width="133" height="116" source="../../art/terrain/details/trees_9.png"/>
   </tile>
   <tile id="41">
+   <properties>
+    <property name="walkable" value="false"/>
+   </properties>
    <image width="133" height="118" source="../../art/terrain/details/trees_8.png"/>
   </tile>
   <tile id="42">
+   <properties>
+    <property name="walkable" value="false"/>
+   </properties>
    <image width="133" height="121" source="../../art/terrain/details/trees_7.png"/>
   </tile>
   <tile id="43">
+   <properties>
+    <property name="walkable" value="false"/>
+   </properties>
    <image width="133" height="124" source="../../art/terrain/details/trees_6.png"/>
   </tile>
   <tile id="44">
+   <properties>
+    <property name="walkable" value="false"/>
+   </properties>
    <image width="132" height="126" source="../../art/terrain/details/trees_5.png"/>
   </tile>
   <tile id="45">
+   <properties>
+    <property name="walkable" value="false"/>
+   </properties>
    <image width="133" height="127" source="../../art/terrain/details/trees_4.png"/>
   </tile>
   <tile id="46">
+   <properties>
+    <property name="walkable" value="false"/>
+   </properties>
    <image width="133" height="113" source="../../art/terrain/details/trees_3.png"/>
   </tile>
   <tile id="47">
+   <properties>
+    <property name="walkable" value="false"/>
+   </properties>
    <image width="133" height="121" source="../../art/terrain/details/trees_2.png"/>
   </tile>
   <tile id="48">
+   <properties>
+    <property name="walkable" value="false"/>
+   </properties>
    <image width="133" height="123" source="../../art/terrain/details/trees_12.png"/>
   </tile>
   <tile id="49">
+   <properties>
+    <property name="walkable" value="false"/>
+   </properties>
    <image width="133" height="118" source="../../art/terrain/details/trees_11.png"/>
   </tile>
   <tile id="50">
+   <properties>
+    <property name="walkable" value="false"/>
+   </properties>
    <image width="132" height="130" source="../../art/terrain/details/trees_10.png"/>
   </tile>
   <tile id="51">
+   <properties>
+    <property name="walkable" value="false"/>
+   </properties>
    <image width="133" height="111" source="../../art/terrain/details/trees_1.png"/>
   </tile>
   <tile id="52">
+   <properties>
+    <property name="walkable" value="false"/>
+   </properties>
    <image width="133" height="99" source="../../art/terrain/details/rocks_8.png"/>
   </tile>
   <tile id="53">
+   <properties>
+    <property name="walkable" value="false"/>
+   </properties>
    <image width="132" height="99" source="../../art/terrain/details/rocks_7.png"/>
   </tile>
   <tile id="54">
+   <properties>
+    <property name="walkable" value="false"/>
+   </properties>
    <image width="133" height="99" source="../../art/terrain/details/rocks_6.png"/>
   </tile>
   <tile id="55">
+   <properties>
+    <property name="walkable" value="false"/>
+   </properties>
    <image width="133" height="99" source="../../art/terrain/details/rocks_5.png"/>
   </tile>
   <tile id="56">
+   <properties>
+    <property name="walkable" value="false"/>
+   </properties>
    <image width="133" height="102" source="../../art/terrain/details/rocks_4.png"/>
   </tile>
   <tile id="57">
+   <properties>
+    <property name="walkable" value="false"/>
+   </properties>
    <image width="133" height="102" source="../../art/terrain/details/rocks_3.png"/>
   </tile>
   <tile id="58">
+   <properties>
+    <property name="walkable" value="false"/>
+   </properties>
    <image width="133" height="99" source="../../art/terrain/details/rocks_2.png"/>
   </tile>
   <tile id="59">
+   <properties>
+    <property name="walkable" value="false"/>
+   </properties>
    <image width="133" height="99" source="../../art/terrain/details/rocks_1.png"/>
   </tile>
   <tile id="60">
+   <properties>
+    <property name="walkable" value="false"/>
+   </properties>
    <image width="132" height="114" source="../../art/terrain/details/crystals_4.png"/>
   </tile>
   <tile id="61">
+   <properties>
+    <property name="walkable" value="false"/>
+   </properties>
    <image width="133" height="127" source="../../art/terrain/details/crystals_3.png"/>
   </tile>
   <tile id="62">
+   <properties>
+    <property name="walkable" value="false"/>
+   </properties>
    <image width="132" height="121" source="../../art/terrain/details/crystals_2.png"/>
   </tile>
   <tile id="63">
+   <properties>
+    <property name="walkable" value="false"/>
+   </properties>
    <image width="132" height="112" source="../../art/terrain/details/crystals_1.png"/>
   </tile>
  </tileset>
  <layer name="tiles" width="30" height="30">
   <data encoding="base64" compression="zlib">
-   eJztld0KgzAMRgsbDIYbTHYhu91lX2A65/r+T6WFhGUh4s+SyqAXB5uKHr4YqnfOeeBIKIzx2WtK9trxqzeM7En7mt4UeTV6Mde7Zk408v6L92bgjffeQAd1Q56zOjfoWfpidSqvxFberf9HFXBO7C2Bi/vM3pM5DsbeFrwP5p7yTiHNVKyvAyeSFa+tktePeAvIiD5cN8TL3Rp50VuTXtewZ9lnCnqXzBUlno1hZp+D8N613qXfl7Mf2AF3skasvFLGFHmz95seZtRRcA==
+   eJztlcEKwjAMhgsKgkxB8SBePfbYi5tT9/5PZQ8JZCFbt9m/IOzwsRK6fvxpab1zzhN7QQXGr14oqxfHr95uoGbVc3pL5M3Ri6neJeckR95/8d4A3hD5EMEAdW8EMefl+ndrKa8G7UWQ2v+pXInjSH8Q7+CZONF6TeSpHDuwtyXvQ7lT3hT8jz4nl8hBZOVvm8nrB7wVZWQfjxvh1e4cedlbi17XVEP2WcLeOedK8nb222Z5O2Pdpd65+6vZRjbEXYwZlNfKWCLv6u3zBZERVi4=
   </data>
  </layer>
 </map>

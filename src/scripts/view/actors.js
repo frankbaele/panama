@@ -131,22 +131,25 @@ define([
         }
 
         function drawActor(actor) {
+
             // For lop trough all the atlasses with find, because we want to exit this loop when the atlas is found.
             var spt,
                 img;
+
             // For lop trough all the atlasses with find, because we want to exit this loop when the atlas is found.
             _.findIndex(assetLoader.assets.loaded.atlas, function (sheet) {
                 // Search for a sprite with the same sprite name
-                spt = _.findWhere(sheet.sprite.sprites, {id: actor.variables.sprite[actor.variables.state][actor.variables.direction][actor.variables.spriteIndex]});
-                img = sheet.sprite.img;
+                var temp = _.findWhere(sheet.sprite.sprites, {id: actor.variables.sprite[actor.variables.state][actor.variables.direction][actor.variables.spriteIndex]});
                 // exit find loop when sprite is found.
-                if (!_.isEmpty(sheet)) {
-                    return;
+                if (!_.isEmpty(temp)) {
+                    spt = temp;
+                    img = sheet.sprite.img;
                 }
             });
             if (_.isEmpty(spt)) {
                 return;
             }
+
             actor.variables.canvas.width = actor.variables.sprite.width;
             actor.variables.canvas.height = actor.variables.sprite.height + healthbarHeight;
 
