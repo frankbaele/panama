@@ -8,7 +8,7 @@ define(['assetLoader', 'eventmanager', 'mapLoader'], function (assetLoader, even
             require(['gamecycle', 'animate', 'input', 'plane'], function(){
                 eventmanager.publish('game.init');
                 var plane = require('plane');
-                var player1 = plane({coordinates: {x: 1980, y: 150}}).init();
+                var player1 = plane({coordinates: {x: 1980, y: 250}}).init();
             });
         });
 });

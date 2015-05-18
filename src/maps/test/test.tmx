@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="isometric" renderorder="right-down" width="30" height="30" tilewidth="132" tileheight="66" nextobjectid="33">
+<map version="1.0" orientation="isometric" renderorder="right-down" width="30" height="30" tilewidth="132" tileheight="66" nextobjectid="35">
  <tileset firstgid="1" name="terrain" tilewidth="133" tileheight="130">
   <tile id="0">
    <image width="132" height="99" source="../../art/terrain/landscape/landscape_39.png"/>
@@ -196,33 +196,7 @@
  </tileset>
  <layer name="tiles" width="30" height="30">
   <data encoding="base64" compression="zlib">
-   eJztldsOwiAMhonnKB6jxnfgBbY5de//VHZJG5Eolo2CF7v4AvTmy186ZpRSBlkiOgFm8GbzSvFvXin6epsvtU/1mN5ceUN7wfWOVPisxMirM3s5372k94Hc8Vwl8hI3T94Y70aXPqf2xvwvtOcZsPjBFNgBF4tNTy+HFXACDhZ79Zq9a6CXg89bo7dguEOd5N0CR+CM69rKSmstkFc7+8Ly0b6K5HVdrre0el1iTdpLkLfrXLVvY8Psc8PwSN2vywQYe5DyzjPlHbzvPAFmylS8
+   eJztld0KgzAMRgsbDIYbTHYhu91lX2A65/r+T6WFhGUh4s+SyqAXB5uKHr4YqnfOeeBIKIzx2WtK9trxqzeM7En7mt4UeTV6Mde7Zk408v6L92bgjffeQAd1Q56zOjfoWfpidSqvxFberf9HFXBO7C2Bi/vM3pM5DsbeFrwP5p7yTiHNVKyvAyeSFa+tktePeAvIiD5cN8TL3Rp50VuTXtewZ9lnCnqXzBUlno1hZp+D8N613qXfl7Mf2AF3skasvFLGFHmz95seZtRRcA==
   </data>
  </layer>
- <objectgroup name="collision" visible="0">
-  <object id="24" x="0" y="0">
-   <polygon points="0,0 198,0 198,1254 0,1254"/>
-  </object>
-  <object id="25" x="0" y="1254">
-   <polygon points="0,0 792,0 792,726 0,726"/>
-  </object>
-  <object id="26" x="330" y="792">
-   <polygon points="0,0 594,0 594,330 0,330"/>
-  </object>
-  <object id="28" x="198" y="396">
-   <polygon points="0,0 858,0 858,264 0,264"/>
-  </object>
-  <object id="29" x="1056" y="396">
-   <polygon points="0,0 594,0 594,528 0,528"/>
-  </object>
-  <object id="30" x="330" y="0">
-   <polygon points="0,0 1650,0 1650,264 0,264"/>
-  </object>
-  <object id="31" x="1782" y="264">
-   <polygon points="0,0 198,0 198,1716 0,1716"/>
-  </object>
-  <object id="32" x="924" y="1056">
-   <polygon points="0,0 858,0 858,924 0,924"/>
-  </object>
- </objectgroup>
 </map>

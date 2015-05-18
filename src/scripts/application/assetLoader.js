@@ -25,6 +25,7 @@ define(['spriteSheet', 'text!assetsList', 'q'], function (spriteSheet, assetsLis
                             name: asset.name,
                             sprite: new spriteSheet(asset.configuration, img)
                         });
+                        console.log('asset loaded');
                         defer.resolve();
                     };
                 }

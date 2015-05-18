@@ -7,31 +7,28 @@ define(['eventmanager', 'PF', 'RVO', 'standardlib'], function (eventmanager, PF,
             // add the world grid and double it.
             that.grid = that.fillmap(app.config.terrain.grid.height, app.config.terrain.grid.width);
             that.simulator = new RVO.Simulator(4, 40, 10, 5, 5, 20, 1, [0, 0]);
-            _.each(app.config.collision.objects, function (collisionObject) {
-                if (!_.isUndefined(collisionObject)) {
-                    var gridCoords = that.PolygonToGridCoordinates(collisionObject);
-                    var size = {
-                        x: gridCoords[1].x - gridCoords[0].x,
-                        y: gridCoords[2].y - gridCoords[0].y
-                    };
-                    that.setSubGrid({
-                        size: size,
-                        start: gridCoords[0]
-                    });
-                    var isoCoordinates = that.PolygonToIsoWorldCoordinates(collisionObject);
-                    that.simulator.addObstacle([
-                        [isoCoordinates[0].x, isoCoordinates[0].y ],
-                        [isoCoordinates[1].x, isoCoordinates[1].y ],
-                        [isoCoordinates[2].x, isoCoordinates[2].y ],
-                        [isoCoordinates[3].x, isoCoordinates[3].y ]
-                    ]);
-                }
-            });
+
             // The orignal map has been filled up now double it in size to have more precise grid, indepent from the terrain.
             that.grid = superSizemap(that.grid);
             // Generate the node tree for the pathfinding
             that.graph = new PF.Grid(that.grid.length, that.grid[0].length, that.grid);
             // Proces the polygons objects we added to the simulator
+            for (var i = 0; i < that.grid.length; i++) {
+                for (var j = 0; j < that.grid[0].length; j++) {
+                    if (that.grid[i][j] === 1) {
+                        var coords = stl.gridPosToWorldPos({
+                            x: j,
+                            y: i
+                        });
+                        that.simulator.addObstacle([
+                            [coords.x, coords.y - app.config.actor.tile.height/2],
+                            [coords.x + app.config.actor.tile.width/2, coords.y ],
+                            [coords.x, coords.y + app.config.actor.tile.height/2],
+                            [coords.x - app.config.actor.tile.width/2, coords.y]
+                        ]);
+                    }
+                }
+            }
             that.simulator.processObstacles();
         };
 
@@ -178,7 +175,7 @@ define(['eventmanager', 'PF', 'RVO', 'standardlib'], function (eventmanager, PF,
             for (var i = 0; i < config.size.y; i++) {
                 array[i] = [];
                 for (var j = 0; j < config.size.x; j++) {
-                    that.grid[config.start.y + i][config.start.x + j] = 1;
+                    that.grid[config.start.x + j][config.start.y + i] = 1;
                 }
             }
         };
