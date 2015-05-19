@@ -1,36 +1,49 @@
-define(['eventmanager', 'PF', 'RVO', 'standardlib', 'world'], function (eventmanager, PF, RVO, stl, world) {
+define(['eventmanager', 'PF', 'RVO', 'standardlib', 'world', 'center'], function (eventmanager, PF, RVO, stl, world, center) {
         var that = {};
         that.updateQueue = [];
         that.debugGrid = {};
-
+        /*
+        that.debugCanvas = app.config.shadowRoot.getElementById("collisionCanvas");
+        that.debugContext = that.debugCanvas.getContext("2d");
+        that.debugCanvas.width = app.config.terrain.grid.width * app.config.terrain.tile.width;
+        that.debugCanvas.height = app.config.terrain.grid.height * app.config.terrain.tile.height;
+        */
         that.init = function () {
             // add the world grid and double it.
             that.grid = that.fillmap(app.config.terrain.grid.height, app.config.terrain.grid.width);
             that.simulator = new RVO.Simulator(4, 40, 10, 5, 5, 20, 1, [0, 0]);
             // check for each grid coordinate if the corresponding tile is walkable
+
             for (var i = 0; i < world.grid.length; i++) {
                 for (var j = 0; j < world.grid[0].length; j++) {
                     var tile = world.grid[i][j] - 1;
                     // if the tile is not walkable close the grid coordinate
-                   if (app.config.terrain.tileSet.tileproperties[tile].walkable === 'false') {
-                       that.grid[j][i] = 1;
-                       var coords = stl.gridPosToWorldPos({
-                           x: j,
-                           y: i
-                       });
+                    if (app.config.terrain.tileSet.tileproperties[tile].walkable === 'false') {
+                        that.grid[j][i] = 1;
+                        var coords = stl.terrainGridPosToWorldPos({
+                            x: j,
+                            y: i,
+                            type: 'terrain'
+                        });
+                        that.simulator.addObstacle([
+                            [coords.x, coords.y],
+                            [coords.x - app.config.terrain.tile.width / 2, coords.y + app.config.terrain.tile.height / 2],
+                            [coords.x, coords.y + app.config.terrain.tile.height],
+                            [coords.x + app.config.terrain.tile.width / 2, coords.y + app.config.terrain.tile.height / 2]
+                        ]);
                         /*
-                       that.simulator.addObstacle([
-                           [coords.x, coords.y],
-                           [coords.x - app.config.terrain.tile.width / 2, coords.y + app.config.terrain.tile.height / 2],
-                           [coords.x, coords.y + app.config.terrain.tile.height ],
-                           [coords.x + app.config.terrain.tile.width / 2, coords.y + app.config.terrain.tile.height / 2]
-                       ]);
-                       */
-
+                        that.debugContext.fillStyle = 'red';
+                        that.debugContext.beginPath();
+                        that.debugContext.moveTo(coords.x, coords.y);
+                        that.debugContext.lineTo(coords.x - app.config.terrain.tile.width / 2, coords.y + app.config.terrain.tile.height / 2)
+                        that.debugContext.lineTo(coords.x, coords.y + app.config.terrain.tile.height);
+                        that.debugContext.lineTo(coords.x + app.config.terrain.tile.width / 2, coords.y + app.config.terrain.tile.height / 2);
+                        that.debugContext.closePath();
+                        that.debugContext.fill();
+                        */
                     }
                 }
             }
-
             // The orignal map has been filled up now double it in size to have more precise grid, indepent from the terrain.
             that.grid = superSizemap(that.grid);
             // Generate the node tree for the pathfinding
@@ -208,7 +221,23 @@ define(['eventmanager', 'PF', 'RVO', 'standardlib', 'world'], function (eventman
             }
             return newmap;
         }
+        /*
+        function centerMap() {
+            var xCorrection = window.innerWidth / 2;
+            var yCorrection = window.innerHeight / 2;
+            // transform the grid tile to iso coordinates
+            var coordinates = {};
+            // transform the coordinates to the actual size of the map
 
+            coordinates.x = -(center.x * app.config.actor.tile.width + ((that.debugCanvas.width) / 2) - xCorrection);
+            coordinates.y = -((center.y + (app.config.terrain.tile.height/app.config.actor.tile.height)) * app.config.actor.tile.height) + yCorrection;
+            $(app.config.shadowRoot).find(that.debugCanvas).css('margin-left', coordinates.x).css('margin-top', coordinates.y);
+        }
+
+        eventmanager.subscribe('new.frame', function () {
+         centerMap(center);
+        });
+        */
         that.init();
         return that;
     }

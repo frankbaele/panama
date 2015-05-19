@@ -73,6 +73,16 @@ define(['eventmanager'], function (eventmanager) {
             y:y
         }
     }
+
+    function terrainGridPosToWorldPos(config){
+        var iso = twoDToIso({x: config.x, y:config.y});
+        var y = iso.y * app.config.terrain.tile.height;
+        var x = iso.x * app.config.terrain.tile.width + (app.config.terrain.grid.width/2 * app.config.terrain.tile.width);
+        return{
+            x:x,
+            y:y
+        }
+    }
     function checkWait(conditionFunction, resultFunction) {
         var tev = setInterval(function () {
             if (conditionFunction()) {
@@ -90,6 +100,7 @@ define(['eventmanager'], function (eventmanager) {
         worldPosToGridPos: worldPosToGridPos,
         worldPosToIsoPos: worldPosToIsoPos,
         gridPosToWorldPos: gridPosToWorldPos,
+        terrainGridPosToWorldPos: terrainGridPosToWorldPos,
         isoWorldPosToCarWorldPos: isoWorldPosToCarWorldPos,
         carWorldPosToIsoWorldPos: carWorldPosToIsoWorldPos,
         checkWait: checkWait
