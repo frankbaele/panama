@@ -16,12 +16,12 @@
   position:absolute;
   left:0;
   top:0;
+  opacity: 0.5;
 }
 #collisionCanvas {
   position:absolute;
   left:0;
   top:0;
-  z-index: 1;
 }
 #ActorsWrapper{
   width: 100%;

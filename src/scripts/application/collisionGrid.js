@@ -2,12 +2,12 @@ define(['eventmanager', 'PF', 'RVO', 'standardlib', 'world', 'center'], function
         var that = {};
         that.updateQueue = [];
         that.debugGrid = {};
-        /*
+
         that.debugCanvas = app.config.shadowRoot.getElementById("collisionCanvas");
         that.debugContext = that.debugCanvas.getContext("2d");
         that.debugCanvas.width = app.config.terrain.grid.width * app.config.terrain.tile.width;
         that.debugCanvas.height = app.config.terrain.grid.height * app.config.terrain.tile.height;
-        */
+
         that.init = function () {
             // add the world grid and double it.
             that.grid = that.fillmap(app.config.terrain.grid.height, app.config.terrain.grid.width);
@@ -25,22 +25,22 @@ define(['eventmanager', 'PF', 'RVO', 'standardlib', 'world', 'center'], function
                             y: i,
                             type: 'terrain'
                         });
+
                         that.simulator.addObstacle([
-                            [coords.x, coords.y],
-                            [coords.x - app.config.terrain.tile.width / 2, coords.y + app.config.terrain.tile.height / 2],
-                            [coords.x, coords.y + app.config.terrain.tile.height],
-                            [coords.x + app.config.terrain.tile.width / 2, coords.y + app.config.terrain.tile.height / 2]
+                            [coords.x, coords.y - app.config.terrain.tile.height/2],
+                            [coords.x + app.config.terrain.tile.width/2, coords.y ],
+                            [coords.x, coords.y + app.config.terrain.tile.height/2],
+                            [coords.x - app.config.terrain.tile.width/2, coords.y]
                         ]);
-                        /*
+
                         that.debugContext.fillStyle = 'red';
                         that.debugContext.beginPath();
                         that.debugContext.moveTo(coords.x, coords.y);
-                        that.debugContext.lineTo(coords.x - app.config.terrain.tile.width / 2, coords.y + app.config.terrain.tile.height / 2)
+                        that.debugContext.lineTo(coords.x - app.config.terrain.tile.width / 2, coords.y + app.config.terrain.tile.height / 2);
                         that.debugContext.lineTo(coords.x, coords.y + app.config.terrain.tile.height);
                         that.debugContext.lineTo(coords.x + app.config.terrain.tile.width / 2, coords.y + app.config.terrain.tile.height / 2);
                         that.debugContext.closePath();
                         that.debugContext.fill();
-                        */
                     }
                 }
             }
@@ -48,6 +48,7 @@ define(['eventmanager', 'PF', 'RVO', 'standardlib', 'world', 'center'], function
             that.grid = superSizemap(that.grid);
             // Generate the node tree for the pathfinding
             that.graph = new PF.Grid(that.grid.length, that.grid[0].length, that.grid);
+            console.log(that.simulator);
             that.simulator.processObstacles();
         };
 
@@ -185,6 +186,7 @@ define(['eventmanager', 'PF', 'RVO', 'standardlib', 'world', 'center'], function
         that.isOpen = function (config) {
             return that.grid[config.new.y][config.new.x] === 0;
         };
+
         /**
          *
          * @param config
@@ -198,6 +200,7 @@ define(['eventmanager', 'PF', 'RVO', 'standardlib', 'world', 'center'], function
                 }
             }
         };
+
         /**
          * Doubles a given array and returns it
          * @param map
@@ -221,7 +224,7 @@ define(['eventmanager', 'PF', 'RVO', 'standardlib', 'world', 'center'], function
             }
             return newmap;
         }
-        /*
+
         function centerMap() {
             var xCorrection = window.innerWidth / 2;
             var yCorrection = window.innerHeight / 2;
@@ -237,7 +240,7 @@ define(['eventmanager', 'PF', 'RVO', 'standardlib', 'world', 'center'], function
         eventmanager.subscribe('new.frame', function () {
          centerMap(center);
         });
-        */
+
         that.init();
         return that;
     }
