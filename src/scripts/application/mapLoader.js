@@ -10,7 +10,6 @@ define(['q', 'world'], function ($q, world) {
                     width: data.width,
                     height: data.height
                 };
-                console.log(data);
                 // get the tilset and put it in config
                 app.config.terrain.tileSet = _.findWhere(data.tilesets, {name : 'terrain'});
                 // remove the path to the terrain folder, so we can easily match on it.

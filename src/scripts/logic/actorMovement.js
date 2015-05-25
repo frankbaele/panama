@@ -1,7 +1,7 @@
 define(['collisionGrid', 'standardlib', 'PF'], function (collisionGrid, stl, PF) {
     var that = {};
     that.finder = new PF.AStarFinder({
-        allowDiagonal: true,
+        allowDiagonal: false,
         dontCrossCorners: true
     });
     that.generatePath = function (config) {

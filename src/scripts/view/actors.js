@@ -65,23 +65,22 @@ define([
             collisionGrid.simulator.doStep();
         }
         function updateActorDirection(actor) {
-            /*
-            var next = actor.variables.coordinates.next;
-            var current = actor.variables.coordinates.current;
-            var change = {
-                x: current.x - next.x,
-                y: current.y - next.y
-            };
-            if (change.x < 0) {
-                actor.variables.direction = 0;
-            } else if (change.x > 0) {
-                actor.variables.direction = 2;
-            } else if (change.y < 0) {
-                actor.variables.direction = 1;
-            } else if (change.y > 0) {
-                actor.variables.direction = 3;
+            var agent =  collisionGrid.simulator.agents[actor.agent];
+            if(agent.velocity[1] != 0 || agent.velocity[0] != 0){
+
+                var rad = Math.atan2(agent.velocity[1], agent.velocity[0]);
+                if(rad <= - Math.PI/2 && rad >= - Math.PI){
+                    actor.variables.direction = 2;
+                }
+                else if(rad > - Math.PI/2 && rad <= 0){
+                    actor.variables.direction = 3;
+                }
+                else if(rad > 0 && rad <= Math.PI/2){
+                    actor.variables.direction = 0;
+                } else{
+                    actor.variables.direction = 1;
+                }
             }
-            */
         }
 
         function updateActorPosition(actor) {
