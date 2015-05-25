@@ -1,4 +1,4 @@
-define(['assetLoader', 'eventmanager', 'mapLoader'], function (assetLoader, eventmanager, mapLoader) {
+define(['assetLoader', 'eventmanager', 'mapLoader', 'jquery', 'lodash'], function (assetLoader, eventmanager, mapLoader) {
     mapLoader.load('test')
         .then(assetLoader.preloadassets)
         .then(function(){
