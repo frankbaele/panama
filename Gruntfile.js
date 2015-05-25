@@ -101,6 +101,7 @@ module.exports = function (grunt) {
                     name: 'scripts/app',
                     baseUrl: "src",
                     mainConfigFile: "src/config/requireConfig.js",
+                    findNestedDependencies: true,
                     out: "dist/scripts/app.js",
                     optimize: 'uglify2',
                     exclude: ['jquery', 'text', 'Keypress'],
