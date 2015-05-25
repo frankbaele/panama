@@ -54,8 +54,16 @@ module.exports = function (grunt) {
             art: {
                 expand: true,
                 cwd: 'src/art',
-                src: '**',
+                src: '*',
                 dest: 'dist/art',
+                flatten: false,
+                filter: 'isFile'
+            },
+            maps: {
+                expand: true,
+                cwd: 'src/maps',
+                src: '**',
+                dest: 'dist/maps',
                 flatten: false,
                 filter: 'isFile'
             },
