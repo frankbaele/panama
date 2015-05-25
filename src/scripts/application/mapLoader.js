@@ -4,7 +4,7 @@ define(['q', 'world'], function ($q, world) {
 
     that.load = function (name) {
         var defer = $q.defer();
-        jQuery.getJSON('/maps/' + name + '/' + name + '.json')
+        jQuery.getJSON('maps/' + name + '/' + name + '.json')
             .then(function (data) {
                 app.config.terrain.grid = {
                     width: data.width,
