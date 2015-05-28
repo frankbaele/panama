@@ -1,4 +1,4 @@
-define(['eventmanager', 'mouse', 'Keypress'], function (eventmanager, mouse, Keypress) {
+define(['eventmanager', 'mouse', '../../bower_components/Keypress/keypress'], function (eventmanager, mouse, Keypress) {
     var listener = new Keypress.Listener();
     var my_combos = [
         {
