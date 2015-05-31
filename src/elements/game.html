@@ -1,25 +1,25 @@
-<link rel="import"
-      href="/bower_components/polymer/polymer.html">
+<link rel="import" href="/bower_components/polymer/polymer.html">
 
-<polymer-element name="game-container">
+<dom-module  id="game-container">
     <template>
-        <link rel="stylesheet" href="../css/style.css">
-        <div id="gamecontainer">
+        <div class="game">
+            <link rel="stylesheet" href="../css/style.css">
             <canvas id="collisionCanvas" class="gamelayer"></canvas>
             <canvas id="mapCanvas" class="gamelayer"></canvas>
             <div id="ActorsWrapper"></div>
-            <div id="ghost-select"></div>
+            <div id="ghostSelect"></div>
         </div>
     </template>
-    <script src="../config/config.js"></script>
-    <script src="/bower_components/requirejs/require.js"></script>
-    <script src="../config/requireConfig.js"></script>
-    <script>
-        Polymer({
-            ready: function(){
-                app.config.shadowRoot = this.shadowRoot;
-                require(['lodash', 'jquery', 'scripts/app']);
-            }
-        });
-    </script>
-</polymer-element>
+</dom-module>
+<script src="../config/config.js"></script>
+<script src="/bower_components/requirejs/require.js"></script>
+<script src="../config/requireConfig.js"></script>
+<script>
+    Polymer({
+        is: "game-container",
+        ready: function(){
+            app.config.element = this.$;
+            require(['lodash', 'jquery', 'scripts/app']);
+        }
+    });
+</script>
