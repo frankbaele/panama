@@ -33,7 +33,8 @@ require.config({
         q: '../../bower_components/q/q',
         text: '../../bower_components/text/text',
         polymer: '../../bower_components/polymer/polymer',
-        rvo: '../../bower_components/rvo/index'
+        rvo: '../../bower_components/rvo/index',
+        pixi: '../../bower_components/pixi.js/bin/pixi'
     },
     shim: {
         rvo: {
