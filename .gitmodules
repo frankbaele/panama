@@ -1,0 +1,4 @@
+[submodule "dist"]
+	path = dist
+	url = git@github.com:frankbaele/panama.git
+	branch = gh-pages

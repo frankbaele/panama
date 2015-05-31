@@ -7,7 +7,6 @@ nbproject
 .project
 .settings
 .idea
-dist
 # Ignore sass-cache files.
 *.sass-cache*
 *bower_components*
