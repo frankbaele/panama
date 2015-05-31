@@ -1,4 +1,4 @@
-define(['../actors/actor.unit.local.js', 'eventmanager'], function (unit, eventmanager) {
+define(['actor.unit.local', 'eventmanager'], function (unit, eventmanager) {
     return function (spec) {
         var that = unit(spec);
         var stats = {

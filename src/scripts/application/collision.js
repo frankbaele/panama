@@ -1,4 +1,4 @@
-define(['eventmanager', 'PF', 'RVO', 'standardlib', 'world', 'center'], function (eventmanager, PF, RVO, stl, world, center) {
+define(['eventmanager', 'pathfinding', 'rvo', 'standardlib', 'world', 'center'], function (eventmanager, PF, RVO, stl, world, center) {
         var that = {};
         that.updateQueue = [];
         that.debugGrid = {};

@@ -24,7 +24,6 @@
     "app-router": "~2.6.0",
     "polymer": "~0.5.5",
     "pathfinding": "~0.4.16",
-    "rvo2.js": "https://github.com/paulwe/rvo2.js.git",
-    "three": "https://raw.github.com/mrdoob/three.js/master/build/three.js"
-  }
+    "rvo": "http://raw.githubusercontent.com/paulwe/rvo2.js/master/lib/rvo2.js"
+ }
 }

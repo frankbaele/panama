@@ -1,4 +1,4 @@
-define(['eventmanager', 'RequestAnimationFrame', '../view/map', 'actors'], function (eventmanager) {
+define(['eventmanager', 'RequestAnimationFrame', 'map', 'actors'], function (eventmanager) {
     var frame = 0;
 
     function animate() {

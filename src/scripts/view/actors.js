@@ -4,7 +4,7 @@ define([
         'actorList',
         'center',
         'assetLoader',
-        'RVO',
+        'rvo',
         'collisionGrid'],
     function (eventmanager, stl, actorList, center, assetLoader, RVO, collisionGrid) {
         var healthbarHeight = 7.5;

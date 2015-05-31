@@ -4,16 +4,9 @@ module.exports = function (grunt) {
     // Config...
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
-        connect: {
-            server: {
-                options: {
-                    port: 9001,
-                    // Prevents Grunt to close just after the task (starting the server) completes
-                    // This will be removed later as `watch` will take care of that
-                    keepalive: false,
-                    hostname: '',
-                    base: './src'
-                }
+        nodemon: {
+            dev:{
+                script: 'server.js'
             }
         },
         watch: {
@@ -82,17 +75,6 @@ module.exports = function (grunt) {
                 options: {
                     exclude: ['requirejs']
                 }
-            },
-            dist: {
-                rjsConfig: 'src/config/requireLiveConfig.js',
-                options: {
-                    exclude: ['requirejs']
-                }
-            }
-        },
-        bower: {
-            dev: {
-                dest: 'dist/scripts/vendor'
             }
         },
         requirejs: {
@@ -104,11 +86,7 @@ module.exports = function (grunt) {
                     findNestedDependencies: true,
                     out: "dist/scripts/app.js",
                     optimize: 'uglify2',
-                    exclude: ['jquery', 'text', 'Keypress'],
                     uglify2: {
-                        //Example of a specialized config. If you are fine
-                        //with the default options, no need to specify
-                        //any of these properties.
                         output: {
                             beautify: false
                         },
@@ -136,6 +114,8 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-requirejs');
+    grunt.loadNpmTasks('grunt-nodemon');
+
     // Task aliases and tasks
     grunt.registerTask('server', [
         'connect',
