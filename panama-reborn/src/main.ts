@@ -1,24 +1,27 @@
-import './style.css'
-import typescriptLogo from './typescript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.ts'
+/**
+ * Panama Reborn - Main Entry Point
+ * Initializes Phaser game with all scenes
+ */
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://www.typescriptlang.org/" target="_blank">
-      <img src="${typescriptLogo}" class="logo vanilla" alt="TypeScript logo" />
-    </a>
-    <h1>Vite + TypeScript</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite and TypeScript logos to learn more
-    </p>
-  </div>
-`
+import Phaser from 'phaser';
+import { PHASER_CONFIG } from './config';
+import { BootScene } from './scenes/BootScene';
+import { GameScene } from './scenes/GameScene';
+import './style.css';
 
-setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
+// Add scenes to config
+const gameConfig: Phaser.Types.Core.GameConfig = {
+  ...PHASER_CONFIG,
+  scene: [BootScene, GameScene]
+};
+
+// Create game instance
+const game = new Phaser.Game(gameConfig);
+
+// Log startup
+console.log('🎮 Panama Reborn - Starting...');
+console.log('📐 Resolution:', gameConfig.width, 'x', gameConfig.height);
+console.log('🎨 Renderer:', gameConfig.type === Phaser.AUTO ? 'AUTO' : 'WEBGL');
+
+// Make game globally accessible for debugging
+(window as any).game = game;
